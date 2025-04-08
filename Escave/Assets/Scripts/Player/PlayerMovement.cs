@@ -5,8 +5,8 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement Settings")]
-    public float moveSpeed = 5f;
-    public float jumpForce = 10f;
+    public float moveSpeed;
+    public float jumpForce;
 
     [Header("Ground Check")]
     [SerializeField] private Transform _groundCheck;
@@ -17,6 +17,10 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _moveInput;
     private bool _isGrounded;
     private SpriteRenderer _spriteRenderer;
+
+
+    private Grappler _grappler;
+
 
     public Direction LastDirection { get; private set; } = Direction.Right;
     public enum Direction
@@ -36,6 +40,8 @@ public class PlayerMovement : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+
+        _grappler = GetComponentInChildren<Grappler>();
     }
 
     private void Update()
@@ -48,8 +54,18 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _rb.linearVelocity = new Vector2(_moveInput.x * moveSpeed, _rb.linearVelocity.y);
+        if (_grappler != null && _grappler._isGrappled)
+        {
+            // Appliquer une force douce dans la direction du input
+            Vector2 force = new Vector2(_moveInput.x, 0f) * moveSpeed;
+            _rb.AddForce(force, ForceMode2D.Force);
+        }
+        else
+        {
+            _rb.linearVelocity = new Vector2(_moveInput.x * moveSpeed, _rb.linearVelocity.y);
+        }
     }
+
 
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -66,7 +82,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (context.performed && _isGrounded)
         {
-            _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, jumpForce);
+            _rb.linearVelocity = new Vector2(_moveInput.x * moveSpeed, _rb.linearVelocity.y);
         }
     }
 
@@ -87,21 +103,21 @@ public class PlayerMovement : MonoBehaviour
         return Direction.Right;
     }
 
-    //private Vector2 DirectionToVector2(Direction dir)
-    //{
-    //    switch (dir)
-    //    {
-    //        case Direction.Up: return Vector2.up;
-    //        case Direction.UpRight: return new Vector2(1, 1).normalized;
-    //        case Direction.Right: return Vector2.right;
-    //        case Direction.DownRight: return new Vector2(1, -1).normalized;
-    //        case Direction.Down: return Vector2.down;
-    //        case Direction.DownLeft: return new Vector2(-1, -1).normalized;
-    //        case Direction.Left: return Vector2.left;
-    //        case Direction.UpLeft: return new Vector2(-1, 1).normalized;
-    //        default: return Vector2.zero;
-    //    }
-    //}
+    public Vector2 DirectionToVector2(Direction dir)
+    {
+        switch (dir)
+        {
+            case Direction.Up: return Vector2.up;
+            case Direction.UpRight: return new Vector2(1, 1).normalized;
+            case Direction.Right: return Vector2.right;
+            case Direction.DownRight: return new Vector2(1, -1).normalized;
+            case Direction.Down: return Vector2.down;
+            case Direction.DownLeft: return new Vector2(-1, -1).normalized;
+            case Direction.Left: return Vector2.left;
+            case Direction.UpLeft: return new Vector2(-1, 1).normalized;
+            default: return Vector2.right;
+        }
+    }
 
     private void HandleSpriteFlip()
     {
