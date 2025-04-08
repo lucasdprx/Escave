@@ -236,7 +236,6 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
         /// </summary>
         public void StartInteractiveRebind()
         {
-            m_Action.action.Disable();
             if (!ResolveActionAndBinding(out var action, out var bindingIndex))
                 return;
 
@@ -261,12 +260,12 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             {
                 m_RebindOperation?.Dispose();
                 m_RebindOperation = null;
-                m_Action.action.Enable();
-                SaveActionBinding();
-
+          
                 action.actionMap.Enable();
                 m_UIInputActionMap?.Enable();
             }
+            
+            action.Disable();
 
             // An "InvalidOperationException: Cannot rebind action x while it is enabled" will
             // be thrown if rebinding is attempted on an action that is enabled.
@@ -286,6 +285,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                 .OnCancel(
                     operation =>
                     {
+                        action.Enable();
                         m_RebindStopEvent?.Invoke(this, operation);
                         if (m_RebindOverlay != null)
                             m_RebindOverlay.SetActive(false);
@@ -295,9 +295,19 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                 .OnComplete(
                     operation =>
                     {
+                        action.Enable();
                         if (m_RebindOverlay != null)
                             m_RebindOverlay.SetActive(false);
                         m_RebindStopEvent?.Invoke(this, operation);
+
+                        if (CheckDuplicateBindings(action, bindingIndex, allCompositeParts))
+                        {
+                            action.RemoveBindingOverride(bindingIndex);
+                            CleanUp();
+                            PerformInteractiveRebind(action, bindingIndex, allCompositeParts);
+                            return;
+                        }
+                        
                         UpdateBindingDisplay();
                         CleanUp();
 
@@ -337,6 +347,36 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             m_RebindOperation.Start();
         }
 
+        private bool CheckDuplicateBindings(InputAction _action, int _bindingIndex, bool _allCompositeParts = false)
+        {
+            InputBinding newBinding = _action.bindings[_bindingIndex];
+            foreach (InputBinding binding in _action.actionMap.bindings)
+            {
+                if(binding.action == newBinding.action)
+                    continue;
+
+                if (binding.effectivePath == newBinding.effectivePath)
+                {
+                    Debug.Log("Duplicate binding " + newBinding.effectivePath);
+                    return true;
+                }
+            }
+
+            if (_allCompositeParts)
+            {
+                for (int i = 1; i < _bindingIndex; ++i)
+                {
+                    if (_action.bindings[i].effectivePath == newBinding.effectivePath)
+                    {
+                        Debug.Log("Duplicate binding " + newBinding.effectivePath);
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
         protected void OnEnable()
         {
             if (s_RebindActionUIs == null)
@@ -359,6 +399,12 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                 s_RebindActionUIs = null;
                 InputSystem.onActionChange -= OnActionChange;
             }
+        }
+
+        private void Start()
+        {
+            UpdateBindingDisplay();
+            UpdateActionLabel();
         }
 
         // When the action system re-resolves bindings, we want to update our UI in response. While this will
@@ -388,29 +434,6 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             }
         }
 
-        private void Start()
-        {
-            LoadActionBinding();
-        }
-
-        private void SaveActionBinding()
-        {
-            //We get the current binginds
-            var _currentBindings = actionReference.action.actionMap.SaveBindingOverridesAsJson();
-            //We set the bindings into a player prefs
-            PlayerPrefs.SetString(m_Action.action.name + bindingId, _currentBindings);
-        }
-
-        private void LoadActionBinding()
-        {
-            //We get the bindings from the player prefs
-            var _savedBindings = PlayerPrefs.GetString(m_Action.action.name + bindingId);
-            //If there's a bind, we set it to the current bindings
-            if (!string.IsNullOrEmpty(_savedBindings))
-            {
-                actionReference.action.actionMap.LoadBindingOverridesFromJson(_savedBindings);
-            }
-        }
 
         [Tooltip("Reference to action that is to be rebound from the UI.")]
         [SerializeField]
