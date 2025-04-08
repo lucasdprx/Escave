@@ -2,10 +2,12 @@ using UnityEngine;
 
 public class TrapCollision : MonoBehaviour
 {
+    public Transform respawnPoint;
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //appeler la fonction de la mort
-        Debug.Log("hi");
+        if (!collision.gameObject.CompareTag("Player")) return;
+        
+        collision.transform.position = respawnPoint.position;
     }
 
 }
