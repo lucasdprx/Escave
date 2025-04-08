@@ -18,6 +18,19 @@ public class PlayerMovement : MonoBehaviour
     private bool _isGrounded;
     private SpriteRenderer _spriteRenderer;
 
+    public Direction LastDirection { get; private set; } = Direction.Right;
+    public enum Direction
+    {
+        Right,
+        UpRight,
+        Up,
+        UpLeft,
+        Left,
+        DownLeft,
+        Down,
+        DownRight
+    }
+
 
     private void Awake()
     {
@@ -30,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
         _isGrounded = Physics2D.OverlapCircle(_groundCheck.position, _groundCheckRadius, _groundLayer);
 
         HandleSpriteFlip();
+        //Debug.DrawRay(transform.position, DirectionToVector2(LastDirection), Color.red);
     }
 
     private void FixedUpdate()
@@ -40,6 +54,12 @@ public class PlayerMovement : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         _moveInput = context.ReadValue<Vector2>();
+
+        if (_moveInput.sqrMagnitude > 0.01f)
+        {
+            LastDirection = GetEightDirection(_moveInput.normalized);
+        }
+
     }
 
     public void OnJump(InputAction.CallbackContext context)
@@ -49,6 +69,39 @@ public class PlayerMovement : MonoBehaviour
             _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, jumpForce);
         }
     }
+
+    private Direction GetEightDirection(Vector2 input)
+    {
+        float angle = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg;
+        angle = (angle + 360f) % 360f;
+
+        if (angle >= 337.5f || angle < 22.5f) return Direction.Right;
+        if (angle >= 22.5f && angle < 67.5f) return Direction.UpRight;
+        if (angle >= 67.5f && angle < 112.5f) return Direction.Up;
+        if (angle >= 112.5f && angle < 157.5f) return Direction.UpLeft;
+        if (angle >= 157.5f && angle < 202.5f) return Direction.Left;
+        if (angle >= 202.5f && angle < 247.5f) return Direction.DownLeft;
+        if (angle >= 247.5f && angle < 292.5f) return Direction.Down;
+        if (angle >= 292.5f && angle < 337.5f) return Direction.DownRight;
+
+        return Direction.Right;
+    }
+
+    //private Vector2 DirectionToVector2(Direction dir)
+    //{
+    //    switch (dir)
+    //    {
+    //        case Direction.Up: return Vector2.up;
+    //        case Direction.UpRight: return new Vector2(1, 1).normalized;
+    //        case Direction.Right: return Vector2.right;
+    //        case Direction.DownRight: return new Vector2(1, -1).normalized;
+    //        case Direction.Down: return Vector2.down;
+    //        case Direction.DownLeft: return new Vector2(-1, -1).normalized;
+    //        case Direction.Left: return Vector2.left;
+    //        case Direction.UpLeft: return new Vector2(-1, 1).normalized;
+    //        default: return Vector2.zero;
+    //    }
+    //}
 
     private void HandleSpriteFlip()
     {
