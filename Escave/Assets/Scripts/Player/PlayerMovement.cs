@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,8 +19,10 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D _rb;
     private Vector2 _moveInput;
     private SpriteRenderer _spriteRenderer;
+    private bool _hasLanded;
     
     private PlayerWallJump _playerWallJump;
+    private PlayerSFX      _playerSFX;
 
 
     private GrapplingHook _grapplingHook;
@@ -44,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         _playerWallJump = GetComponent<PlayerWallJump>();
         _grapplingHook = GetComponentInChildren<GrapplingHook>();
+        _playerSFX = GetComponent<PlayerSFX>();
     }
 
     private void Update()
@@ -75,6 +79,17 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
         }
+
+        // Handle step SFX
+        if (_rb.linearVelocity.x != 0 && _rb.linearVelocity.y == 0) _playerSFX.PlayWalkSFX();
+
+        // Check if the player's landing after a jump to play the SFX
+        if (_hasLanded) return;
+        if (_isGrounded)
+        {
+            _hasLanded = _isGrounded;
+            _playerSFX.PlayJumpLandSFX();
+        }
     }
 
 
@@ -87,7 +102,6 @@ public class PlayerMovement : MonoBehaviour
         {
             LastDirection = GetEightDirection(_moveInput.normalized);
         }
-
     }
 
     public void OnJump(InputAction.CallbackContext context)
@@ -95,6 +109,7 @@ public class PlayerMovement : MonoBehaviour
         if (context.performed && _isGrounded)
         {
             _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, jumpForce);
+            StartCoroutine(TestRoutine());
         }
     }
 
@@ -103,9 +118,9 @@ public class PlayerMovement : MonoBehaviour
         float angle = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg;
         angle = (angle + 360f) % 360f;
 
-        if (angle >= 337.5f || angle < 22.5f) return Direction.Right;
-        if (angle >= 22.5f && angle < 67.5f) return Direction.UpRight;
-        if (angle >= 67.5f && angle < 112.5f) return Direction.Up;
+        if (angle >= 337.5f || angle < 22.5f)  return Direction.Right;
+        if (angle >= 22.5f  && angle < 67.5f)  return Direction.UpRight;
+        if (angle >= 67.5f  && angle < 112.5f) return Direction.Up;
         if (angle >= 112.5f && angle < 157.5f) return Direction.UpLeft;
         if (angle >= 157.5f && angle < 202.5f) return Direction.Left;
         if (angle >= 202.5f && angle < 247.5f) return Direction.DownLeft;
@@ -139,4 +154,9 @@ public class PlayerMovement : MonoBehaviour
             _spriteRenderer.flipX = true;
     }
 
+    private IEnumerator TestRoutine()
+    {
+        yield return new WaitForSeconds(0.5f);
+        _hasLanded = false;
+    }
 }
