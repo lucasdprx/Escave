@@ -1,13 +1,24 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
-public class TimerUIManager : MonoBehaviour
+public class TimerUIManager : MonoBehaviour, IDataPersistence
 {
     [SerializeField] private TextMeshProUGUI _timerText;
     private float _timePassInLevel;
     private int _secondsPassInLevel;
     private int _minutesPassInLevel;
     private int _hoursPassInLevel;
+    
+    public void LoadData(GameData _gameData)
+    {
+        _timePassInLevel = _gameData.inGameTimer;
+    }
+
+    public void SaveData(ref GameData _gameData)
+    {
+        _gameData.inGameTimer = _timePassInLevel;
+    }
 
     private void Update()
     {

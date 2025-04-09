@@ -4,7 +4,7 @@ using Unity.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PlayerDeath : MonoBehaviour
+public class PlayerDeath : MonoBehaviour, IDataPersistence
 {
     [Header("Checkpoints")]
     [SerializeField] private List<GameObject> checkpoints; // checkpoint list
@@ -20,19 +20,25 @@ public class PlayerDeath : MonoBehaviour
     public UnityEvent<int> OnDeath;
     public bool _isRestarting = false;
     
+    public void LoadData(GameData _gameData)
     [SerializeField] private ParticleSystem _deathParticles;
     
     private void Start()
     {
-        // initialisation of the current checkpoint to the first one in the list
-        if (checkpoints != null && checkpoints.Count > 0)
+        if (_gameData.playerPos != Vector2.zero)
         {
+            transform.position = _gameData.playerPos;
             currentCheckpoint = checkpoints[0];
         }
-        else
-        {
-            Debug.LogError("Aucun checkpoint n'est assign� !");
-        }
+        
+        deathCounter = _gameData.deathCount;
+        OnDeath.Invoke(deathCounter);
+    }
+
+    public void SaveData(ref GameData _gameData)
+    {
+        _gameData.deathCount = deathCounter;
+        _gameData.playerPos = currentCheckpoint.transform.position;
     }
 
     public void PlayerDie()

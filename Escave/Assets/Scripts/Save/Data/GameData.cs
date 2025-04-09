@@ -8,7 +8,7 @@ public class GameData
     public int deathCount;
     public float inGameTimer;
 
-    public Transform checkpoint;
+    public Vector2 playerPos;
     //---------------------------------
     
     public GameData()
@@ -16,6 +16,6 @@ public class GameData
         deathCount = 0;
         inGameTimer = 0f;
         
-        checkpoint = null;
+        playerPos = Vector2.zero;
     }
 }
