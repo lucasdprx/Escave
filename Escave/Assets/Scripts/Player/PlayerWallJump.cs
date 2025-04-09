@@ -26,9 +26,11 @@ public class PlayerWallJump : MonoBehaviour
     
     private Rigidbody2D _rb;
     private Vector2 _moveInput;
-    
+
+    private PlayerSFX _playerSFX;
+
     #endregion
-    
+
     #region BoolChecks
 
     public bool _isWallClimbingRight { get; private set; }
@@ -50,8 +52,9 @@ public class PlayerWallJump : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _playerSFX = GetComponent<PlayerSFX>();
     }
-    
+
     private void Update()
     {
         if ((_isWallClimbingLeft || _isWallClimbingRight) && !IsGrounded())
@@ -132,6 +135,7 @@ public class PlayerWallJump : MonoBehaviour
             _rb.linearVelocity = _wallJumpForce;
             SetJumpingValues();
         }
+        _playerSFX.PlayWallJumpSFX();
     }
     
     #endregion
