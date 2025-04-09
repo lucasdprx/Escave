@@ -43,8 +43,6 @@ public class PlayerMovement : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         _playerWallJump = GetComponent<PlayerWallJump>();
-        _grappler = GetComponentInChildren<Grappler>();
-
         _grapplingHook = GetComponentInChildren<GrapplingHook>();
     }
 
