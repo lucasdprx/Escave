@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -23,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerWallJump _playerWallJump;
 
 
-    private Grappler _grappler;
+    private GrapplingHook _grapplingHook;
 
     public Direction LastDirection { get; private set; } = Direction.Right;
     public enum Direction
@@ -45,6 +44,8 @@ public class PlayerMovement : MonoBehaviour
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         _playerWallJump = GetComponent<PlayerWallJump>();
         _grappler = GetComponentInChildren<Grappler>();
+
+        _grapplingHook = GetComponentInChildren<GrapplingHook>();
     }
 
     private void Update()
@@ -57,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_grappler != null && _grappler._isGrappled)
+        if (_grapplingHook != null && _grapplingHook._isGrappled)
         {
             Vector2 force = new Vector2(_moveInput.x, 0f) * moveSpeed;
             _rb.AddForce(force, ForceMode2D.Force);
