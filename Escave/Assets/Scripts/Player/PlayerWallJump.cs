@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Xml;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -35,6 +36,7 @@ public class PlayerWallJump : MonoBehaviour
     public bool _isWallClimbingLeft { get; private set; }
     public bool _isWallJumping { get; private set; }
     private bool _canWallClimb;
+    private bool _isWallClimbing;
     
     #endregion
     
@@ -66,6 +68,13 @@ public class PlayerWallJump : MonoBehaviour
             }
         }
 
+        if (!_isWallClimbing)
+        {
+            _isWallClimbingLeft = false;
+            _isWallClimbingRight = false;
+            _rb.gravityScale = 4;
+        }
+        
         if (IsGrounded())
         {
             _canWallClimb = true;
@@ -78,6 +87,7 @@ public class PlayerWallJump : MonoBehaviour
         if(IsGrounded()) return;
         if (!_canWallClimb) return;
         if (_isWallJumping) return;
+        if (!_isWallClimbing) return;
 
         if (_moveInput.x > 0 && IsWallRight())
         {
@@ -132,6 +142,12 @@ public class PlayerWallJump : MonoBehaviour
             _rb.linearVelocity = _wallJumpForce;
             SetJumpingValues();
         }
+    }
+
+    public void Climb(InputAction.CallbackContext _ctx)
+    {
+        if(_ctx.started) _isWallClimbing = true;
+        else if(_ctx.canceled) _isWallClimbing = false;
     }
     
     #endregion

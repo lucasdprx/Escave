@@ -387,6 +387,17 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &408884853 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5812807921979462972, guid: 13b387d9278d83c4fa6ed0a9bafceeb9, type: 3}
+  m_PrefabInstance: {fileID: 8096398339712742023}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e28b25cc575e9de489d7fc2c642f6fc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1006141413
 GameObject:
   m_ObjectHideFlags: 0
@@ -742,9 +753,57 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1023681964684913588, guid: 13b387d9278d83c4fa6ed0a9bafceeb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023681964684913588, guid: 13b387d9278d83c4fa6ed0a9bafceeb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 3313383474861426580, guid: 13b387d9278d83c4fa6ed0a9bafceeb9, type: 3}
       propertyPath: m_Name
       value: PlayerTestWithPiolet
+      objectReference: {fileID: 0}
+    - target: {fileID: 6658432623037447756, guid: 13b387d9278d83c4fa6ed0a9bafceeb9, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 6658432623037447756, guid: 13b387d9278d83c4fa6ed0a9bafceeb9, type: 3}
+      propertyPath: m_ActionEvents.Array.data[13].m_ActionId
+      value: 7dfe29b8-e480-4a26-8358-fab1f27e7ca0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6658432623037447756, guid: 13b387d9278d83c4fa6ed0a9bafceeb9, type: 3}
+      propertyPath: m_ActionEvents.Array.data[13].m_ActionName
+      value: 'Player/GrabWall[/Keyboard/e]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6658432623037447756, guid: 13b387d9278d83c4fa6ed0a9bafceeb9, type: 3}
+      propertyPath: m_ActionEvents.Array.data[13].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6658432623037447756, guid: 13b387d9278d83c4fa6ed0a9bafceeb9, type: 3}
+      propertyPath: m_ActionEvents.Array.data[13].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6658432623037447756, guid: 13b387d9278d83c4fa6ed0a9bafceeb9, type: 3}
+      propertyPath: m_ActionEvents.Array.data[13].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 408884853}
+    - target: {fileID: 6658432623037447756, guid: 13b387d9278d83c4fa6ed0a9bafceeb9, type: 3}
+      propertyPath: m_ActionEvents.Array.data[13].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6658432623037447756, guid: 13b387d9278d83c4fa6ed0a9bafceeb9, type: 3}
+      propertyPath: m_ActionEvents.Array.data[13].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Climb
+      objectReference: {fileID: 0}
+    - target: {fileID: 6658432623037447756, guid: 13b387d9278d83c4fa6ed0a9bafceeb9, type: 3}
+      propertyPath: m_ActionEvents.Array.data[13].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerWallJump, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6658432623037447756, guid: 13b387d9278d83c4fa6ed0a9bafceeb9, type: 3}
+      propertyPath: m_ActionEvents.Array.data[13].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7217843046272157945, guid: 13b387d9278d83c4fa6ed0a9bafceeb9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -786,7 +845,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6511472847900421227, guid: 13b387d9278d83c4fa6ed0a9bafceeb9, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
