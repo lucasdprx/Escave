@@ -37,6 +37,8 @@ public class PlayerWallJump : MonoBehaviour
     public bool _isWallJumping { get; private set; }
     private bool _canWallClimb;
     private bool _isWallClimbing;
+
+    private bool _isGravitySet;
     
     #endregion
     
@@ -68,8 +70,9 @@ public class PlayerWallJump : MonoBehaviour
             }
         }
 
-        if (!_isWallClimbing)
+        if (!_isWallClimbing && !_isGravitySet)
         {
+            _isGravitySet = true;
             _isWallClimbingLeft = false;
             _isWallClimbingRight = false;
             _rb.gravityScale = 4;
@@ -88,6 +91,8 @@ public class PlayerWallJump : MonoBehaviour
         if (!_canWallClimb) return;
         if (_isWallJumping) return;
         if (!_isWallClimbing) return;
+
+        _isGravitySet = false;
 
         if (_moveInput.x > 0 && IsWallRight())
         {

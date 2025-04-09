@@ -31,9 +31,14 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
     
     public void LoadData(GameData _gameData)
     {
-        if(_gameData.playerPos != Vector2.zero)
+        if (_gameData.playerPos != Vector2.zero)
+        {
             transform.position = _gameData.playerPos;
-        
+        }
+        else
+        {
+            currentCheckpoint = checkpoints[0];
+        }
         deathCounter = _gameData.deathCount;
     }
 

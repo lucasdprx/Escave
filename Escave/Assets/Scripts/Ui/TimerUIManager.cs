@@ -9,16 +9,6 @@ public class TimerUIManager : MonoBehaviour, IDataPersistence
     private int _secondsPassInLevel;
     private int _minutesPassInLevel;
     private int _hoursPassInLevel;
-    
-    public void LoadData(GameData _gameData)
-    {
-        _timePassInLevel = _gameData.inGameTimer;
-    }
-
-    public void SaveData(ref GameData _gameData)
-    {
-        _gameData.inGameTimer = _timePassInLevel;
-    }
 
     private void Update()
     {
