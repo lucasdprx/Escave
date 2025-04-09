@@ -6,6 +6,7 @@ public class PauseMenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject _pauseMenuPanel;
     [SerializeField] private GameObject _settingsMenuPanel;
+    [SerializeField] private PlayerDeath _playerDeath;
     private bool _isGamePaused = false;
 
     public void ShowPausePanel(InputAction.CallbackContext context)
@@ -20,7 +21,10 @@ public class PauseMenuManager : MonoBehaviour
 
     public void RestartGame()
     {
-        Time.timeScale = 1;
+        PauseGame();
+        _playerDeath._isRestarting = true;
+        _playerDeath.PlayerDie();
+        _playerDeath._isRestarting = false;
     }
 
     public void ShowSettings()
