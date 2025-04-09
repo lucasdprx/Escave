@@ -2,6 +2,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerDeath : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class PlayerDeath : MonoBehaviour
     public int DeathCount => deathCounter;
     [SerializeField, ReadOnly] private int deathCounter = 0;
 
+    public UnityEvent<int> OnDeath;
+    public bool _isRestarting = false;
+    
     private void Start()
     {
         // initialisation of the current checkpoint to the first one in the list
@@ -25,7 +29,7 @@ public class PlayerDeath : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Aucun checkpoint n'est assigné !");
+            Debug.LogError("Aucun checkpoint n'est assignï¿½ !");
         }
     }
 
@@ -33,12 +37,14 @@ public class PlayerDeath : MonoBehaviour
     {
         if (currentCheckpoint == null)
         {
-            Debug.LogError("Aucun checkpoint actif n'est défini !");
+            Debug.LogError("Aucun checkpoint actif n'est dï¿½fini !");
             return;
         }
 
         transform.position = currentCheckpoint.transform.position;
+        if (_isRestarting) return;
         deathCounter++;
+        OnDeath.Invoke(deathCounter);
 
         PlayDeathSound();
     }
@@ -51,7 +57,7 @@ public class PlayerDeath : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("AudioSource ou DeathSound non assigné !");
+            Debug.LogWarning("AudioSource ou DeathSound non assignï¿½ !");
         }
     }
 
@@ -69,7 +75,7 @@ public class PlayerDeath : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Le checkpoint spécifié n'est pas dans la liste des checkpoints !");
+            Debug.LogWarning("Le checkpoint spï¿½cifiï¿½ n'est pas dans la liste des checkpoints !");
         }
     }
 }
