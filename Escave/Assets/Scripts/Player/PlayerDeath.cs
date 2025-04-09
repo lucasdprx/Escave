@@ -20,33 +20,26 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
     public UnityEvent<int> OnDeath;
     public bool _isRestarting = false;
     
-    [SerializeField] private ParticleSystem _deathParticles;
     
-    private void Start()
+    [SerializeField] private ParticleSystem _deathParticles;
+
+    public void SaveData(ref GameData _gameData)
     {
-        // initialisation of the current checkpoint to the first one in the list
-        if (checkpoints != null && checkpoints.Count > 0)
-        {
-            currentCheckpoint = checkpoints[0];
-        }
-        else
-        {
-            Debug.LogError("Aucun checkpoint n'est assign� !");
-        }
+        _gameData.deathCount = deathCounter;
+        _gameData.playerPos = currentCheckpoint.transform.position;
     }
     
     public void LoadData(GameData _gameData)
     {
-        if(_gameData.playerPos != Vector2.zero)
+        if (_gameData.playerPos != Vector2.zero)
+        {
             transform.position = _gameData.playerPos;
-        
+        }
+        else
+        {
+            currentCheckpoint = checkpoints[0];
+        }
         deathCounter = _gameData.deathCount;
-    }
-
-    public void SaveData(ref GameData _gameData)
-    {
-        _gameData.playerPos = currentCheckpoint.transform.position;
-        _gameData.deathCount = deathCounter;
     }
 
     public void PlayerDie()
