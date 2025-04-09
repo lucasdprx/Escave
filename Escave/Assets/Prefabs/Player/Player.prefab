@@ -55,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 6894023557217023328}
   - component: {fileID: 2843669229510685384}
   - component: {fileID: 130261818192027073}
+  - component: {fileID: 7576297500504853032}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -283,6 +284,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 942747b4-3f06-44b9-ab65-a694ba08c977
     m_ActionName: 'Player/Fire[/Keyboard/leftShift]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7dfe29b8-e480-4a26-8358-fab1f27e7ca0
+    m_ActionName: 'Player/GrabWall[/Keyboard/ctrl,/XInputControllerWindows/leftShoulder]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -327,8 +332,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ab2e2a2aa0ac0d4a8e339d5cc0a16e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  jumpForce: 14
+  moveSpeed: 9
+  jumpForce: 17
   _groundCheck: {fileID: 4807359283236107663}
   _groundLayer:
     serializedVersion: 2
@@ -391,6 +396,28 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0.060364425, y: 0.2817004}
   m_Radius: 0.84206486
+--- !u!114 &7576297500504853032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7023489141773015471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cca755792dc519740a01ffcbaf8bf286, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkpoints:
+  - {fileID: 0}
+  audioSource: {fileID: 0}
+  deathSound: {fileID: 0}
+  deathCounter: 0
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  _isRestarting: 0
+  _deathParticles: {fileID: 1829656460543490895, guid: c3575c47e04c6a24b81a99d90c93b035, type: 3}
 --- !u!1 &7218083322398610288
 GameObject:
   m_ObjectHideFlags: 0
