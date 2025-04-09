@@ -18,7 +18,7 @@ public class MainMenuHandler : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadScene("PioletWallJump");
+        SceneManager.LoadScene("Game");
     }
 
     private void Start()

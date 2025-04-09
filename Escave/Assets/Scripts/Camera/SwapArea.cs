@@ -1,7 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 public class SwapArea : MonoBehaviour
 {
@@ -20,9 +20,15 @@ public class SwapArea : MonoBehaviour
     [SerializeField] private Camera _camera;
     [SerializeField] private Vector2 _cameraScale;
     [SerializeField] private float _cameraTransitionSpeed;
+    [SerializeField] private Transform _targetCameraPosition;
     
     private PlayerInput _playerInput;
-    private Vector3 _targetCameraPosition, _newCameraPosition = Vector3.zero;
+    private Vector3 _newCameraPosition = Vector3.zero;
+
+    private void Start()
+    {
+        _targetCameraPosition.position = _camera.transform.position;
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -31,7 +37,7 @@ public class SwapArea : MonoBehaviour
         _playerInput = other.GetComponent<PlayerInput>();
         Vector2 _direction = FindDirection(other.gameObject.transform.position);
         other.transform.position += (Vector3)_direction * 2; 
-        _playerInput.DeactivateInput();
+        //_playerInput.DeactivateInput();
         StartCoroutine(MoveCameraCoroutine());
     }
 
@@ -44,11 +50,11 @@ public class SwapArea : MonoBehaviour
         {
             case Direction.Horizontal :
                 _direction.x = Mathf.Sign(_playerPos.x);
-                _targetCameraPosition = new Vector3(_camera.transform.position.x + _direction.x *_cameraScale.x,_camera.transform.position.y,_camera.transform.position.z);
+                _targetCameraPosition.position += new Vector3(_direction.x * _cameraScale.x,0,0);
                 break;
             case Direction.Vertical :
                 _direction.y = Mathf.Sign(_playerPos.y);
-                _targetCameraPosition = new Vector3(_camera.transform.position.x,_camera.transform.position.y + _direction.y * _cameraScale.y,_camera.transform.position.z);
+                _targetCameraPosition.position += new Vector3(0,_direction.y * _cameraScale.y,0);
                 break;
         }
         return _direction;
@@ -59,12 +65,12 @@ public class SwapArea : MonoBehaviour
         while (_actualCameraTransitionTime <= _switchAreaDuration)
         {
             _actualCameraTransitionTime += Time.deltaTime;
-            _newCameraPosition = Vector3.Lerp(_camera.transform.position, _targetCameraPosition,
+            _newCameraPosition = Vector3.Lerp(_camera.transform.position, _targetCameraPosition.position,
                 Time.deltaTime * _cameraTransitionSpeed);
             _camera.transform.position = _newCameraPosition;
             yield return null;
         }
-        _playerInput.ActivateInput();
+        //_playerInput.ActivateInput();
         _actualCameraTransitionTime = 0;
         StopCoroutine(MoveCameraCoroutine());
     }
