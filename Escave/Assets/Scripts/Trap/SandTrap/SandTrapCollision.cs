@@ -52,9 +52,9 @@ public class SandTrapCollision : MonoBehaviour
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.collider.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
             if (!isPlayerSinking) // NE reset que si on n’est pas en train de s’enfoncer
             {
@@ -63,6 +63,8 @@ public class SandTrapCollision : MonoBehaviour
             }
             else
             {
+                isPlayerSinking = false;
+                ResetTrap();
                 Debug.Log("Le joueur quitte le collider pendant qu’il s’enfonce (ignoré).");
             }
         }
@@ -102,7 +104,7 @@ public class SandTrapCollision : MonoBehaviour
             playerRb.gravityScale = sinkingGravityScale;
 
         if (trapCollider != null)
-            trapCollider.enabled = false;
+            trapCollider.isTrigger = true;
 
         Debug.Log("Le joueur commence à s'enfoncer dans le sable.");
     }
@@ -138,6 +140,7 @@ public class SandTrapCollision : MonoBehaviour
         playerRb = null;
         playerMovement = null;
         playerDeath = null;
+        trapCollider.isTrigger = false;
 
         Debug.Log("Réinitialisation du piège de sable.");
     }
