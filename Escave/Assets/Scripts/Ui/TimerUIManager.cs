@@ -30,4 +30,14 @@ public class TimerUIManager : MonoBehaviour, IDataPersistence
         _timerText.text = string.Format("{0:00}:{1:00}:{2:00}", _hoursPassInLevel, _minutesPassInLevel,
             _secondsPassInLevel);
     }
+
+    public void LoadData(GameData _gameData)
+    {
+        _timePassInLevel = _gameData.inGameTimer;
+    }
+
+    public void SaveData(ref GameData _gameData)
+    {
+        _gameData.inGameTimer = _timePassInLevel;
+    }
 }

@@ -40,6 +40,20 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
         _gameData.deathCount = deathCounter;
         _gameData.playerPos = currentCheckpoint.transform.position;
     }
+    
+    public void LoadData(GameData _gameData)
+    {
+        if(_gameData.playerPos != Vector2.zero)
+            transform.position = _gameData.playerPos;
+        
+        deathCounter = _gameData.deathCount;
+    }
+
+    public void SaveData(ref GameData _gameData)
+    {
+        _gameData.playerPos = currentCheckpoint.transform.position;
+        _gameData.deathCount = deathCounter;
+    }
 
     public void PlayerDie()
     {
@@ -88,4 +102,5 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
             Debug.LogWarning("Le checkpoint sp�cifi� n'est pas dans la liste des checkpoints !");
         }
     }
+    
 }
