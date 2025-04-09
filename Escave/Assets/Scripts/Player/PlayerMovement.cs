@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,15 +13,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform _groundCheck;
     private float _groundCheckRadius = 0.2f;
     [SerializeField] private LayerMask _groundLayer;
+    private bool _isGrounded;
+
 
     private Rigidbody2D _rb;
     private Vector2 _moveInput;
-    private bool _isGrounded;
     private SpriteRenderer _spriteRenderer;
 
 
     private Grappler _grappler;
-
 
     public Direction LastDirection { get; private set; } = Direction.Right;
     public enum Direction
@@ -56,15 +57,25 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_grappler != null && _grappler._isGrappled)
         {
-            // Appliquer une force douce dans la direction du input
             Vector2 force = new Vector2(_moveInput.x, 0f) * moveSpeed;
             _rb.AddForce(force, ForceMode2D.Force);
         }
         else
         {
-            _rb.linearVelocity = new Vector2(_moveInput.x * moveSpeed, _rb.linearVelocity.y);
+            if (_isGrounded)
+            {
+                _rb.linearVelocity = new Vector2(_moveInput.x * moveSpeed, _rb.linearVelocity.y);
+            }
+            else
+            {
+                if (Mathf.Abs(_moveInput.x) > 0.01f)
+                {
+                    _rb.linearVelocity = new Vector2(_moveInput.x * moveSpeed, _rb.linearVelocity.y);
+                }
+            }
         }
     }
+
 
 
     public void OnMove(InputAction.CallbackContext context)
@@ -82,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (context.performed && _isGrounded)
         {
-            _rb.linearVelocity = new Vector2(_moveInput.x * moveSpeed, _rb.linearVelocity.y);
+            _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, jumpForce);
         }
     }
 

@@ -51,10 +51,7 @@ public class Grappler : MonoBehaviour
             {
                 _springJoint.connectedAnchor = target.position;
 
-                //_springJoint.autoConfigureDistance = false;
                 _springJoint.distance = Vector2.Distance(transform.position, target.position);
-                //_springJoint.dampingRatio = 0f;
-                //_springJoint.frequency = 1.5f;
 
                 _springJoint.enabled = true;
                 _lineRenderer.enabled = true;
@@ -68,8 +65,6 @@ public class Grappler : MonoBehaviour
 
                 _isGrappled = false;
             }
-
         }
     }
-
 }
