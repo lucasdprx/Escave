@@ -13,7 +13,8 @@ public class StalactitesCollision : MonoBehaviour
     [SerializeField] private string animName;
 
     private const string PlayerTag = "Player";
-    private const string FinishTag = "Finish";
+    private const string GroundTag = "Ground";
+    private PlayerDeath playerDeathScript;
     private float animationLength;
 
     private void Awake()
@@ -47,10 +48,11 @@ public class StalactitesCollision : MonoBehaviour
         {
             case PlayerTag:
                 Debug.Log("dead");
-                //play la fonction death
+                playerDeathScript = collision.gameObject.GetComponent<PlayerDeath>();
+                playerDeathScript.PlayerDie();
                 break;
 
-            case FinishTag:
+            case GroundTag:
                 transform.position = prefabSpawnPoint.transform.position;
                 rb.simulated = false;
                 SetGravity(0);
