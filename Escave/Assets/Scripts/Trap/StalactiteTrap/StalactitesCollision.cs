@@ -14,7 +14,6 @@ public class StalactitesCollision : MonoBehaviour
     private void Awake()
     {
         _transform = transform;
-        rb = GetComponent<Rigidbody2D>();
     }
 
     private void Start()
@@ -46,11 +45,16 @@ public class StalactitesCollision : MonoBehaviour
         transform.localScale = Vector3.zero;
     }
 
-    public IEnumerator StartStalactite()
+    public IEnumerator StartTrap()
     {
+        if (rb == null)
+        {
+            rb = GetComponent<Rigidbody2D>();
+        }
         rb.gravityScale = 0f;
+        transform.localScale = Vector3.zero;
+        gameObject.SetActive(true);
         stalactitesRespawnAnimation.SetBool("IsEnter", true);
-        yield return null;
         yield return new WaitForSeconds(1);
         stalactitesRespawnAnimation.SetBool("IsEnter", false);
         rb.gravityScale = 1f;

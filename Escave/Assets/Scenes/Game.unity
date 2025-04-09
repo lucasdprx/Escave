@@ -348,6 +348,10 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   deathSound: {fileID: 0}
   deathCounter: 0
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  _isRestarting: 0
 --- !u!1 &301118866
 GameObject:
   m_ObjectHideFlags: 0
@@ -8292,15 +8296,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8065942348547337220, guid: d5edcabd26cd7044598ebf94db04622f, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8065942348547337220, guid: d5edcabd26cd7044598ebf94db04622f, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8065942348547337220, guid: d5edcabd26cd7044598ebf94db04622f, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8065942348547337220, guid: d5edcabd26cd7044598ebf94db04622f, type: 3}
       propertyPath: m_LocalPosition.y

@@ -9,8 +9,7 @@ public class TriggerBox : MonoBehaviour
     {
         if (collision.CompareTag("Player") && !StalactitesCollision.gameObject.activeSelf)
         {
-            StalactitesCollision.gameObject.SetActive(true);
-            StartCoroutine(StalactitesCollision.StartStalactite());
+            StartCoroutine(StalactitesCollision.StartTrap());
         }
     }
 }
