@@ -21,6 +21,9 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
     public bool _isRestarting = false;
     
     public void LoadData(GameData _gameData)
+    [SerializeField] private ParticleSystem _deathParticles;
+    
+    private void Start()
     {
         if (_gameData.playerPos != Vector2.zero)
         {
@@ -46,12 +49,14 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
             return;
         }
 
+        if (!_isRestarting)
+        {
+            deathCounter++;
+            OnDeath.Invoke(deathCounter);
+            PlayDeathSound();
+            Instantiate(_deathParticles, this.transform.position, Quaternion.identity);
+        }
         transform.position = currentCheckpoint.transform.position;
-        if (_isRestarting) return;
-        deathCounter++;
-        OnDeath.Invoke(deathCounter);
-
-        PlayDeathSound();
     }
 
     private void PlayDeathSound()
