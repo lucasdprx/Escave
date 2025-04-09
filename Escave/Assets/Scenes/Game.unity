@@ -9033,9 +9033,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6200069048448865863, guid: 873304b1e45d42f44a70838f0dc46336, type: 3}
+      propertyPath: sinkDelay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6200069048448865863, guid: 873304b1e45d42f44a70838f0dc46336, type: 3}
+      propertyPath: gravityScale
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6200069048448865863, guid: 873304b1e45d42f44a70838f0dc46336, type: 3}
+      propertyPath: sinkingDurationBeforeDeath
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7617367311245761655, guid: 873304b1e45d42f44a70838f0dc46336, type: 3}
       propertyPath: m_Name
       value: SandTrap
+      objectReference: {fileID: 0}
+    - target: {fileID: 8961326919686551234, guid: 873304b1e45d42f44a70838f0dc46336, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
