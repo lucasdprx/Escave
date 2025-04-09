@@ -4,7 +4,7 @@ public class SandTrapCollision : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] private float sinkDelay = 3f;
-    [SerializeField] private float sinkingSpeed = 0.5f;
+    [SerializeField] private float sinkingGravityScale = 0.2f;
     [SerializeField] private float slowMultiplier = 0.2f;
     [SerializeField] private float sinkingDurationBeforeDeath = 5f;
 
@@ -18,6 +18,16 @@ public class SandTrapCollision : MonoBehaviour
     private PlayerMovement playerMovement;
     private PlayerDeath playerDeath;
     private float originalSpeed;
+    private float originalGravityScale;
+
+    private Collider2D trapCollider;
+
+    private void Awake()
+    {
+        trapCollider = GetComponent<Collider2D>();
+        if (trapCollider == null)
+            Debug.LogError("Le piège de sable n'a pas de Collider2D !");
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -29,13 +39,16 @@ public class SandTrapCollision : MonoBehaviour
             playerDeath = player.GetComponent<PlayerDeath>();
 
             if (playerMovement != null)
-            {
                 originalSpeed = playerMovement.moveSpeed;
-            }
-  
+
+            if (playerRb != null)
+                originalGravityScale = playerRb.gravityScale;
+
             isPlayerInTrap = true;
             timer = 0f;
             sinkingTimer = 0f;
+
+            Debug.Log("Le joueur est entré dans le piège de sable.");
         }
     }
 
@@ -43,7 +56,15 @@ public class SandTrapCollision : MonoBehaviour
     {
         if (collision.collider.CompareTag("Player"))
         {
-            ResetTrap();
+            if (!isPlayerSinking) // NE reset que si on n’est pas en train de s’enfoncer
+            {
+                Debug.Log("Le joueur est sorti du piège de sable.");
+                ResetTrap();
+            }
+            else
+            {
+                Debug.Log("Le joueur quitte le collider pendant qu’il s’enfonce (ignoré).");
+            }
         }
     }
 
@@ -61,9 +82,8 @@ public class SandTrapCollision : MonoBehaviour
 
         if (isPlayerSinking && player != null)
         {
-            SinkPlayer();
-
             sinkingTimer += Time.deltaTime;
+
             if (sinkingTimer >= sinkingDurationBeforeDeath)
             {
                 KillPlayer();
@@ -79,22 +99,19 @@ public class SandTrapCollision : MonoBehaviour
             playerMovement.moveSpeed *= slowMultiplier;
 
         if (playerRb != null)
-        {
-            playerRb.gravityScale = 0f;
-            playerRb.linearVelocity = Vector2.zero;
-            playerRb.constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionY;
-        }
-    }
+            playerRb.gravityScale = sinkingGravityScale;
 
-    private void SinkPlayer()
-    {
-        player.transform.position += Vector3.down * sinkingSpeed * Time.deltaTime;
+        if (trapCollider != null)
+            trapCollider.enabled = false;
+
+        Debug.Log("Le joueur commence à s'enfoncer dans le sable.");
     }
 
     private void KillPlayer()
     {
         if (playerDeath != null)
         {
+            Debug.Log("Le joueur est mort après être resté trop longtemps dans le piège.");
             playerDeath.PlayerDie();
         }
 
@@ -112,14 +129,16 @@ public class SandTrapCollision : MonoBehaviour
             playerMovement.moveSpeed = originalSpeed;
 
         if (playerRb != null)
-        {
-            playerRb.gravityScale = 1f;
-            playerRb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        }
+            playerRb.gravityScale = originalGravityScale;
+
+        if (trapCollider != null)
+            trapCollider.enabled = true;
 
         player = null;
         playerRb = null;
         playerMovement = null;
         playerDeath = null;
+
+        Debug.Log("Réinitialisation du piège de sable.");
     }
 }
