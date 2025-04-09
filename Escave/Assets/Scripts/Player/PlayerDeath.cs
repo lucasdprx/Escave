@@ -20,20 +20,8 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
     public UnityEvent<int> OnDeath;
     public bool _isRestarting = false;
     
-    public void LoadData(GameData _gameData)
-    [SerializeField] private ParticleSystem _deathParticles;
     
-    private void Start()
-    {
-        if (_gameData.playerPos != Vector2.zero)
-        {
-            transform.position = _gameData.playerPos;
-            currentCheckpoint = checkpoints[0];
-        }
-        
-        deathCounter = _gameData.deathCount;
-        OnDeath.Invoke(deathCounter);
-    }
+    [SerializeField] private ParticleSystem _deathParticles;
 
     public void SaveData(ref GameData _gameData)
     {
@@ -47,12 +35,6 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
             transform.position = _gameData.playerPos;
         
         deathCounter = _gameData.deathCount;
-    }
-
-    public void SaveData(ref GameData _gameData)
-    {
-        _gameData.playerPos = currentCheckpoint.transform.position;
-        _gameData.deathCount = deathCounter;
     }
 
     public void PlayerDie()
