@@ -20,6 +20,8 @@ public class PlayerDeath : MonoBehaviour
     public UnityEvent<int> OnDeath;
     public bool _isRestarting = false;
     
+    [SerializeField] private ParticleSystem _deathParticles;
+    
     private void Start()
     {
         // initialisation of the current checkpoint to the first one in the list
@@ -41,12 +43,14 @@ public class PlayerDeath : MonoBehaviour
             return;
         }
 
+        if (!_isRestarting)
+        {
+            deathCounter++;
+            OnDeath.Invoke(deathCounter);
+            PlayDeathSound();
+            Instantiate(_deathParticles, this.transform.position, Quaternion.identity);
+        }
         transform.position = currentCheckpoint.transform.position;
-        if (_isRestarting) return;
-        deathCounter++;
-        OnDeath.Invoke(deathCounter);
-
-        PlayDeathSound();
     }
 
     private void PlayDeathSound()
