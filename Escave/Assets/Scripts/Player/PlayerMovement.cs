@@ -17,6 +17,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _moveInput;
     private bool _isGrounded;
     private SpriteRenderer _spriteRenderer;
+    
+    private PlayerWallJump _playerWallJump;
 
     public Direction LastDirection { get; private set; } = Direction.Right;
     public enum Direction
@@ -36,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _playerWallJump = GetComponent<PlayerWallJump>();
     }
 
     private void Update()
@@ -48,6 +51,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (_playerWallJump._isWallClimbingLeft || _playerWallJump._isWallClimbingRight || _playerWallJump._isWallJumping) return;
+        
         _rb.linearVelocity = new Vector2(_moveInput.x * moveSpeed, _rb.linearVelocity.y);
     }
 
