@@ -102,6 +102,10 @@ public class PlayerMovement : MonoBehaviour
         {
             LastDirection = GetEightDirection(_moveInput.normalized);
         }
+        if (_moveInput == Vector2.zero)
+        {
+            _rb.linearVelocity = new Vector2(0f, _rb.linearVelocity.y);
+        }
     }
 
     public void OnJump(InputAction.CallbackContext context)
