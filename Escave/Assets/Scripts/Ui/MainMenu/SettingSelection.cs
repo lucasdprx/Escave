@@ -10,4 +10,10 @@ public class SettingSelection : MonoBehaviour
     {
         slider.Select();
     }
+
+    
+    public void SelectSlider()
+    {
+        slider.Select();
+    }
 }

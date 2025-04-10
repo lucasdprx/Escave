@@ -9,4 +9,9 @@ public class CanvasSelectionButton : MonoBehaviour
     {
         _buttonToSelect.Select();
     }
+
+    public void SelectButton()
+    {
+        _buttonToSelect.Select();
+    }
 }
