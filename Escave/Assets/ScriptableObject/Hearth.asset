@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3901c8bc8b421f24c95a37a7fe4eb721, type: 3}
   m_Name: Hearth
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 15ee53b6a5f69114faedd4229be33f13, type: 3}
+  icon: {fileID: 21300000, guid: d3314fa160945f742a5b16cc28d3f3c2, type: 3}
   prefab: {fileID: 2696389360819878618, guid: 31f2624d341031945bedc28419ebc1ec, type: 3}
   collectibleName: Heart
   valueCollect: 3
