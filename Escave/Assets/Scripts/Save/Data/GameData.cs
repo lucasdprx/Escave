@@ -9,8 +9,7 @@ public class GameData
     public float inGameTimer;
 
     public Vector2 playerPos;
-    
-    public Vector2 cameraPos;
+    public Vector3 cameraPos;
     //---------------------------------
     
     public GameData()
@@ -19,6 +18,7 @@ public class GameData
         inGameTimer = 0f;
         
         playerPos = Vector2.zero;
-        cameraPos = Vector2.zero;
+        cameraPos = Vector3.zero;
+        cameraPos.z = -10;
     }
 }

@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &58515552 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1594898457711632667, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
+  m_PrefabInstance: {fileID: 3332733432586909590}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &317386287 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5707157332166010852, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
@@ -183,7 +188,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 100
   field of view: 96
   orthographic: 0
   orthographic size: 5
@@ -302,6 +307,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2478794345925778205, guid: 0b546080af589c1498b91f8971c0c47b, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2929904492367386306, guid: 0b546080af589c1498b91f8971c0c47b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -14.5
@@ -342,6 +351,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4692712459543376296, guid: 0b546080af589c1498b91f8971c0c47b, type: 3}
+      propertyPath: _target
+      value: 
+      objectReference: {fileID: 1483383860}
+    - target: {fileID: 6955651372961097662, guid: 0b546080af589c1498b91f8971c0c47b, type: 3}
+      propertyPath: m_Distance
+      value: 33.77129
+      objectReference: {fileID: 0}
     - target: {fileID: 7023489141773015471, guid: 0b546080af589c1498b91f8971c0c47b, type: 3}
       propertyPath: m_Name
       value: Player
@@ -350,6 +367,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 7576297500504853032, guid: 0b546080af589c1498b91f8971c0c47b, type: 3}
+      propertyPath: cameraTransform
+      value: 
+      objectReference: {fileID: 58515552}
     - target: {fileID: 7576297500504853032, guid: 0b546080af589c1498b91f8971c0c47b, type: 3}
       propertyPath: checkpoints.Array.size
       value: 2
@@ -557,6 +578,11 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!4 &1483383860 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4367744469431291557, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
+  m_PrefabInstance: {fileID: 3332733432586909590}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1494607819
 GameObject:
   m_ObjectHideFlags: 0
@@ -587,6 +613,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fileName: data.json
+  gameData:
+    deathCount: 0
+    inGameTimer: 0
+    playerPos: {x: 0, y: 0}
+    cameraPos: {x: 0, y: 0, z: -10}
 --- !u!4 &1494607821
 Transform:
   m_ObjectHideFlags: 0
@@ -627,8 +658,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2004754105}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.11466, y: 11.281515, z: -5.2253785}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -739,18 +770,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5174403726835366590, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
-      propertyPath: _camera
-      value: 
-      objectReference: {fileID: 330585545}
     - target: {fileID: 8295652783049654115, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
       propertyPath: m_Name
       value: Map
       objectReference: {fileID: 0}
-    - target: {fileID: 8501402310080926432, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
-      propertyPath: _camera
-      value: 
-      objectReference: {fileID: 330585545}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
