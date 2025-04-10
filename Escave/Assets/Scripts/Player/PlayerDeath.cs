@@ -47,7 +47,7 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
 
     public void PlayerDie()
     {
-        _playerSFX.PlayDeathSound();
+        _playerSFX.PlayDeathSFX();
 
         if (currentCheckpoint == null)
         {
@@ -62,7 +62,7 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
             Instantiate(_deathParticles, this.transform.position, Quaternion.identity);
         }
         transform.position = currentCheckpoint.transform.position;
-        _playerSFX.PlayRespawnSound();
+        _playerSFX.PlayRespawnSFX();
     }
 
     public void SetCheckpoint(GameObject newCheckpoint)
@@ -76,7 +76,7 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
         if (checkpoints.Contains(newCheckpoint))
         {
             currentCheckpoint = newCheckpoint;
-            _playerSFX.PlayCheckpointReachSound();
+            _playerSFX.PlayCheckpointReachSFX();
         }
         else
         {

@@ -525,6 +525,7 @@ MonoBehaviour:
   _groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  _heavyFallYVelocity: -30
 --- !u!114 &2843669229510685384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -598,8 +599,6 @@ MonoBehaviour:
   checkpoints:
   - {fileID: 0}
   cameraTransform: {fileID: 0}
-  audioSource: {fileID: 0}
-  deathSound: {fileID: 0}
   deathCounter: 0
   OnDeath:
     m_PersistentCalls:

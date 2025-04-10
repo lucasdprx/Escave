@@ -70,6 +70,7 @@ public class PlayerWallJump : MonoBehaviour
                 _isWallClimbingRight = false;
                 _canWallClimb = false;
                 _rb.gravityScale = 4;
+                _playerSFX.PlayEnduranceRunOutSFX();
             }
         }
 

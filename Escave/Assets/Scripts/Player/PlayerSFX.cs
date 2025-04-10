@@ -14,9 +14,10 @@ public class PlayerSFX : MonoBehaviour
 
     #region Simple SFX (no routines)
     
-    public void PlayDeathSound()           { _audioManager.PlaySound(AudioType.death);           }
-    public void PlayRespawnSound()         { _audioManager.PlaySound(AudioType.respawn);         }
-    public void PlayCheckpointReachSound() { _audioManager.PlaySound(AudioType.checkpointReach); }
+    public void PlayDeathSFX()           { _audioManager.PlaySound(AudioType.death);           }
+    public void PlayRespawnSFX()         { _audioManager.PlaySound(AudioType.respawn);         }
+    public void PlayCheckpointReachSFX() { _audioManager.PlaySound(AudioType.checkpointReach); }
+    public void PlayEnduranceRunOutSFX() { _audioManager.PlaySound(AudioType.enduranceRunOut); }
     public void PlayWallClingSFX()
     {
         //!\\ UNIMPLEMENTED
@@ -29,7 +30,8 @@ public class PlayerSFX : MonoBehaviour
         //_audioManager.PlaySound(AudioType.wallJump);
     }
 
-    public void PlayJumpLandSFX() { _audioManager.PlaySound(AudioType.jumpLand); }
+    public void PlayJumpLandSFX()      { _audioManager.PlaySound(AudioType.jumpLand);      }
+    public void PlayHeavyJumpLandSFX() { _audioManager.PlaySound(AudioType.jumpHeavyLand); }
     #endregion
 
     #region Start/Stop Routines
