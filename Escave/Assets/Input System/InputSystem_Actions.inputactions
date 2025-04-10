@@ -177,6 +177,17 @@
                 },
                 {
                     "name": "",
+                    "id": "19287a20-3968-462f-b9e1-16a92abd159c",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "b1a2c4b4-4947-4409-bf2b-e531c04d776f",
                     "path": "<Keyboard>/ctrl",
                     "interactions": "",
