@@ -9,7 +9,6 @@ public class GameData
     public float inGameTimer;
 
     public Vector2 playerPos;
-    
     public Vector3 cameraPos;
     //---------------------------------
     

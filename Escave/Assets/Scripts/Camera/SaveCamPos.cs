@@ -10,6 +10,6 @@ public class SaveCamPos : MonoBehaviour, IDataPersistence
 
     public void SaveData(ref GameData _gameData)
     {
-        
+    
     }
 }

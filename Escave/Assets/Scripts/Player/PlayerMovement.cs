@@ -130,8 +130,7 @@ public class PlayerMovement : MonoBehaviour
         if (_other.gameObject.layer == LayerMask.NameToLayer("OneWayPlatform"))
             _isOnOneWayPlatform = false;
     }
-
-
+    
     public void OnMove(InputAction.CallbackContext context)
     {
         _moveInput = context.ReadValue<Vector2>();
