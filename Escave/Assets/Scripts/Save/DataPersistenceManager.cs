@@ -1,13 +1,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class DataPersistenceManager : MonoBehaviour
 {
     [Header("File Storage Config")] 
     [SerializeField] private string fileName;
     
-    private GameData _gameData;
+    [FormerlySerializedAs("_gameData")]
+    [HideInInspector] public GameData gameData;
     private List<IDataPersistence> _dataPersistenceObjects;
     private DataFileHandler _dataFileDataHandler;
     public static DataPersistenceManager instance { get; private set; }
@@ -35,21 +37,21 @@ public class DataPersistenceManager : MonoBehaviour
 
     public void NewOptions()
     {
-        this._gameData = new GameData();
+        this.gameData = new GameData();
     }
 
     public void LoadOptions()
     {
-        this._gameData = _dataFileDataHandler.Load();
+        this.gameData = _dataFileDataHandler.Load();
         
-        if (this._gameData == null)
+        if (this.gameData == null)
         {
             NewOptions();
         }
 
         foreach (IDataPersistence _dataPersistenceObject in this._dataPersistenceObjects)
         {
-            _dataPersistenceObject.LoadData(_gameData);
+            _dataPersistenceObject.LoadData(gameData);
         }
     }
 
@@ -57,10 +59,10 @@ public class DataPersistenceManager : MonoBehaviour
     {
         foreach (IDataPersistence _dataPersistenceObject in this._dataPersistenceObjects)
         {
-            _dataPersistenceObject.SaveData(ref _gameData);
+            _dataPersistenceObject.SaveData(ref gameData);
         }
         
-        _dataFileDataHandler.Save(_gameData);
+        _dataFileDataHandler.Save(gameData);
     }
 
     private List<IDataPersistence> FindAllDataPersistenceObjects()
