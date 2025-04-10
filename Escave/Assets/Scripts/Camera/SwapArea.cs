@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -30,6 +31,7 @@ public class SwapArea : MonoBehaviour
     private PlayerInput _playerInput;
     private Vector3 _newCameraPosition = Vector3.zero;
     private Camera _camera;
+    private Vector2 _playerDir;
 
     private void Start()
     {
@@ -38,18 +40,31 @@ public class SwapArea : MonoBehaviour
         _audioManager = AudioManager.Instance;
     }
 
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if(!other.CompareTag("Player"))
+            return;
+        
+        Vector2 _player = (Vector2)transform.position - (Vector2)other.gameObject.transform.position;
+        if (Mathf.Approximately(Mathf.Sign(_playerDir.x), Mathf.Sign(_player.x)) && 
+            Mathf.Approximately(Mathf.Sign(_playerDir.y), Mathf.Sign(_player.y)))
+            return;
+        
+        print("swap");
+        _playerInput = other.GetComponent<PlayerInput>();
+        _playerDeath = other.GetComponent<PlayerDeath>();
+        Vector2 _direction = FindDirection(other.gameObject.transform.position);
+        //other.transform.position -= (Vector3)_direction * 2; 
+        //_playerInput.DeactivateInput();
+        StartCoroutine(MoveCameraCoroutine());
+        _audioManager.PlaySound(AudioType.areaTransition);
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(!other.CompareTag("Player"))
             return;
         
-        _playerInput = other.GetComponent<PlayerInput>();
-        _playerDeath = other.GetComponent<PlayerDeath>();
-        Vector2 _direction = FindDirection(other.gameObject.transform.position);
-        other.transform.position += (Vector3)_direction * 2; 
-        //_playerInput.DeactivateInput();
-        StartCoroutine(MoveCameraCoroutine());
-        _audioManager.PlaySound(AudioType.areaTransition);
+        _playerDir = (Vector2)transform.position - (Vector2)other.gameObject.transform.position;
     }
 
     private Vector2 FindDirection(Vector2 _playerTransform)
@@ -60,13 +75,14 @@ public class SwapArea : MonoBehaviour
         switch (_switchAreaDirection)
         {
             case Direction.Horizontal :
-                _direction.x = Mathf.Sign(_playerPos.x);
+                _direction.x = Mathf.Sign(-_playerPos.x);
                 if(_direction.x < 0)  _playerDeath.SetCheckpoint(_downLeftCheckpoint);
                 if(_direction.x > 0) _playerDeath.SetCheckpoint(_upRightCheckpoint);
                 _targetCameraPosition.position += new Vector3(_direction.x * _cameraScale.x,0,0);
                 break;
             case Direction.Vertical :
-                _direction.y = Mathf.Sign(_playerPos.y);
+                _direction.y = Mathf.Sign(-_playerPos.y);
+                print(_direction);
                 if(_direction.y < 0)  _playerDeath.SetCheckpoint(_downLeftCheckpoint);
                 if(_direction.y > 0) _playerDeath.SetCheckpoint(_upRightCheckpoint);
                 _targetCameraPosition.position += new Vector3(0,_direction.y * _cameraScale.y,0);
