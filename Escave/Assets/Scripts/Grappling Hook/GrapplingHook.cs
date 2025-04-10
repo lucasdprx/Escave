@@ -5,21 +5,23 @@ using UnityEngine.InputSystem;
 public class GrapplingHook : MonoBehaviour
 {
     private LineRenderer _lineRenderer;
-    public SpringJoint2D _springJoint;
-    public Transform target;
+    private SpringJoint2D _springJoint;
+    public Transform _target;
     public float hookTime;
 
     [SerializeField] private GameObject _grapplingHookProjectile;
 
     public bool _isGrappled = false;
-    public bool canShoot = true;
+    private bool _canShoot = true;
 
-    public Transform firePoint;
+    [SerializeField] private Transform firePoint;
     public float hookSpeed = 20f;
     public float maxDistance = 10f;
 
-    public GameObject _currentProjectile;
+    private GameObject _currentProjectile;
     private GrapplerProjectile _projectileScript;
+
+    private Coroutine _detachCoroutine;
 
     private void Start()
     {
@@ -43,7 +45,7 @@ public class GrapplingHook : MonoBehaviour
     {
         if (!ctx.performed) return;
 
-        if (!_isGrappled && canShoot)
+        if (!_isGrappled && _canShoot)
         {
             var playerMovement = transform.parent.GetComponent<PlayerMovement>();
             Vector2 shootDir = playerMovement.DirectionToVector2(playerMovement.LastDirection);
@@ -53,48 +55,66 @@ public class GrapplingHook : MonoBehaviour
             _projectileScript.Initialize(shootDir, hookSpeed, maxDistance, this);
 
             _lineRenderer.enabled = true;
-            canShoot = false;
+            _canShoot = false;
         }
         else if (_isGrappled)
         {
-            DetachGrapplingHook();
+            if (_detachCoroutine != null)
+            {
+                StopCoroutine(_detachCoroutine);
+                DetachGrapplingHook();
+                _detachCoroutine = null;
+            }
+
+            _projectileScript.StartReturn();
         }
+
     }
 
     public void AttachToPoint(Vector2 point)
     {
-        target.position = point;
+        _target.position = point;
+
         _springJoint.connectedAnchor = point;
         _springJoint.distance = Vector2.Distance(transform.position, point);
         _springJoint.enabled = true;
 
         _isGrappled = true;
 
-        StartCoroutine(AutoDetachAfterTime());
+        if (_detachCoroutine != null) StopCoroutine(_detachCoroutine);
+        _detachCoroutine = StartCoroutine(DetachGrapplingHookAfterTime());
     }
 
-    private IEnumerator AutoDetachAfterTime()
+
+    private IEnumerator DetachGrapplingHookAfterTime()
     {
         yield return new WaitForSeconds(hookTime);
+
         DetachGrapplingHook();
+
+        _detachCoroutine = null;
     }
+
 
     public void DetachGrapplingHook()
     {
         _springJoint.enabled = false;
         _isGrappled = false;
 
+        GetComponentInParent<PlayerMovement>()?.OnDetachedFromHook();
+
         if (_projectileScript != null)
         {
-            _projectileScript.StartReturn(); // Hook visuel revient au joueur
+            _projectileScript.StartReturn();
         }
     }
+
 
     public void OnProjectileReturned()
     {
         _lineRenderer.enabled = false;
         _currentProjectile = null;
         _projectileScript = null;
-        canShoot = true;
+        _canShoot = true;
     }
 }
