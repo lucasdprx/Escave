@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CreditsCreatorDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class CreditsCreatorDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private TextMeshProUGUI _name;
     [SerializeField] private TextMeshProUGUI _role;
@@ -21,7 +21,7 @@ public class CreditsCreatorDisplay : MonoBehaviour, IPointerEnterHandler, IPoint
         _role.gameObject.SetActive(false);
     }
 
-    public void OnPointerClick(PointerEventData _eventData)
+    public void OnClick()
     {
         Application.OpenURL(_link);
     }
