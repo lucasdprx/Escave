@@ -5,6 +5,11 @@ using UnityEngine.InputSystem;
 public class SwapArea : MonoBehaviour
 {
     [SerializeField] private Direction _switchAreaDirection;
+
+    [SerializeField] private GameObject _downLeftCheckpoint;
+    [SerializeField] private GameObject _upRightCheckpoint;
+    
+    private PlayerDeath _playerDeath;
     private enum Direction
     {
         Horizontal,
@@ -35,7 +40,9 @@ public class SwapArea : MonoBehaviour
     {
         if(!other.CompareTag("Player"))
             return;
+        
         _playerInput = other.GetComponent<PlayerInput>();
+        _playerDeath = other.GetComponent<PlayerDeath>();
         Vector2 _direction = FindDirection(other.gameObject.transform.position);
         other.transform.position += (Vector3)_direction * 2; 
         //_playerInput.DeactivateInput();
@@ -51,10 +58,14 @@ public class SwapArea : MonoBehaviour
         {
             case Direction.Horizontal :
                 _direction.x = Mathf.Sign(_playerPos.x);
+                if(_direction.x < 0)  _playerDeath.SetCheckpoint(_downLeftCheckpoint);
+                if(_direction.x > 0) _playerDeath.SetCheckpoint(_upRightCheckpoint);
                 _targetCameraPosition.position += new Vector3(_direction.x * _cameraScale.x,0,0);
                 break;
             case Direction.Vertical :
                 _direction.y = Mathf.Sign(_playerPos.y);
+                if(_direction.y < 0)  _playerDeath.SetCheckpoint(_downLeftCheckpoint);
+                if(_direction.y > 0) _playerDeath.SetCheckpoint(_upRightCheckpoint);
                 _targetCameraPosition.position += new Vector3(0,_direction.y * _cameraScale.y,0);
                 break;
         }
