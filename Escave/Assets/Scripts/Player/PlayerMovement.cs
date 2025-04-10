@@ -83,29 +83,47 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (!_playerWallJump._isWallClimbingLeft && !_playerWallJump._isWallClimbingRight && !_playerWallJump._isWallJumping)
         {
+            //If just detached from hook, wait till player use input (else use balancing velocity
             if (_justDetachedFromHook)
             {
-                //keep balancing velocity
-                return;
-            }
+                if (Mathf.Abs(_moveInput.x) > 0.01f)
+                {
+                    //Player use input -> autorize air control
+                    float controlFactor = 0.15f; //adjust speed
+                    _rb.linearVelocity = new Vector2(
+                        Mathf.Lerp(_rb.linearVelocity.x, _moveInput.x * moveSpeed, controlFactor),
+                        _rb.linearVelocity.y
+                    );
+                }
 
-            if (_isGrounded)
-            {
-                _rb.linearVelocity = new Vector2(_moveInput.x * moveSpeed, _rb.linearVelocity.y);
+                //back to base movement
+                if (_isGrounded)
+                {
+                    _justDetachedFromHook = false;
+                }
             }
             else
             {
-                if (Mathf.Abs(_moveInput.x) > 0.01f)
+                if (_isGrounded)
                 {
                     _rb.linearVelocity = new Vector2(_moveInput.x * moveSpeed, _rb.linearVelocity.y);
                 }
                 else
                 {
-                    float dampFactor = 0.9f;
-                    _rb.linearVelocity = new Vector2(_rb.linearVelocity.x * dampFactor, _rb.linearVelocity.y);
+                    if (Mathf.Abs(_moveInput.x) > 0.01f)
+                    {
+                        _rb.linearVelocity = new Vector2(_moveInput.x * moveSpeed, _rb.linearVelocity.y);
+                    }
+                    else
+                    {
+                        float dampFactor = 0.9f;
+                        _rb.linearVelocity = new Vector2(_rb.linearVelocity.x * dampFactor, _rb.linearVelocity.y);
+                    }
                 }
             }
         }
+
+
 
         // Handle step SFX
         if (_rb.linearVelocity.x != 0 && _rb.linearVelocity.y == 0) _playerSFX.PlayWalkSFX();
@@ -150,10 +168,6 @@ public class PlayerMovement : MonoBehaviour
         if (_moveInput.sqrMagnitude > 0.01f)
         {
             LastDirection = GetEightDirection(_moveInput.normalized);
-        }
-        if (_moveInput == Vector2.zero)
-        {
-            _rb.linearVelocity = new Vector2(0f, _rb.linearVelocity.y);
         }
     }
 
