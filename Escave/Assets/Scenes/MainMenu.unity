@@ -1009,14 +1009,74 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 771877039115672031, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: _link
+      value: https://pandortaxe.itch.io/
+      objectReference: {fileID: 0}
     - target: {fileID: 926476891307396569, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
       propertyPath: m_Name
       value: CreditsCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 926476891307396569, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1612199246162592003, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5ba83fb3517ed66418a452b060ba2ca8, type: 3}
+    - target: {fileID: 2086435437638599894, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: _link
+      value: https://alexx-terrieur.itch.io/
+      objectReference: {fileID: 0}
+    - target: {fileID: 2613841844734793318, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: _link
+      value: https://meerlylume.itch.io/
+      objectReference: {fileID: 0}
+    - target: {fileID: 3381381000682066867, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f6baed347ba9192438fc30a4f1006a6d, type: 3}
+    - target: {fileID: 3529511801583171610, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: _link
+      value: https://kuko524.itch.io
+      objectReference: {fileID: 0}
+    - target: {fileID: 4084720816700362426, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: aef0484444dc51c4eab5d8bc9036592f, type: 3}
+    - target: {fileID: 4828349952167087120, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: _link
+      value: https://wighthood.itch.io/
       objectReference: {fileID: 0}
     - target: {fileID: 4932955973489941778, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 816910511}
+    - target: {fileID: 4946830264281224322, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3afe928930cd8304a92512087e640edb, type: 3}
+    - target: {fileID: 5137322395509138166, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: _link
+      value: https://seven207.itch.io/
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313276036163334288, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9738b08c99da050458fe40f163ddcd81, type: 3}
+    - target: {fileID: 6840975035531636848, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 01a1d8097f0a6fb4dacb07e903adbb57, type: 3}
+    - target: {fileID: 7315208055939196917, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: _link
+      value: https://nicotz.itch.io/
+      objectReference: {fileID: 0}
+    - target: {fileID: 7847965933019146005, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: _link
+      value: https://lucasdrpx.itch.io/
+      objectReference: {fileID: 0}
     - target: {fileID: 8046511611358879398, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1096,6 +1156,18 @@ PrefabInstance:
     - target: {fileID: 8046511611358879398, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8149311148708404085, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a8584cf6223112342b8c46201381ebdb, type: 3}
+    - target: {fileID: 8454094754444981651, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d49a2fa26d244d443a6284d8c4a26b2c, type: 3}
+    - target: {fileID: 8873259363389988239, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: m_Alpha
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1193,6 +1265,10 @@ PrefabInstance:
     - target: {fileID: 3017177927439614612, guid: e1815a773d31dfb45b147c8c5834785b, type: 3}
       propertyPath: m_Name
       value: BlackScreenCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 3017177927439614612, guid: e1815a773d31dfb45b147c8c5834785b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1346,6 +1422,10 @@ PrefabInstance:
     - target: {fileID: 3036729531478081424, guid: 32e7d8af2e8d75e44876eb879229bde3, type: 3}
       propertyPath: m_Name
       value: MainMenuCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 3036729531478081424, guid: 32e7d8af2e8d75e44876eb879229bde3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4627625537957235456, guid: 32e7d8af2e8d75e44876eb879229bde3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
