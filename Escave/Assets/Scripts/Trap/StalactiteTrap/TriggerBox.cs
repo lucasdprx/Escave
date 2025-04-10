@@ -7,9 +7,9 @@ public class TriggerBox : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && !StalactitesCollision.gameObject.activeSelf)
+        if (collision.CompareTag("Player") && !StalactitesCollision.isStarted)
         {
-            StartCoroutine(StalactitesCollision.StartTrap());
+            StalactitesCollision.StartTrap();
         }
     }
 }
