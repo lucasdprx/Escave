@@ -50,7 +50,6 @@ public class SwapArea : MonoBehaviour
             Mathf.Approximately(Mathf.Sign(_playerDir.y), Mathf.Sign(_player.y)))
             return;
         
-        print("swap");
         _playerInput = other.GetComponent<PlayerInput>();
         _playerDeath = other.GetComponent<PlayerDeath>();
         Vector2 _direction = FindDirection(other.gameObject.transform.position);
@@ -82,7 +81,6 @@ public class SwapArea : MonoBehaviour
                 break;
             case Direction.Vertical :
                 _direction.y = Mathf.Sign(-_playerPos.y);
-                print(_direction);
                 if(_direction.y < 0)  _playerDeath.SetCheckpoint(_downLeftCheckpoint);
                 if(_direction.y > 0) _playerDeath.SetCheckpoint(_upRightCheckpoint);
                 _targetCameraPosition.position += new Vector3(0,_direction.y * _cameraScale.y,0);

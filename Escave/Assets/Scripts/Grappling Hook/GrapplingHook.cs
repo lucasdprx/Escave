@@ -124,7 +124,8 @@ public class GrapplingHook : MonoBehaviour
             _detachCoroutine = null;
         }
 
-        _projectileScript.StartReturn();
+        if (_projectileScript)
+            _projectileScript.StartReturn();
     }
 
 
