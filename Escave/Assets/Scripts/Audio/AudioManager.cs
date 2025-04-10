@@ -37,7 +37,6 @@ public class AudioManager : MonoBehaviour
         if (type == AudioType.step || type == AudioType.jumpLand)
         {
             data.source.pitch = Random.Range(0.75f, 1.5f);
-            //RANGE IS TEMPORARY
         }
         else data.source.pitch = 1f;
 
