@@ -69,6 +69,7 @@ public class SwapArea : MonoBehaviour
                 _targetCameraPosition.position += new Vector3(0,_direction.y * _cameraScale.y,0);
                 break;
         }
+        DataPersistenceManager.instance.gameData.cameraPos = _targetCameraPosition.position;
         return _direction;
     }
 

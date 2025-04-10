@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
@@ -9,7 +8,6 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
     [Header("Checkpoints")]
     [SerializeField] private List<GameObject> checkpoints; // checkpoint list
     private GameObject currentCheckpoint; // active checkpoint
-    [SerializeField] private Transform cameraTransform; // camera transform
 
     public int DeathCount => deathCounter;
     [SerializeField, ReadOnly] private int deathCounter = 0;
@@ -72,7 +70,6 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
             Debug.LogWarning("Checkpoint fourni est null !");
             return;
         }
-        DataPersistenceManager.instance.gameData.cameraPos = cameraTransform.position;
         if (checkpoints.Contains(newCheckpoint))
         {
             currentCheckpoint = newCheckpoint;

@@ -770,10 +770,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5174403726835366590, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
+      propertyPath: _upRightCheckpoint
+      value: 
+      objectReference: {fileID: 2128502133}
+    - target: {fileID: 5174403726835366590, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
+      propertyPath: _downLeftCheckpoint
+      value: 
+      objectReference: {fileID: 317386287}
     - target: {fileID: 8295652783049654115, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
       propertyPath: m_Name
       value: Map
       objectReference: {fileID: 0}
+    - target: {fileID: 8501402310080926432, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
+      propertyPath: _downLeftCheckpoint
+      value: 
+      objectReference: {fileID: 2128502133}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
