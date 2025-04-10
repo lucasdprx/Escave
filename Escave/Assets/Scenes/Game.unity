@@ -886,6 +886,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5174403726835366590, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
+      propertyPath: _checkpoint
+      value: 
+      objectReference: {fileID: 2128502133}
+    - target: {fileID: 5174403726835366590, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
+      propertyPath: _firstCheckpoint
+      value: 
+      objectReference: {fileID: 317386287}
+    - target: {fileID: 5174403726835366590, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
+      propertyPath: _secondCheckpoint
+      value: 
+      objectReference: {fileID: 3332733432586909591}
+    - target: {fileID: 5174403726835366590, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
+      propertyPath: _upRightCheckpoint
+      value: 
+      objectReference: {fileID: 2128502133}
+    - target: {fileID: 5174403726835366590, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
+      propertyPath: _downLeftCheckpoint
+      value: 
+      objectReference: {fileID: 317386287}
     - target: {fileID: 5631678746114165998, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -894,7 +914,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Map
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1059246174895494662, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
+    - {fileID: 7114634620953361553, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1148447995629196069, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
@@ -905,6 +927,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 956385105}
   m_SourcePrefab: {fileID: 100100000, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
+--- !u!1 &3332733432586909591 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6225677881916563798, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
+  m_PrefabInstance: {fileID: 3332733432586909590}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
