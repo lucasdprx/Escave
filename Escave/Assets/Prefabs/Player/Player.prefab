@@ -286,7 +286,19 @@ MonoBehaviour:
     m_ActionId: 942747b4-3f06-44b9-ab65-a694ba08c977
     m_ActionName: 'Player/Fire[/Keyboard/leftShift]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2843669229510685384}
+        m_TargetAssemblyTypeName: PlayerWallJump, Assembly-CSharp
+        m_MethodName: Climb
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 7dfe29b8-e480-4a26-8358-fab1f27e7ca0
     m_ActionName: 'Player/GrabWall[/Keyboard/ctrl,/XInputControllerWindows/leftShoulder]'
   m_NeverAutoSwitchControlSchemes: 0
