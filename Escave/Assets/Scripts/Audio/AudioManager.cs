@@ -4,13 +4,16 @@ public enum AudioType
 {
     step,
     jumpLand,
+    jumpHeavyLand,
     death,
     respawn,
     grapplingHookHit,
     grapplingHookThrow,
     wallCling,
     wallJump,
-    checkpointReach
+    checkpointReach,
+    areaTransition,
+    enduranceRunOut
 }
 
 public class AudioManager : MonoBehaviour

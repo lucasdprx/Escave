@@ -6,20 +6,25 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement Settings")]
     public float moveSpeed;
-    public float jumpForce;
+    public float jumpForce; [Space]
 
     [Header("Ground Check")]
     [SerializeField] private Transform _groundCheck;
     private float _groundCheckRadius = 0.2f;
-    [SerializeField] private LayerMask _groundLayer;
+    [SerializeField] private LayerMask _groundLayer; [Space]
     private bool _isGrounded;
 
 
     private Rigidbody2D _rb;
     private Vector2 _moveInput;
     private SpriteRenderer _spriteRenderer;
+
+    [Header("Heavy Fall Detection")]
+    [SerializeField] private float _heavyFallYVelocity; 
     private bool _hasLanded;
-    
+    private bool _inHeavyFall;
+
+
     private PlayerWallJump _playerWallJump;
     private PlayerSFX      _playerSFX;
     
@@ -106,13 +111,21 @@ public class PlayerMovement : MonoBehaviour
         if (_rb.linearVelocity.x != 0 && _rb.linearVelocity.y == 0) _playerSFX.PlayWalkSFX();
 
         // Handle jump landing SFX
-        if (_rb.linearVelocity.y < 0 && !_isGrounded) _hasLanded = false; //Check if the player is falling
+        if (_rb.linearVelocity.y < 0 && !_isGrounded) //Check if the player is falling
+        {
+            _hasLanded = false;
+        }
 
         if (_hasLanded) return; //If the player was falling, check if it landed
+        if (_rb.linearVelocity.y <= _heavyFallYVelocity) _inHeavyFall = true;
         if (_isGrounded)
         {
-            _hasLanded = _isGrounded;
-            _playerSFX.PlayJumpLandSFX();
+            _hasLanded = true;
+
+            if (_inHeavyFall) _playerSFX.PlayHeavyJumpLandSFX();
+            else              _playerSFX.PlayJumpLandSFX();
+
+            _inHeavyFall = false;
         }
     }
 

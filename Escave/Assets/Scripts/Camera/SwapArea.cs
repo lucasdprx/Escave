@@ -5,11 +5,12 @@ using UnityEngine.InputSystem;
 public class SwapArea : MonoBehaviour
 {
     [SerializeField] private Direction _switchAreaDirection;
-
     [SerializeField] private GameObject _downLeftCheckpoint;
     [SerializeField] private GameObject _upRightCheckpoint;
     
     private PlayerDeath _playerDeath;
+    private AudioManager _audioManager;
+
     private enum Direction
     {
         Horizontal,
@@ -34,6 +35,7 @@ public class SwapArea : MonoBehaviour
     {
         _camera = Camera.main;
         _targetCameraPosition.position = _camera.transform.position;
+        _audioManager = AudioManager.Instance;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -47,6 +49,7 @@ public class SwapArea : MonoBehaviour
         other.transform.position += (Vector3)_direction * 2; 
         //_playerInput.DeactivateInput();
         StartCoroutine(MoveCameraCoroutine());
+        _audioManager.PlaySound(AudioType.areaTransition);
     }
 
     private Vector2 FindDirection(Vector2 _playerTransform)
