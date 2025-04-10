@@ -13,6 +13,10 @@ public class PlayerSFX : MonoBehaviour
     }
 
     #region Simple SFX (no routines)
+    
+    public void PlayDeathSound()           { _audioManager.PlaySound(AudioType.death);           }
+    public void PlayRespawnSound()         { _audioManager.PlaySound(AudioType.respawn);         }
+    public void PlayCheckpointReachSound() { _audioManager.PlaySound(AudioType.checkpointReach); }
     public void PlayWallClingSFX()
     {
         //!\\ UNIMPLEMENTED

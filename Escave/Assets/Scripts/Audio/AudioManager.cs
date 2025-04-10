@@ -9,7 +9,8 @@ public enum AudioType
     grapplingHookHit,
     grapplingHookThrow,
     wallCling,
-    wallJump
+    wallJump,
+    checkpointReach
 }
 
 public class AudioManager : MonoBehaviour
