@@ -2886,6 +2886,18 @@ PrefabInstance:
       value: https://wighthood.itch.io/
       objectReference: {fileID: 0}
     - target: {fileID: 4932955973489941778, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.b
+      value: 0.6458704
+      objectReference: {fileID: 0}
+    - target: {fileID: 4932955973489941778, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.g
+      value: 0.6458704
+      objectReference: {fileID: 0}
+    - target: {fileID: 4932955973489941778, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.r
+      value: 0.7735849
+      objectReference: {fileID: 0}
+    - target: {fileID: 4932955973489941778, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 816910511}
