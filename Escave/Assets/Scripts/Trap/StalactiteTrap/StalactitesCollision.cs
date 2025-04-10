@@ -31,8 +31,11 @@ public class StalactitesCollision : MonoBehaviour
             playerDeathScript.PlayerDie();
             StartCoroutine(ResetSpike());
         }
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Enemy"))
         {
+            rb.gravityScale = 0f;
+            rb.linearVelocity = Vector2.zero;
+            stalactitesRespawnAnimation.SetBool("IsEnter", true);
             StartCoroutine(ResetSpike());
         }
     }
