@@ -16,7 +16,6 @@ public class OneWayPlatform : MonoBehaviour
         if (_other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             _playerOneWayThroughPlatform = _other.gameObject.GetComponent<PlayerOneWayThroughPlatform>();
-            print("caca");
         }
     }
 
