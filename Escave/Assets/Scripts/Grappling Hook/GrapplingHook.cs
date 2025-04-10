@@ -109,6 +109,18 @@ public class GrapplingHook : MonoBehaviour
         _detachCoroutine = StartCoroutine(DetachGrapplingHookAfterTime());
     }
 
+    public void ResetGrapplingHook()
+    {
+        if (_detachCoroutine != null)
+        {
+            StopCoroutine(_detachCoroutine);
+            DetachGrapplingHook();
+            _detachCoroutine = null;
+        }
+
+        _projectileScript.StartReturn();
+    }
+
 
     private IEnumerator DetachGrapplingHookAfterTime()
     {
