@@ -3264,6 +3264,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4690843803585295154, guid: 0d91b74e4a3d8de4f90f53268cb99760, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4777273265745261833, guid: 0d91b74e4a3d8de4f90f53268cb99760, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4777273265745261833, guid: 0d91b74e4a3d8de4f90f53268cb99760, type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 903435929}
     - target: {fileID: 4777273265745261833, guid: 0d91b74e4a3d8de4f90f53268cb99760, type: 3}
       propertyPath: m_Colors.m_SelectedColor.b
       value: 0.46942863
@@ -3276,6 +3288,10 @@ PrefabInstance:
       propertyPath: m_Colors.m_SelectedColor.r
       value: 0.7264151
       objectReference: {fileID: 0}
+    - target: {fileID: 4777273265745261833, guid: 0d91b74e4a3d8de4f90f53268cb99760, type: 3}
+      propertyPath: m_Navigation.m_SelectOnRight
+      value: 
+      objectReference: {fileID: 1929239249}
     - target: {fileID: 4777273265745261833, guid: 0d91b74e4a3d8de4f90f53268cb99760, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 2
