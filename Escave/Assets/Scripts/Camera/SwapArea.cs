@@ -17,16 +17,18 @@ public class SwapArea : MonoBehaviour
     private float _actualCameraTransitionTime;
     
     [Header("Camera")]
-    [SerializeField] private Camera _camera;
+    
     [SerializeField] private Vector2 _cameraScale;
     [SerializeField] private float _cameraTransitionSpeed;
     [SerializeField] private Transform _targetCameraPosition;
     
     private PlayerInput _playerInput;
     private Vector3 _newCameraPosition = Vector3.zero;
+    private Camera _camera;
 
     private void Start()
     {
+        _camera = Camera.main;
         _targetCameraPosition.position = _camera.transform.position;
     }
 

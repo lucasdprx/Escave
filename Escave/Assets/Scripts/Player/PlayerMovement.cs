@@ -87,8 +87,10 @@ public class PlayerMovement : MonoBehaviour
         // Handle step SFX
         if (_rb.linearVelocity.x != 0 && _rb.linearVelocity.y == 0) _playerSFX.PlayWalkSFX();
 
-        // Check if the player's landing after a jump to play the SFX
-        if (_hasLanded) return;
+        // Handle jump landing SFX
+        if (_rb.linearVelocity.y < 0 && !_isGrounded) _hasLanded = false; //Check if the player is falling
+
+        if (_hasLanded) return; //If the player was falling, check if it landed
         if (_isGrounded)
         {
             _hasLanded = _isGrounded;
@@ -130,7 +132,6 @@ public class PlayerMovement : MonoBehaviour
         if (context.performed && _isGrounded)
         {
             _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, jumpForce);
-            StartCoroutine(TestRoutine());
         }
     }
 
@@ -173,11 +174,5 @@ public class PlayerMovement : MonoBehaviour
             _spriteRenderer.flipX = false;
         else if (_moveInput.x < 0 && !_spriteRenderer.flipX)
             _spriteRenderer.flipX = true;
-    }
-
-    private IEnumerator TestRoutine()
-    {
-        yield return new WaitForSeconds(0.5f);
-        _hasLanded = false;
     }
 }
