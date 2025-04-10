@@ -11,18 +11,20 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
     private GameObject currentCheckpoint; // active checkpoint
     [SerializeField] private Transform cameraTransform; // camera transform
 
-    [Header("Audio")]
-    [SerializeField] private AudioSource audioSource;
-    [SerializeField] private AudioClip deathSound; // sound to play on death
-
     public int DeathCount => deathCounter;
     [SerializeField, ReadOnly] private int deathCounter = 0;
 
     public UnityEvent<int> OnDeath;
     public bool _isRestarting = false;
     
-    
     [SerializeField] private ParticleSystem _deathParticles;
+
+    private PlayerSFX _playerSFX;
+
+    private void Start()
+    {
+        _playerSFX = GetComponent<PlayerSFX>();
+    }
 
     public void SaveData(ref GameData _gameData)
     {
@@ -45,6 +47,8 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
 
     public void PlayerDie()
     {
+        _playerSFX.PlayDeathSound();
+
         if (currentCheckpoint == null)
         {
             Debug.LogError("Aucun checkpoint actif n'est d�fini !");
@@ -55,22 +59,10 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
         {
             deathCounter++;
             OnDeath.Invoke(deathCounter);
-            PlayDeathSound();
             Instantiate(_deathParticles, this.transform.position, Quaternion.identity);
         }
         transform.position = currentCheckpoint.transform.position;
-    }
-
-    private void PlayDeathSound()
-    {
-        if (audioSource != null && deathSound != null)
-        {
-            audioSource.PlayOneShot(deathSound);
-        }
-        else
-        {
-            Debug.LogWarning("AudioSource ou DeathSound non assign� !");
-        }
+        _playerSFX.PlayRespawnSound();
     }
 
     public void SetCheckpoint(GameObject newCheckpoint)
@@ -84,6 +76,7 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
         if (checkpoints.Contains(newCheckpoint))
         {
             currentCheckpoint = newCheckpoint;
+            _playerSFX.PlayCheckpointReachSound();
         }
         else
         {
