@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -10,6 +9,8 @@ public class StalactitesCollision : MonoBehaviour
     private PlayerDeath playerDeathScript;
     private Vector2 initSpawnPoint;
     private Transform _transform;
+    
+    [HideInInspector] public bool isStarted;
 
     private void Awake()
     {
@@ -19,44 +20,36 @@ public class StalactitesCollision : MonoBehaviour
     private void Start()
     {
         initSpawnPoint = _transform.position;
+        rb = GetComponent<Rigidbody2D>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        print(collision);
-        print(collision.gameObject.tag);
         if (collision.gameObject.CompareTag("Player"))
         {
             playerDeathScript = collision.gameObject.GetComponent<PlayerDeath>();
             playerDeathScript.PlayerDie();
-            ResetSpike();
+            StartCoroutine(ResetSpike());
         }
         if (collision.gameObject.CompareTag("Ground"))
         {
-            ResetSpike();
+            StartCoroutine(ResetSpike());
         }
     }
-    private void ResetSpike()
+    private IEnumerator ResetSpike()
     {
         _transform.position = initSpawnPoint;
         rb.gravityScale = 0f;
         rb.linearVelocity = Vector2.zero;
-        gameObject.SetActive(false);
-        transform.localScale = Vector3.zero;
+        stalactitesRespawnAnimation.SetBool("IsEnter", true);
+        yield return new WaitForSeconds(1f);
+        stalactitesRespawnAnimation.SetBool("IsEnter", false);
+        isStarted = false;
     }
 
-    public IEnumerator StartTrap()
+    public void StartTrap()
     {
-        if (rb == null)
-        {
-            rb = GetComponent<Rigidbody2D>();
-        }
-        rb.gravityScale = 0f;
-        transform.localScale = Vector3.zero;
-        gameObject.SetActive(true);
-        stalactitesRespawnAnimation.SetBool("IsEnter", true);
-        yield return new WaitForSeconds(1);
-        stalactitesRespawnAnimation.SetBool("IsEnter", false);
+        isStarted = true;
         rb.gravityScale = 1f;
     }
 }

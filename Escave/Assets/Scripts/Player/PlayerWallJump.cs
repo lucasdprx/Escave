@@ -27,9 +27,11 @@ public class PlayerWallJump : MonoBehaviour
     
     private Rigidbody2D _rb;
     private Vector2 _moveInput;
-    
+
+    private PlayerSFX _playerSFX;
+
     #endregion
-    
+
     #region BoolChecks
 
     public bool _isWallClimbingRight { get; private set; }
@@ -37,6 +39,8 @@ public class PlayerWallJump : MonoBehaviour
     public bool _isWallJumping { get; private set; }
     private bool _canWallClimb;
     private bool _isWallClimbing;
+
+    private bool _isGravitySet;
     
     #endregion
     
@@ -52,8 +56,9 @@ public class PlayerWallJump : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _playerSFX = GetComponent<PlayerSFX>();
     }
-    
+
     private void Update()
     {
         if ((_isWallClimbingLeft || _isWallClimbingRight) && !IsGrounded())
@@ -68,8 +73,9 @@ public class PlayerWallJump : MonoBehaviour
             }
         }
 
-        if (!_isWallClimbing)
+        if (!_isWallClimbing && !_isGravitySet)
         {
+            _isGravitySet = true;
             _isWallClimbingLeft = false;
             _isWallClimbingRight = false;
             _rb.gravityScale = 4;
@@ -88,6 +94,8 @@ public class PlayerWallJump : MonoBehaviour
         if (!_canWallClimb) return;
         if (_isWallJumping) return;
         if (!_isWallClimbing) return;
+
+        _isGravitySet = false;
 
         if (_moveInput.x > 0 && IsWallRight())
         {
@@ -142,6 +150,7 @@ public class PlayerWallJump : MonoBehaviour
             _rb.linearVelocity = _wallJumpForce;
             SetJumpingValues();
         }
+        _playerSFX.PlayWallJumpSFX();
     }
 
     public void Climb(InputAction.CallbackContext _ctx)

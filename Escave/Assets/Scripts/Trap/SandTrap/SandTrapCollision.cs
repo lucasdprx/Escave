@@ -3,142 +3,95 @@ using UnityEngine;
 public class SandTrapCollision : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] private float sinkDelay = 3f;
-    [SerializeField] private float sinkingGravityScale = 0.2f;
-    [SerializeField] private float slowMultiplier = 0.2f;
-    [SerializeField] private float sinkingDurationBeforeDeath = 5f;
-
-    private bool isPlayerInTrap = false;
-    private bool isPlayerSinking = false;
-    private float timer = 0f;
-    private float sinkingTimer = 0f;
-
-    private GameObject player;
-    private Rigidbody2D playerRb;
+    [SerializeField] private float sinkDelay = 1f;
+    [SerializeField] private float gravityScale = 0.1f;
+    [SerializeField] private float slowScale = 0.5f;
+    [SerializeField] private float sinkingDurationBeforeDeath = 3f;
+    
+    private bool isSinking;
+    private float enterTimer;
+    private float sinkingTimer;
+    private Collider2D trapCollider;
     private PlayerMovement playerMovement;
     private PlayerDeath playerDeath;
-    private float originalSpeed;
-    private float originalGravityScale;
-
-    private Collider2D trapCollider;
-
+    private Rigidbody2D playerRigidbody;
+    private float initGravityScale;
+    private float initMoveSpeed;
+    private float initJumpForce;
     private void Awake()
     {
         trapCollider = GetComponent<Collider2D>();
-        if (trapCollider == null)
-            Debug.LogError("Le piège de sable n'a pas de Collider2D !");
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        if (collision.collider.CompareTag("Player"))
+        if (!other.gameObject.CompareTag("Player")) return;
+        
+        if (!playerMovement)
         {
-            player = collision.gameObject;
-            playerRb = player.GetComponent<Rigidbody2D>();
-            playerMovement = player.GetComponent<PlayerMovement>();
-            playerDeath = player.GetComponent<PlayerDeath>();
-
-            if (playerMovement != null)
-                originalSpeed = playerMovement.moveSpeed;
-
-            if (playerRb != null)
-                originalGravityScale = playerRb.gravityScale;
-
-            isPlayerInTrap = true;
-            timer = 0f;
-            sinkingTimer = 0f;
-
-            Debug.Log("Le joueur est entré dans le piège de sable.");
+            playerMovement = other.gameObject.GetComponent<PlayerMovement>();
+            initMoveSpeed = playerMovement.moveSpeed;
+            initJumpForce = playerMovement.jumpForce;
         }
+        if (!playerDeath)
+        {
+            playerDeath = other.gameObject.GetComponent<PlayerDeath>();
+        }
+        if (!playerRigidbody)
+        {
+            playerRigidbody = other.gameObject.GetComponent<Rigidbody2D>();
+            initGravityScale = playerRigidbody.gravityScale;
+        }
+        
+        isSinking = true;
     }
-
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnCollisionExit2D(Collision2D other)
     {
-        if (collision.collider.CompareTag("Player"))
-        {
-            if (!isPlayerSinking) // NE reset que si on n’est pas en train de s’enfoncer
-            {
-                Debug.Log("Le joueur est sorti du piège de sable.");
-                ResetTrap();
-            }
-            else
-            {
-                Debug.Log("Le joueur quitte le collider pendant qu’il s’enfonce (ignoré).");
-            }
-        }
+        if (!other.gameObject.CompareTag("Player")) return;
+        
+        isSinking = false;
+        enterTimer = 0f;
     }
-
     private void Update()
     {
-        if (isPlayerInTrap && !isPlayerSinking)
+        if (!isSinking) return;
+            
+        enterTimer += Time.deltaTime;
+        if (enterTimer >= sinkDelay)
         {
-            timer += Time.deltaTime;
-
-            if (timer >= sinkDelay)
-            {
-                StartSinking();
-            }
-        }
-
-        if (isPlayerSinking && player != null)
-        {
-            sinkingTimer += Time.deltaTime;
-
-            if (sinkingTimer >= sinkingDurationBeforeDeath)
-            {
-                KillPlayer();
-            }
+            enterTimer = 0f;
+            trapCollider.isTrigger = true;
+            isSinking = false;
         }
     }
-
-    private void StartSinking()
+    private void OnTriggerStay2D(Collider2D other)
     {
-        isPlayerSinking = true;
-
-        if (playerMovement != null)
-            playerMovement.moveSpeed *= slowMultiplier;
-
-        if (playerRb != null)
-            playerRb.gravityScale = sinkingGravityScale;
-
-        if (trapCollider != null)
-            trapCollider.enabled = false;
-
-        Debug.Log("Le joueur commence à s'enfoncer dans le sable.");
-    }
-
-    private void KillPlayer()
-    {
-        if (playerDeath != null)
+        if (!other.gameObject.CompareTag("Player")) return;
+        
+        playerRigidbody.gravityScale = gravityScale;
+        playerMovement.moveSpeed = slowScale;
+        playerMovement.jumpForce = 0;
+        sinkingTimer += Time.deltaTime;
+        if (sinkingTimer >= sinkingDurationBeforeDeath)
         {
-            Debug.Log("Le joueur est mort après être resté trop longtemps dans le piège.");
+            sinkingTimer = 0f;
+            trapCollider.isTrigger = false;
             playerDeath.PlayerDie();
+            playerRigidbody.gravityScale = initGravityScale;
+            playerMovement.moveSpeed = initMoveSpeed;
+            playerMovement.jumpForce = initJumpForce;
         }
-
-        ResetTrap();
     }
-
-    private void ResetTrap()
+    private void OnTriggerExit2D(Collider2D other)
     {
-        isPlayerInTrap = false;
-        isPlayerSinking = false;
-        timer = 0f;
+        if (!other.gameObject.CompareTag("Player")) return;
+        
         sinkingTimer = 0f;
-
-        if (playerMovement != null)
-            playerMovement.moveSpeed = originalSpeed;
-
-        if (playerRb != null)
-            playerRb.gravityScale = originalGravityScale;
-
-        if (trapCollider != null)
-            trapCollider.enabled = true;
-
-        player = null;
-        playerRb = null;
-        playerMovement = null;
-        playerDeath = null;
-
-        Debug.Log("Réinitialisation du piège de sable.");
+        trapCollider.isTrigger = false;
+        playerRigidbody.gravityScale = initGravityScale;
+        playerMovement.moveSpeed = initMoveSpeed;
+        playerMovement.jumpForce = initJumpForce;
     }
 }
+
+    

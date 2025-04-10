@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 15ee53b6a5f69114faedd4229be33f13, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -132,10 +132,11 @@ GameObject:
   - component: {fileID: 6894023557217023328}
   - component: {fileID: 2843669229510685384}
   - component: {fileID: 130261818192027073}
+  - component: {fileID: 6209871711555313902}
   - component: {fileID: 7576297500504853032}
   - component: {fileID: -3144108716938962793}
-  m_Layer: 0
-  m_Name: Player
+  m_Layer: 7
+  m_Name: PlayerONeWay
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -211,6 +212,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6209871711555313902}
+        m_TargetAssemblyTypeName: PlayerOneWayThroughPlatform, Assembly-CSharp
+        m_MethodName: Look
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 351f2ccd-1f9f-44bf-9bec-d62ac5c5f408
     m_ActionName: 'Player/Move[/Keyboard/z,/Keyboard/s,/Keyboard/q,/Keyboard/d]'
   - m_PersistentCalls:
@@ -230,6 +243,18 @@ MonoBehaviour:
       - m_Target: {fileID: 2843669229510685384}
         m_TargetAssemblyTypeName: PlayerWallJump, Assembly-CSharp
         m_MethodName: OperateWallJumpAction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6209871711555313902}
+        m_TargetAssemblyTypeName: PlayerOneWayThroughPlatform, Assembly-CSharp
+        m_MethodName: JumpAction
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -350,7 +375,7 @@ MonoBehaviour:
   _groundCheck: {fileID: 4807359283236107663}
   _groundLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 320
 --- !u!114 &2843669229510685384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -409,6 +434,18 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0.060364425, y: 0.2817004}
   m_Radius: 0.84206486
+--- !u!114 &6209871711555313902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7023489141773015471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8c581960b87fc7418b3d542008ecb35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7576297500504853032
 MonoBehaviour:
   m_ObjectHideFlags: 0

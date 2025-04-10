@@ -4,11 +4,12 @@ using Unity.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PlayerDeath : MonoBehaviour
+public class PlayerDeath : MonoBehaviour, IDataPersistence
 {
     [Header("Checkpoints")]
     [SerializeField] private List<GameObject> checkpoints; // checkpoint list
     private GameObject currentCheckpoint; // active checkpoint
+    [SerializeField] private Transform cameraTransform; // camera transform
 
     [Header("Audio")]
     [SerializeField] private AudioSource audioSource;
@@ -20,19 +21,26 @@ public class PlayerDeath : MonoBehaviour
     public UnityEvent<int> OnDeath;
     public bool _isRestarting = false;
     
-    [SerializeField] private ParticleSystem _deathParticles;
     
-    private void Start()
+    [SerializeField] private ParticleSystem _deathParticles;
+
+    public void SaveData(ref GameData _gameData)
     {
-        // initialisation of the current checkpoint to the first one in the list
-        if (checkpoints != null && checkpoints.Count > 0)
+        _gameData.deathCount = deathCounter;
+        _gameData.playerPos = currentCheckpoint.transform.position;
+    }
+    
+    public void LoadData(GameData _gameData)
+    {
+        if (_gameData.playerPos != Vector2.zero)
         {
-            currentCheckpoint = checkpoints[0];
+            transform.position = _gameData.playerPos;
         }
         else
         {
-            Debug.LogError("Aucun checkpoint n'est assign� !");
+            currentCheckpoint = checkpoints[0];
         }
+        deathCounter = _gameData.deathCount;
     }
 
     public void PlayerDie()
@@ -72,7 +80,7 @@ public class PlayerDeath : MonoBehaviour
             Debug.LogWarning("Checkpoint fourni est null !");
             return;
         }
-
+        DataPersistenceManager.instance.gameData.cameraPos = cameraTransform.position;
         if (checkpoints.Contains(newCheckpoint))
         {
             currentCheckpoint = newCheckpoint;
@@ -82,4 +90,5 @@ public class PlayerDeath : MonoBehaviour
             Debug.LogWarning("Le checkpoint sp�cifi� n'est pas dans la liste des checkpoints !");
         }
     }
+    
 }
