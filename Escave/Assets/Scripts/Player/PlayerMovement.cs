@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -23,6 +25,8 @@ public class PlayerMovement : MonoBehaviour
     
     private PlayerWallJump _playerWallJump;
     private PlayerSFX      _playerSFX;
+    
+    bool _isOnOneWayPlatform;
 
 
     private GrapplingHook _grapplingHook;
@@ -94,6 +98,17 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D _other)
+    {
+        if (_other.gameObject.layer == LayerMask.NameToLayer("OneWayPlatform"))
+            _isOnOneWayPlatform = true;
+    }
+
+    private void OnCollisionExit2D(Collision2D _other)
+    {
+        if (_other.gameObject.layer == LayerMask.NameToLayer("OneWayPlatform"))
+            _isOnOneWayPlatform = false;
+    }
 
 
     public void OnMove(InputAction.CallbackContext context)
@@ -112,6 +127,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
+        if (_moveInput.y < 0 && _isOnOneWayPlatform) return;
+        
         if (context.performed && _isGrounded)
         {
             _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, jumpForce);
