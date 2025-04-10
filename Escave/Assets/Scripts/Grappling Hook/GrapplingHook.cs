@@ -22,7 +22,8 @@ public class GrapplingHook : MonoBehaviour
     private GrapplerProjectile _projectileScript;
 
     private Coroutine _detachCoroutine;
-
+    private AudioManager _audioManager;
+    
     [SerializeField] private float _climbSpeed = 2f;
 
     private void Start()
@@ -32,6 +33,8 @@ public class GrapplingHook : MonoBehaviour
 
         _lineRenderer.enabled = false;
         _springJoint.enabled = false;
+
+        _audioManager = AudioManager.Instance;
     }
 
     private void Update()
@@ -71,6 +74,7 @@ public class GrapplingHook : MonoBehaviour
 
         if (!_isGrappled && _canShoot)
         {
+            _audioManager.PlaySound(AudioType.grapplingHookThrow);
             var playerMovement = transform.parent.GetComponent<PlayerMovement>();
             Vector2 shootDir = playerMovement.DirectionToVector2(playerMovement.LastDirection);
 
@@ -104,6 +108,8 @@ public class GrapplingHook : MonoBehaviour
         _springJoint.enabled = true;
 
         _isGrappled = true;
+        _audioManager.PlaySound(AudioType.grapplingHookHit);
+
 
         if (_detachCoroutine != null) StopCoroutine(_detachCoroutine);
         _detachCoroutine = StartCoroutine(DetachGrapplingHookAfterTime());
