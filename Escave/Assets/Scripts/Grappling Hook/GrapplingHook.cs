@@ -123,7 +123,7 @@ public class GrapplingHook : MonoBehaviour
             DetachGrapplingHook();
             _detachCoroutine = null;
         }
-
+        
         if (_projectileScript)
             _projectileScript.StartReturn();
     }
