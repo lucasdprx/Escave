@@ -6,6 +6,8 @@ public class CreditsCreatorDisplay : MonoBehaviour, IPointerEnterHandler, IPoint
 {
     [SerializeField] private TextMeshProUGUI _name;
     [SerializeField] private TextMeshProUGUI _role;
+
+    [SerializeField] private string _link;
     
     public void OnPointerEnter(PointerEventData _eventData)
     {
@@ -17,5 +19,10 @@ public class CreditsCreatorDisplay : MonoBehaviour, IPointerEnterHandler, IPoint
     {
         _name.gameObject.SetActive(false);
         _role.gameObject.SetActive(false);
+    }
+
+    public void OnClick()
+    {
+        Application.OpenURL(_link);
     }
 }

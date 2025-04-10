@@ -58,7 +58,7 @@ public class GrapplerProjectile : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (_isReturning || _isAttached) return;
-        if (collision.CompareTag("Player")) return;
+        if (collision.CompareTag("Player") || IsPartOfTrap(collision.transform)) return;
 
         SurfaceInfo surface = collision.GetComponent<SurfaceInfo>();
         if (surface != null)
@@ -77,4 +77,20 @@ public class GrapplerProjectile : MonoBehaviour
             StartReturn();
         }
     }
+
+    private bool IsPartOfTrap(Transform obj)
+    {
+        Transform current = obj;
+
+        while (current != null)
+        {
+            if (current.CompareTag("Trap"))
+                return true;
+
+            current = current.parent;
+        }
+
+        return false;
+    }
+
 }

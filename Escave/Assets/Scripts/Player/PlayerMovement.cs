@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -38,6 +35,8 @@ public class PlayerMovement : MonoBehaviour
     private bool _justDetachedFromHook;
     private float _detachGraceTime = .3f;
     private float _detachTimer;
+
+    private float _verticalInput;
 
     public Direction LastDirection { get; private set; } = Direction.Right;
     public enum Direction
@@ -141,10 +140,12 @@ public class PlayerMovement : MonoBehaviour
         if (_other.gameObject.layer == LayerMask.NameToLayer("OneWayPlatform"))
             _isOnOneWayPlatform = false;
     }
-
+    
     public void OnMove(InputAction.CallbackContext context)
     {
         _moveInput = context.ReadValue<Vector2>();
+
+        _verticalInput = _moveInput.y;
 
         if (_moveInput.sqrMagnitude > 0.01f)
         {
@@ -212,4 +213,6 @@ public class PlayerMovement : MonoBehaviour
         _justDetachedFromHook = true;
         _detachTimer = _detachGraceTime;
     }
+
+    public float GetVerticalInput() => _verticalInput;
 }

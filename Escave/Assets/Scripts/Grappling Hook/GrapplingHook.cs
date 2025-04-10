@@ -22,8 +22,9 @@ public class GrapplingHook : MonoBehaviour
     private GrapplerProjectile _projectileScript;
 
     private Coroutine _detachCoroutine;
-
     private AudioManager _audioManager;
+    
+    [SerializeField] private float _climbSpeed = 2f;
 
     private void Start()
     {
@@ -43,7 +44,29 @@ public class GrapplingHook : MonoBehaviour
             _lineRenderer.SetPosition(0, transform.position);
             _lineRenderer.SetPosition(1, _currentProjectile.transform.position);
         }
+
+        //Climb/ Descent
+        if (_isGrappled)
+        {
+            float vertical = transform.parent.GetComponent<PlayerMovement>().GetVerticalInput();
+
+            if (Mathf.Abs(vertical) > 0.01f)
+            {
+                float newDistance = _springJoint.distance - vertical * _climbSpeed * Time.deltaTime;
+
+                newDistance = Mathf.Clamp(newDistance, 1f, maxDistance); //Set limite to clibing
+
+                _springJoint.distance = newDistance;
+
+                if (_currentProjectile == null)
+                {
+                    _lineRenderer.SetPosition(0, transform.position);
+                    _lineRenderer.SetPosition(1, _springJoint.connectedAnchor);
+                }
+            }
+        }
     }
+
 
     public void FireGrappler(InputAction.CallbackContext ctx)
     {
