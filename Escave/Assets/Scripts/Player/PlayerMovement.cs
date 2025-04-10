@@ -129,8 +129,6 @@ public class PlayerMovement : MonoBehaviour
             _isOnOneWayPlatform = false;
     }
 
-
-
     public void OnMove(InputAction.CallbackContext context)
     {
         _moveInput = context.ReadValue<Vector2>();
