@@ -90,13 +90,6 @@ public class GrapplingHook : MonoBehaviour
     {
         yield return new WaitForSeconds(hookTime);
 
-        //_springJoint.enabled = false;
-        //_lineRenderer.enabled = false;
-
-        //_isGrappled = false;
-        //_canShoot = false;
-
-        //_projectileScript?.StartReturn();
         DetachGrapplingHook();
 
         _detachCoroutine = null;
@@ -108,11 +101,14 @@ public class GrapplingHook : MonoBehaviour
         _springJoint.enabled = false;
         _isGrappled = false;
 
+        GetComponentInParent<PlayerMovement>()?.OnDetachedFromHook();
+
         if (_projectileScript != null)
         {
             _projectileScript.StartReturn();
         }
     }
+
 
     public void OnProjectileReturned()
     {

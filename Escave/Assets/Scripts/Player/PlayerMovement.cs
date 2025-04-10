@@ -23,6 +23,9 @@ public class PlayerMovement : MonoBehaviour
 
 
     private GrapplingHook _grapplingHook;
+    private bool _justDetachedFromHook;
+    private float _detachGraceTime = .3f;
+    private float _detachTimer;
 
     public Direction LastDirection { get; private set; } = Direction.Right;
     public enum Direction
@@ -50,6 +53,11 @@ public class PlayerMovement : MonoBehaviour
     {
         _isGrounded = Physics2D.OverlapCircle(_groundCheck.position, _groundCheckRadius, _groundLayer);
 
+        if (_isGrounded && _justDetachedFromHook)
+        {
+            _justDetachedFromHook = false;
+        }
+
         HandleSpriteFlip();
         //Debug.DrawRay(transform.position, DirectionToVector2(LastDirection), Color.red);
     }
@@ -63,6 +71,12 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (!_playerWallJump._isWallClimbingLeft && !_playerWallJump._isWallClimbingRight && !_playerWallJump._isWallJumping)
         {
+            if (_justDetachedFromHook)
+            {
+                //keep balancing velocity
+                return;
+            }
+
             if (_isGrounded)
             {
                 _rb.linearVelocity = new Vector2(_moveInput.x * moveSpeed, _rb.linearVelocity.y);
@@ -73,9 +87,15 @@ public class PlayerMovement : MonoBehaviour
                 {
                     _rb.linearVelocity = new Vector2(_moveInput.x * moveSpeed, _rb.linearVelocity.y);
                 }
+                else
+                {
+                    float dampFactor = 0.9f;
+                    _rb.linearVelocity = new Vector2(_rb.linearVelocity.x * dampFactor, _rb.linearVelocity.y);
+                }
             }
         }
     }
+
 
 
 
@@ -137,6 +157,12 @@ public class PlayerMovement : MonoBehaviour
             _spriteRenderer.flipX = false;
         else if (_moveInput.x < 0 && !_spriteRenderer.flipX)
             _spriteRenderer.flipX = true;
+    }
+
+    public void OnDetachedFromHook()
+    {
+        _justDetachedFromHook = true;
+        _detachTimer = _detachGraceTime;
     }
 
 }
