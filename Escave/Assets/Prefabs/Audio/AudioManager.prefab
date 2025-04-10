@@ -706,7 +706,7 @@ MonoBehaviour:
     source: {fileID: 4056921319568295849}
   - type: 0
     source: {fileID: 5584423956691084180}
-  - type: 8
+  - type: 9
     source: {fileID: 1996394261981806519}
   - type: 3
     source: {fileID: 8224383423289070205}
