@@ -2895,10 +2895,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 106704834183712726, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: m_text
+      value: Dev
+      objectReference: {fileID: 0}
     - target: {fileID: 771877039115672031, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
       propertyPath: _link
       value: https://pandortaxe.itch.io/
       objectReference: {fileID: 0}
+    - target: {fileID: 771877039115672031, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: _eventSystem
+      value: 
+      objectReference: {fileID: 857446523}
     - target: {fileID: 808771126710350390, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
       propertyPath: m_text
       value: Nicolas TREZEGUET
@@ -2919,14 +2927,30 @@ PrefabInstance:
       propertyPath: m_text
       value: Eliot
       objectReference: {fileID: 0}
+    - target: {fileID: 1747432323186197100, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2086435437638599894, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
       propertyPath: _link
       value: https://alexx-terrieur.itch.io/
+      objectReference: {fileID: 0}
+    - target: {fileID: 2086435437638599894, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: _eventSystem
+      value: 
+      objectReference: {fileID: 857446523}
+    - target: {fileID: 2453681331861742505, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2613841844734793318, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
       propertyPath: _link
       value: https://meerlylume.itch.io/
       objectReference: {fileID: 0}
+    - target: {fileID: 2613841844734793318, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: _eventSystem
+      value: 
+      objectReference: {fileID: 857446523}
     - target: {fileID: 3381381000682066867, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -2934,6 +2958,18 @@ PrefabInstance:
     - target: {fileID: 3529511801583171610, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
       propertyPath: _link
       value: https://kuko524.itch.io
+      objectReference: {fileID: 0}
+    - target: {fileID: 3529511801583171610, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: _eventSystem
+      value: 
+      objectReference: {fileID: 857446523}
+    - target: {fileID: 3752324447427040136, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 475
+      objectReference: {fileID: 0}
+    - target: {fileID: 3769506024287452832, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4084720816700362426, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
       propertyPath: m_Sprite
@@ -2943,6 +2979,10 @@ PrefabInstance:
       propertyPath: _link
       value: https://wighthood.itch.io/
       objectReference: {fileID: 0}
+    - target: {fileID: 4828349952167087120, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: _eventSystem
+      value: 
+      objectReference: {fileID: 857446523}
     - target: {fileID: 4932955973489941778, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
       propertyPath: m_Colors.m_SelectedColor.b
       value: 0.6458704
@@ -2999,14 +3039,38 @@ PrefabInstance:
       propertyPath: _link
       value: https://seven207.itch.io/
       objectReference: {fileID: 0}
+    - target: {fileID: 5137322395509138166, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: _eventSystem
+      value: 
+      objectReference: {fileID: 857446523}
     - target: {fileID: 5403115283710034853, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
       propertyPath: m_text
       value: Lume NIEWOLSKA
+      objectReference: {fileID: 0}
+    - target: {fileID: 5566359804767739267, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5576221828718768299, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 450
+      objectReference: {fileID: 0}
+    - target: {fileID: 5619255042607381893, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: m_Color.a
+      value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 6017392107157232215, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: m_text
+      value: Art
       objectReference: {fileID: 0}
     - target: {fileID: 6313276036163334288, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 9738b08c99da050458fe40f163ddcd81, type: 3}
+    - target: {fileID: 6566384457576017314, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 450
+      objectReference: {fileID: 0}
     - target: {fileID: 6793358699903888857, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
       propertyPath: m_text
       value: Kilian MONNIER
@@ -3023,10 +3087,18 @@ PrefabInstance:
       propertyPath: _link
       value: https://nicotz.itch.io/
       objectReference: {fileID: 0}
+    - target: {fileID: 7315208055939196917, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: _eventSystem
+      value: 
+      objectReference: {fileID: 857446523}
     - target: {fileID: 7847965933019146005, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
       propertyPath: _link
       value: https://lucasdrpx.itch.io/
       objectReference: {fileID: 0}
+    - target: {fileID: 7847965933019146005, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: _eventSystem
+      value: 
+      objectReference: {fileID: 857446523}
     - target: {fileID: 8046511611358879398, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -3123,6 +3195,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: d49a2fa26d244d443a6284d8c4a26b2c, type: 3}
+    - target: {fileID: 8556626026652156903, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: _eventSystem
+      value: 
+      objectReference: {fileID: 857446523}
+    - target: {fileID: 8661212516089461186, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8873259363389988239, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
       propertyPath: m_Alpha
       value: 0
