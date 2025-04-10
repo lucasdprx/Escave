@@ -1162,10 +1162,10 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 517447596}
+    m_SelectOnUp: {fileID: 1138795029}
     m_SelectOnDown: {fileID: 1766924446}
     m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 548209773}
+    m_SelectOnRight: {fileID: 1929239249}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -2236,9 +2236,9 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 1899287783}
+    m_SelectOnUp: {fileID: 548209773}
     m_SelectOnDown: {fileID: 1766924446}
-    m_SelectOnLeft: {fileID: 1138795029}
+    m_SelectOnLeft: {fileID: 903435929}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
@@ -2795,7 +2795,7 @@ PrefabInstance:
     - target: {fileID: 529593205631245235, guid: 0d91b74e4a3d8de4f90f53268cb99760, type: 3}
       propertyPath: m_Navigation.m_SelectOnDown
       value: 
-      objectReference: {fileID: 1766924446}
+      objectReference: {fileID: 903435929}
     - target: {fileID: 529593205631245235, guid: 0d91b74e4a3d8de4f90f53268cb99760, type: 3}
       propertyPath: m_Navigation.m_SelectOnRight
       value: 
@@ -2839,7 +2839,7 @@ PrefabInstance:
     - target: {fileID: 1006431119571052106, guid: 0d91b74e4a3d8de4f90f53268cb99760, type: 3}
       propertyPath: m_Navigation.m_SelectOnDown
       value: 
-      objectReference: {fileID: 1766924446}
+      objectReference: {fileID: 1929239249}
     - target: {fileID: 1006431119571052106, guid: 0d91b74e4a3d8de4f90f53268cb99760, type: 3}
       propertyPath: m_Navigation.m_SelectOnLeft
       value: 
@@ -3367,6 +3367,10 @@ PrefabInstance:
     - target: {fileID: 5390127299039669717, guid: 0d91b74e4a3d8de4f90f53268cb99760, type: 3}
       propertyPath: m_ChildForceExpandHeight
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5488757442183199302, guid: 0d91b74e4a3d8de4f90f53268cb99760, type: 3}
+      propertyPath: m_Text
+      value: X
       objectReference: {fileID: 0}
     - target: {fileID: 5725964288892428953, guid: 0d91b74e4a3d8de4f90f53268cb99760, type: 3}
       propertyPath: m_Navigation.m_Mode
