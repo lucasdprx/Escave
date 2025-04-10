@@ -148,5 +148,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   breakingTime: 1
+  recreationTime: 2.5
   onTouchParticles: {fileID: 1125175072244788571, guid: 8576a2b56afe24c419cb0519737c355b, type: 3}
   breakingParticles: {fileID: 8368128936833767661, guid: f5b4a9d614d5c6f42b2dba885662f19b, type: 3}
