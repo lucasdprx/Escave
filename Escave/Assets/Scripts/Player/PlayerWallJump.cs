@@ -25,6 +25,8 @@ public class PlayerWallJump : MonoBehaviour
     [Space(10)]
     [SerializeField] private LayerMask _wallLayer;
     
+    [SerializeField] private Vector2 _onTopWallForce;
+    
     private Rigidbody2D _rb;
     private Vector2 _moveInput;
 
@@ -97,6 +99,11 @@ public class PlayerWallJump : MonoBehaviour
         if (!_isWallClimbing) return;
 
         _isGravitySet = false;
+
+        if (((_isWallClimbingLeft && !IsWallLeft()) || (_isWallClimbingRight && !IsWallRight())) && !_isWallJumping)
+        {
+            _rb.AddForce(_onTopWallForce, ForceMode2D.Impulse);
+        }
 
         if (_moveInput.x > 0 && IsWallRight())
         {
