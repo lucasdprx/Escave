@@ -1085,6 +1085,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 42222658780426199, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
+      propertyPath: _upRightCheckpoint
+      value: 
+      objectReference: {fileID: 3332733432586909593}
+    - target: {fileID: 42222658780426199, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
       propertyPath: _downLeftCheckpoint
       value: 
       objectReference: {fileID: 3332733432586909591}
@@ -1269,6 +1273,11 @@ GameObject:
 --- !u!1 &3332733432586909592 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8376413239570655694, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
+  m_PrefabInstance: {fileID: 3332733432586909590}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3332733432586909593 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5680967316869047893, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
   m_PrefabInstance: {fileID: 3332733432586909590}
   m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
