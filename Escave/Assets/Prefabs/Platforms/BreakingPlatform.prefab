@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3359647729536531921}
   - component: {fileID: 4246351169965404710}
   - component: {fileID: 5006847095089074156}
+  - component: {fileID: 7454200272719635905}
   m_Layer: 6
   m_Name: BreakingPlatform
   m_TagString: Ground
@@ -151,3 +152,16 @@ MonoBehaviour:
   recreationTime: 2.5
   onTouchParticles: {fileID: 1125175072244788571, guid: 8576a2b56afe24c419cb0519737c355b, type: 3}
   breakingParticles: {fileID: 8368128936833767661, guid: f5b4a9d614d5c6f42b2dba885662f19b, type: 3}
+--- !u!114 &7454200272719635905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9108904764392287712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd135932898d3e541ac66694945e493c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HookSurfaceTime: 50

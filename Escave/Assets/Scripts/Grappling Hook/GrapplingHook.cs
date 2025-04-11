@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -67,6 +68,17 @@ public class GrapplingHook : MonoBehaviour
         }
     }
 
+    public void DestroyProjectile()
+    {
+        Destroy(_currentProjectile);
+        _projectileScript = null;   
+        _lineRenderer.enabled = false;
+        _springJoint.enabled = false;
+        _isGrappled = false;
+        GetComponentInParent<PlayerMovement>()?.OnDetachedFromHook();
+        _canShoot = true;
+    }
+
 
     public void FireGrappler(InputAction.CallbackContext ctx)
     {
@@ -113,19 +125,6 @@ public class GrapplingHook : MonoBehaviour
 
         if (_detachCoroutine != null) StopCoroutine(_detachCoroutine);
         _detachCoroutine = StartCoroutine(DetachGrapplingHookAfterTime());
-    }
-
-    public void ResetGrapplingHook()
-    {
-        if (_detachCoroutine != null)
-        {
-            StopCoroutine(_detachCoroutine);
-            DetachGrapplingHook();
-            _detachCoroutine = null;
-        }
-        
-        if (_projectileScript)
-            _projectileScript.StartReturn();
     }
 
 

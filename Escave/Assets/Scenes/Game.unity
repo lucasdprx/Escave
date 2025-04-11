@@ -279,6 +279,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGoingDown: 0
+--- !u!1 &429862685 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8916585539719025571, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
+  m_PrefabInstance: {fileID: 3332733432586909590}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &429862689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429862685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd135932898d3e541ac66694945e493c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HookSurfaceTime: 50
 --- !u!1 &578244639
 GameObject:
   m_ObjectHideFlags: 0
@@ -462,7 +480,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7576297500504853032, guid: 0b546080af589c1498b91f8971c0c47b, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ResetGrapplingHook
+      value: DestroyProjectile
       objectReference: {fileID: 0}
     - target: {fileID: 7576297500504853032, guid: 0b546080af589c1498b91f8971c0c47b, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -586,6 +604,24 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14ae4b2b02390b142b87b3e1e00e7371, type: 3}
+--- !u!1 &1322591408 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3585024657559116362, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
+  m_PrefabInstance: {fileID: 3332733432586909590}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1322591412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1322591408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd135932898d3e541ac66694945e493c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HookSurfaceTime: 50
 --- !u!1 &1471028150
 GameObject:
   m_ObjectHideFlags: 0
@@ -880,7 +916,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3585024657559116362, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1322591412}
+    - targetCorrespondingSourceObject: {fileID: 8916585539719025571, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 429862689}
   m_SourcePrefab: {fileID: 100100000, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
