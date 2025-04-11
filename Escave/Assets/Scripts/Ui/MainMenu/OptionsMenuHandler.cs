@@ -47,7 +47,7 @@ public class OptionsMenuHandler : MonoBehaviour, IOptionPersistence
         sfxVol.value = _optionData.sfxVolume;
         musicVol.value = _optionData.musicVolume;
 
-        fullscreenToggle.isOn = _optionData.fullScreen;
+        //fullscreenToggle.isOn = _optionData.fullScreen;
         ToggleFullscreen();
         
         ChangeMasterVolume();
@@ -92,5 +92,10 @@ public class OptionsMenuHandler : MonoBehaviour, IOptionPersistence
     {
         Resolution resolution = _resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+    }
+
+    public void ReturnButton()
+    {
+        gameObject.SetActive(false);
     }
 }
