@@ -249,6 +249,17 @@
                     "action": "Open/ClosePause",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fc407531-6c3f-478f-9860-daca2bee7830",
+                    "path": "<XInputController>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Open/ClosePause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
