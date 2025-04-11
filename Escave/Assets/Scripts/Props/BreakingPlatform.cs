@@ -61,6 +61,7 @@ public class BreakingPlatform : MonoBehaviour
                 _timer = 0;
                 boxCollider.enabled = true;
                 spriteRenderer.enabled = true;
+                _hasTouched = false;
             }
         }
     }
