@@ -1,5 +1,5 @@
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -12,14 +12,10 @@ public class OptionsMenuHandler : MonoBehaviour, IOptionPersistence
 
     public Toggle fullscreenToggle;
     public TMP_Dropdown resolutionDropdown;
-    
-    private Resolution[] _resolutions;
 
-    private void Start()
-    {
-        if (resolutionDropdown != null)
-            GetResolution();
-    }
+    [SerializeField] private List<string> resolutions;
+    
+    string _currentResolution;
 
     public void ChangeMasterVolume()
     {
@@ -46,6 +42,18 @@ public class OptionsMenuHandler : MonoBehaviour, IOptionPersistence
         masterVol.value = _optionData.mainVolume;
         sfxVol.value = _optionData.sfxVolume;
         musicVol.value = _optionData.musicVolume;
+        
+        _currentResolution = _optionData.resolution;
+
+        for (int i = 0; i < resolutions.Count; i++)
+        {
+            if (String.Equals(resolutions[i], _currentResolution))
+            {
+                resolutionDropdown.value = i;
+            }
+        }
+        string[] _resolution = _currentResolution.Split('x');
+        Screen.SetResolution(int.Parse(_resolution[0]), int.Parse(_resolution[1]), fullscreenToggle.isOn);
 
         fullscreenToggle.isOn = _optionData.fullScreen;
         ToggleFullscreen();
@@ -60,37 +68,17 @@ public class OptionsMenuHandler : MonoBehaviour, IOptionPersistence
         _optionData.mainVolume = masterVol.value;
         _optionData.sfxVolume = sfxVol.value;
         _optionData.musicVolume = musicVol.value;
+
+        _optionData.resolution = _currentResolution;
         
         _optionData.fullScreen = fullscreenToggle.isOn;
         ToggleFullscreen();
     }
-    private Resolution[] GetResolution()
+    
+    public void SetResolution()
     {
-        _resolutions = Screen.resolutions.Select(resolution => 
-            new Resolution { width = resolution.width, height = resolution.height }).Distinct().ToArray();
-        resolutionDropdown.ClearOptions();
-        List<string> options = new List<string>();
-        int currentResolution = 0;
-        for (int i = 0; i < _resolutions.Length; i++)
-        {
-            string option = _resolutions[i].width + "x" + _resolutions[i].height;
-            options.Add(option);
-            
-            if (_resolutions[i].width == Screen.width && _resolutions[i].height == Screen.height)
-            {
-                currentResolution = i;
-            }
-        }
-        
-        resolutionDropdown.AddOptions(options);
-        resolutionDropdown.value = currentResolution;
-        resolutionDropdown.RefreshShownValue();
-        
-        return _resolutions;
-    }
-    public void SetResolution(int resolutionIndex)
-    {
-        Resolution resolution = _resolutions[resolutionIndex];
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        _currentResolution = resolutions[resolutionDropdown.value];
+        string[] _resolution = _currentResolution.Split('x');
+        Screen.SetResolution(int.Parse(_resolution[0]), int.Parse(_resolution[1]), fullscreenToggle.isOn);
     }
 }
