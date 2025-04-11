@@ -25,7 +25,7 @@ public class PlayerOneWayThroughPlatform : MonoBehaviour
     {
         Vector2 _look = _ctx.ReadValue<Vector2>();
 
-        if (_look.y < -0.5f)
+        if (_look.y < -0.15f)
         {
             _isLookingDown = true;
             print("lookingDown");
