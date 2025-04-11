@@ -4,13 +4,22 @@ public enum AudioType
 {
     step,
     jumpLand,
+    jumpHeavyLand,
     death,
     respawn,
     grapplingHookHit,
     grapplingHookThrow,
     wallCling,
     wallJump,
-    checkpointReach
+    checkpointReach,
+    areaTransition,
+    enduranceRunOut,
+    collectibleGet,
+    stalactiteFall,
+    stalactiteRegrow,
+    levelStart,
+    uiButton,
+    uiReturn
 }
 
 public class AudioManager : MonoBehaviour
@@ -35,10 +44,16 @@ public class AudioManager : MonoBehaviour
     public void PlaySound(AudioType type)
     {
         AudioData data = GetAudioData(type);
-        if (type == AudioType.step || type == AudioType.jumpLand)
+        if (type == AudioType.step 
+         || type == AudioType.jumpLand 
+         || type == AudioType.grapplingHookThrow 
+         || type == AudioType.grapplingHookHit
+         || type == AudioType.uiReturn
+         || type == AudioType.uiButton)
         {
             data.source.pitch = Random.Range(0.75f, 1.5f);
         }
+
         else data.source.pitch = 1f;
 
         data.source.Play();

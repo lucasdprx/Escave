@@ -27,12 +27,12 @@ public class DataPersistenceManager : MonoBehaviour
     {
         _dataFileDataHandler = new DataFileHandler(Application.persistentDataPath, fileName);
         this._dataPersistenceObjects = FindAllDataPersistenceObjects();
-        LoadOptions();
+        LoadGame();
     }
 
     private void OnApplicationQuit()
     {
-        SaveOptions();
+        SaveGame();
     }
 
     public void NewOptions()
@@ -40,7 +40,7 @@ public class DataPersistenceManager : MonoBehaviour
         this.gameData = new GameData();
     }
 
-    public void LoadOptions()
+    public void LoadGame()
     {
         this.gameData = _dataFileDataHandler.Load();
         
@@ -55,7 +55,7 @@ public class DataPersistenceManager : MonoBehaviour
         }
     }
 
-    public void SaveOptions()
+    public void SaveGame()
     {
         foreach (IDataPersistence _dataPersistenceObject in this._dataPersistenceObjects)
         {

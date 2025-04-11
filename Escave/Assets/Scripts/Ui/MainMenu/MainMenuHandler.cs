@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -6,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class MainMenuHandler : MonoBehaviour
 {
     public CanvasGroup blackScreen;
+    private AudioManager _audioManager;
 
     [Space(10)] 
     [Header("Times")] 
@@ -19,11 +19,30 @@ public class MainMenuHandler : MonoBehaviour
     public void PlayGame()
     {
         SceneManager.LoadScene("Game");
+        _audioManager.PlaySound(AudioType.levelStart);
+    }
+
+    public void NewGame()
+    {
+        DataPersistenceManager.instance.gameData = new GameData();
+        DataPersistenceManager.instance.SaveGame();
+        PlayGame();
+    }
+
+    public void PlayUIClickSound()
+    {
+        _audioManager.PlaySound(AudioType.uiButton);
+    }
+
+    public void PlayUIReturnSound()
+    {
+        _audioManager.PlaySound(AudioType.uiReturn);
     }
 
     private void Start()
     {
         StartCoroutine(FadeOutAnim(blackScreen));
+        _audioManager = AudioManager.Instance;
     }
 
     public void FadeIn(CanvasGroup _canvasGroup)

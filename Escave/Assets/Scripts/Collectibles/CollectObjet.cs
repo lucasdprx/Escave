@@ -4,13 +4,14 @@ using UnityEngine;
 public class CollectObjet : MonoBehaviour
 {
     [SerializeField] CollectibleData collectibleData;
-    [SerializeField] private AudioSource audioSource;
     private SpriteRenderer spriteRenderer;
+    private AudioManager _audioManager;
 
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = collectibleData.Icon;
+        _audioManager = AudioManager.Instance;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -24,7 +25,7 @@ public class CollectObjet : MonoBehaviour
 
         if (collision.CompareTag("Player"))
         {
-            collectibleData.PlayPickupSound(audioSource);
+            _audioManager.PlaySound(AudioType.collectibleGet);
             collectibleData.PickUpAugmentation();
             ParticleSystem effect = collectibleData.PlayPickupEffect(transform.position);
             StartCoroutine(DestroyCollectible(effect));

@@ -11,6 +11,7 @@ public class StalactitesCollision : MonoBehaviour
     private Transform _transform;
     
     [HideInInspector] public bool isStarted;
+    private AudioManager _audioManager;
 
     private void Awake()
     {
@@ -21,6 +22,7 @@ public class StalactitesCollision : MonoBehaviour
     {
         initSpawnPoint = _transform.position;
         rb = GetComponent<Rigidbody2D>();
+        _audioManager  = AudioManager.Instance;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -31,13 +33,17 @@ public class StalactitesCollision : MonoBehaviour
             playerDeathScript.PlayerDie();
             StartCoroutine(ResetSpike());
         }
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Enemy"))
         {
+            rb.gravityScale = 0f;
+            rb.linearVelocity = Vector2.zero;
+            stalactitesRespawnAnimation.SetBool("IsEnter", true);
             StartCoroutine(ResetSpike());
         }
     }
     private IEnumerator ResetSpike()
     {
+        _audioManager.PlaySound(AudioType.stalactiteRegrow);
         _transform.position = initSpawnPoint;
         rb.gravityScale = 0f;
         rb.linearVelocity = Vector2.zero;
@@ -49,6 +55,7 @@ public class StalactitesCollision : MonoBehaviour
 
     public void StartTrap()
     {
+        _audioManager.PlaySound(AudioType.stalactiteFall);
         isStarted = true;
         rb.gravityScale = 1f;
     }

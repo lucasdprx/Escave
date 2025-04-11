@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,20 +6,25 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement Settings")]
     public float moveSpeed;
-    public float jumpForce;
+    public float jumpForce; [Space]
 
     [Header("Ground Check")]
     [SerializeField] private Transform _groundCheck;
-    private float _groundCheckRadius = 0.2f;
-    [SerializeField] private LayerMask _groundLayer;
+    private float _groundCheckRadius = 0.45f;
+    [SerializeField] private LayerMask _groundLayer; [Space]
     private bool _isGrounded;
 
 
     private Rigidbody2D _rb;
     private Vector2 _moveInput;
     private SpriteRenderer _spriteRenderer;
+
+    [Header("Heavy Fall Detection")]
+    [SerializeField] private float _heavyFallYVelocity; 
     private bool _hasLanded;
-    
+    private bool _inHeavyFall;
+
+
     private PlayerWallJump _playerWallJump;
     private PlayerSFX      _playerSFX;
     
@@ -33,6 +35,10 @@ public class PlayerMovement : MonoBehaviour
     private bool _justDetachedFromHook;
     private float _detachGraceTime = .3f;
     private float _detachTimer;
+
+    private float _verticalInput;
+
+    private Vector2 boxSize;
 
     public Direction LastDirection { get; private set; } = Direction.Right;
     public enum Direction
@@ -55,11 +61,13 @@ public class PlayerMovement : MonoBehaviour
         _playerWallJump = GetComponent<PlayerWallJump>();
         _grapplingHook = GetComponentInChildren<GrapplingHook>();
         _playerSFX = GetComponent<PlayerSFX>();
+
+        boxSize = new Vector2(1.2f, 0.3f);
     }
 
     private void Update()
     {
-        _isGrounded = Physics2D.OverlapCircle(_groundCheck.position, _groundCheckRadius, _groundLayer);
+        _isGrounded = Physics2D.OverlapBox(_groundCheck.position, boxSize, 0f, _groundLayer);
 
         if (_isGrounded && _justDetachedFromHook)
         {
@@ -79,41 +87,67 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (!_playerWallJump._isWallClimbingLeft && !_playerWallJump._isWallClimbingRight && !_playerWallJump._isWallJumping)
         {
+            //If just detached from hook, wait till player use input (else use balancing velocity
             if (_justDetachedFromHook)
             {
-                //keep balancing velocity
-                return;
-            }
+                if (Mathf.Abs(_moveInput.x) > 0.01f)
+                {
+                    //Player use input -> autorize air control
+                    float controlFactor = 0.15f; //adjust speed
+                    _rb.linearVelocity = new Vector2(
+                        Mathf.Lerp(_rb.linearVelocity.x, _moveInput.x * moveSpeed, controlFactor),
+                        _rb.linearVelocity.y
+                    );
+                }
 
-            if (_isGrounded)
-            {
-                _rb.linearVelocity = new Vector2(_moveInput.x * moveSpeed, _rb.linearVelocity.y);
+                //back to base movement
+                if (_isGrounded)
+                {
+                    _justDetachedFromHook = false;
+                }
             }
             else
             {
-                if (Mathf.Abs(_moveInput.x) > 0.01f)
+                if (_isGrounded)
                 {
                     _rb.linearVelocity = new Vector2(_moveInput.x * moveSpeed, _rb.linearVelocity.y);
                 }
                 else
                 {
-                    float dampFactor = 0.9f;
-                    _rb.linearVelocity = new Vector2(_rb.linearVelocity.x * dampFactor, _rb.linearVelocity.y);
+                    if (Mathf.Abs(_moveInput.x) > 0.01f)
+                    {
+                        _rb.linearVelocity = new Vector2(_moveInput.x * moveSpeed, _rb.linearVelocity.y);
+                    }
+                    else
+                    {
+                        float dampFactor = 0.9f;
+                        _rb.linearVelocity = new Vector2(_rb.linearVelocity.x * dampFactor, _rb.linearVelocity.y);
+                    }
                 }
             }
         }
+
+
 
         // Handle step SFX
         if (_rb.linearVelocity.x != 0 && _rb.linearVelocity.y == 0) _playerSFX.PlayWalkSFX();
 
         // Handle jump landing SFX
-        if (_rb.linearVelocity.y < 0 && !_isGrounded) _hasLanded = false; //Check if the player is falling
+        if (_rb.linearVelocity.y < 0 && !_isGrounded) //Check if the player is falling
+        {
+            _hasLanded = false;
+        }
 
         if (_hasLanded) return; //If the player was falling, check if it landed
+        if (_rb.linearVelocity.y <= _heavyFallYVelocity) _inHeavyFall = true;
         if (_isGrounded)
         {
-            _hasLanded = _isGrounded;
-            _playerSFX.PlayJumpLandSFX();
+            _hasLanded = true;
+
+            if (_inHeavyFall) _playerSFX.PlayHeavyJumpLandSFX();
+            else              _playerSFX.PlayJumpLandSFX();
+
+            _inHeavyFall = false;
         }
     }
 
@@ -128,18 +162,16 @@ public class PlayerMovement : MonoBehaviour
         if (_other.gameObject.layer == LayerMask.NameToLayer("OneWayPlatform"))
             _isOnOneWayPlatform = false;
     }
-
+    
     public void OnMove(InputAction.CallbackContext context)
     {
         _moveInput = context.ReadValue<Vector2>();
 
+        _verticalInput = _moveInput.y;
+
         if (_moveInput.sqrMagnitude > 0.01f)
         {
             LastDirection = GetEightDirection(_moveInput.normalized);
-        }
-        if (_moveInput == Vector2.zero)
-        {
-            _rb.linearVelocity = new Vector2(0f, _rb.linearVelocity.y);
         }
     }
 
@@ -199,4 +231,6 @@ public class PlayerMovement : MonoBehaviour
         _justDetachedFromHook = true;
         _detachTimer = _detachGraceTime;
     }
+
+    public float GetVerticalInput() => _verticalInput;
 }
