@@ -177,7 +177,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (_moveInput.y < 0 && _isOnOneWayPlatform) return;
+        if (_moveInput.y < -0.95f && _isOnOneWayPlatform) return;
         
         if (context.performed && _isGrounded)
         {
