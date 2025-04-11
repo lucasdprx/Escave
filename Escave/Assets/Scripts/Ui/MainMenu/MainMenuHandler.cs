@@ -22,6 +22,13 @@ public class MainMenuHandler : MonoBehaviour
         _audioManager.PlaySound(AudioType.levelStart);
     }
 
+    public void NewGame()
+    {
+        DataPersistenceManager.instance.gameData = new GameData();
+        DataPersistenceManager.instance.SaveGame();
+        PlayGame();
+    }
+
     public void PlayUIClickSound()
     {
         _audioManager.PlaySound(AudioType.uiButton);
