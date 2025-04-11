@@ -9,6 +9,8 @@ public class OptionsData
     public float sfxVolume;
     
     public bool fullScreen;
+
+    public string resolution;
     //---------------------------------
     
     public OptionsData()
@@ -17,6 +19,8 @@ public class OptionsData
         musicVolume = -10f;
         sfxVolume = -10f;
         
-        fullScreen = false;
+        resolution = "1920x1080";
+        
+        fullScreen = true;
     }
 }
