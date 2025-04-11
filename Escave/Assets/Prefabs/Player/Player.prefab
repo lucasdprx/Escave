@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1837069202165182709}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.65, y: 0.085, z: 0}
+  m_LocalPosition: {x: 0.275, y: 0.085, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -475,6 +475,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 7dfe29b8-e480-4a26-8358-fab1f27e7ca0
     m_ActionName: 'Player/GrabWall[/Keyboard/ctrl,/XInputControllerWindows/leftShoulder]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3c283b7a-3db4-49cc-ae79-86c270fafb2b
+    m_ActionName: 'Player/Open/ClosePause[/Keyboard/escape]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
