@@ -14,7 +14,12 @@ public enum AudioType
     checkpointReach,
     areaTransition,
     enduranceRunOut,
-    collectibleGet
+    collectibleGet,
+    stalactiteFall,
+    stalactiteRegrow,
+    levelStart,
+    uiButton,
+    uiReturn
 }
 
 public class AudioManager : MonoBehaviour
@@ -42,7 +47,9 @@ public class AudioManager : MonoBehaviour
         if (type == AudioType.step 
          || type == AudioType.jumpLand 
          || type == AudioType.grapplingHookThrow 
-         || type == AudioType.grapplingHookHit)
+         || type == AudioType.grapplingHookHit
+         || type == AudioType.uiReturn
+         || type == AudioType.uiButton)
         {
             data.source.pitch = Random.Range(0.75f, 1.5f);
         }

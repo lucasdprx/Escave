@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Ground Check")]
     [SerializeField] private Transform _groundCheck;
-    private float _groundCheckRadius = 0.2f;
+    private float _groundCheckRadius = 0.45f;
     [SerializeField] private LayerMask _groundLayer; [Space]
     private bool _isGrounded;
 
@@ -38,6 +38,8 @@ public class PlayerMovement : MonoBehaviour
 
     private float _verticalInput;
 
+    private Vector2 boxSize;
+
     public Direction LastDirection { get; private set; } = Direction.Right;
     public enum Direction
     {
@@ -59,11 +61,13 @@ public class PlayerMovement : MonoBehaviour
         _playerWallJump = GetComponent<PlayerWallJump>();
         _grapplingHook = GetComponentInChildren<GrapplingHook>();
         _playerSFX = GetComponent<PlayerSFX>();
+
+        boxSize = new Vector2(1.2f, 0.3f);
     }
 
     private void Update()
     {
-        _isGrounded = Physics2D.OverlapCircle(_groundCheck.position, _groundCheckRadius, _groundLayer);
+        _isGrounded = Physics2D.OverlapBox(_groundCheck.position, boxSize, 0f, _groundLayer);
 
         if (_isGrounded && _justDetachedFromHook)
         {
