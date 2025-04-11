@@ -33,7 +33,7 @@ public class StalactitesCollision : MonoBehaviour
             playerDeathScript.PlayerDie();
             StartCoroutine(ResetSpike());
         }
-        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Trap"))
         {
             rb.gravityScale = 0f;
             rb.linearVelocity = Vector2.zero;
