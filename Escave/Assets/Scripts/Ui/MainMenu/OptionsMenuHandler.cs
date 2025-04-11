@@ -55,7 +55,7 @@ public class OptionsMenuHandler : MonoBehaviour, IOptionPersistence
         string[] _resolution = _currentResolution.Split('x');
         Screen.SetResolution(int.Parse(_resolution[0]), int.Parse(_resolution[1]), fullscreenToggle.isOn);
 
-        fullscreenToggle.isOn = _optionData.fullScreen;
+        //fullscreenToggle.isOn = _optionData.fullScreen;
         ToggleFullscreen();
         
         ChangeMasterVolume();
@@ -80,5 +80,10 @@ public class OptionsMenuHandler : MonoBehaviour, IOptionPersistence
         _currentResolution = resolutions[resolutionDropdown.value];
         string[] _resolution = _currentResolution.Split('x');
         Screen.SetResolution(int.Parse(_resolution[0]), int.Parse(_resolution[1]), fullscreenToggle.isOn);
+    }
+
+    public void ReturnButton()
+    {
+        gameObject.SetActive(false);
     }
 }

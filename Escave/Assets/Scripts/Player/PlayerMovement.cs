@@ -220,6 +220,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleSpriteFlip()
     {
+        if (Time.timeScale == 0) return;
+
         if (_moveInput.x > 0 && _spriteRenderer.flipX)
             _spriteRenderer.flipX = false;
         else if (_moveInput.x < 0 && !_spriteRenderer.flipX)

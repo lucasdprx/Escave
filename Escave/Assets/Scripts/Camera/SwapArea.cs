@@ -50,6 +50,17 @@ public class SwapArea : MonoBehaviour
             Mathf.Approximately(Mathf.Sign(_playerDir.y), Mathf.Sign(_player.y)))
             return;
         
+        if (_switchAreaDirection == Direction.Horizontal)
+        {
+            if (Mathf.Approximately(Mathf.Sign(_playerDir.x), Mathf.Sign(_player.x)))
+                return;
+        }
+        else if (_switchAreaDirection == Direction.Vertical)
+        {
+            if (Mathf.Approximately(Mathf.Sign(_playerDir.y), Mathf.Sign(_player.y)))
+                return;
+        }
+        
         _playerInput = other.GetComponent<PlayerInput>();
         _playerDeath = other.GetComponent<PlayerDeath>();
         Vector2 _direction = FindDirection(other.gameObject.transform.position);
