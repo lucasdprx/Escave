@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -40,6 +41,15 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector2 boxSize;
 
+    [Header("Sprite Animation")]
+    [SerializeField] private Sprite[] runSprites; // 0 à 6
+
+    private int _currentFrame;
+    private float _animationTimer;
+    [SerializeField] private float animationSpeed = 0.1f;
+
+    [SerializeField] private GameObject _lightHelmet;
+
     public Direction LastDirection { get; private set; } = Direction.Right;
     public enum Direction
     {
@@ -75,6 +85,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         HandleSpriteFlip();
+        HandleRunAnimation();
         //Debug.DrawRay(transform.position, DirectionToVector2(LastDirection), Color.red);
     }
 
@@ -223,11 +234,37 @@ public class PlayerMovement : MonoBehaviour
         if (Time.timeScale == 0) return;
 
         if (_moveInput.x > 0 && _spriteRenderer.flipX)
+        {
             _spriteRenderer.flipX = false;
+            _lightHelmet.transform.rotation = Quaternion.Euler(0, 0, -90);
+            _lightHelmet.transform.position = new Vector3(0.25f, 0.31f, 0);
+        }
         else if (_moveInput.x < 0 && !_spriteRenderer.flipX)
+        {
             _spriteRenderer.flipX = true;
+            _lightHelmet.transform.position = new Vector3(- 0.12f, 0.31f, 0);
+            _lightHelmet.transform.rotation = Quaternion.Euler(0, -180, -90);
+        }
     }
-    
+
+    private void HandleRunAnimation()
+    {
+        if (!_isGrounded || Mathf.Abs(_moveInput.x) < 0.01f)
+        {
+            _currentFrame = 0;
+            _spriteRenderer.sprite = runSprites[_currentFrame]; // idle = frame 0
+            return;
+        }
+
+        _animationTimer += Time.deltaTime;
+        if (_animationTimer >= animationSpeed)
+        {
+            _animationTimer = 0f;
+            _currentFrame = (_currentFrame + 1) % runSprites.Length;
+            _spriteRenderer.sprite = runSprites[_currentFrame];
+        }
+    }
+
     public void OnDetachedFromHook()
     {
         _justDetachedFromHook = true;
