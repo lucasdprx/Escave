@@ -381,6 +381,7 @@ GameObject:
   - component: {fileID: 7576297500504853032}
   - component: {fileID: -3144108716938962793}
   - component: {fileID: 4370203769354911228}
+  - component: {fileID: 368811237205190504}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -459,7 +460,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 4370203769354911228}
+      - m_Target: {fileID: 368811237205190504}
         m_TargetAssemblyTypeName: PlayerOneWayThroughPlatform, Assembly-CSharp
         m_MethodName: Look
         m_Mode: 0
@@ -499,7 +500,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 4370203769354911228}
+      - m_Target: {fileID: 368811237205190504}
         m_TargetAssemblyTypeName: PlayerOneWayThroughPlatform, Assembly-CSharp
         m_MethodName: JumpAction
         m_Mode: 0
@@ -769,6 +770,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
   deathCounter: 0
   OnDeath:
     m_PersistentCalls:
@@ -801,6 +803,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stepTime: 0.1
 --- !u!114 &4370203769354911228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7023489141773015471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8c581960b87fc7418b3d542008ecb35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGoingDown: 0
+--- !u!114 &368811237205190504
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
