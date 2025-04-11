@@ -13,7 +13,7 @@ public class OptionsMenuHandler : MonoBehaviour, IOptionPersistence
     public Toggle fullscreenToggle;
     public TMP_Dropdown resolutionDropdown;
 
-    [SerializeField] private List<string> resolutions;
+    public List<string> resolutions;
     
     string _currentResolution;
 
