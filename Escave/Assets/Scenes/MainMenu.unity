@@ -677,6 +677,8 @@ MonoBehaviour:
     cameraPos: {x: 0, y: 0, z: -10}
     collectibles: 
     collectiblesCollected: 0
+    isHookEnabled: 0
+    isPioletEnabled: 0
 --- !u!4 &1217117895
 Transform:
   m_ObjectHideFlags: 0
