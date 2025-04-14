@@ -7,7 +7,8 @@ using UnityEngine.InputSystem;
 public class PlayerWallJump : MonoBehaviour
 {
     #region Variables
-    
+
+    public bool _isGrabUnlock;
     [Header("Checks")]
     [SerializeField] private Transform _wallCheckRight;
     [SerializeField] private Transform _wallCheckLeft;
@@ -163,8 +164,11 @@ public class PlayerWallJump : MonoBehaviour
 
     public void Climb(InputAction.CallbackContext _ctx)
     {
-        if(_ctx.started) _isWallClimbing = true;
-        else if(_ctx.canceled) _isWallClimbing = false;
+        if (_isGrabUnlock)
+        {
+            if(_ctx.started) _isWallClimbing = true;
+            else if(_ctx.canceled) _isWallClimbing = false;
+        }
     }
     
     #endregion

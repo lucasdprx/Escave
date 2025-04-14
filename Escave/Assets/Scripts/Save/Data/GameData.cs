@@ -14,6 +14,9 @@ public class GameData
 
     public List<bool> collectibles;
     public int collectiblesCollected;
+
+    public bool isHookEnabled;
+    public bool isPioletEnabled;
     //---------------------------------
     
     public GameData()
@@ -26,5 +29,8 @@ public class GameData
         cameraPos.z = -10;
         
         collectibles = new List<bool>();
+        
+        isHookEnabled = false;
+        isPioletEnabled = false;
     }
 }
