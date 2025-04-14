@@ -33,6 +33,7 @@ public class CollectObjet : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             _audioManager.PlaySound(AudioType.collectibleGet);
+            collectiblesSave.OnCollectibleCollected();
             collectibleData.PickUp();
             ParticleSystem effect = PlayPickupEffect(transform.position);
             StartCoroutine(DestroyCollectible(effect));
