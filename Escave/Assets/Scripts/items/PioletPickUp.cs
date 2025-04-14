@@ -4,6 +4,8 @@ using UnityEngine;
 public class PioletPickUp : MonoBehaviour
 {
     [SerializeField] private PlayerWallJump _playerWallJump;
+    [SerializeField] private GameObject _pickUpUiShow;
+    [SerializeField] private UIItemShow _itemShow;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -11,6 +13,7 @@ public class PioletPickUp : MonoBehaviour
         {
             EnablingPiolet();
             DataPersistenceManager.instance.gameData.isPioletEnabled = true;
+            _itemShow.ShowPiolet();
         }
     }
     
