@@ -1,0 +1,45 @@
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CollectiblesSave : MonoBehaviour, IDataPersistence
+{
+    [SerializeField] private List<CollectObjet> collectibles;
+    
+    private int valueCollected;
+    
+    public void LoadData(GameData _gameData)
+    {
+        valueCollected = _gameData.collectiblesCollected;
+        
+        if (_gameData.collectibles.Count == 0) return;
+        
+        for (int i = 0; i < _gameData.collectibles.Count; i++)
+        {
+            collectibles[i].collectibleData.SetData(_gameData.collectibles[i]);
+        }
+
+        foreach (CollectObjet _collectObjet in collectibles)
+        {
+            if (_collectObjet.collectibleData.HasBeenCollected == true)
+            {
+                _collectObjet.gameObject.SetActive(false);
+            }
+        }
+    }
+
+    public void OnCollectibleCollected()
+    {
+        valueCollected++;
+    }
+
+    public void SaveData(ref GameData _gameData)
+    {
+        _gameData.collectiblesCollected = valueCollected;
+        _gameData.collectibles = new List<bool>();
+
+        for (int i = 0; i < collectibles.Count; i++)
+        {
+            _gameData.collectibles.Add(collectibles[i].collectibleData.HasBeenCollected);
+        }
+    }
+}

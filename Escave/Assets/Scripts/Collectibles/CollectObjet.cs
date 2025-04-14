@@ -3,14 +3,21 @@ using UnityEngine;
 
 public class CollectObjet : MonoBehaviour
 {
-    [SerializeField] CollectibleData collectibleData;
+    public CollectibleData collectibleData;
     private SpriteRenderer spriteRenderer;
     private AudioManager _audioManager;
+    
+    public CollectiblesSave collectiblesSave;
+    
+    [SerializeField] private Sprite icon;
+    [SerializeField] private ParticleSystem pickupEffect;
 
     private void Start()
     {
+        collectibleData = new CollectibleData();
+        
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = collectibleData.Icon;
+        spriteRenderer.sprite = icon;
         _audioManager = AudioManager.Instance;
     }
 
@@ -26,8 +33,8 @@ public class CollectObjet : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             _audioManager.PlaySound(AudioType.collectibleGet);
-            collectibleData.PickUpAugmentation();
-            ParticleSystem effect = collectibleData.PlayPickupEffect(transform.position);
+            collectibleData.PickUp();
+            ParticleSystem effect = PlayPickupEffect(transform.position);
             StartCoroutine(DestroyCollectible(effect));
         }
     }
@@ -42,5 +49,21 @@ public class CollectObjet : MonoBehaviour
             }
         }
         Destroy(gameObject);
+    }
+    
+    public ParticleSystem PlayPickupEffect(Vector3 position)
+    {
+        if (pickupEffect != null)
+        {
+            ParticleSystem effect = Instantiate(pickupEffect, position, Quaternion.identity);
+            effect.Play();
+            Destroy(effect.gameObject, effect.main.duration);
+            return effect;
+        }
+        else
+        {
+            Debug.LogWarning("pickupEffect non assign� !");
+            return null;
+        }
     }
 }
