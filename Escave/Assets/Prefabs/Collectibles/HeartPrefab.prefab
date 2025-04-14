@@ -131,7 +131,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ef0911d176b4a044857b0196e665e87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectibleData: {fileID: 11400000, guid: bb2ce56695ce3e943ab24d62e05e8768, type: 2}
+  collectiblesSave: {fileID: 0}
+  icon: {fileID: 21300000, guid: d3314fa160945f742a5b16cc28d3f3c2, type: 3}
+  pickupEffect: {fileID: 0}
 --- !u!212 &7524789550919486330
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -10,6 +11,9 @@ public class GameData
 
     public Vector2 playerPos;
     public Vector3 cameraPos;
+
+    public List<bool> collectibles;
+    public int collectiblesCollected;
     //---------------------------------
     
     public GameData()
@@ -20,5 +24,7 @@ public class GameData
         playerPos = Vector2.zero;
         cameraPos = Vector3.zero;
         cameraPos.z = -10;
+        
+        collectibles = new List<bool>();
     }
 }
