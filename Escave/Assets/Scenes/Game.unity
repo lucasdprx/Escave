@@ -966,17 +966,6 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
---- !u!114 &753375096 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4370203769354911228, guid: 0b546080af589c1498b91f8971c0c47b, type: 3}
-  m_PrefabInstance: {fileID: 769763603}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8c581960b87fc7418b3d542008ecb35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &769763603
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -986,17 +975,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1217224998343057527, guid: 0b546080af589c1498b91f8971c0c47b, type: 3}
-      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 753375096}
-    - target: {fileID: 1217224998343057527, guid: 0b546080af589c1498b91f8971c0c47b, type: 3}
       propertyPath: m_ActionEvents.Array.data[14].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1228545894}
-    - target: {fileID: 1217224998343057527, guid: 0b546080af589c1498b91f8971c0c47b, type: 3}
-      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: Look
-      objectReference: {fileID: 0}
     - target: {fileID: 2929904492367386306, guid: 0b546080af589c1498b91f8971c0c47b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -14.5
@@ -1053,14 +1034,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 7512550661318520076, guid: 0b546080af589c1498b91f8971c0c47b, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7576297500504853032, guid: 0b546080af589c1498b91f8971c0c47b, type: 3}
-      propertyPath: checkpoints.Array.size
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 7576297500504853032, guid: 0b546080af589c1498b91f8971c0c47b, type: 3}
       propertyPath: 'checkpoints.Array.data[0]'
       value: 
@@ -1093,8 +1066,7 @@ PrefabInstance:
       propertyPath: 'checkpoints.Array.data[7]'
       value: 
       objectReference: {fileID: 1426133392}
-    m_RemovedComponents:
-    - {fileID: 7512550661318520076, guid: 0b546080af589c1498b91f8971c0c47b, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2455,6 +2427,30 @@ PrefabInstance:
       propertyPath: _playerWallJump
       value: 
       objectReference: {fileID: 769763605}
+    - target: {fileID: 5897370953533657349, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
+      propertyPath: m_AnimatedTiles.Array.data[23].second.m_AnimationSpeed
+      value: 10.000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5897370953533657349, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
+      propertyPath: m_AnimatedTiles.Array.data[27].second.m_AnimationSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5897370953533657349, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
+      propertyPath: m_AnimatedTiles.Array.data[36].second.m_AnimationSpeed
+      value: 10.000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5897370953533657349, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
+      propertyPath: m_AnimatedTiles.Array.data[38].second.m_AnimationSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5897370953533657349, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
+      propertyPath: m_AnimatedTiles.Array.data[69].second.m_AnimationSpeed
+      value: 10.000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5897370953533657349, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
+      propertyPath: m_AnimatedTiles.Array.data[99].second.m_AnimationSpeed
+      value: 10.000001
+      objectReference: {fileID: 0}
     - target: {fileID: 8295652783049654115, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
       propertyPath: m_Name
       value: Map
