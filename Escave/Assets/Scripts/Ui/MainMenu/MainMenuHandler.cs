@@ -89,5 +89,7 @@ public class MainMenuHandler : MonoBehaviour
         
         _canvasGroup.alpha = 1f;
         _canvasGroup.interactable = true;
+        
+        _canvasGroup.gameObject.GetComponent<Select>().SelectThing();
     }
 }
