@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 boxSize;
 
     [Header("Sprite Animation")]
-    [SerializeField] private Sprite[] runSprites; // 0 à 6
+    [SerializeField] private Sprite[] runSprites; // 0 Ã  6
 
     private int _currentFrame;
     private float _animationTimer;
@@ -237,12 +237,10 @@ public class PlayerMovement : MonoBehaviour
         {
             _spriteRenderer.flipX = false;
             _lightHelmet.transform.rotation = Quaternion.Euler(0, 0, -90);
-            _lightHelmet.transform.position = new Vector3(0.25f, 0.31f, 0);
         }
         else if (_moveInput.x < 0 && !_spriteRenderer.flipX)
         {
             _spriteRenderer.flipX = true;
-            _lightHelmet.transform.position = new Vector3(- 0.12f, 0.31f, 0);
             _lightHelmet.transform.rotation = Quaternion.Euler(0, -180, -90);
         }
     }
