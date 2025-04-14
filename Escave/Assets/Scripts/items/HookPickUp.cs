@@ -1,8 +1,10 @@
+using System.Collections;
 using UnityEngine;
 
 public class HookPickUp : MonoBehaviour
 {
     [SerializeField] private GrapplingHook _grapplingHook;
+    [SerializeField] private UIItemShow _itemShow;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -10,6 +12,7 @@ public class HookPickUp : MonoBehaviour
         {
             EnablingHook();
             DataPersistenceManager.instance.gameData.isHookEnabled = true;
+            _itemShow.ShowHook();
         }
     }
 
