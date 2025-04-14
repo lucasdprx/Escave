@@ -88,6 +88,7 @@ public class PlayerWallJump : MonoBehaviour
         if (IsGrounded())
         {
             _canWallClimb = true;
+            _isWallClimbing = false;
             _wallStayTimer = 0;
         }
     }
