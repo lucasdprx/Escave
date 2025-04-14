@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9dc3cde529ffea429fd0abe9adaf8e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StalactitesCollision: {fileID: 8373863136058864425}
+  _stalactitesCollision: {fileID: 8373863136058864425}
 --- !u!1 &3992045252993023199
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,6 +195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stalactitesRespawnAnimation: {fileID: 2045260709435859522}
+  triggerBox: {fileID: 6555589888145952492}
   isStarted: 0
 --- !u!60 &6818891036870601069
 PolygonCollider2D:
