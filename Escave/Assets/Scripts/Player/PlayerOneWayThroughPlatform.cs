@@ -28,7 +28,6 @@ public class PlayerOneWayThroughPlatform : MonoBehaviour
         if (_look.y < -0.95f)
         {
             _isLookingDown = true;
-            print("lookingDown");
         }
         else
         {
