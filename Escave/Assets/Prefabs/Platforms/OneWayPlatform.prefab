@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3731635781054140321}
   m_Layer: 8
   m_Name: OneWayPlatform
-  m_TagString: Ground
+  m_TagString: IgnoreGrappling
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
