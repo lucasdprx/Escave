@@ -41,6 +41,10 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
             currentCheckpoint = checkpoints[0];
         }
         deathCounter = _gameData.deathCount;
+        if (deathCounter > 0)
+        {
+            OnDeath.Invoke(deathCounter);
+        }
     }
 
     public void PlayerDie()
@@ -81,5 +85,4 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
             Debug.LogWarning("Le checkpoint sp�cifi� n'est pas dans la liste des checkpoints !");
         }
     }
-    
 }

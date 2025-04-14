@@ -1,25 +1,12 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class PauseMenuManager : MonoBehaviour
 {
-    [SerializeField] private GameObject _pauseMenuCanvas;
     [SerializeField] private GameObject _settingsMenuPanel;
     [SerializeField] private PlayerDeath _playerDeath;
-    private bool _isGamePaused = false;
-    
-
-
-    private void Awake()
-    {
-        if (_pauseMenuCanvas == null)
-        {
-            Debug.LogError("Le Canvas du menu pause n'est pas assigné !");
-        }
-    }
+    private bool _isGamePaused;
 
     public void ShowPausePanel(InputAction.CallbackContext context)
     {
@@ -57,15 +44,8 @@ public class PauseMenuManager : MonoBehaviour
     private void PauseGame()
     {
         _isGamePaused = !_isGamePaused;
-        _pauseMenuCanvas.SetActive(_isGamePaused);
+        gameObject.SetActive(_isGamePaused);
 
-        if (_isGamePaused)
-        {
-            Time.timeScale = 0f;
-        }
-        else
-        {
-            Time.timeScale = 1f;
-        }
+        Time.timeScale = _isGamePaused ? 0f : 1f;
     }
 }
