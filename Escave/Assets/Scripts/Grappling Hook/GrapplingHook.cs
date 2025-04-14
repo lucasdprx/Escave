@@ -137,9 +137,14 @@ public class GrapplingHook : MonoBehaviour
         _detachCoroutine = null;
     }
 
-
     public void DetachGrapplingHook()
     {
+        if (_detachCoroutine != null)
+        {
+            StopCoroutine(_detachCoroutine);
+            _detachCoroutine = null;
+        }
+
         _springJoint.enabled = false;
         _isGrappled = false;
 
@@ -149,6 +154,8 @@ public class GrapplingHook : MonoBehaviour
         {
             _projectileScript.StartReturn();
         }
+
+        _lineRenderer.enabled = false;
     }
 
 
