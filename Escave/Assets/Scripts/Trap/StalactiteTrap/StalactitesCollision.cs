@@ -48,7 +48,6 @@ public class StalactitesCollision : MonoBehaviour
         rb.gravityScale = 0f;
         rb.linearVelocity = Vector2.zero;
         stalactitesRespawnAnimation.SetBool("IsEnter", true);
-        //ResetSike();
         yield return new WaitForSeconds(1f);
         stalactitesRespawnAnimation.SetBool("IsEnter", false);
         isStarted = false;
@@ -64,12 +63,5 @@ public class StalactitesCollision : MonoBehaviour
         _audioManager.PlaySound(AudioType.stalactiteFall);
         isStarted = true;
         rb.gravityScale = 1f;
-    }
-
-    private void ResetSike()
-    {
-        rb.gravityScale = 0f;
-        rb.linearVelocity = Vector2.zero;
-        stalactitesRespawnAnimation.SetBool("IsEnter", true);
     }
 }
