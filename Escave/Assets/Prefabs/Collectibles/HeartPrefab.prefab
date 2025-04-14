@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 1295712687761947085}
   m_Layer: 0
   m_Name: HeartPrefab
-  m_TagString: Untagged
+  m_TagString: IgnoreGrappling
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
