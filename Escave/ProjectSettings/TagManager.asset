@@ -7,6 +7,8 @@ TagManager:
   - Ground
   - Trap
   - Enemy
+  - IgnoreGrappling
+  - BreakingPlateform
   layers:
   - Default
   - TransparentFX

@@ -16,6 +16,8 @@ public class BreakingPlatform : MonoBehaviour
     private bool _hasTouched = false;
     private float _timer;
 
+    public event Action OnBroken;
+
     private void Start()
     {
         Vector3 _scaleWanted = new Vector3(transform.localScale.x, 1f, 1f);
@@ -47,22 +49,34 @@ public class BreakingPlatform : MonoBehaviour
         {
             if (_timer >= breakingTime)
             {
-                Instantiate(breakingParticles, transform.position, Quaternion.identity);
-                _timer = 0;
-                boxCollider.enabled = false;
-                spriteRenderer.enabled = false;
+                BreakPlateform();
             }
         }
         else
         {
             if (_timer >= recreationTime)
             {
-                Instantiate(breakingParticles, transform.position, Quaternion.identity);
-                _timer = 0;
-                boxCollider.enabled = true;
-                spriteRenderer.enabled = true;
-                _hasTouched = false;
+                ResetPlateform();
             }
         }
+    }
+
+    private void BreakPlateform()
+    {
+        Instantiate(breakingParticles, transform.position, Quaternion.identity);
+        _timer = 0;
+        boxCollider.enabled = false;
+        spriteRenderer.enabled = false;
+
+        OnBroken?.Invoke();
+    }
+
+    private void ResetPlateform()
+    {
+        Instantiate(breakingParticles, transform.position, Quaternion.identity);
+        _timer = 0;
+        boxCollider.enabled = true;
+        spriteRenderer.enabled = true;
+        _hasTouched = false;
     }
 }

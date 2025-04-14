@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class GrapplingHook : MonoBehaviour
 {
+    public bool _isHookUnlock;
     private LineRenderer _lineRenderer;
     private SpringJoint2D _springJoint;
     public Transform _target;
@@ -82,6 +83,8 @@ public class GrapplingHook : MonoBehaviour
 
     public void FireGrappler(InputAction.CallbackContext ctx)
     {
+        if(!_isHookUnlock)
+            return;
         if (!ctx.performed) return;
 
         if (!_isGrappled && _canShoot)
@@ -137,9 +140,14 @@ public class GrapplingHook : MonoBehaviour
         _detachCoroutine = null;
     }
 
-
     public void DetachGrapplingHook()
     {
+        if (_detachCoroutine != null)
+        {
+            StopCoroutine(_detachCoroutine);
+            _detachCoroutine = null;
+        }
+
         _springJoint.enabled = false;
         _isGrappled = false;
 
@@ -149,6 +157,8 @@ public class GrapplingHook : MonoBehaviour
         {
             _projectileScript.StartReturn();
         }
+
+        _lineRenderer.enabled = false;
     }
 
 

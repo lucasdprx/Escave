@@ -16,6 +16,7 @@ public class GrapplerProjectile : MonoBehaviour
 
     private GameObject _currentHookedObject;
     private bool _isOnEnemy;
+    private BreakingPlatform _currentBreakingPlatform;
 
     public void Initialize(Vector2 dir, float speed, float maxDist, GrapplingHook hook)
     {
@@ -66,14 +67,25 @@ public class GrapplerProjectile : MonoBehaviour
         _isOnEnemy = false;
         _isReturning = true;
         _rb.bodyType = RigidbodyType2D.Dynamic;
+
+        if (_currentBreakingPlatform != null)
+        {
+            _currentBreakingPlatform.OnBroken -= _grapplingHook.DetachGrapplingHook;
+            _currentBreakingPlatform = null;
+        }
     }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (_isReturning || _isAttached) return;
-        if (collision.CompareTag("Player") || IsPartOfTrap(collision.transform)) return;
+
+        if (collision.CompareTag("Player") || collision.CompareTag("IgnoreGrappling")) return; //pass through object
+
+        if (IsPartOfTrap(collision.transform)) StartReturn(); //grappling come back to player
+
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") ||
-            collision.gameObject.layer == LayerMask.NameToLayer("OneWayPlatform") || collision.CompareTag("Enemy"))
+            collision.gameObject.layer == LayerMask.NameToLayer("OneWayPlatform") || collision.CompareTag("Enemy")) //Attach to object
         {
             print("OnGround");
             
@@ -92,6 +104,18 @@ public class GrapplerProjectile : MonoBehaviour
 
                 _grapplingHook.hookTime = surface.HookSurfaceTime;
                 _grapplingHook.AttachToPoint(transform.position);
+
+                //set is grapple to surface 
+                if(collision.CompareTag("BreakingPlateform"))
+                {
+                    BreakingPlatform platform = collision.GetComponent<BreakingPlatform>();
+                    if (platform != null)
+                    {
+                        _currentBreakingPlatform = platform;
+                        _currentBreakingPlatform.OnBroken += _grapplingHook.DetachGrapplingHook;
+                    }
+
+                }
             }
             else
             {

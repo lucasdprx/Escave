@@ -103,8 +103,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sinkDelay: 3
-  sinkingGravityScale: 0.01
-  slowMultiplier: 0.2
+  gravityScale: 0.1
+  slowScale: 0.5
   sinkingDurationBeforeDeath: 5
 --- !u!61 &5471825058831625265
 BoxCollider2D:

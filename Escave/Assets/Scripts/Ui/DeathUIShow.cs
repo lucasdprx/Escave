@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 
@@ -15,6 +14,6 @@ public class DeathUIShow : MonoBehaviour
     private void ShowDeathCounter(int deathCount)
     {
         Debug.Log(deathCount);
-        _deathText.text = "Number of death: " + deathCount.ToString();
+        _deathText.text = "Number of death: " + deathCount;
     }
 }
