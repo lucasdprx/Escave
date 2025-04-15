@@ -61,6 +61,9 @@ public class PlayerMovement : MonoBehaviour
     private bool _isJumping;
     private float _jumpTimeCounter;
     [SerializeField] private float _maxJumpDuration = 0.35f; // durée max du saut
+    
+    [Header("Pause Menu")]
+    [SerializeField] private PauseMenuManager _pauseMenu;
 
     public Direction LastDirection { get; private set; } = Direction.Right;
     public enum Direction
@@ -223,6 +226,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
+        if (_pauseMenu._isGamePaused)
+            return;
         if (_moveInput.y < -0.95f && _isOnOneWayPlatform) return;
 
         if (context.started)

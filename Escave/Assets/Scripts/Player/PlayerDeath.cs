@@ -52,7 +52,6 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
     public void PlayerDie()
     {
         _playerSFX.PlayDeathSFX();
-        OnDeath2?.Invoke(this, EventArgs.Empty);
 
         if (currentCheckpoint == null)
         {
@@ -69,6 +68,8 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
         GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
         transform.position = currentCheckpoint.transform.position;
         _playerSFX.PlayRespawnSFX();
+        
+        OnDeath2?.Invoke(this, EventArgs.Empty);
     }
 
     public void SetCheckpoint(GameObject newCheckpoint)
