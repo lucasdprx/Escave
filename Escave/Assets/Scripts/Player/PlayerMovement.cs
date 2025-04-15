@@ -117,6 +117,8 @@ public class PlayerMovement : MonoBehaviour
         {
             _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, jumpForce);
             _inputActionTime = -1;
+            _isJumping = true;
+            _jumpTimeCounter = _maxJumpDuration;
         }
 
         if (_isInputBuffering)
