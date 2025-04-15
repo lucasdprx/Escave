@@ -42,19 +42,21 @@ public class PatrolEnemy : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            _isPlayerAhead = true;
-            _actualSpeed = 4;
-        }
-    }
+    // private void OnTriggerEnter2D(Collider2D other)
+    // {
+    //     if (other.CompareTag("Player"))
+    //     {
+    //         _isPlayerAhead = true;
+    //         _actualSpeed = 4;
+    //     }
+    // }
 
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
+            _isPlayerAhead = true;
+            _actualSpeed = 4;
             _playerPosition = other.transform.position;
         }
     }
