@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class BreakingPlatform : MonoBehaviour
@@ -28,15 +27,14 @@ public class BreakingPlatform : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D _other)
     {
-        if (_other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if (_other.gameObject.layer != LayerMask.NameToLayer("Player"))  return;
+        
+        if (!_hasTouched)
         {
-            if (!_hasTouched)
-            {
-                Instantiate(onTouchParticles, transform.position, Quaternion.identity);
+            Instantiate(onTouchParticles, transform.position, Quaternion.identity);
                 
-                if(_other.transform.position.y > transform.position.y)
-                    _hasTouched = true;
-            }
+            if(_other.transform.position.y > transform.position.y)
+                _hasTouched = true;
         }
     }
 

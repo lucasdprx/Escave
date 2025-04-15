@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,7 +12,6 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Ground Check")]
     [SerializeField] private Transform _groundCheck;
-    private float _groundCheckRadius = 0.45f;
     [SerializeField] private LayerMask _groundLayer; [Space]
     private bool _isGrounded;
 
@@ -30,11 +28,9 @@ public class PlayerMovement : MonoBehaviour
 
     private PlayerWallJump _playerWallJump;
     private PlayerSFX      _playerSFX;
-    
-    bool _isOnOneWayPlatform;
 
-
-    private GrapplingHook _grapplingHook;
+    private bool _isOnOneWayPlatform;
+    private bool _isGrappling;
     private bool _justDetachedFromHook;
     private float _detachGraceTime = .3f;
     private float _detachTimer;
@@ -63,8 +59,6 @@ public class PlayerMovement : MonoBehaviour
     private bool _isJumping;
     private float _jumpTimeCounter;
     [SerializeField] private float _maxJumpDuration = 0.35f; // durée max du saut
-    
-    private PlayerDeath _playerDeath;
     [Header("Pause Menu")]
     [SerializeField] private PauseMenuManager _pauseMenu;
 
@@ -87,9 +81,7 @@ public class PlayerMovement : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         _playerWallJump = GetComponent<PlayerWallJump>();
-        _grapplingHook = GetComponentInChildren<GrapplingHook>();
         _playerSFX = GetComponent<PlayerSFX>();
-        _playerDeath = GetComponent<PlayerDeath>();
         
         baseMoveSpeed = moveSpeed;
         baseJumpForce = jumpForce;
@@ -133,7 +125,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_grapplingHook != null && _grapplingHook._isGrappled)
+        if (_isGrappling)
         {
             Vector2 force = new Vector2(_moveInput.x, 0f) * moveSpeed;
             _rb.AddForce(force, ForceMode2D.Force);
@@ -341,4 +333,9 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public float GetVerticalInput() => _verticalInput;
+    
+    public void SetIsGrappling(bool value)
+    {
+        _isGrappling = value;
+    }
 }

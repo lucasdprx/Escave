@@ -4,12 +4,12 @@ using UnityEngine;
 public class StalactitesCollision : MonoBehaviour
 {
     [SerializeField] private Animator stalactitesRespawnAnimation;
-    [SerializeField] private TriggerBox triggerBox;
 
     private Rigidbody2D rb;
     private PlayerDeath playerDeathScript;
     private Vector2 initSpawnPoint;
     private Transform _transform;
+    private bool _isPlayerInside;
 
     [HideInInspector] public bool isStarted;
     private AudioManager _audioManager;
@@ -52,7 +52,7 @@ public class StalactitesCollision : MonoBehaviour
         stalactitesRespawnAnimation.SetBool("IsEnter", false);
         isStarted = false;
 
-        if (triggerBox != null && triggerBox.IsPlayerStillInside())
+        if (_isPlayerInside)
         {
             StartTrap();
         }
@@ -63,5 +63,9 @@ public class StalactitesCollision : MonoBehaviour
         _audioManager.PlaySound(AudioType.stalactiteFall);
         isStarted = true;
         rb.gravityScale = 1f;
+    }
+    public void SetIsPlayerInside(bool isPlayerInside)
+    {
+        _isPlayerInside = isPlayerInside;
     }
 }

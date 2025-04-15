@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
@@ -11,11 +10,11 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
     private GameObject currentCheckpoint; // active checkpoint
 
     public int DeathCount => deathCounter;
-    [SerializeField, ReadOnly] private int deathCounter = 0;
+    [SerializeField, ReadOnly] private int deathCounter;
 
     public UnityEvent<int> OnDeath;
     public UnityEvent OnDeath2;
-    public bool _isRestarting = false;
+    public bool _isRestarting;
     
     [SerializeField] private ParticleSystem _deathParticles;
 
@@ -27,6 +26,7 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
     private void Start()
     {
         _playerSFX = GetComponent<PlayerSFX>();
+        PauseMenuManager.OnRestartGame += PlayerDie;
     }
 
     public void SaveData(ref GameData _gameData)

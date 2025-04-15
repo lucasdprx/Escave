@@ -65,7 +65,7 @@ public class AudioManager : MonoBehaviour
         data.source.Stop();
     }
 
-    public AudioData GetAudioData(AudioType type)
+    private AudioData GetAudioData(AudioType type)
     {
         for (int i = 0; i < audioData.Length; i++)
         {

@@ -733,6 +733,7 @@ MonoBehaviour:
   _lightHelmet: {fileID: 5966334176976692577}
   _inputBufferTime: 0.15
   _maxJumpDuration: 0.25
+  _pauseMenu: {fileID: 0}
 --- !u!114 &2843669229510685384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -811,6 +812,8 @@ MonoBehaviour:
         m_CallState: 2
   _isRestarting: 0
   _deathParticles: {fileID: 1829656460543490895, guid: c3575c47e04c6a24b81a99d90c93b035, type: 3}
+  _grapplingHook: {fileID: 4692712459543376296}
+  _collectiblesSave: {fileID: 0}
 --- !u!114 &-3144108716938962793
 MonoBehaviour:
   m_ObjectHideFlags: 0

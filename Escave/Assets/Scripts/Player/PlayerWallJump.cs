@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Xml;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -56,8 +54,7 @@ public class PlayerWallJump : MonoBehaviour
     #endregion
 
     #region Unity Callbacks
-    
-    void Start()
+    private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         _playerSFX = GetComponent<PlayerSFX>();
@@ -115,7 +112,7 @@ public class PlayerWallJump : MonoBehaviour
 
         _isGravitySet = false;
 
-        if (((_isWallClimbingLeft && !IsWallLeft()) || (_isWallClimbingRight && !IsWallRight())) && !_isWallJumping)
+        if ((_isWallClimbingLeft && !IsWallLeft() || _isWallClimbingRight && !IsWallRight()) && !_isWallJumping)
         {
             _rb.AddForce(_onTopWallForce, ForceMode2D.Impulse);
         }
