@@ -6,14 +6,14 @@ public class PauseMenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject _settingsMenuPanel;
     [SerializeField] private PlayerDeath _playerDeath;
-    private bool _isGamePaused;
-
+    public bool _isGamePaused;
+    private bool _isSettingsMenuOpen = false;
+    
     public void ShowPausePanel(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
             PauseGame();
-
         }
     }
 
@@ -33,6 +33,12 @@ public class PauseMenuManager : MonoBehaviour
     public void ShowSettings()
     {
         _settingsMenuPanel.SetActive(true);
+        _isSettingsMenuOpen = true;
+    }
+
+    public void HideSettings()
+    {
+        _isSettingsMenuOpen = false;
     }
 
     public void BackToMainMenu()
@@ -43,6 +49,8 @@ public class PauseMenuManager : MonoBehaviour
 
     private void PauseGame()
     {
+        if (_isSettingsMenuOpen)
+            return;
         _isGamePaused = !_isGamePaused;
         gameObject.SetActive(_isGamePaused);
 
