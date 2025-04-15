@@ -49,6 +49,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float animationSpeed = 0.1f;
 
     [SerializeField] private GameObject _lightHelmet;
+    
+    [Header("Input Buffer")]
+    [SerializeField] private float _inputBufferTime = 0.15f;
+
+    private float _inputActionTime;
+    
+    private bool _isInputBuffering = false;
 
     public Direction LastDirection { get; private set; } = Direction.Right;
     public enum Direction
@@ -82,6 +89,17 @@ public class PlayerMovement : MonoBehaviour
         if (_isGrounded && _justDetachedFromHook)
         {
             _justDetachedFromHook = false;
+        }
+
+        if (_isGrounded && _inputActionTime > 0) 
+        {
+            _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, jumpForce);
+            _inputActionTime = -1;
+        }
+
+        if (_isInputBuffering)
+        {
+            _inputActionTime -= Time.deltaTime;
         }
 
         HandleSpriteFlip();
@@ -189,11 +207,21 @@ public class PlayerMovement : MonoBehaviour
     public void OnJump(InputAction.CallbackContext context)
     {
         if (_moveInput.y < -0.95f && _isOnOneWayPlatform) return;
-        
-        if (context.performed && _isGrounded)
+
+        if (context.started)
         {
-            _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, jumpForce);
+            _inputActionTime = _inputBufferTime;
+            _isInputBuffering = false;
         }
+        else
+        {
+            _isInputBuffering = true;
+        }
+
+        // if (context.performed && _isGrounded)
+        // {
+        //     _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, jumpForce);
+        // }
     }
 
     private Direction GetEightDirection(Vector2 input)
