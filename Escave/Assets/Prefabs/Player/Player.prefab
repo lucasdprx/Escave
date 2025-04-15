@@ -729,9 +729,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 248b1c2419efe5b4daf6c574cd24bc7f, type: 3}
   - {fileID: 21300000, guid: d9b2f925cb26fd74aa4d3c958189114d, type: 3}
   - {fileID: 21300000, guid: 8d5c351cd5ff03c4eba8259a3b603a38, type: 3}
-  animationSpeed: 0.1
+  _animationSpeed: 0.1
   _lightHelmet: {fileID: 5966334176976692577}
-  maxJumpDuration: 0.2
+  _inputBufferTime: 0.15
+  _maxJumpDuration: 0.25
 --- !u!114 &2843669229510685384
 MonoBehaviour:
   m_ObjectHideFlags: 0
