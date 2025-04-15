@@ -1,15 +1,18 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CollectiblesSave : MonoBehaviour, IDataPersistence
 {
     [SerializeField] private List<CollectObjet> collectibles;
+    [SerializeField] private TextMeshProUGUI _fraiseText;
     
     private int valueCollected;
     
     public void LoadData(GameData _gameData)
     {
         valueCollected = _gameData.collectiblesCollected;
+        UpdateText();
         
         if (_gameData.collectibles.Count == 0) return;
         
@@ -30,6 +33,12 @@ public class CollectiblesSave : MonoBehaviour, IDataPersistence
     public void OnCollectibleCollected()
     {
         valueCollected++;
+        UpdateText();
+    }
+
+    private void UpdateText()
+    {
+        _fraiseText.text = valueCollected.ToString();
     }
 
     public void SaveData(ref GameData _gameData)
