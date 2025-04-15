@@ -14,7 +14,7 @@ public class SandTrapCollision : MonoBehaviour
     private float sinkingTimer;
     private Collider2D trapCollider;
     private PlayerMovement playerMovement;
-    [SerializeField] private PlayerDeath playerDeath;
+    private PlayerDeath playerDeath;
     private Rigidbody2D playerRigidbody;
     private float initGravityScale;
     private float initMoveSpeed;
@@ -22,17 +22,19 @@ public class SandTrapCollision : MonoBehaviour
     private void Awake()
     {
         trapCollider = GetComponent<Collider2D>();
-        
-        playerDeath.OnDeath2 += Reset;
     }
 
-    private void Reset(object _sender, EventArgs _e)
+    private void Reset()
     {
         sinkingTimer = 0f;
         trapCollider.isTrigger = false;
-        playerRigidbody.gravityScale = initGravityScale;
-        playerMovement.moveSpeed = initMoveSpeed;
-        playerMovement.jumpForce = initJumpForce;
+        if (playerRigidbody)
+            playerRigidbody.gravityScale = initGravityScale;
+        if (playerMovement)
+        {
+            playerMovement.moveSpeed = initMoveSpeed;
+            playerMovement.jumpForce = initJumpForce;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -87,17 +89,14 @@ public class SandTrapCollision : MonoBehaviour
         if (sinkingTimer >= sinkingDurationBeforeDeath)
         {
             playerDeath.PlayerDie();
+            Reset();
         }
     }
     private void OnTriggerExit2D(Collider2D other)
     {
         if (!other.gameObject.CompareTag("Player")) return;
         
-        sinkingTimer = 0f;
-        trapCollider.isTrigger = false;
-        playerRigidbody.gravityScale = initGravityScale;
-        playerMovement.moveSpeed = initMoveSpeed;
-        playerMovement.jumpForce = initJumpForce;
+        Reset();
     }
 }
 

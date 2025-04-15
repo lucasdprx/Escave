@@ -7,7 +7,9 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement Settings")]
     public float moveSpeed;
-    public float jumpForce; [Space]
+    public float jumpForce;
+    [Space] private float baseMoveSpeed;
+    [Space] private float baseJumpForce;
 
     [Header("Ground Check")]
     [SerializeField] private Transform _groundCheck;
@@ -61,6 +63,10 @@ public class PlayerMovement : MonoBehaviour
     private bool _isJumping;
     private float _jumpTimeCounter;
     [SerializeField] private float _maxJumpDuration = 0.35f; // durée max du saut
+    
+    private PlayerDeath _playerDeath;
+    [Header("Pause Menu")]
+    [SerializeField] private PauseMenuManager _pauseMenu;
 
     public Direction LastDirection { get; private set; } = Direction.Right;
     public enum Direction
@@ -83,8 +89,19 @@ public class PlayerMovement : MonoBehaviour
         _playerWallJump = GetComponent<PlayerWallJump>();
         _grapplingHook = GetComponentInChildren<GrapplingHook>();
         _playerSFX = GetComponent<PlayerSFX>();
+        _playerDeath = GetComponent<PlayerDeath>();
+        
+        baseMoveSpeed = moveSpeed;
+        baseJumpForce = jumpForce;
 
         _boxSize = new Vector2(1.2f, 0.3f);
+    }
+
+    public void Reset()
+    {
+        moveSpeed = baseMoveSpeed;
+        jumpForce = baseJumpForce;
+        _rb.gravityScale = 4;
     }
 
     private void Update()
@@ -223,6 +240,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
+        if (_pauseMenu._isGamePaused)
+            return;
         if (_moveInput.y < -0.95f && _isOnOneWayPlatform) return;
 
         if (context.started)
