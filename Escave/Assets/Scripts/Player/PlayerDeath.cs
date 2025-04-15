@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
@@ -13,6 +14,7 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
     [SerializeField, ReadOnly] private int deathCounter = 0;
 
     public UnityEvent<int> OnDeath;
+    public event EventHandler OnDeath2;
     public bool _isRestarting = false;
     
     [SerializeField] private ParticleSystem _deathParticles;
@@ -50,6 +52,7 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
     public void PlayerDie()
     {
         _playerSFX.PlayDeathSFX();
+        OnDeath2?.Invoke(this, EventArgs.Empty);
 
         if (currentCheckpoint == null)
         {
