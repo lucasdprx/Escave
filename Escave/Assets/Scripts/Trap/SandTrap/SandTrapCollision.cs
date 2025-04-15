@@ -22,7 +22,6 @@ public class SandTrapCollision : MonoBehaviour
     private void Awake()
     {
         trapCollider = GetComponent<Collider2D>();
-        playerDeath.OnDeath2 += Reset;
     }
 
     private void Reset(object _sender, EventArgs _e)
@@ -47,6 +46,7 @@ public class SandTrapCollision : MonoBehaviour
         if (!playerDeath)
         {
             playerDeath = other.gameObject.GetComponent<PlayerDeath>();
+            playerDeath.OnDeath2 += Reset;
         }
         if (!playerRigidbody)
         {

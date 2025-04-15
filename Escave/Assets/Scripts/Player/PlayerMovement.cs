@@ -236,7 +236,6 @@ public class PlayerMovement : MonoBehaviour
         }
         if (context.started && _isGrounded)
         {
-            _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, jumpForce);
             _isJumping = true;
             _jumpTimeCounter = _maxJumpDuration;
         }
