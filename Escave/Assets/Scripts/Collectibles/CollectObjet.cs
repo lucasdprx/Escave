@@ -49,7 +49,7 @@ public class CollectObjet : MonoBehaviour
                 yield return null;
             }
         }
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
     
     public ParticleSystem PlayPickupEffect(Vector3 position)

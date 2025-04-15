@@ -1327,6 +1327,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 769763604}
     - target: {fileID: 7576297500504853032, guid: 0b546080af589c1498b91f8971c0c47b, type: 3}
+      propertyPath: _collectiblesSave
+      value: 
+      objectReference: {fileID: 3332733432586909594}
+    - target: {fileID: 7576297500504853032, guid: 0b546080af589c1498b91f8971c0c47b, type: 3}
       propertyPath: 'checkpoints.Array.data[0]'
       value: 
       objectReference: {fileID: 317386287}
@@ -4801,6 +4805,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5680967316869047893, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
   m_PrefabInstance: {fileID: 3332733432586909590}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3332733432586909594 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2648774950224487253, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
+  m_PrefabInstance: {fileID: 3332733432586909590}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ee6e956537c33a44b85eaa40f47c48b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -22,6 +22,7 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
     private PlayerSFX _playerSFX;
     
     [SerializeField] private GrapplingHook _grapplingHook;
+    [SerializeField] private CollectiblesSave _collectiblesSave;
     
     private void Start()
     {
@@ -67,6 +68,7 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
             OnDeath.Invoke(deathCounter);
             Instantiate(_deathParticles, this.transform.position, Quaternion.identity);
         }
+        _collectiblesSave.LoadData(DataPersistenceManager.instance.gameData);
         _grapplingHook.DestroyProjectile();
         GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
         transform.position = currentCheckpoint.transform.position;
@@ -84,6 +86,7 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
         }
         if (checkpoints.Contains(newCheckpoint))
         {
+            _collectiblesSave.SaveData(ref DataPersistenceManager.instance.gameData);
             currentCheckpoint = newCheckpoint;
             _playerSFX.PlayCheckpointReachSFX();
         }
