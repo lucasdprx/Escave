@@ -7,7 +7,9 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement Settings")]
     public float moveSpeed;
-    public float jumpForce; [Space]
+    public float jumpForce;
+    [Space] private float baseMoveSpeed;
+    [Space] private float baseJumpForce;
 
     [Header("Ground Check")]
     [SerializeField] private Transform _groundCheck;
@@ -62,6 +64,7 @@ public class PlayerMovement : MonoBehaviour
     private float _jumpTimeCounter;
     [SerializeField] private float _maxJumpDuration = 0.35f; // durée max du saut
     
+    private PlayerDeath _playerDeath;
     [Header("Pause Menu")]
     [SerializeField] private PauseMenuManager _pauseMenu;
 
@@ -86,8 +89,19 @@ public class PlayerMovement : MonoBehaviour
         _playerWallJump = GetComponent<PlayerWallJump>();
         _grapplingHook = GetComponentInChildren<GrapplingHook>();
         _playerSFX = GetComponent<PlayerSFX>();
+        _playerDeath = GetComponent<PlayerDeath>();
+        
+        baseMoveSpeed = moveSpeed;
+        baseJumpForce = jumpForce;
 
         _boxSize = new Vector2(1.2f, 0.3f);
+    }
+
+    public void Reset()
+    {
+        moveSpeed = baseMoveSpeed;
+        jumpForce = baseJumpForce;
+        _rb.gravityScale = 4;
     }
 
     private void Update()
