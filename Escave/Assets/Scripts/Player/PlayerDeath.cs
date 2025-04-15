@@ -14,7 +14,7 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
     [SerializeField, ReadOnly] private int deathCounter = 0;
 
     public UnityEvent<int> OnDeath;
-    public event EventHandler OnDeath2;
+    public UnityEvent OnDeath2;
     public bool _isRestarting = false;
     
     [SerializeField] private ParticleSystem _deathParticles;
@@ -69,7 +69,7 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
         transform.position = currentCheckpoint.transform.position;
         _playerSFX.PlayRespawnSFX();
         
-        OnDeath2?.Invoke(this, EventArgs.Empty);
+        OnDeath2.Invoke();
     }
 
     public void SetCheckpoint(GameObject newCheckpoint)

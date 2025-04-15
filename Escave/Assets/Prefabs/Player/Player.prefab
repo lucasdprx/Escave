@@ -794,6 +794,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnDeath2:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6894023557217023328}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: Reset
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _isRestarting: 0
   _deathParticles: {fileID: 1829656460543490895, guid: c3575c47e04c6a24b81a99d90c93b035, type: 3}
 --- !u!114 &-3144108716938962793
