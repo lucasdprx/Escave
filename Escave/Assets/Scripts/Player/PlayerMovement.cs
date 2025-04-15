@@ -217,11 +217,6 @@ public class PlayerMovement : MonoBehaviour
         {
             _isInputBuffering = true;
         }
-
-        // if (context.performed && _isGrounded)
-        // {
-        //     _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, jumpForce);
-        // }
     }
 
     private Direction GetEightDirection(Vector2 input)
