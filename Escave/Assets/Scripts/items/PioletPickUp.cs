@@ -15,7 +15,7 @@ public class PioletPickUp : MonoBehaviour
             _playerAction = other.GetComponent<PlayerInput>();
             EnablingPiolet();
             DataPersistenceManager.instance.gameData.isPioletEnabled = true;
-            _itemShow.ShowPiolet(_playerAction);
+            _itemShow.Active();
         }
     }
     

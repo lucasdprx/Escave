@@ -39,16 +39,28 @@ public class PlayerMovement : MonoBehaviour
 
     private float _verticalInput;
 
-    private Vector2 boxSize;
+    private Vector2 _boxSize;
 
     [Header("Sprite Animation")]
     [SerializeField] private Sprite[] runSprites; // 0 à 6
 
     private int _currentFrame;
     private float _animationTimer;
-    [SerializeField] private float animationSpeed = 0.1f;
+    [SerializeField] private float _animationSpeed = 0.1f;
 
     [SerializeField] private GameObject _lightHelmet;
+    
+    [Header("Input Buffer")]
+    [SerializeField] private float _inputBufferTime = 0.15f;
+
+    private float _inputActionTime;
+    
+    private bool _isInputBuffering = false;
+
+    [Header("Variable Jump Settings")]
+    private bool _isJumping;
+    private float _jumpTimeCounter;
+    [SerializeField] private float _maxJumpDuration = 0.35f; // durée max du saut
 
     public Direction LastDirection { get; private set; } = Direction.Right;
     public enum Direction
@@ -72,16 +84,27 @@ public class PlayerMovement : MonoBehaviour
         _grapplingHook = GetComponentInChildren<GrapplingHook>();
         _playerSFX = GetComponent<PlayerSFX>();
 
-        boxSize = new Vector2(1.2f, 0.3f);
+        _boxSize = new Vector2(1.2f, 0.3f);
     }
 
     private void Update()
     {
-        _isGrounded = Physics2D.OverlapBox(_groundCheck.position, boxSize, 0f, _groundLayer);
+        _isGrounded = Physics2D.OverlapBox(_groundCheck.position, _boxSize, 0f, _groundLayer);
 
         if (_isGrounded && _justDetachedFromHook)
         {
             _justDetachedFromHook = false;
+        }
+
+        if (_isGrounded && _inputActionTime > 0) 
+        {
+            _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, jumpForce);
+            _inputActionTime = -1;
+        }
+
+        if (_isInputBuffering)
+        {
+            _inputActionTime -= Time.deltaTime;
         }
 
         HandleSpriteFlip();
@@ -138,6 +161,18 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        if (_isJumping)
+        {
+            if (_jumpTimeCounter > 0f)
+            {
+                _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, jumpForce);
+                _jumpTimeCounter -= Time.fixedDeltaTime;
+            }
+            else
+            {
+                _isJumping = false;
+            }
+        }
 
 
         // Handle step SFX
@@ -189,10 +224,26 @@ public class PlayerMovement : MonoBehaviour
     public void OnJump(InputAction.CallbackContext context)
     {
         if (_moveInput.y < -0.95f && _isOnOneWayPlatform) return;
-        
-        if (context.performed && _isGrounded)
+
+        if (context.started)
+        {
+            _inputActionTime = _inputBufferTime;
+            _isInputBuffering = false;
+        }
+        else
+        {
+            _isInputBuffering = true;
+        }
+        if (context.started && _isGrounded)
         {
             _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, jumpForce);
+            _isJumping = true;
+            _jumpTimeCounter = _maxJumpDuration;
+        }
+
+        if (context.canceled)
+        {
+            _isJumping = false;
         }
     }
 
@@ -255,7 +306,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         _animationTimer += Time.deltaTime;
-        if (_animationTimer >= animationSpeed)
+        if (_animationTimer >= _animationSpeed)
         {
             _animationTimer = 0f;
             _currentFrame = (_currentFrame + 1) % runSprites.Length;
