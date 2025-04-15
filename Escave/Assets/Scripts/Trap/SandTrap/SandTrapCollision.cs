@@ -86,12 +86,7 @@ public class SandTrapCollision : MonoBehaviour
         sinkingTimer += Time.deltaTime;
         if (sinkingTimer >= sinkingDurationBeforeDeath)
         {
-            sinkingTimer = 0f;
-            trapCollider.isTrigger = false;
             playerDeath.PlayerDie();
-            playerRigidbody.gravityScale = initGravityScale;
-            playerMovement.moveSpeed = initMoveSpeed;
-            playerMovement.jumpForce = initJumpForce;
         }
     }
     private void OnTriggerExit2D(Collider2D other)
