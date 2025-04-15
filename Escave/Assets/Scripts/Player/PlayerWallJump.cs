@@ -44,6 +44,7 @@ public class PlayerWallJump : MonoBehaviour
     private bool _isWallClimbing;
 
     private bool _isGravitySet;
+    private bool _isInputDone;
     
     #endregion
     
@@ -64,7 +65,25 @@ public class PlayerWallJump : MonoBehaviour
 
     private void Update()
     {
-        if ((_isWallClimbingLeft || _isWallClimbingRight) && !IsGrounded())
+        if (IsGrounded())
+        {
+            _canWallClimb = true;
+            _isWallClimbing = false;
+            _wallStayTimer = 0;
+            _isWallClimbingLeft = false;
+            _isWallClimbingRight = false;
+        }
+        
+        if (_isInputDone && IsWallRight() && _moveInput.x > 0.1f && !IsGrounded())
+        {
+            _isWallClimbingRight = true;
+            _isWallClimbing = true;
+        } else if (_isInputDone && IsWallLeft() && _moveInput.x < 0.1f && !IsGrounded()) {
+            _isWallClimbingLeft = true;
+            _isWallClimbing = true;
+        }
+
+        if (_isWallClimbingLeft || _isWallClimbingRight)
         {
             _wallStayTimer += Time.deltaTime;
             if (_wallStayTimer >= _wallStayTime)
@@ -74,6 +93,7 @@ public class PlayerWallJump : MonoBehaviour
                 _canWallClimb = false;
                 _rb.gravityScale = 4;
                 _playerSFX.PlayEnduranceRunOutSFX();
+                _isInputDone = false;
             }
         }
 
@@ -83,13 +103,6 @@ public class PlayerWallJump : MonoBehaviour
             _isWallClimbingLeft = false;
             _isWallClimbingRight = false;
             _rb.gravityScale = 4;
-        }
-        
-        if (IsGrounded())
-        {
-            _canWallClimb = true;
-            _isWallClimbing = false;
-            _wallStayTimer = 0;
         }
     }
     
@@ -107,9 +120,8 @@ public class PlayerWallJump : MonoBehaviour
             _rb.AddForce(_onTopWallForce, ForceMode2D.Impulse);
         }
 
-        if (_moveInput.x > 0 && IsWallRight())
+        if (_isWallClimbingRight && IsWallRight())
         {
-            _isWallClimbingRight = true;
             _rb.gravityScale = 0;
             if (_moveInput.y != 0)
             {
@@ -118,9 +130,8 @@ public class PlayerWallJump : MonoBehaviour
             }
             _rb.linearVelocity = new Vector2(0f, 0f);
         }
-        else if (_moveInput.x < 0 && IsWallLeft())
+        else if (_isWallClimbingLeft && IsWallLeft())
         {
-            _isWallClimbingLeft = true;
             _rb.gravityScale = 0;
             if (_moveInput.y != 0)
             {
@@ -167,8 +178,19 @@ public class PlayerWallJump : MonoBehaviour
     {
         if (_isGrabUnlock)
         {
-            if(_ctx.started) _isWallClimbing = true;
-            else if(_ctx.canceled) _isWallClimbing = false;
+            if (_ctx.started)
+            {
+                if (_isWallClimbing)
+                {
+                    _isWallClimbing = false;
+                    _isWallClimbingLeft = false;
+                    _isWallClimbingRight = false;
+                    return;
+                }
+                
+                _isInputDone = true;
+            }
+            else if(_ctx.canceled) _isInputDone = false;
         }
     }
     
