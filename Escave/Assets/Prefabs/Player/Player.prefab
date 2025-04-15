@@ -715,7 +715,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 9
-  jumpForce: 17
+  jumpForce: 11
   _groundCheck: {fileID: 4807359283236107663}
   _groundLayer:
     serializedVersion: 2
@@ -731,6 +731,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8d5c351cd5ff03c4eba8259a3b603a38, type: 3}
   animationSpeed: 0.1
   _lightHelmet: {fileID: 5966334176976692577}
+  maxJumpDuration: 0.2
 --- !u!114 &2843669229510685384
 MonoBehaviour:
   m_ObjectHideFlags: 0
