@@ -20,7 +20,9 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
     [SerializeField] private ParticleSystem _deathParticles;
 
     private PlayerSFX _playerSFX;
-
+    
+    [SerializeField] private GrapplingHook _grapplingHook;
+    
     private void Start()
     {
         _playerSFX = GetComponent<PlayerSFX>();
@@ -65,6 +67,7 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
             OnDeath.Invoke(deathCounter);
             Instantiate(_deathParticles, this.transform.position, Quaternion.identity);
         }
+        _grapplingHook.DestroyProjectile();
         GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
         transform.position = currentCheckpoint.transform.position;
         _playerSFX.PlayRespawnSFX();
