@@ -99,7 +99,7 @@ public class PlayerMovement : MonoBehaviour
     {
         moveSpeed = baseMoveSpeed;
         jumpForce = baseJumpForce;
-        _rb.gravityScale = 5;
+        _rb.gravityScale = 4;
     }
 
     private void Update()
