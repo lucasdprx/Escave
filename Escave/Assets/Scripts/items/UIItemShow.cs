@@ -3,6 +3,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Video;
 
 public class UIItemShow : MonoBehaviour
 {
@@ -14,6 +15,10 @@ public class UIItemShow : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _textMesh;
     [TextArea]
     [SerializeField] private string message;
+    
+    [Header("Videos")]
+    [SerializeField] private VideoPlayer _videoPlayer1;
+    [SerializeField] private VideoPlayer _videoPlayer2;
 
     public void Active()
     {
@@ -36,5 +41,8 @@ public class UIItemShow : MonoBehaviour
         _textMesh.text = message.Replace(
             "[firstBind]", _action.action.bindings[0].ToString().Split("/")[1]).Replace(
             "[secondBind]", _action.action.bindings[1].ToString().Split("/")[1]);
+        
+        _videoPlayer1.Play();
+        _videoPlayer2.Play();
     }
 }
