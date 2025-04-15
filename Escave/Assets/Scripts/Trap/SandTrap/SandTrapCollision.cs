@@ -14,7 +14,7 @@ public class SandTrapCollision : MonoBehaviour
     private float sinkingTimer;
     private Collider2D trapCollider;
     private PlayerMovement playerMovement;
-    private PlayerDeath playerDeath;
+    [SerializeField] private PlayerDeath playerDeath;
     private Rigidbody2D playerRigidbody;
     private float initGravityScale;
     private float initMoveSpeed;
@@ -22,6 +22,8 @@ public class SandTrapCollision : MonoBehaviour
     private void Awake()
     {
         trapCollider = GetComponent<Collider2D>();
+        
+        playerDeath.OnDeath2 += Reset;
     }
 
     private void Reset(object _sender, EventArgs _e)
@@ -46,7 +48,6 @@ public class SandTrapCollision : MonoBehaviour
         if (!playerDeath)
         {
             playerDeath = other.gameObject.GetComponent<PlayerDeath>();
-            playerDeath.OnDeath2 += Reset;
         }
         if (!playerRigidbody)
         {
