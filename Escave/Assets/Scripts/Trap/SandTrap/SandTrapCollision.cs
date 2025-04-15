@@ -28,10 +28,13 @@ public class SandTrapCollision : MonoBehaviour
     {
         sinkingTimer = 0f;
         trapCollider.isTrigger = false;
-        playerRigidbody.gravityScale = initGravityScale;
-        playerMovement.moveSpeed = initMoveSpeed;
-        playerMovement.jumpForce = initJumpForce;
-        Debug.Log("Reset");
+        if (playerRigidbody)
+            playerRigidbody.gravityScale = initGravityScale;
+        if (playerMovement)
+        {
+            playerMovement.moveSpeed = initMoveSpeed;
+            playerMovement.jumpForce = initJumpForce;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
