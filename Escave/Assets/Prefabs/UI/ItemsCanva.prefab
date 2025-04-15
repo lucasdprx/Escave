@@ -104,7 +104,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4290765750216909562
 RectTransform:
   m_ObjectHideFlags: 0
@@ -187,6 +187,8 @@ MonoBehaviour:
 
     Use [firstBind] or [secondBind] in order to
     use the grappling hook.'
+  _videoPlayer1: {fileID: 0}
+  _videoPlayer2: {fileID: 0}
 --- !u!114 &1138907378170386939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,10 +237,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2152795960449201091}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1010, y: -440}
+  m_SizeDelta: {x: 20, y: 880}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6278307928630804919
 CanvasRenderer:
@@ -500,7 +502,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 0}
+  m_Texture: {fileID: 8400000, guid: 5e53ddbbeab562644bd4d425723b3c31, type: 2}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -515,16 +517,16 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2334847593707049006}
   m_Enabled: 1
-  m_VideoClip: {fileID: 0}
+  m_VideoClip: {fileID: 32900000, guid: 0610489b768aad44fbe769c1a9fb14eb, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
-  m_TargetTexture: {fileID: 0}
+  m_TargetTexture: {fileID: 8400000, guid: 5e53ddbbeab562644bd4d425723b3c31, type: 2}
   m_TimeReference: 0
   m_TargetMaterialRenderer: {fileID: 0}
   m_TargetMaterialProperty: <noninit>
   m_RenderMode: 2
-  m_AspectRatio: 2
+  m_AspectRatio: 1
   m_DataSource: 0
   m_TimeUpdateMode: 2
   m_PlaybackSpeed: 1
@@ -532,14 +534,14 @@ VideoPlayer:
   m_TargetAudioSources:
   - {fileID: 0}
   m_DirectAudioVolumes:
-  - 1
+  - 0
   m_Url: 
   m_EnabledAudioTracks: 01
-  m_DirectAudioMutes: 00
+  m_DirectAudioMutes: 01
   m_ControlledAudioTrackCount: 1
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_SkipOnDrop: 1
-  m_Looping: 0
+  m_Looping: 1
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []
@@ -575,10 +577,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4393074552257213784}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 143.01}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 500, y: -106.505}
+  m_SizeDelta: {x: 920, y: 143.01}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7991525594750968305
 CanvasRenderer:
@@ -713,10 +715,10 @@ RectTransform:
   - {fileID: 1535718384585886895}
   m_Father: {fileID: 2152795960449201091}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1270, y: -440}
+  m_SizeDelta: {x: 500, y: 880}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3934296626450978055
 MonoBehaviour:
@@ -798,10 +800,10 @@ RectTransform:
   - {fileID: 9185534296390984461}
   m_Father: {fileID: 2152795960449201091}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 500, y: -440}
+  m_SizeDelta: {x: 1000, y: 880}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &9082362038470291179
 MonoBehaviour:
@@ -882,10 +884,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 7371622987321095165}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 250, y: -291.25}
+  m_SizeDelta: {x: 430, y: 312.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7287204160618748675
 CanvasRenderer:
@@ -1323,10 +1325,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4393074552257213784}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 550}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 500, y: -493.01}
+  m_SizeDelta: {x: 920, y: 550}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &905733699707860074
 CanvasRenderer:
@@ -1578,7 +1580,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 0}
+  m_Texture: {fileID: 8400000, guid: 5e53ddbbeab562644bd4d425723b3c31, type: 2}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -1593,16 +1595,16 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5902020334726151975}
   m_Enabled: 1
-  m_VideoClip: {fileID: 0}
+  m_VideoClip: {fileID: 32900000, guid: 4de646523fad74a4bb1e3be79529adf8, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
-  m_TargetTexture: {fileID: 0}
+  m_TargetTexture: {fileID: 8400000, guid: 5e53ddbbeab562644bd4d425723b3c31, type: 2}
   m_TimeReference: 0
   m_TargetMaterialRenderer: {fileID: 0}
   m_TargetMaterialProperty: <noninit>
   m_RenderMode: 2
-  m_AspectRatio: 2
+  m_AspectRatio: 1
   m_DataSource: 0
   m_TimeUpdateMode: 2
   m_PlaybackSpeed: 1
@@ -1610,14 +1612,14 @@ VideoPlayer:
   m_TargetAudioSources:
   - {fileID: 0}
   m_DirectAudioVolumes:
-  - 1
+  - 0
   m_Url: 
   m_EnabledAudioTracks: 01
-  m_DirectAudioMutes: 00
+  m_DirectAudioMutes: 01
   m_ControlledAudioTrackCount: 1
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_SkipOnDrop: 1
-  m_Looping: 0
+  m_Looping: 1
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []
@@ -1723,6 +1725,8 @@ MonoBehaviour:
 
     Use [firstBind] or
     [secondBind] and keep your direction in the wall in order to climb a wall.'
+  _videoPlayer1: {fileID: 3815763900341081137}
+  _videoPlayer2: {fileID: 8633275262619293137}
 --- !u!114 &5418784794266259764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1874,10 +1878,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 7371622987321095165}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 250, y: -643.75}
+  m_SizeDelta: {x: 430, y: 312.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2709570278770704118
 CanvasRenderer:
