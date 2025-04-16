@@ -1817,7 +1817,6 @@ GameObject:
   - component: {fileID: 5056975239091734879}
   - component: {fileID: 8289576644545608481}
   - component: {fileID: 7919205125676097352}
-  - component: {fileID: 233867226281387246}
   m_Layer: 5
   m_Name: Template
   m_TagString: Untagged
@@ -1914,19 +1913,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &233867226281387246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3435834992280006701}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d1e8c0f0bfa3ac44a0962d0d4b3c6cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scrollSpeed: 10
 --- !u!1 &3439842633604118389
 GameObject:
   m_ObjectHideFlags: 0
@@ -3910,7 +3896,7 @@ MonoBehaviour:
     m_SelectOnUp: {fileID: 1618522947913190028}
     m_SelectOnDown: {fileID: 4433781616162163436}
     m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnRight: {fileID: 4433781616162163436}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -4054,7 +4040,7 @@ MonoBehaviour:
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 2273298288679179971}
     m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnLeft: {fileID: 2273298288679179971}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
