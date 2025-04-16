@@ -2715,6 +2715,7 @@ MonoBehaviour:
     collectiblesCollected: 0
     isHookEnabled: 0
     isPioletEnabled: 0
+    chapterUnlocked: 
 --- !u!4 &1494607821
 Transform:
   m_ObjectHideFlags: 0
