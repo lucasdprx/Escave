@@ -16,6 +16,8 @@ public class GameData
 
     public bool isHookEnabled;
     public bool isPioletEnabled;
+
+    public List<bool> chapterUnlocked;
     //---------------------------------
     
     public GameData()
@@ -31,5 +33,7 @@ public class GameData
         
         isHookEnabled = false;
         isPioletEnabled = false;
+        
+        chapterUnlocked = new List<bool>();
     }
 }
