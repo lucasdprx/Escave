@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5006847095089074156}
   - component: {fileID: 7454200272719635905}
   m_Layer: 6
-  m_Name: BreakingPlatform
+  m_Name: BreakingPlatformLeft
   m_TagString: BreakingPlateform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ae6c796495785f645a94eeb4fdea3ecd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 838859a3c0ecd864db0efafb7b8a9882, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
