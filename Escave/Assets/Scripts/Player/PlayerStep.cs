@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -5,26 +6,29 @@ public class PlayerStep : MonoBehaviour
 {
     [SerializeField] private float _stepTime;
     private bool _isWalking;
+    private float _timerStep;
     private void Start()
     {
         PlayerMovement.OnStepSound += PlayWalkSFX;
     }
-
-    #region Start/Stop Routines
+    
     private void PlayWalkSFX()
     {
         if (_isWalking) return;
-        StartCoroutine(WalkRoutine());
+        
+        _isWalking = true;
+        AudioManager.Instance.PlaySound(AudioType.step);
     }
-    #endregion
 
-    #region Routines
-    private IEnumerator WalkRoutine()
+    private void Update()
     {
-         _isWalking = true;
-         AudioManager.Instance.PlaySound(AudioType.step);
-         yield return new WaitForSeconds(_stepTime);
-        _isWalking = false;
+        if (!_isWalking) return;
+        
+        _timerStep += Time.deltaTime;
+        if (_timerStep >= _stepTime)
+        {
+            _isWalking = false;
+            _timerStep = 0;
+        }
     }
-    #endregion
 }

@@ -119,6 +119,8 @@ public class GrapplingHook : MonoBehaviour
 
     private void AttachToPoint()
     {
+        if (!_target) return;
+        
         _target.position = _projectileScript.transform.position;
 
         _springJoint.connectedAnchor = _target.position;
@@ -144,7 +146,7 @@ public class GrapplingHook : MonoBehaviour
         _detachCoroutine = null;
     }
 
-    public void DetachGrapplingHook()
+    private void DetachGrapplingHook()
     {
         if (_detachCoroutine != null)
         {
@@ -167,9 +169,11 @@ public class GrapplingHook : MonoBehaviour
     }
 
 
-    public void OnProjectileReturned()
+    private void OnProjectileReturned()
     {
-        _lineRenderer.enabled = false;
+        if (_lineRenderer)
+            _lineRenderer.enabled = false;
+        
         _currentProjectile = null;
         _projectileScript = null;
         _canShoot = true;
