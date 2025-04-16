@@ -1,39 +1,16 @@
-using System;
 using UnityEngine;
 
 public class CollectibleData
 {
-    [Header("Attributes")]
-    private bool hasBeenCollected = false;
-
-    [Header("Effects")]
-    [SerializeField] private AudioClip pickupSound;
-    [SerializeField] private AudioSource pickupSource;
-    
-    public AudioClip PickupSound => pickupSound;
-    public bool HasBeenCollected => hasBeenCollected;
-
-
-    public void PlayPickupSound(AudioSource source)
-    {
-        if (source != null && pickupSound != null)
-        {
-            source.PlayOneShot(pickupSound);
-        }
-        else
-        {
-            Debug.LogWarning("pickupSound non assign� !");
-        }
-    }
+    public bool HasBeenCollected { get; private set; }
 
     public void PickUp()
     {
-        Debug.Log(hasBeenCollected);
-        hasBeenCollected = true;
+        HasBeenCollected = true;
     }
 
-    public void SetData(bool _hasBeenCollected)
+    public void SetData(bool hasBeenCollected)
     {
-        hasBeenCollected = _hasBeenCollected;
+        HasBeenCollected = hasBeenCollected;
     }
 }

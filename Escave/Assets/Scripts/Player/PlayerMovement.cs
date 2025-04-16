@@ -1,6 +1,6 @@
-using NUnit.Framework;
+using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
@@ -13,55 +13,27 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Ground Check")]
     [SerializeField] private Transform _groundCheck;
-    private float _groundCheckRadius = 0.45f;
-    [SerializeField] private LayerMask _groundLayer; [Space]
-    private bool _isGrounded;
-
-
-    private Rigidbody2D _rb;
-    private Vector2 _moveInput;
-    private SpriteRenderer _spriteRenderer;
+    [SerializeField] private LayerMask _groundLayer;
 
     [Header("Heavy Fall Detection")]
     [SerializeField] private float _heavyFallYVelocity; 
     private bool _hasLanded;
     private bool _inHeavyFall;
-
-
-    private PlayerWallJump _playerWallJump;
-    private PlayerSFX      _playerSFX;
     
-    bool _isOnOneWayPlatform;
-
-
-    private GrapplingHook _grapplingHook;
-    private bool _justDetachedFromHook;
-    private float _detachGraceTime = .3f;
-    private float _detachTimer;
-
-    private float _verticalInput;
-
-    private Vector2 _boxSize;
-
-    [SerializeField] private GameObject _lightHelmet;
-    [SerializeField] private Transform[] _switchTransformsInRotation;
-    private Vector3[] _initialLocalPositions;
-
     [Header("Input Buffer")]
     [SerializeField] private float _inputBufferTime = 0.15f;
 
     private float _inputActionTime;
-    
-    private bool _isInputBuffering = false;
+    private bool _isInputBuffering;
 
     [Header("Variable Jump Settings")]
+    [SerializeField] private float _maxJumpDuration = 0.35f;
+    
     private bool _isJumping;
     private float _jumpTimeCounter;
-    [SerializeField] private float _maxJumpDuration = 0.35f; // durée max du saut
     
-    private PlayerDeath _playerDeath;
-    [Header("Pause Menu")]
-    [SerializeField] private PauseMenuManager _pauseMenu;
+    [Header("Grappling Hook")]
+    public UnityEvent _onJumpWhileGrappling;
 
     public Direction LastDirection { get; private set; } = Direction.Right;
     public enum Direction
@@ -76,28 +48,39 @@ public class PlayerMovement : MonoBehaviour
         DownRight
     }
 
-    [SerializeField] private Animator _animator;
-
+    public static event Action OnStepSound;
+    public static bool _isGrounded;
+    
+    [SerializeField] private Transform[] _switchTransformsInRotation;
+    private Vector3[] _initialLocalPositions;
+    private PlayerWallJump _playerWallJump;
+    private bool _isOnOneWayPlatform;
+    private bool _isGrappling;
+    private bool _justDetachedFromHook;
+    private Vector2 _boxSize;
+    private Rigidbody2D _rb;
+    private PlayerInputHandler _playerInputHandler;
+    
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         _playerWallJump = GetComponent<PlayerWallJump>();
-        _grapplingHook = GetComponentInChildren<GrapplingHook>();
-        _playerSFX = GetComponent<PlayerSFX>();
-        _playerDeath = GetComponent<PlayerDeath>();
+        _playerInputHandler = GetComponent<PlayerInputHandler>();
         
         baseMoveSpeed = moveSpeed;
         baseJumpForce = jumpForce;
 
         _boxSize = new Vector2(1.2f, 0.3f);
-
         _initialLocalPositions = new Vector3[_switchTransformsInRotation.Length];
 
         for (int i = 0; i < _switchTransformsInRotation.Length; i++)
         {
             _initialLocalPositions[i] = _switchTransformsInRotation[i].localPosition;
         }
+        
+        _playerInputHandler.OnJumpPressed += OnJumpPressed;
+        _playerInputHandler.OnJumpReleased += OnJumpRelease;
+        _playerInputHandler.OnMove += OnMove;
     }
 
     public void Reset()
@@ -128,160 +111,139 @@ public class PlayerMovement : MonoBehaviour
         {
             _inputActionTime -= Time.deltaTime;
         }
-
-        //Animation Parameters Update
-        _animator.SetFloat("Speed", Mathf.Abs(_moveInput.x));
-        _animator.SetBool("IsJumping", !_isGrounded && !_playerWallJump._isWallClimbingLeft && !_playerWallJump._isWallClimbingRight && !_grapplingHook._isGrappled);
-
-        _animator.SetBool("IsClimbing", _playerWallJump._isWallClimbingLeft || _playerWallJump._isWallClimbingRight);
-
-        if (_animator.GetBool("IsClimbing"))
-        {
-            float climbSpeed = Mathf.Abs(_rb.linearVelocity.y);
-            _animator.SetFloat("ClimbSpeed", climbSpeed);
-        }
-
-        _animator.SetBool("IsGrappling", _grapplingHook._isGrappled);
-
-
-        HandleSpriteFlip();
-        //Debug.DrawRay(transform.position, DirectionToVector2(LastDirection), Color.red);
     }
 
     private void FixedUpdate()
     {
-        if (_grapplingHook != null && _grapplingHook._isGrappled)
-        {
-            Vector2 force = new Vector2(_moveInput.x, 0f) * moveSpeed;
-            _rb.AddForce(force, ForceMode2D.Force);
-        }
-        else if (!_playerWallJump._isWallClimbingLeft && !_playerWallJump._isWallClimbingRight && !_playerWallJump._isWallJumping)
-        {
-            //If just detached from hook, wait till player use input (else use balancing velocity
-            if (_justDetachedFromHook)
-            {
-                if (Mathf.Abs(_moveInput.x) > 0.01f)
-                {
-                    //Player use input -> autorize air control
-                    float controlFactor = 0.15f; //adjust speed
-                    _rb.linearVelocity = new Vector2(
-                        Mathf.Lerp(_rb.linearVelocity.x, _moveInput.x * moveSpeed, controlFactor),
-                        _rb.linearVelocity.y
-                    );
-                }
+        HandleGrapplingMovement();
+        HandleGroundAndAirMovement();
+        HandleJump();
+        HandleSFX();
+    }
 
-                //back to base movement
-                if (_isGrounded)
-                {
-                    _justDetachedFromHook = false;
-                }
-            }
-            else
+    private void HandleGrapplingMovement()
+    {
+        if (!_isGrappling) return;
+        
+        Vector2 force = new Vector2(_playerInputHandler.MoveInput.x, 0f) * moveSpeed;
+        _rb.AddForce(force, ForceMode2D.Force);
+    }
+
+    private void HandleGroundAndAirMovement()
+    {
+        if (_isGrappling || _playerWallJump._isWallClimbingLeft || _playerWallJump._isWallClimbingRight || _playerWallJump._isWallJumping)
+            return;
+
+        if (_justDetachedFromHook)
+        {
+            if (Mathf.Abs(_playerInputHandler.MoveInput.x) > 0.01f)
             {
-                if (_isGrounded)
-                {
-                    _rb.linearVelocity = new Vector2(_moveInput.x * moveSpeed, _rb.linearVelocity.y);
-                }
-                else
-                {
-                    if (Mathf.Abs(_moveInput.x) > 0.01f)
-                    {
-                        _rb.linearVelocity = new Vector2(_moveInput.x * moveSpeed, _rb.linearVelocity.y);
-                    }
-                    else
-                    {
-                        float dampFactor = 0.9f;
-                        _rb.linearVelocity = new Vector2(_rb.linearVelocity.x * dampFactor, _rb.linearVelocity.y);
-                    }
-                }
+                const float controlFactor = 0.15f;
+                _rb.linearVelocity = new Vector2(
+                    Mathf.Lerp(_rb.linearVelocity.x, _playerInputHandler.MoveInput.x * moveSpeed, controlFactor),
+                    _rb.linearVelocity.y
+                );
             }
+
+            if (_isGrounded)
+            {
+                _justDetachedFromHook = false;
+            }
+            return;
         }
 
-        if (_isJumping)
+        if (_isGrounded || Mathf.Abs(_playerInputHandler.MoveInput.x) > 0.01f)
         {
-            if (_jumpTimeCounter > 0f)
-            {
-                _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, jumpForce);
-                _jumpTimeCounter -= Time.fixedDeltaTime;
-            }
-            else
-            {
-                _isJumping = false;
-            }
+            _rb.linearVelocity = new Vector2(_playerInputHandler.MoveInput.x * moveSpeed, _rb.linearVelocity.y);
+        }
+        else
+        {
+            const float dampFactor = 0.9f;
+            Vector2 linearVelocity = _rb.linearVelocity;
+            linearVelocity = new Vector2(linearVelocity.x * dampFactor, linearVelocity.y);
+            _rb.linearVelocity = linearVelocity;
+        }
+    }
+
+    private void HandleJump()
+    {
+        if (!_isJumping) return;
+
+        if (_jumpTimeCounter > 0f)
+        {
+            _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, jumpForce);
+            _jumpTimeCounter -= Time.fixedDeltaTime;
+        }
+        else
+        {
+            _isJumping = false;
+        }
+    }
+
+    private void HandleSFX()
+    {
+        if (_rb.linearVelocity.x != 0 && _rb.linearVelocity.y == 0)
+        {
+            OnStepSound?.Invoke();
         }
 
-
-        // Handle step SFX
-        if (_rb.linearVelocity.x != 0 && _rb.linearVelocity.y == 0) _playerSFX.PlayWalkSFX();
-
-        // Handle jump landing SFX
-        if (_rb.linearVelocity.y < 0 && !_isGrounded) //Check if the player is falling
+        if (_rb.linearVelocity.y < 0 && !_isGrounded)
         {
             _hasLanded = false;
         }
 
-        if (_hasLanded) return; //If the player was falling, check if it landed
-        if (_rb.linearVelocity.y <= _heavyFallYVelocity) _inHeavyFall = true;
-        if (_isGrounded)
+        if (_hasLanded) return;
+
+        if (_rb.linearVelocity.y <= _heavyFallYVelocity)
         {
-            _hasLanded = true;
-
-            if (_inHeavyFall) _playerSFX.PlayHeavyJumpLandSFX();
-            else              _playerSFX.PlayJumpLandSFX();
-
-            _inHeavyFall = false;
+            _inHeavyFall = true;
         }
+
+        if (!_isGrounded) return;
+        
+        _hasLanded = true;
+        AudioManager.Instance.PlaySound(_inHeavyFall ? AudioType.jumpHeavyLand : AudioType.jumpLand);
+        _inHeavyFall = false;
     }
 
-    private void OnCollisionEnter2D(Collision2D _other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        if (_other.gameObject.layer == LayerMask.NameToLayer("OneWayPlatform"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("OneWayPlatform"))
             _isOnOneWayPlatform = true;
     }
 
-    private void OnCollisionExit2D(Collision2D _other)
+    private void OnCollisionExit2D(Collision2D other)
     {
-        if (_other.gameObject.layer == LayerMask.NameToLayer("OneWayPlatform"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("OneWayPlatform"))
             _isOnOneWayPlatform = false;
     }
     
-    public void OnMove(InputAction.CallbackContext context)
+    private void OnMove()
     {
-        _moveInput = context.ReadValue<Vector2>();
-
-        _verticalInput = _moveInput.y;
-
-        if (_moveInput.sqrMagnitude > 0.01f)
+        if (_playerInputHandler.MoveInput.sqrMagnitude > 0.01f)
         {
-            LastDirection = GetEightDirection(_moveInput.normalized);
+            LastDirection = GetEightDirection(_playerInputHandler.MoveInput.normalized);
         }
     }
 
-    public void OnJump(InputAction.CallbackContext context)
+    private void OnJumpPressed()
     {
-        if (_pauseMenu._isGamePaused)
-            return;
-        if (_moveInput.y < -0.95f && _isOnOneWayPlatform) return;
+        if (Time.timeScale <= 0) return;
+        
+        if (_playerInputHandler.MoveInput.y < -0.95f && _isOnOneWayPlatform) return;
 
-        if (context.started)
-        {
-            _inputActionTime = _inputBufferTime;
-            _isInputBuffering = false;
-        }
-        else
-        {
-            _isInputBuffering = true;
-        }
-        if (context.started && _isGrounded)
-        {
-            _isJumping = true;
-            _jumpTimeCounter = _maxJumpDuration;
-        }
+        _onJumpWhileGrappling.Invoke();
+        _inputActionTime = _inputBufferTime;
+        _isInputBuffering = true;
 
-        if (context.canceled)
-        {
-            _isJumping = false;
-        }
+        if (!_isGrounded) return;
+        
+        _isJumping = true;
+        _jumpTimeCounter = _maxJumpDuration;
+    }
+    private void OnJumpRelease()
+    {
+        _isJumping = false;
     }
 
     private Direction GetEightDirection(Vector2 input)
@@ -289,14 +251,14 @@ public class PlayerMovement : MonoBehaviour
         float angle = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg;
         angle = (angle + 360f) % 360f;
 
-        if (angle >= 337.5f || angle < 22.5f)  return Direction.Right;
-        if (angle >= 22.5f  && angle < 67.5f)  return Direction.UpRight;
-        if (angle >= 67.5f  && angle < 112.5f) return Direction.Up;
-        if (angle >= 112.5f && angle < 157.5f) return Direction.UpLeft;
-        if (angle >= 157.5f && angle < 202.5f) return Direction.Left;
-        if (angle >= 202.5f && angle < 247.5f) return Direction.DownLeft;
-        if (angle >= 247.5f && angle < 292.5f) return Direction.Down;
-        if (angle >= 292.5f && angle < 337.5f) return Direction.DownRight;
+        if (angle is >= 337.5f or < 22.5f)  return Direction.Right;
+        if (angle is >= 22.5f and < 67.5f)  return Direction.UpRight;
+        if (angle is >= 67.5f and < 112.5f) return Direction.Up;
+        if (angle is >= 112.5f and < 157.5f) return Direction.UpLeft;
+        if (angle is >= 157.5f and < 202.5f) return Direction.Left;
+        if (angle is >= 202.5f and < 247.5f) return Direction.DownLeft;
+        if (angle is >= 247.5f and < 292.5f) return Direction.Down;
+        if (angle is >= 292.5f and < 337.5f) return Direction.DownRight;
 
         return Direction.Right;
     }
@@ -316,52 +278,28 @@ public class PlayerMovement : MonoBehaviour
             default: return Vector2.right;
         }
     }
-
-    private void HandleSpriteFlip()
-    {
-        if (Time.timeScale == 0) return;
-
-        if (_moveInput.x > 0 && _spriteRenderer.flipX)
-        {
-            _spriteRenderer.flipX = false;
-
-            _lightHelmet.transform.rotation = Quaternion.Euler(0, 0, -90);
-
-            //flip objects with player
-            for (int i = 0; i < _switchTransformsInRotation.Length; i++)
-            {
-                var originalPos = _initialLocalPositions[i];
-
-                _switchTransformsInRotation[i].localPosition = originalPos;
-                _switchTransformsInRotation[i].localRotation = Quaternion.Euler(0, 0, _switchTransformsInRotation[i].localPosition.z);
-            }
-        }
-        else if (_moveInput.x < 0 && !_spriteRenderer.flipX)
-        {
-            _spriteRenderer.flipX = true;
-
-            _lightHelmet.transform.rotation = Quaternion.Euler(0, -180, -90);
-            
-            //flip objects with player
-            for (int i = 0; i < _switchTransformsInRotation.Length; i++)
-            {
-                var originalPos = _initialLocalPositions[i];
-
-                _switchTransformsInRotation[i].localPosition = new Vector3(-originalPos.x, originalPos.y, originalPos.z);
-                _switchTransformsInRotation[i].localRotation = Quaternion.Euler(0, 180, _switchTransformsInRotation[i].localPosition.z);
-            }
-        }
-    }
-
-
+    
     public void OnDetachedFromHook()
     {
         _justDetachedFromHook = true;
-        _detachTimer = _detachGraceTime;
     }
 
-    public float GetVerticalInput() => _verticalInput;
-
+    public float GetVerticalInput() => _playerInputHandler.VerticalInput;
     
+    public void SetIsGrappling(bool value)
+    {
+        _isGrappling = value;
+    }
+    private void OnDestroy()
+    {
+        if (_playerInputHandler == null) return;
 
+        _playerInputHandler.OnJumpPressed -= OnJumpPressed;
+        _playerInputHandler.OnJumpReleased -= OnJumpRelease;
+        _playerInputHandler.OnMove -= OnMove;
+    }
+    public bool IsWallClimb()
+    {
+        return _playerWallJump._isWallClimbingLeft || _playerWallJump._isWallClimbingRight;
+    }
 }

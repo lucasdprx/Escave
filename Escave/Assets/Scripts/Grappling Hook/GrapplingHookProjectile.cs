@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class GrapplerProjectile : MonoBehaviour
@@ -7,26 +8,30 @@ public class GrapplerProjectile : MonoBehaviour
     private float _speed;
     private float _maxDistance;
     private Vector2 _startPosition;
-    private bool _isReturning = false;
+    private bool _isReturning;
+    private float _hookTime;
     
     public LayerMask layerMask;
-
-    private GrapplingHook _grapplingHook;
-    private bool _isAttached = false;
+    private bool _isAttached;
 
     private GameObject _currentHookedObject;
     private bool _isOnEnemy;
     private BreakingPlatform _currentBreakingPlatform;
+    private Transform _grapplingHookTransform;
 
-    public void Initialize(Vector2 dir, float speed, float maxDist, GrapplingHook hook)
+    public static event Action OnProjectileReturned;
+    public static event Action OnDetachGrapplingHook;
+    public static event Action OnSurfaceTouched;
+
+    public void Initialize(Vector2 dir, float speed, float maxDist, Transform grapplingHook, float hookTime)
     {
         _rb = GetComponent<Rigidbody2D>();
         _direction = dir.normalized;
         _speed = speed;
+        _hookTime = hookTime;
         _maxDistance = maxDist;
-        _grapplingHook = hook;
         _startPosition = transform.position;
-
+        _grapplingHookTransform = grapplingHook;
         _rb.linearVelocity = _direction * _speed;
     }
 
@@ -35,12 +40,12 @@ public class GrapplerProjectile : MonoBehaviour
         if (_isReturning)
         {
             _currentHookedObject = null;
-            Vector2 toPlayer = (_grapplingHook.transform.position - transform.position).normalized;
+            Vector2 toPlayer = (_grapplingHookTransform.transform.position - transform.position).normalized;
             _rb.linearVelocity = toPlayer * _speed;
 
-            if (Vector2.Distance(transform.position, _grapplingHook.transform.position) < 0.75f)
+            if (Vector2.Distance(transform.position, _grapplingHookTransform.transform.position) < 0.75f)
             {
-                _grapplingHook.OnProjectileReturned();
+                OnProjectileReturned?.Invoke();
                 Destroy(gameObject);
             }
         }
@@ -55,7 +60,7 @@ public class GrapplerProjectile : MonoBehaviour
 
         if (_isAttached && _isOnEnemy)
         {
-            if(_currentHookedObject != null)
+            if(_currentHookedObject)
                 transform.position = _currentHookedObject.transform.position;
         }
     }
@@ -68,9 +73,9 @@ public class GrapplerProjectile : MonoBehaviour
         _isReturning = true;
         _rb.bodyType = RigidbodyType2D.Dynamic;
 
-        if (_currentBreakingPlatform != null)
+        if (_currentBreakingPlatform)
         {
-            _currentBreakingPlatform.OnBroken -= _grapplingHook.DetachGrapplingHook;
+            _currentBreakingPlatform.OnBroken -= DetachGrapplingHook;
             _currentBreakingPlatform = null;
         }
     }
@@ -103,8 +108,8 @@ public class GrapplerProjectile : MonoBehaviour
                 transform.position = collision.ClosestPoint(transform.position);
                 _isAttached = true;
 
-                _grapplingHook.hookTime = surface.HookSurfaceTime;
-                _grapplingHook.AttachToPoint(transform.position);
+                _hookTime = surface.HookSurfaceTime;
+                OnSurfaceTouched?.Invoke();
 
                 //set is grapple to surface 
                 if(collision.CompareTag("BreakingPlateform"))
@@ -113,7 +118,7 @@ public class GrapplerProjectile : MonoBehaviour
                     if (platform != null)
                     {
                         _currentBreakingPlatform = platform;
-                        _currentBreakingPlatform.OnBroken += _grapplingHook.DetachGrapplingHook;
+                        _currentBreakingPlatform.OnBroken += DetachGrapplingHook;
                     }
 
                 }
@@ -123,6 +128,10 @@ public class GrapplerProjectile : MonoBehaviour
                 StartReturn();
             }
         }
+    }
+    private void DetachGrapplingHook()
+    {
+        OnDetachGrapplingHook?.Invoke();
     }
 
     private bool IsPartOfTrap(Transform obj)

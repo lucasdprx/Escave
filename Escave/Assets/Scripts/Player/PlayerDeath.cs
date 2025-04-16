@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
@@ -11,19 +10,19 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
     private GameObject currentCheckpoint; // active checkpoint
 
     public int DeathCount => deathCounter;
-    [SerializeField, ReadOnly] private int deathCounter = 0;
+    [SerializeField, ReadOnly] private int deathCounter;
 
     public UnityEvent<int> OnDeath;
     public UnityEvent OnDeath2;
-    public bool _isRestarting = false;
+    public bool _isRestarting;
     
     [SerializeField] private ParticleSystem _deathParticles;
-
-    private PlayerSFX _playerSFX;
-
+    [SerializeField] private GrapplingHook _grapplingHook;
+    [SerializeField] private CollectiblesSave _collectiblesSave;
+    
     private void Start()
     {
-        _playerSFX = GetComponent<PlayerSFX>();
+        PauseMenuManager.OnRestartGame += PlayerDie;
     }
 
     public void SaveData(ref GameData _gameData)
@@ -51,7 +50,7 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
 
     public void PlayerDie()
     {
-        _playerSFX.PlayDeathSFX();
+        AudioManager.Instance.PlaySound(AudioType.death);
 
         if (currentCheckpoint == null)
         {
@@ -65,9 +64,11 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
             OnDeath.Invoke(deathCounter);
             Instantiate(_deathParticles, this.transform.position, Quaternion.identity);
         }
+        _collectiblesSave.LoadData(DataPersistenceManager.instance.gameData);
+        _grapplingHook.DestroyProjectile();
         GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
         transform.position = currentCheckpoint.transform.position;
-        _playerSFX.PlayRespawnSFX();
+        AudioManager.Instance.PlaySound(AudioType.respawn);
         
         OnDeath2.Invoke();
     }
@@ -81,8 +82,9 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
         }
         if (checkpoints.Contains(newCheckpoint))
         {
+            _collectiblesSave.SaveData(ref DataPersistenceManager.instance.gameData);
             currentCheckpoint = newCheckpoint;
-            _playerSFX.PlayCheckpointReachSFX();
+            AudioManager.Instance.PlaySound(AudioType.checkpointReach);
         }
         else
         {

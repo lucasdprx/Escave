@@ -171,6 +171,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6932263571252307126}
   - component: {fileID: 2478794345925778205}
+  - component: {fileID: 5415488315808768288}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
@@ -249,6 +250,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &5415488315808768288
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3816604139127367419}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 74e888b8fcd7ba14fbe8304bb4ea6e7f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4594134647436753598
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,9 +403,11 @@ GameObject:
   - component: {fileID: 6894023557217023328}
   - component: {fileID: 2843669229510685384}
   - component: {fileID: 7576297500504853032}
-  - component: {fileID: -3144108716938962793}
   - component: {fileID: 4370203769354911228}
   - component: {fileID: 5968446577486750942}
+  - component: {fileID: 5500900846455294277}
+  - component: {fileID: 1309718639194689868}
+  - component: {fileID: 1496963242904100683}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -437,9 +462,9 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6894023557217023328}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-        m_MethodName: OnMove
+      - m_Target: {fileID: 1309718639194689868}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: Move
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -477,9 +502,9 @@ MonoBehaviour:
     m_ActionName: 'Player/Move[/Keyboard/z,/Keyboard/s,/Keyboard/q,/Keyboard/d]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6894023557217023328}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-        m_MethodName: OnJump
+      - m_Target: {fileID: 1309718639194689868}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: Jump
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -721,18 +746,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 320
   _heavyFallYVelocity: -30
-  runSprites:
-  - {fileID: 21300000, guid: 9235d183deec7c54294543a53e3ed567, type: 3}
-  - {fileID: 21300000, guid: 83f8eb243812a7446bbebeb6f1aa0395, type: 3}
-  - {fileID: 21300000, guid: cbf12097c87564f46a4bb788a4c055f0, type: 3}
-  - {fileID: 21300000, guid: 6285c4672a98eb14c9304a5d6d7de024, type: 3}
-  - {fileID: 21300000, guid: 248b1c2419efe5b4daf6c574cd24bc7f, type: 3}
-  - {fileID: 21300000, guid: d9b2f925cb26fd74aa4d3c958189114d, type: 3}
-  - {fileID: 21300000, guid: 8d5c351cd5ff03c4eba8259a3b603a38, type: 3}
-  _animationSpeed: 0.1
-  _lightHelmet: {fileID: 5966334176976692577}
   _inputBufferTime: 0.15
   _maxJumpDuration: 0.25
+  _onJumpWhileGrappling:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &2843669229510685384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -811,19 +829,8 @@ MonoBehaviour:
         m_CallState: 2
   _isRestarting: 0
   _deathParticles: {fileID: 1829656460543490895, guid: c3575c47e04c6a24b81a99d90c93b035, type: 3}
---- !u!114 &-3144108716938962793
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7023489141773015471}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7071952fab2059458df0be4940a9c8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _stepTime: 0.1
+  _grapplingHook: {fileID: 4692712459543376296}
+  _collectiblesSave: {fileID: 0}
 --- !u!114 &4370203769354911228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -851,6 +858,54 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pioletObject: {fileID: 0}
   _hookObject: {fileID: 0}
+--- !u!114 &5500900846455294277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7023489141773015471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ea34ccbe86eee74b819cbf7565e185a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _lightHelmet: {fileID: 5966334176976692577}
+  runSprites:
+  - {fileID: 21300000, guid: 9235d183deec7c54294543a53e3ed567, type: 3}
+  - {fileID: 21300000, guid: 83f8eb243812a7446bbebeb6f1aa0395, type: 3}
+  - {fileID: 21300000, guid: cbf12097c87564f46a4bb788a4c055f0, type: 3}
+  - {fileID: 21300000, guid: 6285c4672a98eb14c9304a5d6d7de024, type: 3}
+  - {fileID: 21300000, guid: 248b1c2419efe5b4daf6c574cd24bc7f, type: 3}
+  - {fileID: 21300000, guid: d9b2f925cb26fd74aa4d3c958189114d, type: 3}
+  - {fileID: 21300000, guid: 8d5c351cd5ff03c4eba8259a3b603a38, type: 3}
+  _animationSpeed: 0.1
+  _animator: {fileID: 5415488315808768288}
+--- !u!114 &1309718639194689868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7023489141773015471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa300e9a5eee346438496978bf2c7aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1496963242904100683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7023489141773015471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7071952fab2059458df0be4940a9c8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stepTime: 0.1
 --- !u!1 &7218083322398610288
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,15 +5,15 @@ public class TriggerBox : MonoBehaviour
     [Header("references")]
     [SerializeField] private StalactitesCollision _stalactitesCollision;
 
-    private bool _isPlayerInside = false;
+    private bool _isPlayerInside;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Player")) return;
 
-        _isPlayerInside = true;
+        _stalactitesCollision.SetIsPlayerInside(true);
 
-        if (!_stalactitesCollision.isStarted)
+        if (!_stalactitesCollision.GetIsStarted())
         {
             _stalactitesCollision.StartTrap();
         }
@@ -23,12 +23,7 @@ public class TriggerBox : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            _isPlayerInside = false;
+            _stalactitesCollision.SetIsPlayerInside(false);
         }
-    }
-
-    public bool IsPlayerStillInside()
-    {
-        return _isPlayerInside;
     }
 }

@@ -4,14 +4,13 @@ using UnityEngine;
 public class StalactitesCollision : MonoBehaviour
 {
     [SerializeField] private Animator stalactitesRespawnAnimation;
-    [SerializeField] private TriggerBox triggerBox;
 
     private Rigidbody2D rb;
     private PlayerDeath playerDeathScript;
     private Vector2 initSpawnPoint;
     private Transform _transform;
-
-    [HideInInspector] public bool isStarted;
+    private bool _isPlayerInside;
+    private bool isStarted;
     private AudioManager _audioManager;
 
     private void Awake()
@@ -35,7 +34,8 @@ public class StalactitesCollision : MonoBehaviour
             StartCoroutine(ResetSpike());
         }
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") ||
-            collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Trap"))
+            collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Trap")
+            || collision.gameObject.CompareTag("IgnoreGrappling"))
         {
             StartCoroutine(ResetSpike());
         }
@@ -52,7 +52,7 @@ public class StalactitesCollision : MonoBehaviour
         stalactitesRespawnAnimation.SetBool("IsEnter", false);
         isStarted = false;
 
-        if (triggerBox != null && triggerBox.IsPlayerStillInside())
+        if (_isPlayerInside)
         {
             StartTrap();
         }
@@ -63,5 +63,13 @@ public class StalactitesCollision : MonoBehaviour
         _audioManager.PlaySound(AudioType.stalactiteFall);
         isStarted = true;
         rb.gravityScale = 1f;
+    }
+    public void SetIsPlayerInside(bool isPlayerInside)
+    {
+        _isPlayerInside = isPlayerInside;
+    }
+    public bool GetIsStarted()
+    {
+        return isStarted;
     }
 }

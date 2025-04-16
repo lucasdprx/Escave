@@ -27,6 +27,10 @@ public class CollectiblesSave : MonoBehaviour, IDataPersistence
             {
                 _collectObjet.gameObject.SetActive(false);
             }
+            else if( _collectObjet.collectibleData.HasBeenCollected == false)
+            {
+                _collectObjet.gameObject.SetActive(true);
+            }
         }
     }
 

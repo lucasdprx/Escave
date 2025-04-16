@@ -133,7 +133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collectiblesSave: {fileID: 0}
   icon: {fileID: 21300000, guid: d3314fa160945f742a5b16cc28d3f3c2, type: 3}
-  pickupEffect: {fileID: 0}
+  pickupEffect: {fileID: 137384935975206570, guid: 1a7f8d6e7b5e4534384b571b8033904f, type: 3}
 --- !u!212 &7524789550919486330
 SpriteRenderer:
   m_ObjectHideFlags: 0

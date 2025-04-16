@@ -1,5 +1,4 @@
 using System.Collections;
-using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,7 +12,7 @@ public class GrapplingHook : MonoBehaviour
 
     [SerializeField] private GameObject _grapplingHookProjectile;
 
-    public bool _isGrappled = false;
+    public bool _isGrappled;
     private bool _canShoot = true;
 
     [SerializeField] private Transform firePoint;
@@ -25,6 +24,7 @@ public class GrapplingHook : MonoBehaviour
 
     private Coroutine _detachCoroutine;
     private AudioManager _audioManager;
+    private PlayerMovement _playerMovement;
     
     [SerializeField] private float _climbSpeed = 2f;
 
@@ -32,16 +32,19 @@ public class GrapplingHook : MonoBehaviour
     {
         _lineRenderer = GetComponent<LineRenderer>();
         _springJoint = transform.parent.GetComponent<SpringJoint2D>();
-
+        _playerMovement = GetComponentInParent<PlayerMovement>();
         _lineRenderer.enabled = false;
         _springJoint.enabled = false;
 
+        GrapplerProjectile.OnProjectileReturned += OnProjectileReturned;
+        GrapplerProjectile.OnDetachGrapplingHook += DetachGrapplingHook;
+        GrapplerProjectile.OnSurfaceTouched += AttachToPoint;
         _audioManager = AudioManager.Instance;
     }
 
     private void Update()
     {
-        if (_currentProjectile != null)
+        if (_currentProjectile)
         {
             _lineRenderer.SetPosition(0, transform.position);
             _lineRenderer.SetPosition(1, _currentProjectile.transform.position);
@@ -50,7 +53,7 @@ public class GrapplingHook : MonoBehaviour
         //Climb/ Descent
         if (_isGrappled)
         {
-            float vertical = transform.parent.GetComponent<PlayerMovement>().GetVerticalInput();
+            float vertical = _playerMovement.GetVerticalInput();
 
             if (Mathf.Abs(vertical) > 0.01f)
             {
@@ -60,7 +63,7 @@ public class GrapplingHook : MonoBehaviour
 
                 _springJoint.distance = newDistance;
 
-                if (_currentProjectile == null)
+                if (!_currentProjectile)
                 {
                     _lineRenderer.SetPosition(0, transform.position);
                     _lineRenderer.SetPosition(1, _springJoint.connectedAnchor);
@@ -76,7 +79,8 @@ public class GrapplingHook : MonoBehaviour
         _lineRenderer.enabled = false;
         _springJoint.enabled = false;
         _isGrappled = false;
-        GetComponentInParent<PlayerMovement>()?.OnDetachedFromHook();
+        _playerMovement.SetIsGrappling(false);
+        _playerMovement.OnDetachedFromHook();
         _canShoot = true;
     }
 
@@ -90,12 +94,11 @@ public class GrapplingHook : MonoBehaviour
         if (!_isGrappled && _canShoot)
         {
             _audioManager.PlaySound(AudioType.grapplingHookThrow);
-            var playerMovement = transform.parent.GetComponent<PlayerMovement>();
-            Vector2 shootDir = playerMovement.DirectionToVector2(playerMovement.LastDirection);
+            Vector2 shootDir = _playerMovement.DirectionToVector2(_playerMovement.LastDirection);
 
             _currentProjectile = Instantiate(_grapplingHookProjectile, firePoint.position, Quaternion.identity);
             _projectileScript = _currentProjectile.GetComponent<GrapplerProjectile>();
-            _projectileScript.Initialize(shootDir, hookSpeed, maxDistance, this);
+            _projectileScript.Initialize(shootDir, hookSpeed, maxDistance, transform, hookTime);
 
             _lineRenderer.enabled = true;
             _canShoot = false;
@@ -114,15 +117,18 @@ public class GrapplingHook : MonoBehaviour
 
     }
 
-    public void AttachToPoint(Vector2 point)
+    private void AttachToPoint()
     {
-        _target.position = point;
+        if (!_target) return;
+        
+        _target.position = _projectileScript.transform.position;
 
-        _springJoint.connectedAnchor = point;
-        _springJoint.distance = Vector2.Distance(transform.position, point);
+        _springJoint.connectedAnchor = _target.position;
+        _springJoint.distance = Vector2.Distance(transform.position, _target.position);
         _springJoint.enabled = true;
 
         _isGrappled = true;
+        _playerMovement.SetIsGrappling(true);
         _audioManager.PlaySound(AudioType.grapplingHookHit);
 
 
@@ -140,7 +146,7 @@ public class GrapplingHook : MonoBehaviour
         _detachCoroutine = null;
     }
 
-    public void DetachGrapplingHook()
+    private void DetachGrapplingHook()
     {
         if (_detachCoroutine != null)
         {
@@ -150,10 +156,11 @@ public class GrapplingHook : MonoBehaviour
 
         _springJoint.enabled = false;
         _isGrappled = false;
+        _playerMovement.SetIsGrappling(false);
 
-        GetComponentInParent<PlayerMovement>()?.OnDetachedFromHook();
+        _playerMovement.OnDetachedFromHook();
 
-        if (_projectileScript != null)
+        if (_projectileScript)
         {
             _projectileScript.StartReturn();
         }
@@ -162,9 +169,11 @@ public class GrapplingHook : MonoBehaviour
     }
 
 
-    public void OnProjectileReturned()
+    private void OnProjectileReturned()
     {
-        _lineRenderer.enabled = false;
+        if (_lineRenderer)
+            _lineRenderer.enabled = false;
+        
         _currentProjectile = null;
         _projectileScript = null;
         _canShoot = true;

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -5,9 +6,10 @@ using UnityEngine.SceneManagement;
 public class PauseMenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject _settingsMenuPanel;
-    [SerializeField] private PlayerDeath _playerDeath;
     public bool _isGamePaused;
-    private bool _isSettingsMenuOpen = false;
+    private bool _isSettingsMenuOpen;
+    
+    public static event Action OnRestartGame;
     
     public void ShowPausePanel(InputAction.CallbackContext context)
     {
@@ -25,9 +27,7 @@ public class PauseMenuManager : MonoBehaviour
     public void RestartGame()
     {
         PauseGame();
-        _playerDeath._isRestarting = true;
-        _playerDeath.PlayerDie();
-        _playerDeath._isRestarting = false;
+        OnRestartGame?.Invoke();
     }
 
     public void ShowSettings()

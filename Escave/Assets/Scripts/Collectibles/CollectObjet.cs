@@ -23,36 +23,32 @@ public class CollectObjet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collectibleData.HasBeenCollected)
+        if (collectibleData.HasBeenCollected || !collision.CompareTag("Player"))
         {
             return;
         }
-
-        Debug.Log("Collision with " + collision.gameObject.name);
-
-        if (collision.CompareTag("Player"))
+        
+        _audioManager.PlaySound(AudioType.collectibleGet);
+        collectiblesSave.OnCollectibleCollected();
+        collectibleData.PickUp();
+        ParticleSystem effect = PlayPickupEffect(transform.position);
+        if (effect)
         {
-            _audioManager.PlaySound(AudioType.collectibleGet);
-            collectiblesSave.OnCollectibleCollected();
-            collectibleData.PickUp();
-            ParticleSystem effect = PlayPickupEffect(transform.position);
             StartCoroutine(DestroyCollectible(effect));
+        }
+        else
+        {
+            gameObject.SetActive(false);
         }
     }
 
     private IEnumerator DestroyCollectible(ParticleSystem effect)
     {
-        if (effect != null)
-        {
-            while (effect.isPlaying)
-            {
-                yield return null;
-            }
-        }
-        Destroy(gameObject);
+        yield return new WaitForSeconds(effect.totalTime);
+        gameObject.SetActive(false);
     }
-    
-    public ParticleSystem PlayPickupEffect(Vector3 position)
+
+    private ParticleSystem PlayPickupEffect(Vector3 position)
     {
         if (pickupEffect != null)
         {
@@ -61,10 +57,8 @@ public class CollectObjet : MonoBehaviour
             Destroy(effect.gameObject, effect.main.duration);
             return effect;
         }
-        else
-        {
-            Debug.LogWarning("pickupEffect non assign� !");
-            return null;
-        }
+        
+        Debug.LogWarning("pickupEffect non assign� !");
+        return null;
     }
 }

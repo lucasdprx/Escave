@@ -5,8 +5,6 @@ public class RebindSaveLoad : MonoBehaviour
 {
     public InputActionAsset actions;
 
-    public GameObject canvas;
-
 
     public void ResetBindings()
     {
