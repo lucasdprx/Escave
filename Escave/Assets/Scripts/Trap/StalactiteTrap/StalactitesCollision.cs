@@ -4,6 +4,7 @@ using UnityEngine;
 public class StalactitesCollision : MonoBehaviour
 {
     [SerializeField] private Animator stalactitesRespawnAnimation;
+    [SerializeField] private LayerMask groundLayer;
 
     private Rigidbody2D rb;
     private PlayerDeath playerDeathScript;
@@ -35,7 +36,8 @@ public class StalactitesCollision : MonoBehaviour
             StartCoroutine(ResetSpike());
         }
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") ||
-            collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Trap"))
+            collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Trap")
+            || collision.gameObject.CompareTag("IgnoreGrappling"))
         {
             StartCoroutine(ResetSpike());
         }
