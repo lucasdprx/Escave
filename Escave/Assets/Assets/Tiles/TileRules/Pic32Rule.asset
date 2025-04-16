@@ -13,15 +13,13 @@ MonoBehaviour:
   m_Name: Pic32Rule
   m_EditorClassIdentifier: 
   m_DefaultSprite: {fileID: 0}
-  m_DefaultGameObject: {fileID: 0}
+  m_DefaultGameObject: {fileID: 8107012357529082124, guid: f54b2a1d10a21db4cb1df780da8a9a8d, type: 3}
   m_DefaultColliderType: 1
   m_TilingRules:
   - m_Id: 0
     m_Sprites:
     - {fileID: 21300000, guid: b163096d7ecf388428b2b49f21af2039, type: 3}
-    - {fileID: 21300000, guid: bc6aca8e479683b4799dd6a87a4e47cd, type: 3}
-    - {fileID: 21300000, guid: 5e79f9743fac17d4eb688ca978445002, type: 3}
-    m_GameObject: {fileID: 0}
+    m_GameObject: {fileID: 8107012357529082124, guid: f54b2a1d10a21db4cb1df780da8a9a8d, type: 3}
     m_MinAnimationSpeed: 1
     m_MaxAnimationSpeed: 1
     m_PerlinScale: 0.5
