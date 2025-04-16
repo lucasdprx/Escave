@@ -12,27 +12,7 @@ public class PlayerSFX : MonoBehaviour
         _audioManager = AudioManager.Instance;
     }
 
-    #region Simple SFX (no routines)
-    
-    public void PlayDeathSFX()           { _audioManager.PlaySound(AudioType.death);           }
-    public void PlayRespawnSFX()         { _audioManager.PlaySound(AudioType.respawn);         }
-    public void PlayCheckpointReachSFX() { _audioManager.PlaySound(AudioType.checkpointReach); }
-    public void PlayEnduranceRunOutSFX() { _audioManager.PlaySound(AudioType.enduranceRunOut); }
-    public void PlayWallClingSFX()
-    {
-        //!\\ UNIMPLEMENTED
-        //_audioManager.PlaySound(AudioType.wallCling);
-    }
-
-    public void PlayWallJumpSFX()
-    {
-        //!\\ UNIMPLEMENTED
-        //_audioManager.PlaySound(AudioType.wallJump);
-    }
-
-    public void PlayJumpLandSFX()      { _audioManager.PlaySound(AudioType.jumpLand);      }
-    public void PlayHeavyJumpLandSFX() { _audioManager.PlaySound(AudioType.jumpHeavyLand); }
-    #endregion
+    public void PlaySFX(AudioType type) { _audioManager.PlaySound(type); } //For simple SFX without coroutines
 
     #region Start/Stop Routines
     public void PlayWalkSFX()
