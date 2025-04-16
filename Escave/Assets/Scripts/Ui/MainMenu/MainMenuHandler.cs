@@ -18,6 +18,7 @@ public class MainMenuHandler : MonoBehaviour
 
     public void PlayGame()
     {
+        DataPersistenceManager.instance.SaveGame();
         SceneManager.LoadScene("Game");
         _audioManager.PlaySound(AudioType.levelStart);
     }
