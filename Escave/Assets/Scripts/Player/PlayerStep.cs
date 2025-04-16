@@ -1,19 +1,13 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
-public class PlayerSFX : MonoBehaviour
+public class PlayerStep : MonoBehaviour
 {
     [SerializeField] private float _stepTime;
     private bool _isWalking;
     private void Start()
     {
         PlayerMovement.OnStepSound += PlayWalkSFX;
-    }
-
-    public static void PlaySFX(AudioType type)
-    {
-        AudioManager.Instance.PlaySound(type);
     }
 
     #region Start/Stop Routines

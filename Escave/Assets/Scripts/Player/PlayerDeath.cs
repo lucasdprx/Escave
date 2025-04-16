@@ -50,7 +50,7 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
 
     public void PlayerDie()
     {
-        PlayerSFX.PlaySFX(AudioType.death);
+        AudioManager.Instance.PlaySound(AudioType.death);
 
         if (currentCheckpoint == null)
         {
@@ -68,7 +68,7 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
         _grapplingHook.DestroyProjectile();
         GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
         transform.position = currentCheckpoint.transform.position;
-        PlayerSFX.PlaySFX(AudioType.respawn);
+        AudioManager.Instance.PlaySound(AudioType.respawn);
         
         OnDeath2.Invoke();
     }
@@ -84,7 +84,7 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
         {
             _collectiblesSave.SaveData(ref DataPersistenceManager.instance.gameData);
             currentCheckpoint = newCheckpoint;
-            PlayerSFX.PlaySFX(AudioType.checkpointReach);
+            AudioManager.Instance.PlaySound(AudioType.checkpointReach);
         }
         else
         {

@@ -194,7 +194,7 @@ public class PlayerMovement : MonoBehaviour
         if (!_isGrounded) return;
         
         _hasLanded = true;
-        PlayerSFX.PlaySFX(_inHeavyFall ? AudioType.jumpHeavyLand : AudioType.jumpLand);
+        AudioManager.Instance.PlaySound(_inHeavyFall ? AudioType.jumpHeavyLand : AudioType.jumpLand);
         _inHeavyFall = false;
     }
 
