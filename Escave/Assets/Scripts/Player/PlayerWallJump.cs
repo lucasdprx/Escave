@@ -89,7 +89,7 @@ public class PlayerWallJump : MonoBehaviour
                 _isWallClimbingRight = false;
                 _canWallClimb = false;
                 _rb.gravityScale = 4;
-                _playerSFX.PlayEnduranceRunOutSFX();
+                _playerSFX.PlaySFX(AudioType.enduranceRunOut);
                 _isInputDone = false;
             }
         }
@@ -168,7 +168,6 @@ public class PlayerWallJump : MonoBehaviour
             _rb.linearVelocity = _wallJumpForce;
             SetJumpingValues();
         }
-        _playerSFX.PlayWallJumpSFX();
     }
 
     public void Climb(InputAction.CallbackContext _ctx)
