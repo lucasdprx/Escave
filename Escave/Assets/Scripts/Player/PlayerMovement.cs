@@ -81,6 +81,7 @@ public class PlayerMovement : MonoBehaviour
         DownRight
     }
 
+    [SerializeField] private Animator _animator;
 
     private void Awake()
     {
@@ -126,8 +127,25 @@ public class PlayerMovement : MonoBehaviour
             _inputActionTime -= Time.deltaTime;
         }
 
+        //Animation Parameters Update
+        //_animator.SetFloat("Speed", Mathf.Abs(_moveInput.x));
+        //_animator.SetBool("IsJumping", !_isGrounded && !_playerWallJump._isWallClimbingLeft && !_playerWallJump._isWallClimbingRight && !_grapplingHook._isGrappled);
+        //_animator.SetBool("IsClimbing", _playerWallJump._isWallClimbingLeft || _playerWallJump._isWallClimbingRight);
+        //_animator.SetBool("IsGrappling", _grapplingHook._isGrappled);
+
+        _animator.SetFloat("Speed", Mathf.Abs(_moveInput.x));
+        _animator.SetBool("IsJumping", !_isGrounded && !_playerWallJump._isWallClimbingLeft && !_playerWallJump._isWallClimbingRight && !_grapplingHook._isGrappled);
+        _animator.SetBool("IsClimbing", _playerWallJump._isWallClimbingLeft || _playerWallJump._isWallClimbingRight);
+        if (_animator.GetBool("IsClimbing"))
+        {
+            _animator.SetFloat("ClimbSpeed", Mathf.Abs(_rb.linearVelocity.y));
+        }
+        _animator.SetBool("IsGrappling", _grapplingHook._isGrappled);
+
+
+
         HandleSpriteFlip();
-        HandleRunAnimation();
+        //HandleRunAnimation();
         //Debug.DrawRay(transform.position, DirectionToVector2(LastDirection), Color.red);
     }
 
@@ -316,23 +334,23 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void HandleRunAnimation()
-    {
-        if (!_isGrounded || Mathf.Abs(_moveInput.x) < 0.01f)
-        {
-            _currentFrame = 0;
-            _spriteRenderer.sprite = runSprites[_currentFrame]; // idle = frame 0
-            return;
-        }
+    //private void HandleRunAnimation()
+    //{
+    //    if (!_isGrounded || Mathf.Abs(_moveInput.x) < 0.01f)
+    //    {
+    //        _currentFrame = 0;
+    //        _spriteRenderer.sprite = runSprites[_currentFrame]; // idle = frame 0
+    //        return;
+    //    }
 
-        _animationTimer += Time.deltaTime;
-        if (_animationTimer >= _animationSpeed)
-        {
-            _animationTimer = 0f;
-            _currentFrame = (_currentFrame + 1) % runSprites.Length;
-            _spriteRenderer.sprite = runSprites[_currentFrame];
-        }
-    }
+    //    _animationTimer += Time.deltaTime;
+    //    if (_animationTimer >= _animationSpeed)
+    //    {
+    //        _animationTimer = 0f;
+    //        _currentFrame = (_currentFrame + 1) % runSprites.Length;
+    //        _spriteRenderer.sprite = runSprites[_currentFrame];
+    //    }
+    //}
 
     public void OnDetachedFromHook()
     {
@@ -341,4 +359,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public float GetVerticalInput() => _verticalInput;
+
+    
+
 }
