@@ -11,7 +11,7 @@ public class PlayerWallJump : MonoBehaviour
     [SerializeField] private Transform _wallCheckRight;
     [SerializeField] private Transform _wallCheckLeft;
     [SerializeField] private Transform _groundCheck;
-    private float _checkRadius = 0.2f;
+    private const float _checkRadius = 0.2f;
 
     [Header("OnJump")]
     [SerializeField] private Vector2 _wallJumpForce;
@@ -28,8 +28,6 @@ public class PlayerWallJump : MonoBehaviour
     
     private Rigidbody2D _rb;
     private Vector2 _moveInput;
-
-    private PlayerSFX _playerSFX;
 
     #endregion
 
@@ -57,7 +55,6 @@ public class PlayerWallJump : MonoBehaviour
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _playerSFX = GetComponent<PlayerSFX>();
     }
 
     private void Update()
@@ -89,7 +86,7 @@ public class PlayerWallJump : MonoBehaviour
                 _isWallClimbingRight = false;
                 _canWallClimb = false;
                 _rb.gravityScale = 4;
-                _playerSFX.PlaySFX(AudioType.enduranceRunOut);
+                PlayerSFX.PlaySFX(AudioType.enduranceRunOut);
                 _isInputDone = false;
             }
         }
@@ -224,29 +221,27 @@ public class PlayerWallJump : MonoBehaviour
         if (_moveInput.y > 0)
         {
             _rb.linearVelocity = new Vector2(0f, _wallClimbSpeed);
-            return;
-        } else if (_moveInput.y < 0)
+        } 
+        else if (_moveInput.y < 0)
         {
             _rb.linearVelocity = new Vector2(0f, -_wallClimbSpeed);
-            return;
         }
     }
     
     #endregion
     
     #region Bool Functions
-
-    public bool IsWallRight()
+    private bool IsWallRight()
     {
         return Physics2D.OverlapCircle(_wallCheckRight.position, _checkRadius, _wallLayer);
     }
 
-    public bool IsWallLeft()
+    private bool IsWallLeft()
     {
         return Physics2D.OverlapCircle(_wallCheckLeft.position, _checkRadius, _wallLayer);
     }
 
-    public bool IsGrounded()
+    private bool IsGrounded()
     {
         return Physics2D.OverlapCircle(_groundCheck.position, _checkRadius, _wallLayer);
     }

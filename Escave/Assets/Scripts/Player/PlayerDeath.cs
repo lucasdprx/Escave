@@ -17,15 +17,11 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
     public bool _isRestarting;
     
     [SerializeField] private ParticleSystem _deathParticles;
-
-    private PlayerSFX _playerSFX;
-    
     [SerializeField] private GrapplingHook _grapplingHook;
     [SerializeField] private CollectiblesSave _collectiblesSave;
     
     private void Start()
     {
-        _playerSFX = GetComponent<PlayerSFX>();
         PauseMenuManager.OnRestartGame += PlayerDie;
     }
 
@@ -54,7 +50,7 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
 
     public void PlayerDie()
     {
-        _playerSFX.PlaySFX(AudioType.death);
+        PlayerSFX.PlaySFX(AudioType.death);
 
         if (currentCheckpoint == null)
         {
@@ -72,7 +68,7 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
         _grapplingHook.DestroyProjectile();
         GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
         transform.position = currentCheckpoint.transform.position;
-        _playerSFX.PlaySFX(AudioType.respawn);
+        PlayerSFX.PlaySFX(AudioType.respawn);
         
         OnDeath2.Invoke();
     }
@@ -88,7 +84,7 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
         {
             _collectiblesSave.SaveData(ref DataPersistenceManager.instance.gameData);
             currentCheckpoint = newCheckpoint;
-            _playerSFX.PlaySFX(AudioType.checkpointReach);
+            PlayerSFX.PlaySFX(AudioType.checkpointReach);
         }
         else
         {
