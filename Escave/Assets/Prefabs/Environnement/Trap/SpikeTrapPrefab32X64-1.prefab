@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1158402020276680127}
   - component: {fileID: 6587423906623321531}
   m_Layer: 0
-  m_Name: SpikeTrapPrefab
+  m_Name: SpikeTrapPrefab32X64-1
   m_TagString: Trap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cd3933fcff0bc044bbbb2cdccfc42c9e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -139,8 +139,8 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.28866667}
-    oldSize: {x: 1, y: 1}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 2}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -148,9 +148,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.0006201565, y: 0.51395655}
-      - {x: -0.4204644, y: -0.2778644}
-      - {x: 0.40177834, y: -0.2778644}
+    - - {x: 0.36127687, y: -0.5828651}
+      - {x: 0.30906105, y: -0.22916874}
+      - {x: 0.19949621, y: -0.28077763}
+      - {x: 0.10385269, y: 0.017647266}
+      - {x: -0.016709894, y: 0.73852456}
+      - {x: -0.42562896, y: -0.9962797}
+      - {x: -0.43218222, y: -0.9995564}
+      - {x: 0.40900534, y: -1.002351}
   m_UseDelaunayMesh: 0
 --- !u!50 &6587423906623321531
 Rigidbody2D:
