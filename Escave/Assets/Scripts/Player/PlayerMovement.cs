@@ -201,8 +201,8 @@ public class PlayerMovement : MonoBehaviour
         {
             _hasLanded = true;
 
-            if (_inHeavyFall) _playerSFX.PlayHeavyJumpLandSFX();
-            else              _playerSFX.PlayJumpLandSFX();
+            if (_inHeavyFall) _playerSFX.PlaySFX(AudioType.jumpHeavyLand);
+            else              _playerSFX.PlaySFX(AudioType.jumpLand);
 
             _inHeavyFall = false;
         }
