@@ -154,7 +154,8 @@ public class GrapplingHook : MonoBehaviour
             _detachCoroutine = null;
         }
 
-        _springJoint.enabled = false;
+        if (_springJoint)
+            _springJoint.enabled = false;
         _isGrappled = false;
         _playerMovement.SetIsGrappling(false);
 
