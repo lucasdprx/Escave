@@ -18,6 +18,8 @@ public class SandTrapCollision : MonoBehaviour
     private float initGravityScale;
     private float initMoveSpeed;
     private float initJumpForce;
+
+
     private void Awake()
     {
         trapCollider = GetComponent<Collider2D>();
@@ -76,11 +78,13 @@ public class SandTrapCollision : MonoBehaviour
             trapCollider.isTrigger = true;
             isSinking = false;
         }
+
+        
     }
     private void OnTriggerStay2D(Collider2D other)
     {
         if (!other.gameObject.CompareTag("Player")) return;
-        
+
         playerRigidbody.gravityScale = gravityScale;
         playerMovement.moveSpeed = slowScale;
         playerMovement.jumpForce = 0;
