@@ -28,7 +28,8 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
     public void SaveData(ref GameData _gameData)
     {
         _gameData.deathCount = deathCounter;
-        _gameData.playerPos = currentCheckpoint.transform.position;
+        if (currentCheckpoint)
+            _gameData.playerPos = currentCheckpoint.transform.position;
     }
     
     public void LoadData(GameData _gameData)

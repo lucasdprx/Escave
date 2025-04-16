@@ -7,6 +7,9 @@ public class SwapArea : MonoBehaviour
     [SerializeField] private Direction _switchAreaDirection;
     [SerializeField] private GameObject _downLeftCheckpoint;
     [SerializeField] private GameObject _upRightCheckpoint;
+    [SerializeField] private GameObject _levelDownLeft;
+    [SerializeField] private GameObject _levelUpRight;
+    private GameObject _levelToUnload;
     
     private PlayerDeath _playerDeath;
     private AudioManager _audioManager;
@@ -31,6 +34,8 @@ public class SwapArea : MonoBehaviour
     private Vector3 _newCameraPosition = Vector3.zero;
     private Camera _camera;
     private Vector2 _playerDir;
+    
+    [SerializeField] private SaveLevel _saveLevel;
 
     private void Start()
     {
@@ -85,14 +90,38 @@ public class SwapArea : MonoBehaviour
         {
             case Direction.Horizontal :
                 _direction.x = Mathf.Sign(-_playerPos.x);
-                if(_direction.x < 0)  _playerDeath.SetCheckpoint(_downLeftCheckpoint);
-                if(_direction.x > 0) _playerDeath.SetCheckpoint(_upRightCheckpoint);
+                if (_direction.x < 0)
+                {
+                    _playerDeath.SetCheckpoint(_downLeftCheckpoint);
+                    _levelToUnload = _levelUpRight;
+                    _levelDownLeft.SetActive(true);
+                    _saveLevel.SetCurrentLevel(_levelDownLeft);
+                }
+                else if (_direction.x > 0)
+                {
+                    _playerDeath.SetCheckpoint(_upRightCheckpoint);
+                    _levelUpRight.SetActive(true);
+                    _levelToUnload = _levelDownLeft;
+                    _saveLevel.SetCurrentLevel(_levelUpRight);
+                }
                 _targetCameraPosition.position += new Vector3(_direction.x * _cameraScale.x,0,0);
                 break;
             case Direction.Vertical :
                 _direction.y = Mathf.Sign(-_playerPos.y);
-                if(_direction.y < 0)  _playerDeath.SetCheckpoint(_downLeftCheckpoint);
-                if(_direction.y > 0) _playerDeath.SetCheckpoint(_upRightCheckpoint);
+                if (_direction.y < 0)
+                {
+                    _playerDeath.SetCheckpoint(_downLeftCheckpoint);
+                    _levelToUnload = _levelUpRight;
+                    _levelDownLeft.SetActive(true);
+                    _saveLevel.SetCurrentLevel(_levelDownLeft);
+                }
+                else if (_direction.y > 0)
+                {
+                    _playerDeath.SetCheckpoint(_upRightCheckpoint);
+                    _levelUpRight.SetActive(true);
+                    _saveLevel.SetCurrentLevel(_levelUpRight);
+                    _levelToUnload = _levelDownLeft;
+                }
                 _targetCameraPosition.position += new Vector3(0,_direction.y * _cameraScale.y,0);
                 break;
         }
@@ -110,6 +139,7 @@ public class SwapArea : MonoBehaviour
             _camera.transform.position = _newCameraPosition;
             yield return null;
         }
+        _levelToUnload.SetActive(false);
         //_playerInput.ActivateInput();
         _actualCameraTransitionTime = 0;
         StopCoroutine(MoveCameraCoroutine());

@@ -23,11 +23,11 @@ public class CollectiblesSave : MonoBehaviour, IDataPersistence
 
         foreach (CollectObjet _collectObjet in collectibles)
         {
-            if (_collectObjet.collectibleData.HasBeenCollected == true)
+            if (_collectObjet.collectibleData.HasBeenCollected)
             {
                 _collectObjet.gameObject.SetActive(false);
             }
-            else if( _collectObjet.collectibleData.HasBeenCollected == false)
+            else if(!_collectObjet.collectibleData.HasBeenCollected)
             {
                 _collectObjet.gameObject.SetActive(true);
             }
