@@ -48,8 +48,6 @@ public class PlayerMovement : MonoBehaviour
         DownRight
     }
 
-    [SerializeField] private Animator _animator;
-
     public static event Action OnStepSound;
     public static bool _isGrounded;
     
@@ -105,20 +103,6 @@ public class PlayerMovement : MonoBehaviour
         {
             _inputActionTime -= Time.deltaTime;
         }
-        if (!_animator) return;
-        
-        _animator.SetFloat("Speed", Mathf.Abs(_playerInputHandler.MoveInput.x));
-       // _animator.SetBool("IsJumping", !_isGrounded && !_playerWallJump._isWallClimbingLeft && !_playerWallJump._isWallClimbingRight && !_grapplingHook._isGrappled);
-
-        _animator.SetBool("IsClimbing", _playerWallJump._isWallClimbingLeft || _playerWallJump._isWallClimbingRight);
-
-        if (_animator.GetBool("IsClimbing"))
-        {
-            float climbSpeed = Mathf.Abs(_rb.linearVelocity.y);
-            _animator.SetFloat("ClimbSpeed", climbSpeed);
-        }
-
-        //_animator.SetBool("IsGrappling", _grapplingHook._isGrappled);
     }
 
     private void FixedUpdate()
@@ -305,5 +289,9 @@ public class PlayerMovement : MonoBehaviour
         _playerInputHandler.OnJumpPressed -= OnJumpPressed;
         _playerInputHandler.OnJumpReleased -= OnJumpRelease;
         _playerInputHandler.OnMove -= OnMove;
+    }
+    public bool IsWallClimb()
+    {
+        return _playerWallJump._isWallClimbingLeft || _playerWallJump._isWallClimbingRight;
     }
 }

@@ -171,6 +171,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6932263571252307126}
   - component: {fileID: 2478794345925778205}
+  - component: {fileID: 5415488315808768288}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
@@ -249,6 +250,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &5415488315808768288
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3816604139127367419}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 74e888b8fcd7ba14fbe8304bb4ea6e7f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4594134647436753598
 GameObject:
   m_ObjectHideFlags: 0
@@ -728,6 +751,7 @@ MonoBehaviour:
   _onJumpWhileGrappling:
     m_PersistentCalls:
       m_Calls: []
+  _animator: {fileID: 5415488315808768288}
 --- !u!114 &2843669229510685384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -870,6 +894,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: d9b2f925cb26fd74aa4d3c958189114d, type: 3}
   - {fileID: 21300000, guid: 8d5c351cd5ff03c4eba8259a3b603a38, type: 3}
   _animationSpeed: 0.1
+  _animator: {fileID: 5415488315808768288}
 --- !u!114 &1309718639194689868
 MonoBehaviour:
   m_ObjectHideFlags: 0
