@@ -26,6 +26,8 @@ public class CheckpointScript : MonoBehaviour
     {
         if (!_light.activeSelf) return;
         
+        if (other.gameObject.layer != LayerMask.NameToLayer("Player")) return;
+        
         other.GetComponent<PlayerDeath>().SetCheckpoint(gameObject);
         _animator.Play("Activation");
         _animator.SetBool("Activated", true);
