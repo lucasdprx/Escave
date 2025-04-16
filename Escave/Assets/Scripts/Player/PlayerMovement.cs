@@ -51,6 +51,8 @@ public class PlayerMovement : MonoBehaviour
     public static event Action OnStepSound;
     public static bool _isGrounded;
     
+    [SerializeField] private Transform[] _switchTransformsInRotation;
+    private Vector3[] _initialLocalPositions;
     private PlayerWallJump _playerWallJump;
     private bool _isOnOneWayPlatform;
     private bool _isGrappling;
@@ -69,6 +71,12 @@ public class PlayerMovement : MonoBehaviour
         baseJumpForce = jumpForce;
 
         _boxSize = new Vector2(1.2f, 0.3f);
+        _initialLocalPositions = new Vector3[_switchTransformsInRotation.Length];
+
+        for (int i = 0; i < _switchTransformsInRotation.Length; i++)
+        {
+            _initialLocalPositions[i] = _switchTransformsInRotation[i].localPosition;
+        }
         
         _playerInputHandler.OnJumpPressed += OnJumpPressed;
         _playerInputHandler.OnJumpReleased += OnJumpRelease;
@@ -116,7 +124,7 @@ public class PlayerMovement : MonoBehaviour
     private void HandleGrapplingMovement()
     {
         if (!_isGrappling) return;
-
+        
         Vector2 force = new Vector2(_playerInputHandler.MoveInput.x, 0f) * moveSpeed;
         _rb.AddForce(force, ForceMode2D.Force);
     }
@@ -270,7 +278,7 @@ public class PlayerMovement : MonoBehaviour
             default: return Vector2.right;
         }
     }
-
+    
     public void OnDetachedFromHook()
     {
         _justDetachedFromHook = true;

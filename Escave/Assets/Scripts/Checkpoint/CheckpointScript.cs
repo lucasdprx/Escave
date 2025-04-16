@@ -9,7 +9,6 @@ public class CheckpointScript : MonoBehaviour
     private void Start()
     {
         _animator = GetComponent<Animator>();
-        //_light = GetComponentInChildren<Light2D>();
         _light.SetActive(false);
     }
 
