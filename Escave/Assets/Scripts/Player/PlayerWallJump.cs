@@ -86,7 +86,7 @@ public class PlayerWallJump : MonoBehaviour
                 _isWallClimbingRight = false;
                 _canWallClimb = false;
                 _rb.gravityScale = 4;
-                PlayerSFX.PlaySFX(AudioType.enduranceRunOut);
+                AudioManager.Instance.PlaySound(AudioType.enduranceRunOut);
                 _isInputDone = false;
             }
         }
