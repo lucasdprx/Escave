@@ -32,6 +32,9 @@ public class PlayerWallJump : MonoBehaviour
     private Vector2 _moveInput;
 
     private PlayerSFX _playerSFX;
+    [SerializeField] private GameObject _staminaEffect;
+    private bool _isStaminaActive = false;
+
 
     #endregion
 
@@ -66,7 +69,17 @@ public class PlayerWallJump : MonoBehaviour
     {
         if ((_isWallClimbingLeft || _isWallClimbingRight) && !IsGrounded())
         {
+            if (!_isStaminaActive)
+            {
+                _isStaminaActive = true;
+                _staminaEffect.SetActive(true);
+            }
+
             _wallStayTimer += Time.deltaTime;
+
+            // Animation speed augmente de x1 à x5 selon _wallStayTimer
+            _staminaEffect.GetComponent<Animator>().speed = Mathf.Lerp(1f, 2.5f, _wallStayTimer / _wallStayTime);
+
             if (_wallStayTimer >= _wallStayTime)
             {
                 _isWallClimbingLeft = false;
@@ -77,6 +90,8 @@ public class PlayerWallJump : MonoBehaviour
             }
         }
 
+
+
         if (!_isWallClimbing && !_isGravitySet)
         {
             _isGravitySet = true;
@@ -84,15 +99,23 @@ public class PlayerWallJump : MonoBehaviour
             _isWallClimbingRight = false;
             _rb.gravityScale = 4;
         }
-        
+
         if (IsGrounded())
         {
             _canWallClimb = true;
             _isWallClimbing = false;
             _wallStayTimer = 0;
+
+            if (_isStaminaActive)
+            {
+                _staminaEffect.GetComponent<Animator>().speed = 1f;
+                _staminaEffect.SetActive(false);
+                _isStaminaActive = false;
+            }
         }
+
     }
-    
+
     private void FixedUpdate()
     {
         if(IsGrounded()) return;

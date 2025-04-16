@@ -43,15 +43,10 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector2 _boxSize;
 
-    [Header("Sprite Animation")]
-    [SerializeField] private Sprite[] runSprites; // 0 à 6
-
-    private int _currentFrame;
-    private float _animationTimer;
-    [SerializeField] private float _animationSpeed = 0.1f;
-
     [SerializeField] private GameObject _lightHelmet;
-    
+    [SerializeField] private Transform[] _switchTransformsInRotation;
+    private Vector3[] _initialLocalPositions;
+
     [Header("Input Buffer")]
     [SerializeField] private float _inputBufferTime = 0.15f;
 
@@ -96,6 +91,13 @@ public class PlayerMovement : MonoBehaviour
         baseJumpForce = jumpForce;
 
         _boxSize = new Vector2(1.2f, 0.3f);
+
+        _initialLocalPositions = new Vector3[_switchTransformsInRotation.Length];
+
+        for (int i = 0; i < _switchTransformsInRotation.Length; i++)
+        {
+            _initialLocalPositions[i] = _switchTransformsInRotation[i].localPosition;
+        }
     }
 
     public void Reset()
@@ -143,7 +145,6 @@ public class PlayerMovement : MonoBehaviour
 
 
         HandleSpriteFlip();
-        //HandleRunAnimation();
         //Debug.DrawRay(transform.position, DirectionToVector2(LastDirection), Color.red);
     }
 
@@ -323,32 +324,35 @@ public class PlayerMovement : MonoBehaviour
         if (_moveInput.x > 0 && _spriteRenderer.flipX)
         {
             _spriteRenderer.flipX = false;
+
             _lightHelmet.transform.rotation = Quaternion.Euler(0, 0, -90);
+
+            //flip objects with player
+            for (int i = 0; i < _switchTransformsInRotation.Length; i++)
+            {
+                var originalPos = _initialLocalPositions[i];
+
+                _switchTransformsInRotation[i].localPosition = originalPos;
+                _switchTransformsInRotation[i].localRotation = Quaternion.Euler(0, 0, _switchTransformsInRotation[i].localPosition.z);
+            }
         }
         else if (_moveInput.x < 0 && !_spriteRenderer.flipX)
         {
             _spriteRenderer.flipX = true;
+
             _lightHelmet.transform.rotation = Quaternion.Euler(0, -180, -90);
+            
+            //flip objects with player
+            for (int i = 0; i < _switchTransformsInRotation.Length; i++)
+            {
+                var originalPos = _initialLocalPositions[i];
+
+                _switchTransformsInRotation[i].localPosition = new Vector3(-originalPos.x, originalPos.y, originalPos.z);
+                _switchTransformsInRotation[i].localRotation = Quaternion.Euler(0, 180, _switchTransformsInRotation[i].localPosition.z);
+            }
         }
     }
 
-    //private void HandleRunAnimation()
-    //{
-    //    if (!_isGrounded || Mathf.Abs(_moveInput.x) < 0.01f)
-    //    {
-    //        _currentFrame = 0;
-    //        _spriteRenderer.sprite = runSprites[_currentFrame]; // idle = frame 0
-    //        return;
-    //    }
-
-    //    _animationTimer += Time.deltaTime;
-    //    if (_animationTimer >= _animationSpeed)
-    //    {
-    //        _animationTimer = 0f;
-    //        _currentFrame = (_currentFrame + 1) % runSprites.Length;
-    //        _spriteRenderer.sprite = runSprites[_currentFrame];
-    //    }
-    //}
 
     public void OnDetachedFromHook()
     {
