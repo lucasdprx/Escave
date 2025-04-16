@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -61,6 +62,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _maxJumpDuration = 0.35f; // durée max du saut
     [Header("Pause Menu")]
     [SerializeField] private PauseMenuManager _pauseMenu;
+    
+    [Header("Grappling Hook")]
+    // private GrapplingHook _grapplingHook;
+    public UnityEvent _onJumpWhileGrappling;
 
     public Direction LastDirection { get; private set; } = Direction.Right;
     public enum Direction
@@ -82,6 +87,7 @@ public class PlayerMovement : MonoBehaviour
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         _playerWallJump = GetComponent<PlayerWallJump>();
         _playerSFX = GetComponent<PlayerSFX>();
+        // _grapplingHook = GetComponentInChildren<GrapplingHook>();
         
         baseMoveSpeed = moveSpeed;
         baseJumpForce = jumpForce;
@@ -240,6 +246,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (context.started)
         {
+            _onJumpWhileGrappling.Invoke();
+            // _grapplingHook.DestroyProjectile();
             _inputActionTime = _inputBufferTime;
             _isInputBuffering = false;
         }

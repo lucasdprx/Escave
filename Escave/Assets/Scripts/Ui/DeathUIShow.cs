@@ -13,7 +13,6 @@ public class DeathUIShow : MonoBehaviour
 
     private void ShowDeathCounter(int deathCount)
     {
-        Debug.Log(deathCount);
-        _deathText.text = deathCount;
+        _deathText.text = deathCount.ToString();
     }
 }
