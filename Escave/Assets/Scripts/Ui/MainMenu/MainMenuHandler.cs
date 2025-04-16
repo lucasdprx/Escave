@@ -24,7 +24,7 @@ public class MainMenuHandler : MonoBehaviour
 
     public void NewGame()
     {
-        DataPersistenceManager.instance.gameData = new GameData();
+        DataPersistenceManager.instance.NewOptions();
         DataPersistenceManager.instance.SaveGame();
         PlayGame();
     }
