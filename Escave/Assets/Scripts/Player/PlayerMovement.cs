@@ -116,7 +116,7 @@ public class PlayerMovement : MonoBehaviour
     private void HandleGrapplingMovement()
     {
         if (!_isGrappling) return;
-
+        
         Vector2 force = new Vector2(_playerInputHandler.MoveInput.x, 0f) * moveSpeed;
         _rb.AddForce(force, ForceMode2D.Force);
     }
@@ -270,7 +270,7 @@ public class PlayerMovement : MonoBehaviour
             default: return Vector2.right;
         }
     }
-
+    
     public void OnDetachedFromHook()
     {
         _justDetachedFromHook = true;
