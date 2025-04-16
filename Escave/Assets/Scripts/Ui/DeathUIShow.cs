@@ -14,6 +14,6 @@ public class DeathUIShow : MonoBehaviour
     private void ShowDeathCounter(int deathCount)
     {
         Debug.Log(deathCount);
-        _deathText.text = "Number of death: " + deathCount;
+        _deathText.text = deathCount;
     }
 }
