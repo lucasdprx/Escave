@@ -132,12 +132,14 @@ public class PlayerMovement : MonoBehaviour
         _animator.SetBool("IsJumping", !_isGrounded && !_playerWallJump._isWallClimbingLeft && !_playerWallJump._isWallClimbingRight && !_grapplingHook._isGrappled);
 
         _animator.SetBool("IsClimbing", _playerWallJump._isWallClimbingLeft || _playerWallJump._isWallClimbingRight);
+
         if (_animator.GetBool("IsClimbing"))
         {
-            _animator.SetFloat("ClimbSpeed", Mathf.Abs(_rb.linearVelocity.y));
+            float climbSpeed = Mathf.Abs(_rb.linearVelocity.y);
+            _animator.SetFloat("ClimbSpeed", climbSpeed);
         }
-        _animator.SetBool("IsGrappling", _grapplingHook._isGrappled);
 
+        _animator.SetBool("IsGrappling", _grapplingHook._isGrappled);
 
 
         HandleSpriteFlip();
