@@ -195,8 +195,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stalactitesRespawnAnimation: {fileID: 2045260709435859522}
-  triggerBox: {fileID: 6555589888145952492}
-  isStarted: 0
 --- !u!60 &6818891036870601069
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -243,9 +241,9 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0.5773587}
-      - {x: -0.5, y: -0.28866667}
-      - {x: 0.5, y: -0.28866667}
+    - - {x: 0.00000003678724, y: 0.5281573}
+      - {x: -0.46677974, y: -0.27514976}
+      - {x: 0.47436985, y: -0.27560732}
   m_UseDelaunayMesh: 0
 --- !u!50 &4984101991183923821
 Rigidbody2D:
