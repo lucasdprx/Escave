@@ -128,13 +128,9 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Animation Parameters Update
-        //_animator.SetFloat("Speed", Mathf.Abs(_moveInput.x));
-        //_animator.SetBool("IsJumping", !_isGrounded && !_playerWallJump._isWallClimbingLeft && !_playerWallJump._isWallClimbingRight && !_grapplingHook._isGrappled);
-        //_animator.SetBool("IsClimbing", _playerWallJump._isWallClimbingLeft || _playerWallJump._isWallClimbingRight);
-        //_animator.SetBool("IsGrappling", _grapplingHook._isGrappled);
-
         _animator.SetFloat("Speed", Mathf.Abs(_moveInput.x));
         _animator.SetBool("IsJumping", !_isGrounded && !_playerWallJump._isWallClimbingLeft && !_playerWallJump._isWallClimbingRight && !_grapplingHook._isGrappled);
+
         _animator.SetBool("IsClimbing", _playerWallJump._isWallClimbingLeft || _playerWallJump._isWallClimbingRight);
         if (_animator.GetBool("IsClimbing"))
         {
