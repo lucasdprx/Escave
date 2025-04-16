@@ -18,11 +18,14 @@ public class CollectiblesSave : MonoBehaviour, IDataPersistence
         
         for (int i = 0; i < _gameData.collectibles.Count; i++)
         {
-            collectibles[i].collectibleData.SetData(_gameData.collectibles[i]);
+            if (collectibles[i].collectibleData != null)
+                collectibles[i].collectibleData.SetData(_gameData.collectibles[i]);
         }
 
         foreach (CollectObjet _collectObjet in collectibles)
         {
+            if (_collectObjet.collectibleData == null) continue;
+            
             if (_collectObjet.collectibleData.HasBeenCollected)
             {
                 _collectObjet.gameObject.SetActive(false);

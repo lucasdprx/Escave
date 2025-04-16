@@ -1,31 +1,31 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class SaveLevel : MonoBehaviour, IDataPersistence
+public class SaveLevel : MonoBehaviour
 {
-    [SerializeField] private GameObject _level1;
-    private GameObject _currentLevel;
+    [SerializeField] private List<GameObject> _levels;
 
-    public void LoadData(GameData _gameData)
+    private void Start()
     {
-        if (_gameData.levelToLoad == null)
-        {
-            _gameData.levelToLoad = _level1;
-            _level1.SetActive(true);
-            _currentLevel = _level1;
-        }
-        else
-        {
-            _currentLevel = _gameData.levelToLoad;
-            _currentLevel.SetActive(true);
-        }
+        GameObject nearestLevel = GetNearestLevel(DataPersistenceManager.instance.gameData.cameraPos);
+        nearestLevel.SetActive(true);
     }
-    public void SaveData(ref GameData _gameData)
+    private GameObject GetNearestLevel(Vector3 pos)
     {
-        print(_currentLevel);
-        _gameData.levelToLoad = _currentLevel != null ? _currentLevel : _level1;
-    }
-    public void SetCurrentLevel(GameObject level)
-    {
-        _currentLevel = level;
+        GameObject nearestLevel = _levels[0];
+        float minDistance = Vector3.Distance(pos, nearestLevel.transform.position);
+
+        foreach (GameObject level in _levels)
+        {
+            float distance = Vector3.Distance(pos, level.transform.position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                nearestLevel = level;
+            }
+        }
+
+        return nearestLevel;
     }
 }

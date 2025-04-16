@@ -95,14 +95,12 @@ public class SwapArea : MonoBehaviour
                     _playerDeath.SetCheckpoint(_downLeftCheckpoint);
                     _levelToUnload = _levelUpRight;
                     _levelDownLeft.SetActive(true);
-                    _saveLevel.SetCurrentLevel(_levelDownLeft);
                 }
                 else if (_direction.x > 0)
                 {
                     _playerDeath.SetCheckpoint(_upRightCheckpoint);
                     _levelUpRight.SetActive(true);
                     _levelToUnload = _levelDownLeft;
-                    _saveLevel.SetCurrentLevel(_levelUpRight);
                 }
                 _targetCameraPosition.position += new Vector3(_direction.x * _cameraScale.x,0,0);
                 break;
@@ -113,13 +111,11 @@ public class SwapArea : MonoBehaviour
                     _playerDeath.SetCheckpoint(_downLeftCheckpoint);
                     _levelToUnload = _levelUpRight;
                     _levelDownLeft.SetActive(true);
-                    _saveLevel.SetCurrentLevel(_levelDownLeft);
                 }
                 else if (_direction.y > 0)
                 {
                     _playerDeath.SetCheckpoint(_upRightCheckpoint);
                     _levelUpRight.SetActive(true);
-                    _saveLevel.SetCurrentLevel(_levelUpRight);
                     _levelToUnload = _levelDownLeft;
                 }
                 _targetCameraPosition.position += new Vector3(0,_direction.y * _cameraScale.y,0);

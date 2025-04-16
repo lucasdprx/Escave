@@ -18,8 +18,6 @@ public class GameData
     public bool isPioletEnabled;
 
     public List<bool> chapterUnlocked;
-    
-    public GameObject levelToLoad;
     //---------------------------------
     
     public GameData()
@@ -37,6 +35,5 @@ public class GameData
         isPioletEnabled = false;
         
         chapterUnlocked = new List<bool>();
-        levelToLoad = null;
     }
 }
