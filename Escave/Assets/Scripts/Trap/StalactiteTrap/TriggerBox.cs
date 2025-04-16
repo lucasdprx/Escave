@@ -13,7 +13,7 @@ public class TriggerBox : MonoBehaviour
 
         _stalactitesCollision.SetIsPlayerInside(true);
 
-        if (!_stalactitesCollision.isStarted)
+        if (!_stalactitesCollision.GetIsStarted())
         {
             _stalactitesCollision.StartTrap();
         }

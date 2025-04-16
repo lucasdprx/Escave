@@ -4,15 +4,13 @@ using UnityEngine;
 public class StalactitesCollision : MonoBehaviour
 {
     [SerializeField] private Animator stalactitesRespawnAnimation;
-    [SerializeField] private LayerMask groundLayer;
 
     private Rigidbody2D rb;
     private PlayerDeath playerDeathScript;
     private Vector2 initSpawnPoint;
     private Transform _transform;
     private bool _isPlayerInside;
-
-    [HideInInspector] public bool isStarted;
+    private bool isStarted;
     private AudioManager _audioManager;
 
     private void Awake()
@@ -69,5 +67,9 @@ public class StalactitesCollision : MonoBehaviour
     public void SetIsPlayerInside(bool isPlayerInside)
     {
         _isPlayerInside = isPlayerInside;
+    }
+    public bool GetIsStarted()
+    {
+        return isStarted;
     }
 }
