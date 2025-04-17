@@ -12,25 +12,18 @@ public class LaederBoardScript : MonoBehaviour, IDataPersistence
     
     public void LoadData(GameData _gameData)
     {
-        if (_gameData.timers.Count <= 0)
-        {
-            _gameData.timers = new List<float>();
-            for (int i = 0; i < m_LaederBoard.Count; i++)
-            {
-                _gameData.timers.Add(0);
-            }
-        }
+        if (_gameData.timers.Count <= 0) return;
+        if(_gameData.chaptersFinished.Count <= 0) return;
+        if (_gameData.chaptersFinished[0] == false) return;
 
         tempTimers = _gameData.timers;
         
-        for (int i = 0; i < m_LaederBoard.Count; ++i)
+        for (int i = 0; i < tempTimers.Count; ++i)
         {
             if (_gameData.timers[i] == 0) return;
-            if (_gameData.chaptersFinished.Count <= i) return;
             if (_gameData.chaptersFinished[i] == false) return;
             
             float _timer = _gameData.timers[i];
-            Debug.Log(_timer);
             
             int _milisecondsPassInLevel = (int)(_timer % (int)_timer * 100);
             int _secondsPassInLevel = (int)_timer % 60;
@@ -45,8 +38,6 @@ public class LaederBoardScript : MonoBehaviour, IDataPersistence
             
             m_LaederBoard[i].text = _finalString;
         }
-        
-        DataPersistenceManager.instance.SaveGame();
     }
 
     public void SaveData(ref GameData _gameData)

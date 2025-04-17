@@ -2083,8 +2083,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5981532554043316701}
-  - {fileID: 7317641769805131264}
   - {fileID: 2183469337807566177}
+  - {fileID: 7317641769805131264}
   - {fileID: 2678766887758837155}
   - {fileID: 598139797516857112}
   - {fileID: 1036077791532222755}
@@ -2215,7 +2215,7 @@ MonoBehaviour:
     m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 4627625537957235456}
-    m_SelectOnDown: {fileID: 8587418159234938076}
+    m_SelectOnDown: {fileID: 6862173243624281472}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1

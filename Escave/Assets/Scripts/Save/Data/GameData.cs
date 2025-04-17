@@ -36,6 +36,6 @@ public class GameData
         isHookEnabled = false;
         isPioletEnabled = false;
         
-        chaptersFinished = new List<bool>();
+        chaptersFinished = new List<bool>(2);
     }
 }
