@@ -35,6 +35,9 @@ public class PlayerMovement : MonoBehaviour
     [Header("Grappling Hook")]
     public UnityEvent _onJumpWhileGrappling;
 
+    [Header("Knockback")]
+    [SerializeField] private float _knockbackDuration = 0.2f;
+
     public Direction LastDirection { get; private set; } = Direction.Right;
     public enum Direction
     {
@@ -55,6 +58,8 @@ public class PlayerMovement : MonoBehaviour
     private bool _isOnOneWayPlatform;
     private bool _isGrappling;
     private bool _justDetachedFromHook;
+    private bool _isKnockback;
+    private float _knockbackTimer;
     private Vector2 _boxSize;
     private Rigidbody2D _rb;
     private PlayerInputHandler _playerInputHandler;
@@ -84,6 +89,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+
+        if (_isKnockback)
+        {
+            _knockbackTimer -= Time.deltaTime;
+            if (_knockbackTimer <= 0f)
+            {
+                _isKnockback = false;
+            }
+            return;
+        }
+
         _isGrounded = Physics2D.OverlapBox(_groundCheck.position, _boxSize, 0f, _groundLayer);
 
         if (_isGrounded && _justDetachedFromHook)
@@ -103,10 +119,12 @@ public class PlayerMovement : MonoBehaviour
         {
             _inputActionTime -= Time.deltaTime;
         }
+       
     }
 
     private void FixedUpdate()
     {
+       if (_isKnockback) return;
         HandleGrapplingMovement();
         HandleGroundAndAirMovement();
         HandleJump();
@@ -123,7 +141,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleGroundAndAirMovement()
     {
-        if (_isGrappling || _playerWallJump._isWallClimbingLeft || _playerWallJump._isWallClimbingRight || _playerWallJump._isWallJumping)
+
+        if (_isGrappling || _playerWallJump._isWallClimbingLeft || _playerWallJump._isWallClimbingRight || _playerWallJump._isWallJumping || _isKnockback)
             return;
 
         if (_justDetachedFromHook)
@@ -293,5 +312,13 @@ public class PlayerMovement : MonoBehaviour
     public bool IsWallClimb()
     {
         return _playerWallJump._isWallClimbingLeft || _playerWallJump._isWallClimbingRight;
+    }
+
+    public void ApplyKnockback(Vector2 direction, float force)
+    {
+        _isKnockback = true;
+        _knockbackTimer = _knockbackDuration;
+        _rb.linearVelocity = Vector2.zero;// Optional 
+        _rb.AddForce(direction * force, ForceMode2D.Impulse);
     }
 }
