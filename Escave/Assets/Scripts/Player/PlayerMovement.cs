@@ -73,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
         baseMoveSpeed = moveSpeed;
         baseJumpForce = jumpForce;
 
-        _boxSize = new Vector2(1.2f, 0.3f);
+        _boxSize = new Vector2(0.8f, 0.3f);
         
         _playerInputHandler.OnJumpPressed += OnJumpPressed;
         _playerInputHandler.OnJumpReleased += OnJumpRelease;
@@ -101,6 +101,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         _isGrounded = Physics2D.OverlapBox(_groundCheck.position, _boxSize, 0f, _groundLayer);
+        print(_isGrounded);
 
         if (_isGrounded && _justDetachedFromHook)
         {
