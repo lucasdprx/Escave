@@ -1,9 +1,10 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LevelEnd : MonoBehaviour, IDataPersistence
 {
-    [SerializeField] private int _index;
+    private int _index;
     private bool passedPassed;
     private void OnTriggerExit2D(Collider2D other)
     {
@@ -13,6 +14,11 @@ public class LevelEnd : MonoBehaviour, IDataPersistence
         passedPassed = true;
         DataPersistenceManager.instance.SaveGame();
         SceneManager.LoadScene("MainMenu");
+    }
+
+    private void Start()
+    {
+        _index = SceneManager.GetActiveScene().buildIndex - 1;
     }
 
     public void LoadData(GameData _gameData)

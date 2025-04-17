@@ -7,8 +7,8 @@ public class GameData
     //----------Data to save----------
     public int deathCount;
 
-    public Vector2 playerPos;
-    public Vector3 cameraPos;
+    public List<Vector2> playerPos;
+    public List<Vector3> cameraPos;
 
     public List<bool> collectibles;
     public int collectiblesCollected;
@@ -27,9 +27,10 @@ public class GameData
         
         timers = new List<float>();
         
-        playerPos = Vector2.zero;
-        cameraPos = Vector3.zero;
-        cameraPos.z = -10;
+        playerPos = new List<Vector2>();
+        playerPos.Add(Vector2.zero);
+        cameraPos = new List<Vector3>();
+        cameraPos.Add(new Vector3(0, 0, -10));
         
         collectibles = new List<bool>();
         
