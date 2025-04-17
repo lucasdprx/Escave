@@ -48,14 +48,18 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
     public void LoadData(GameData _gameData)
     {
         levelIndex = SceneManager.GetActiveScene().buildIndex - 1;
-        if (_gameData.playerPos[levelIndex] != Vector2.zero)
+        if (_gameData.playerPos.Count > levelIndex)
         {
-            transform.position = _gameData.playerPos[levelIndex];
+            if (_gameData.playerPos[levelIndex] != Vector2.zero)
+            {
+                transform.position = _gameData.playerPos[levelIndex];
+            }
+            else
+            {
+                currentCheckpoint = checkpoints[0];
+            }
         }
-        else
-        {
-            currentCheckpoint = checkpoints[0];
-        }
+        
         deathCounter = _gameData.deathCount;
         if (deathCounter > 0)
         {
