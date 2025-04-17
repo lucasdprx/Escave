@@ -5,7 +5,7 @@ public class CheckpointScript : MonoBehaviour
     private Animator _animator;
     [SerializeField] private GameObject _light;
 
-    private void Start()
+    private void Awake()
     {
         _animator = GetComponent<Animator>();
         _light.SetActive(false);
@@ -16,22 +16,13 @@ public class CheckpointScript : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             other.GetComponent<PlayerDeath>().SetCheckpoint(gameObject);
-            _animator.Play("Activation");
+            if (!_animator)
+            {
+                _animator = GetComponent<Animator>();
+            }
+            
             _animator.SetBool("Activated", true);
-
             _light.SetActive(true);
         }
-    }
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        if (!_light.activeSelf) return;
-        
-        if (other.gameObject.layer != LayerMask.NameToLayer("Player")) return;
-        
-        other.GetComponent<PlayerDeath>().SetCheckpoint(gameObject);
-        _animator.Play("Activation");
-        _animator.SetBool("Activated", true);
-
-        _light.SetActive(true);
     }
 }
