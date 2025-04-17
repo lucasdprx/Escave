@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class CollectibleData
 {
     public bool HasBeenCollected { get; private set; }

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class TimerUIManager : MonoBehaviour, IDataPersistence
 {
+    [SerializeField]
+    private int timerIndex;
+    
     [SerializeField] private TextMeshProUGUI _timerText;
     private float _timePassInLevel;
     private int _secondsPassInLevel;
@@ -25,11 +28,11 @@ public class TimerUIManager : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData _gameData)
     {
-        _timePassInLevel = _gameData.inGameTimer;
+        _timePassInLevel = _gameData.timers[timerIndex];
     }
 
     public void SaveData(ref GameData _gameData)
     {
-        _gameData.inGameTimer = _timePassInLevel;
+        _gameData.timers[timerIndex] = _timePassInLevel;
     }
 }

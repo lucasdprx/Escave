@@ -1,25 +1,27 @@
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 
 public class CheckpointScript : MonoBehaviour
 {
     private Animator _animator;
     [SerializeField] private GameObject _light;
 
-    private void Start()
+    private void Awake()
     {
         _animator = GetComponent<Animator>();
         _light.SetActive(false);
     }
 
-    private void OnTriggerEnter2D(Collider2D _other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (_other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            _other.GetComponent<PlayerDeath>().SetCheckpoint(gameObject);
-            _animator.Play("Activation");
+            other.GetComponent<PlayerDeath>().SetCheckpoint(gameObject);
+            if (!_animator)
+            {
+                _animator = GetComponent<Animator>();
+            }
+            
             _animator.SetBool("Activated", true);
-
             _light.SetActive(true);
         }
     }
