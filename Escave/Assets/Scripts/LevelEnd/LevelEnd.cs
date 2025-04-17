@@ -19,6 +19,8 @@ public class LevelEnd : MonoBehaviour, IDataPersistence
 
     public void SaveData(ref GameData _gameData)
     {
+        if (_gameData.chaptersFinished.Count <= _index) return;
+        
         _gameData.chaptersFinished[_index] = true;
     }
 }
