@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3380124007142588744}
   - component: {fileID: 5096979518138205190}
   - component: {fileID: 1158402020276680127}
-  - component: {fileID: 6587423906623321531}
   m_Layer: 0
   m_Name: SpikeTrapPic32-3
   m_TagString: Trap
@@ -152,38 +151,11 @@ PolygonCollider2D:
       - {x: -0.062499993, y: 0.2856232}
       - {x: -0.21339059, y: -0.17611384}
       - {x: -0.2641855, y: -0.040982574}
-      - {x: -0.44640577, y: -0.5}
-      - {x: 0.42496812, y: -0.5}
+      - {x: -0.33671415, y: -0.35602975}
+      - {x: 0.36840838, y: -0.35602975}
       - {x: 0.3552957, y: -0.29196882}
       - {x: 0.27820566, y: -0.01678852}
       - {x: 0.23239477, y: -0.10247685}
       - {x: 0.1726171, y: -0.087804645}
       - {x: 0.10348261, y: 0.1339058}
   m_UseDelaunayMesh: 0
---- !u!50 &6587423906623321531
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8107012357529082124}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 7

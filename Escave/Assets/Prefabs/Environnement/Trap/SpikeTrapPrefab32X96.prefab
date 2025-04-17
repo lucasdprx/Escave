@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3380124007142588744}
   - component: {fileID: 5096979518138205190}
   - component: {fileID: 1158402020276680127}
-  - component: {fileID: 6587423906623321531}
   m_Layer: 0
   m_Name: SpikeTrapPrefab32X96
   m_TagString: Trap
@@ -154,33 +153,6 @@ PolygonCollider2D:
       - {x: 0.21767324, y: -0.10605484}
       - {x: 0.18543845, y: 0.06328505}
       - {x: -0.007722944, y: 1.141264}
-      - {x: -0.42318976, y: -1.5004472}
-      - {x: 0.43077135, y: -1.4995314}
+      - {x: -0.33217183, y: -1.2583393}
+      - {x: 0.38890308, y: -1.2574235}
   m_UseDelaunayMesh: 0
---- !u!50 &6587423906623321531
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8107012357529082124}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 7
