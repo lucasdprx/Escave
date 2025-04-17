@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class SwapArea : MonoBehaviour
 {
@@ -30,7 +29,6 @@ public class SwapArea : MonoBehaviour
     [SerializeField] private float _cameraTransitionSpeed;
     [SerializeField] private Transform _targetCameraPosition;
     
-    private PlayerInput _playerInput;
     private Vector3 _newCameraPosition = Vector3.zero;
     private Camera _camera;
     private Vector2 _playerDir;
@@ -65,11 +63,8 @@ public class SwapArea : MonoBehaviour
                 return;
         }
         
-        _playerInput = other.GetComponent<PlayerInput>();
         _playerDeath = other.GetComponent<PlayerDeath>();
-        Vector2 _direction = FindDirection(other.gameObject.transform.position);
-        //other.transform.position -= (Vector3)_direction * 2; 
-        //_playerInput.DeactivateInput();
+        FindDirection(other.gameObject.transform.position);
         StartCoroutine(MoveCameraCoroutine());
         _audioManager.PlaySound(AudioType.areaTransition);
     }
@@ -81,7 +76,7 @@ public class SwapArea : MonoBehaviour
         _playerDir = (Vector2)transform.position - (Vector2)other.gameObject.transform.position;
     }
 
-    private Vector2 FindDirection(Vector2 _playerTransform)
+    private void FindDirection(Vector2 _playerTransform)
     {
         Vector2 _playerPos = (Vector2)transform.position - _playerTransform;
         Vector2 _direction = Vector2.zero;
@@ -122,7 +117,6 @@ public class SwapArea : MonoBehaviour
                 break;
         }
         DataPersistenceManager.instance.gameData.cameraPos = _targetCameraPosition.position;
-        return _direction;
     }
 
     private IEnumerator MoveCameraCoroutine()
@@ -136,7 +130,6 @@ public class SwapArea : MonoBehaviour
             yield return null;
         }
         _levelToUnload.SetActive(false);
-        //_playerInput.ActivateInput();
         _actualCameraTransitionTime = 0;
         StopCoroutine(MoveCameraCoroutine());
     }
