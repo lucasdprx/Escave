@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class GameData
 {
     //----------Data to save----------
     public int deathCount;
-    public float inGameTimer;
 
     public Vector2 playerPos;
     public Vector3 cameraPos;
@@ -18,12 +18,15 @@ public class GameData
     public bool isPioletEnabled;
 
     public List<bool> chapterUnlocked;
+
+    public List<float> timers;
     //---------------------------------
     
     public GameData()
     {
         deathCount = 0;
-        inGameTimer = 0f;
+        
+        timers = new List<float>();
         
         playerPos = Vector2.zero;
         cameraPos = Vector3.zero;
