@@ -55,7 +55,6 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
 
         if (currentCheckpoint == null)
         {
-            Debug.LogError("Aucun checkpoint actif n'est d�fini !");
             return;
         }
 
