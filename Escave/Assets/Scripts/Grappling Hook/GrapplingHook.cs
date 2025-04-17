@@ -179,7 +179,7 @@ public class GrapplingHook : MonoBehaviour
         _detachCoroutine = null;
     }
 
-    private void DetachGrapplingHook()
+    public void DetachGrapplingHook()
     {
         if (_detachCoroutine != null)
         {
