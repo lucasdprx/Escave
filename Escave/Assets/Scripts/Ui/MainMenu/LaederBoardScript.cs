@@ -44,6 +44,8 @@ public class LaederBoardScript : MonoBehaviour, IDataPersistence
             
             m_LaederBoard[i].text = _finalString;
         }
+        
+        DataPersistenceManager.instance.SaveGame();
     }
 
     public void SaveData(ref GameData _gameData)
