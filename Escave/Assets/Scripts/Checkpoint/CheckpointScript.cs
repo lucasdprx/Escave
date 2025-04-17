@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 
 public class CheckpointScript : MonoBehaviour
 {
@@ -12,15 +11,27 @@ public class CheckpointScript : MonoBehaviour
         _light.SetActive(false);
     }
 
-    private void OnTriggerEnter2D(Collider2D _other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (_other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            _other.GetComponent<PlayerDeath>().SetCheckpoint(gameObject);
+            other.GetComponent<PlayerDeath>().SetCheckpoint(gameObject);
             _animator.Play("Activation");
             _animator.SetBool("Activated", true);
 
             _light.SetActive(true);
         }
+    }
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (!_light.activeSelf) return;
+        
+        if (other.gameObject.layer != LayerMask.NameToLayer("Player")) return;
+        
+        other.GetComponent<PlayerDeath>().SetCheckpoint(gameObject);
+        _animator.Play("Activation");
+        _animator.SetBool("Activated", true);
+
+        _light.SetActive(true);
     }
 }
