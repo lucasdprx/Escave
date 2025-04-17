@@ -19,6 +19,6 @@ public class LevelEnd : MonoBehaviour, IDataPersistence
 
     public void SaveData(ref GameData _gameData)
     {
-        _gameData.chapterUnlocked[_index] = true;
+        _gameData.chaptersFinished[_index] = true;
     }
 }

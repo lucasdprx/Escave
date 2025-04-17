@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -7,10 +8,10 @@ public class CollectObjet : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private AudioManager _audioManager;
     
-    public CollectiblesSave collectiblesSave;
-    
     [SerializeField] private Sprite icon;
     [SerializeField] private ParticleSystem pickupEffect;
+    
+    public static event Action OnCollectibleCollected;
 
     private void Start()
     {
@@ -28,8 +29,8 @@ public class CollectObjet : MonoBehaviour
             return;
         }
         
+        OnCollectibleCollected?.Invoke();
         _audioManager.PlaySound(AudioType.collectibleGet);
-        collectiblesSave.OnCollectibleCollected();
         collectibleData.PickUp();
         ParticleSystem effect = PlayPickupEffect(transform.position);
         if (effect)

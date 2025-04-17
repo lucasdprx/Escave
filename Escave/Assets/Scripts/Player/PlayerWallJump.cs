@@ -30,7 +30,9 @@ public class PlayerWallJump : MonoBehaviour
     private Vector2 _moveInput;
     
     [SerializeField] private GameObject _staminaEffect;
-    private bool _isStaminaActive = false;
+    private bool _isStaminaActive;
+    private Animator _animator;
+    private AudioManager _audioManager;
     #endregion
 
     #region BoolChecks
@@ -56,6 +58,8 @@ public class PlayerWallJump : MonoBehaviour
     #region Unity Callbacks
     private void Start()
     {
+        _audioManager = AudioManager.Instance;
+        _animator = _staminaEffect.GetComponent<Animator>();
         _rb = GetComponent<Rigidbody2D>();
     }
 
@@ -89,8 +93,8 @@ public class PlayerWallJump : MonoBehaviour
 
             _wallStayTimer += Time.deltaTime;
 
-            // Animation speed augmente de x1 � x5 selon _wallStayTimer
-            _staminaEffect.GetComponent<Animator>().speed = Mathf.Lerp(1f, 2.5f, _wallStayTimer / _wallStayTime);
+            // Animation speed augment de x1 � x5 salon _wallStayTimer
+            _animator.speed = Mathf.Lerp(1f, 2.5f, _wallStayTimer / _wallStayTime);
 
             if (_wallStayTimer >= _wallStayTime)
             {
@@ -98,7 +102,7 @@ public class PlayerWallJump : MonoBehaviour
                 _isWallClimbingRight = false;
                 _canWallClimb = false;
                 _rb.gravityScale = 4;
-                AudioManager.Instance.PlaySound(AudioType.enduranceRunOut);
+                _audioManager.PlaySound(AudioType.enduranceRunOut);
                 _isInputDone = false;
             }
         }
@@ -121,7 +125,7 @@ public class PlayerWallJump : MonoBehaviour
 
             if (_isStaminaActive)
             {
-                _staminaEffect.GetComponent<Animator>().speed = 1f;
+                _animator.speed = 1f;
                 _staminaEffect.SetActive(false);
                 _isStaminaActive = false;
             }
@@ -197,21 +201,23 @@ public class PlayerWallJump : MonoBehaviour
 
     public void Climb(InputAction.CallbackContext _ctx)
     {
-        if (_isGrabUnlock)
+        if (!_isGrabUnlock) return;
+        
+        if (_ctx.started)
         {
-            if (_ctx.started)
+            if (_isWallClimbing)
             {
-                if (_isWallClimbing)
-                {
-                    _isWallClimbing = false;
-                    _isWallClimbingLeft = false;
-                    _isWallClimbingRight = false;
-                    return;
-                }
-                
-                _isInputDone = true;
+                _isWallClimbing = false;
+                _isWallClimbingLeft = false;
+                _isWallClimbingRight = false;
+                return;
             }
-            else if(_ctx.canceled) _isInputDone = false;
+                
+            _isInputDone = true;
+        }
+        else if (_ctx.canceled)
+        {
+            _isInputDone = false;
         }
     }
     

@@ -22,18 +22,18 @@ public class ChapterSelectionManager : MonoBehaviour, IDataPersistence
     {
         _audioManager = AudioManager.Instance;
         
-        if (_gameData.chapterUnlocked.Count <= 0)
+        if (_gameData.chaptersFinished.Count <= 0)
         {
             foreach (Button button in buttons)
             {
-                _gameData.chapterUnlocked.Add(button.interactable);
+                _gameData.chaptersFinished.Add(button.interactable);
             }
         }
         else
         {
-            for (int i = 0; i < _gameData.chapterUnlocked.Count; i++)
+            for (int i = 1; i < _gameData.chaptersFinished.Count; i++)
             {
-                if (_gameData.chapterUnlocked[i])
+                if (_gameData.chaptersFinished[i - 1])
                 {
                     buttons[i].interactable = true;
                 }
@@ -43,9 +43,9 @@ public class ChapterSelectionManager : MonoBehaviour, IDataPersistence
 
     public void SaveData(ref GameData _gameData)
     {
-        for (int i = 0; i < _gameData.chapterUnlocked.Count; i++)
+        for (int i = 1; i < _gameData.chaptersFinished.Count; i++)
         {
-            _gameData.chapterUnlocked[i] = buttons[i].interactable;
+            _gameData.chaptersFinished[i - 1] = buttons[i].interactable;
         }
     }
 }
