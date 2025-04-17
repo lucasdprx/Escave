@@ -23,7 +23,7 @@ public class CollectiblesSave : MonoBehaviour, IDataPersistence
         
         for (int i = 0; i < _gameData.collectibles.Count; i++)
         {
-            if (collectibles[i] == null) continue;
+            if (collectibles.Count <= i) continue;
             
             if (collectibles[i].collectibleData != null)
                 collectibles[i].collectibleData.SetData(_gameData.collectibles[i]);

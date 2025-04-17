@@ -101,7 +101,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
         _isGrounded = Physics2D.OverlapBox(_groundCheck.position, _boxSize, 0f, _groundLayer);
-        print(_isGrounded);
 
         if (_isGrounded && _justDetachedFromHook)
         {
