@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class SaveLevel : MonoBehaviour
 {
     [SerializeField] private List<GameObject> _levels;
