@@ -34,7 +34,10 @@ public class TimerUIManager : MonoBehaviour, IDataPersistence
 
     public void SaveData(ref GameData _gameData)
     {
-        if (_gameData.timers.Count <= timerIndex) return;
+        if (_gameData.timers.Count <= timerIndex)
+        {
+            _gameData.timers.Add(_timePassInLevel);
+        };
         
         _gameData.timers[timerIndex] = _timePassInLevel;
     }
