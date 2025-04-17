@@ -190,22 +190,30 @@ public class GrapplingHook : MonoBehaviour
         if (_springJoint)
             _springJoint.enabled = false;
         _isGrappled = false;
-
-        _lineRenderer.positionCount = 2;
+        
         _elapsedHookTime = 0f;
-        _lineRenderer.startColor = _ropeColorGradient.Evaluate(_elapsedHookTime);
-        _lineRenderer.endColor = _ropeColorGradient.Evaluate(_elapsedHookTime);
+        if (_lineRenderer)
+        {
+            _lineRenderer.startColor = _ropeColorGradient.Evaluate(_elapsedHookTime);
+            _lineRenderer.endColor = _ropeColorGradient.Evaluate(_elapsedHookTime);
+            _lineRenderer.positionCount = 2;
+        }
 
-        _playerMovement.SetIsGrappling(false);
-
-        _playerMovement.OnDetachedFromHook();
+        if (_playerMovement)
+        {
+            _playerMovement.SetIsGrappling(false);
+            _playerMovement.OnDetachedFromHook();
+        }
 
         if (_projectileScript)
         {
             _projectileScript.StartReturn();
         }
 
-        _lineRenderer.enabled = false;
+        if (_lineRenderer)
+        {
+            _lineRenderer.enabled = false;
+        }
     }
 
 
