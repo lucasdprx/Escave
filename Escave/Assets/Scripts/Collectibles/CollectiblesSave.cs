@@ -8,7 +8,12 @@ public class CollectiblesSave : MonoBehaviour, IDataPersistence
     [SerializeField] private TextMeshProUGUI _fraiseText;
     
     private int valueCollected;
-    
+
+    private void Awake()
+    {
+        CollectObjet.OnCollectibleCollected += OnCollectibleCollected;
+    }
+
     public void LoadData(GameData _gameData)
     {
         valueCollected = _gameData.collectiblesCollected;
