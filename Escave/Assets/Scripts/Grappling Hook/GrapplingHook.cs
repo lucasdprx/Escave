@@ -75,12 +75,17 @@ public class GrapplingHook : MonoBehaviour
     public void DestroyProjectile()
     {
         Destroy(_currentProjectile);
-        _projectileScript = null;   
-        _lineRenderer.enabled = false;
-        _springJoint.enabled = false;
+        _projectileScript = null;
+        if (_lineRenderer)
+            _lineRenderer.enabled = false;
+        if (_springJoint)
+            _springJoint.enabled = false;
         _isGrappled = false;
-        _playerMovement.SetIsGrappling(false);
-        _playerMovement.OnDetachedFromHook();
+        if (_playerMovement)
+        {
+            _playerMovement.SetIsGrappling(false);
+            _playerMovement.OnDetachedFromHook();
+        }
         _canShoot = true;
     }
 

@@ -26,6 +26,7 @@ public class LaederBoardScript : MonoBehaviour, IDataPersistence
         for (int i = 0; i < m_LaederBoard.Count; ++i)
         {
             if (_gameData.timers[i] == 0) return;
+            if (_gameData.chaptersFinished.Count <= i) return;
             if (_gameData.chaptersFinished[i] == false) return;
             
             float _timer = _gameData.timers[i];
