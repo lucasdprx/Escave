@@ -4,11 +4,13 @@ using UnityEngine.SceneManagement;
 public class LevelEnd : MonoBehaviour, IDataPersistence
 {
     [SerializeField] private int _index;
+    private bool passedPassed;
     private void OnTriggerExit2D(Collider2D other)
     {
         if(!other.CompareTag("Player"))
             return;
-        
+
+        passedPassed = true;
         DataPersistenceManager.instance.SaveGame();
         SceneManager.LoadScene("MainMenu");
     }
@@ -19,8 +21,9 @@ public class LevelEnd : MonoBehaviour, IDataPersistence
 
     public void SaveData(ref GameData _gameData)
     {
-        if (_gameData.chaptersFinished.Count <= _index) return;
-        
-        _gameData.chaptersFinished[_index] = true;
+        if (_gameData.chaptersFinished.Count <= _index && passedPassed)
+        {
+            _gameData.chaptersFinished.Add(true);
+        }
     }
 }
