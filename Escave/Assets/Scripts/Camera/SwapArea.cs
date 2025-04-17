@@ -32,8 +32,6 @@ public class SwapArea : MonoBehaviour
     private Vector3 _newCameraPosition = Vector3.zero;
     private Camera _camera;
     private Vector2 _playerDir;
-    
-    [SerializeField] private SaveLevel _saveLevel;
 
     private void Start()
     {
