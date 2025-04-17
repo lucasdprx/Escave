@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,8 +15,6 @@ public class ChapterSelectionScroll : MonoBehaviour
     private Vector2 _nextPos;
     private ScrollRect scrollRect;
     private GameObject selectedElement;
-    
-    public event EventHandler<Button> OnLeftMove;
 
     private void Awake()
     {
