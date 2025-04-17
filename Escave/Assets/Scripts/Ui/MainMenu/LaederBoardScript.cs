@@ -7,20 +7,15 @@ using UnityEngine.SceneManagement;
 public class LaederBoardScript : MonoBehaviour, IDataPersistence
 {
     [SerializeField] private List<TextMeshProUGUI> m_LaederBoard;
-
-    private List<float> tempTimers;
     
     public void LoadData(GameData _gameData)
     {
         if (_gameData.timers.Count <= 0) return;
         if(_gameData.chaptersFinished.Count <= 0) return;
-        if (_gameData.chaptersFinished[0] == false) return;
-
-        tempTimers = _gameData.timers;
+        if (!_gameData.chaptersFinished[0]) return;
         
-        for (int i = 0; i < tempTimers.Count; ++i)
+        for (int i = 0; i < _gameData.timers.Count; i++)
         {
-            if (_gameData.timers[i] == 0) return;
             if (_gameData.chaptersFinished[i] == false) return;
             
             float _timer = _gameData.timers[i];
@@ -42,6 +37,5 @@ public class LaederBoardScript : MonoBehaviour, IDataPersistence
 
     public void SaveData(ref GameData _gameData)
     {
-        _gameData.timers = tempTimers;
     }
 }

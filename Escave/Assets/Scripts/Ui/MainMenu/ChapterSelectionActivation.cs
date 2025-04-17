@@ -9,7 +9,7 @@ public class ChapterSelectionActivation : MonoBehaviour, IDataPersistence
     {
         chapterSelectionButton.interactable = false;
         
-        if (_gameData.chaptersFinished.Count > 0 && _gameData.chaptersFinished[1] == true)
+        if (_gameData.chaptersFinished.Count > 0 && _gameData.chaptersFinished[1])
             chapterSelectionButton.interactable = true;
     }
 
