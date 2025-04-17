@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class BreakingPlatform : MonoBehaviour
@@ -14,8 +15,10 @@ public class BreakingPlatform : MonoBehaviour
 
     private bool _hasTouched = false;
     private float _timer;
-
     public event Action OnBroken;
+
+   [SerializeField] private GameObject _breakingPlatformPositionBlock;
+   [SerializeField] private float _distanceToShake = 0.05f;
 
     private void Start()
     {
@@ -35,6 +38,11 @@ public class BreakingPlatform : MonoBehaviour
                 
             if(_other.transform.position.y > transform.position.y)
                 _hasTouched = true;
+        }
+
+        if (_hasTouched)
+        {
+            StartCoroutine(Shake());
         }
     }
 
@@ -61,6 +69,8 @@ public class BreakingPlatform : MonoBehaviour
 
     private void BreakPlateform()
     {
+        StopAllCoroutines();
+        Instantiate(_breakingPlatformPositionBlock, transform.position, Quaternion.identity);
         Instantiate(breakingParticles, transform.position, Quaternion.identity);
         _timer = 0;
         boxCollider.enabled = false;
@@ -77,4 +87,16 @@ public class BreakingPlatform : MonoBehaviour
         spriteRenderer.enabled = true;
         _hasTouched = false;
     }
+    
+    private IEnumerator Shake() 
+    {
+        while (true)
+        {
+            transform.localPosition += new Vector3(_distanceToShake, 0, 0);
+            yield return new WaitForSeconds(0.01f);
+            transform.localPosition -= new Vector3(_distanceToShake, 0, 0);
+            yield return new WaitForSeconds(0.01f);
+        }
+    }
+
 }
