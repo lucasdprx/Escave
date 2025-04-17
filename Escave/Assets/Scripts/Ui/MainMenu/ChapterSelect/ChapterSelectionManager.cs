@@ -21,6 +21,8 @@ public class ChapterSelectionManager : MonoBehaviour, IDataPersistence
     {
         _audioManager = AudioManager.Instance;
 
+        if (_gameData.chaptersFinished.Count <= 0) return;
+        
         if(_gameData.chaptersFinished[0]) buttons[1].interactable = true;
     }
 
