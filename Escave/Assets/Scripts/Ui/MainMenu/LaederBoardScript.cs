@@ -14,29 +14,30 @@ public class LaederBoardScript : MonoBehaviour, IDataPersistence
     {
         if (_gameData.timers.Count <= 0) return;
         if(_gameData.chaptersFinished.Count <= 0) return;
-        if (_gameData.chaptersFinished[0] == false) return;
 
         tempTimers = _gameData.timers;
         
         for (int i = 0; i < tempTimers.Count; ++i)
         {
             if (_gameData.timers[i] == 0) return;
-            if (_gameData.chaptersFinished[i] == false) return;
+
+            if (_gameData.chaptersFinished[i] == true)
+            {
+                float _timer = _gameData.timers[i];
             
-            float _timer = _gameData.timers[i];
+                int _milisecondsPassInLevel = (int)(_timer % (int)_timer * 100);
+                int _secondsPassInLevel = (int)_timer % 60;
+                int _minutesPassInLevel = (int)_timer / 60;
+                _minutesPassInLevel %= 60;
+                int _hoursPassInLevel = (int)_timer / 3600;
             
-            int _milisecondsPassInLevel = (int)(_timer % (int)_timer * 100);
-            int _secondsPassInLevel = (int)_timer % 60;
-            int _minutesPassInLevel = (int)_timer / 60;
-            _minutesPassInLevel %= 60;
-            int _hoursPassInLevel = (int)_timer / 3600;
+                string _time = string.Format("{0:00}:{1:00}:{2:00}:{3:00}", _hoursPassInLevel, _minutesPassInLevel,
+                    _secondsPassInLevel, _milisecondsPassInLevel);
             
-            string _time = string.Format("{0:00}:{1:00}:{2:00}:{3:00}", _hoursPassInLevel, _minutesPassInLevel,
-                _secondsPassInLevel, _milisecondsPassInLevel);
+                string _finalString = m_LaederBoard[i].text.Split(":")[0].Trim() + " : " + _time;
             
-            string _finalString = m_LaederBoard[i].text.Split(":")[0].Trim() + " : " + _time;
-            
-            m_LaederBoard[i].text = _finalString;
+                m_LaederBoard[i].text = _finalString;
+            }
         }
     }
 
