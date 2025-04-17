@@ -1,8 +1,11 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SwapArea : MonoBehaviour
 {
+    private int levelIndex;
+    
     [SerializeField] private Direction _switchAreaDirection;
     [SerializeField] private GameObject _downLeftCheckpoint;
     [SerializeField] private GameObject _upRightCheckpoint;
@@ -35,6 +38,7 @@ public class SwapArea : MonoBehaviour
 
     private void Start()
     {
+        levelIndex = SceneManager.GetActiveScene().buildIndex - 1;
         _camera = Camera.main;
         _targetCameraPosition.position = _camera.transform.position;
         _audioManager = AudioManager.Instance;
@@ -114,7 +118,12 @@ public class SwapArea : MonoBehaviour
                 _targetCameraPosition.position += new Vector3(0,_direction.y * _cameraScale.y,0);
                 break;
         }
-        DataPersistenceManager.instance.gameData.cameraPos = _targetCameraPosition.position;
+
+        if (DataPersistenceManager.instance.gameData.cameraPos.Count <= levelIndex)
+        {
+            DataPersistenceManager.instance.gameData.cameraPos.Add(_targetCameraPosition.position);
+        }else
+            DataPersistenceManager.instance.gameData.cameraPos[levelIndex] = _targetCameraPosition.position;
     }
 
     private IEnumerator MoveCameraCoroutine()

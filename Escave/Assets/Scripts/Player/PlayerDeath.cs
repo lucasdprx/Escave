@@ -2,12 +2,15 @@ using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class PlayerDeath : MonoBehaviour, IDataPersistence
 {
     [Header("Checkpoints")]
     [SerializeField] private List<GameObject> checkpoints; // checkpoint list
     private GameObject currentCheckpoint; // active checkpoint
+    
+    private int levelIndex;
 
     public int DeathCount => deathCounter;
     [SerializeField, ReadOnly] private int deathCounter;
@@ -29,14 +32,25 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
     {
         _gameData.deathCount = deathCounter;
         if (currentCheckpoint)
-            _gameData.playerPos = currentCheckpoint.transform.position;
+        {
+            if (_gameData.playerPos.Count <= levelIndex)
+            {
+                _gameData.playerPos.Add(currentCheckpoint.transform.position);
+            }
+            else
+            {
+                _gameData.playerPos[levelIndex] = currentCheckpoint.transform.position;
+            }
+            
+        }
     }
     
     public void LoadData(GameData _gameData)
     {
-        if (_gameData.playerPos != Vector2.zero)
+        levelIndex = SceneManager.GetActiveScene().buildIndex - 1;
+        if (_gameData.playerPos[levelIndex] != Vector2.zero)
         {
-            transform.position = _gameData.playerPos;
+            transform.position = _gameData.playerPos[levelIndex];
         }
         else
         {
