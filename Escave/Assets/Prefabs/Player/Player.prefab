@@ -797,7 +797,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   _knockbackDuration: 0.2
-  _coyoteTime: 0.2
+  _coyoteTime: 0.12
 --- !u!114 &2843669229510685384
 MonoBehaviour:
   m_ObjectHideFlags: 0

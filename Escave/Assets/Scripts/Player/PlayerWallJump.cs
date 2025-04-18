@@ -28,6 +28,7 @@ public class PlayerWallJump : MonoBehaviour
     [SerializeField] private Vector2 _onTopWallForce;
     
     private Rigidbody2D _rb;
+    private float _initialGravityScale;
     private Vector2 _moveInput;
     
     [SerializeField] private GameObject _staminaEffect;
@@ -62,6 +63,7 @@ public class PlayerWallJump : MonoBehaviour
         _audioManager = AudioManager.Instance;
         _animator = _staminaEffect.GetComponent<Animator>();
         _rb = GetComponent<Rigidbody2D>();
+        _initialGravityScale = _rb.gravityScale;
 
         if (SceneManager.GetActiveScene().buildIndex >= 2)
             _isGrabUnlock = true;
@@ -105,7 +107,7 @@ public class PlayerWallJump : MonoBehaviour
                 _isWallClimbingLeft = false;
                 _isWallClimbingRight = false;
                 _canWallClimb = false;
-                _rb.gravityScale = 4;
+                _rb.gravityScale = _initialGravityScale;
                 _audioManager.PlaySound(AudioType.enduranceRunOut);
                 _isInputDone = false;
             }
@@ -118,7 +120,7 @@ public class PlayerWallJump : MonoBehaviour
             _isGravitySet = true;
             _isWallClimbingLeft = false;
             _isWallClimbingRight = false;
-            _rb.gravityScale = 4;
+            _rb.gravityScale = _initialGravityScale;
         }
 
         if (IsGrounded() || IsOnOneWayPlateform())
@@ -175,7 +177,7 @@ public class PlayerWallJump : MonoBehaviour
         {
             _isWallClimbingRight = false;
             _isWallClimbingLeft = false;
-            _rb.gravityScale = 4;
+            _rb.gravityScale = _initialGravityScale;
         }
     }
 
@@ -229,7 +231,7 @@ public class PlayerWallJump : MonoBehaviour
         _isWallJumping = true;
         _isWallClimbingRight = false;
         _isWallClimbingLeft = false;
-        _rb.gravityScale = 4;
+        _rb.gravityScale = _initialGravityScale;
         _wallStayTimer += 3;
         StartCoroutine(WallJumpTime());
     }
