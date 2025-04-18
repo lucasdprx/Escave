@@ -20,29 +20,19 @@ public class PlayerOneWayThroughPlatform : MonoBehaviour
             _isOnPlatform = false;
     }
 
-
     public void Look(InputAction.CallbackContext _ctx)
     {
         Vector2 _look = _ctx.ReadValue<Vector2>();
 
-        if (_look.y < -0.95f)
+        if (_look.y < -0.95f && _isOnPlatform)
         {
             _isLookingDown = true;
+            isGoingDown = true;
         }
         else
         {
             _isLookingDown = false;
             isGoingDown = false;
-        }
-    }
-
-    public void JumpAction(InputAction.CallbackContext _ctx)
-    {
-        if (!_isOnPlatform) return;
-        
-        if (_isLookingDown)
-        {
-            isGoingDown = true;
         }
     }
 }

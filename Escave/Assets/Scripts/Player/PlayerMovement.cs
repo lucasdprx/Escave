@@ -254,7 +254,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Time.timeScale <= 0) return;
         
-        if (_playerInputHandler.MoveInput.y < -0.95f && _isOnOneWayPlatform) return;
+        //if (_playerInputHandler.MoveInput.y < -0.95f && _isOnOneWayPlatform) return;
 
         _onJumpWhileGrappling.Invoke();
         _inputActionTime = _inputBufferTime;
