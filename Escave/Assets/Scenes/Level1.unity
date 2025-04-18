@@ -1783,6 +1783,7 @@ MonoBehaviour:
     isHookEnabled: 0
     isPioletEnabled: 0
     chapterUnlocked: 0
+    chapterFinished: 0
     buttonStateSet: 0
     timer: 0
 --- !u!4 &1494607821
