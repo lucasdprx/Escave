@@ -154,13 +154,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isHookUnlock: 0
   _target: {fileID: 0}
-  hookTime: 4
+  hookTime: 5
   _grapplingHookProjectile: {fileID: 5052244785293746716, guid: b3fe719adf31bbd4eadad23d180469b4, type: 3}
   _isGrappled: 0
   firePoint: {fileID: 5713371350758247214}
   hookSpeed: 35
   maxDistance: 10
-  _climbSpeed: 2
+  _climbSpeed: 3.5
   _ropeColorGradient:
     serializedVersion: 2
     key0: {r: 0.25882354, g: 0.25882354, b: 0.25882354, a: 1}
@@ -797,6 +797,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   _knockbackDuration: 0.2
+  _coyoteTime: 0.2
 --- !u!114 &2843669229510685384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -919,7 +920,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _lightHelmet: {fileID: 5966334176976692577}
   _animator: {fileID: 5415488315808768288}
-  _switchTransformsInRotation: []
+  _switchTransformsInRotation:
+  - {fileID: 5713371350758247214}
 --- !u!114 &1309718639194689868
 MonoBehaviour:
   m_ObjectHideFlags: 0

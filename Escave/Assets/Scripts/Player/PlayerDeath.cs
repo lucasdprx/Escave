@@ -89,7 +89,6 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
         {
             _collectiblesSave.SaveData(ref DataPersistenceManager.instance.gameData);
             currentCheckpoint = newCheckpoint;
-            AudioManager.Instance.PlaySound(AudioType.checkpointReach);
         }
         else
         {

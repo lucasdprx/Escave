@@ -19,8 +19,10 @@ public class TimerUIManager : MonoBehaviour, IDataPersistence
         _minutesPassInLevel = (int)_timePassInLevel / 60;
         _minutesPassInLevel %= 60;
         _hoursPassInLevel = (int)_timePassInLevel / 3600;
-        _timerText.text = string.Format("{0:00}:{1:00}:{2:00}:{3:00}", _hoursPassInLevel, _minutesPassInLevel,
-            _secondsPassInLevel, _millisecondsPassInLevel);
+        //_timerText.text = string.Format("{0:00}:{1:00}:{2:00}:{3:00}", _hoursPassInLevel, _minutesPassInLevel,
+            //_secondsPassInLevel, _millisecondsPassInLevel);
+            
+        _timerText.text = _hoursPassInLevel + "h" + _minutesPassInLevel + "m" + _secondsPassInLevel + "s" + _millisecondsPassInLevel;
     }
 
     public void LoadData(GameData _gameData)

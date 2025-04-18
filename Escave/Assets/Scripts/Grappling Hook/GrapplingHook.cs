@@ -56,52 +56,52 @@ public class GrapplingHook : MonoBehaviour
     {
         if (_currentProjectile)
         {
-            _lineRenderer.SetPosition(0, transform.position);
-            _lineRenderer.SetPosition(1, _currentProjectile.transform.position);
-        }
-
-        //Climb/ Descent
-        if (_isGrappled)
-        {
-            float vertical = _playerMovement.GetVerticalInput();
-
-            if (Mathf.Abs(vertical) > 0.01f)
+            if (!_isGrappled)
             {
-                float newDistance = _springJoint.distance - vertical * _climbSpeed * Time.deltaTime;
+                _lineRenderer.positionCount = 2;
+                _lineRenderer.SetPosition(0, transform.position);
+                _lineRenderer.SetPosition(1, _currentProjectile.transform.position);
+            }
+            else
+            {
+                //Climb/ Descent
+                float vertical = _playerMovement.GetVerticalInput();
 
-                newDistance = Mathf.Clamp(newDistance, 1f, maxDistance); //Set limite to clibing
-
-                _springJoint.distance = newDistance;
-
-                if (!_currentProjectile)
+                if (Mathf.Abs(vertical) > 0.01f)
                 {
-                    _lineRenderer.SetPosition(0, transform.position);
-                    _lineRenderer.SetPosition(1, _springJoint.connectedAnchor);
+                    float newDistance = _springJoint.distance - vertical * _climbSpeed * Time.deltaTime;
+
+                    newDistance = Mathf.Clamp(newDistance, 1f, maxDistance); //Set limite to climbing
+
+                    _springJoint.distance = newDistance;
+
+                    if (!_currentProjectile)
+                    {
+                        _lineRenderer.SetPosition(0, transform.position);
+                        _lineRenderer.SetPosition(1, _springJoint.connectedAnchor);
+                    }
                 }
+
+                //Rope effet
+                _elapsedHookTime += Time.deltaTime;
+                float t = Mathf.Clamp01(_elapsedHookTime / hookTime);
+
+                //Color
+                _lineRenderer.startColor = _ropeColorGradient.Evaluate(t);
+                _lineRenderer.endColor = _ropeColorGradient.Evaluate(t);
+
+                //Calculate vibration with middle point
+                Vector3 start = transform.position;
+                Vector3 end = _currentProjectile.transform.position;
+                Vector3 mid = (start + end) * 0.5f;
+                Vector3 jitter = new Vector3(Mathf.Sin(Time.time * _ropeVibrationFrequency) * _ropeVibrationIntensity, Mathf.Cos(Time.time * _ropeVibrationFrequency * 1.2f) * _ropeVibrationIntensity, 0f);
+
+                _lineRenderer.positionCount = 3;
+                _lineRenderer.SetPosition(0, start);
+                _lineRenderer.SetPosition(1, mid + jitter);
+                _lineRenderer.SetPosition(2, end);
             }
         }
-
-        if (_isGrappled && _currentProjectile != null)
-        {
-            if (_elapsedHookTime < hookTime)
-                _elapsedHookTime += Time.deltaTime;
-
-            float t = Mathf.Clamp01(_elapsedHookTime / hookTime);
-
-            //Change rope color
-            _lineRenderer.startColor = _ropeColorGradient.Evaluate(t);
-            _lineRenderer.endColor = _ropeColorGradient.Evaluate(t);
-
-            //rope vibration
-            Vector3 ropeDirection = _currentProjectile.transform.position - transform.position;
-            Vector3 midPoint = transform.position + ropeDirection * 0.5f;
-            Vector3 jitterOffset = new Vector3(Mathf.Sin(Time.time * _ropeVibrationFrequency) * _ropeVibrationIntensity, Mathf.Cos(Time.time * _ropeVibrationFrequency * 1.2f) * _ropeVibrationIntensity, 0f);
-            _lineRenderer.positionCount = 3;
-            _lineRenderer.SetPosition(0, transform.position);
-            _lineRenderer.SetPosition(1, midPoint + jitterOffset);
-            _lineRenderer.SetPosition(2, _currentProjectile.transform.position);
-        }
-
     }
 
     public void DestroyProjectile()
@@ -195,13 +195,15 @@ public class GrapplingHook : MonoBehaviour
             _springJoint.enabled = false;
         _isGrappled = false;
         
-        _elapsedHookTime = 0f;
         if (_lineRenderer)
         {
+            _lineRenderer.positionCount = 2;
+            _elapsedHookTime = 0f;
+
             _lineRenderer.startColor = _ropeColorGradient.Evaluate(_elapsedHookTime);
             _lineRenderer.endColor = _ropeColorGradient.Evaluate(_elapsedHookTime);
-            _lineRenderer.positionCount = 2;
         }
+
 
         if (_playerMovement)
         {
