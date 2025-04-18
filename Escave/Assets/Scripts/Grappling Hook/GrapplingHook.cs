@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class GrapplingHook : MonoBehaviour
 {
@@ -36,6 +37,9 @@ public class GrapplingHook : MonoBehaviour
 
     private void Start()
     {
+        if (SceneManager.GetActiveScene().buildIndex >= 2)
+            _isHookUnlock = true;
+        
         _lineRenderer = GetComponent<LineRenderer>();
         _springJoint = transform.parent.GetComponent<SpringJoint2D>();
         _playerMovement = GetComponentInParent<PlayerMovement>();

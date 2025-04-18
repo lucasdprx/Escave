@@ -73,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
         baseMoveSpeed = moveSpeed;
         baseJumpForce = jumpForce;
 
-        _boxSize = new Vector2(1.2f, 0.3f);
+        _boxSize = new Vector2(0.8f, 0.3f);
         
         _playerInputHandler.OnJumpPressed += OnJumpPressed;
         _playerInputHandler.OnJumpReleased += OnJumpRelease;

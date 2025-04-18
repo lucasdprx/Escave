@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerItemsManager : MonoBehaviour, IDataPersistence
@@ -7,11 +6,11 @@ public class PlayerItemsManager : MonoBehaviour, IDataPersistence
     [SerializeField] private HookPickUp _hookObject;
     public void LoadData(GameData _gameData)
     {
-        if (_gameData.isPioletEnabled == true)
+        if (_gameData.isPioletEnabled && _pioletObject != null)
         {
             _pioletObject.EnablingPiolet();
         }        
-        if (_gameData.isHookEnabled == true)
+        if (_gameData.isHookEnabled && _hookObject != null)
         {
             _hookObject.EnablingHook();
         }

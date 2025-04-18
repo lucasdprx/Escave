@@ -897,18 +897,6 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[14].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1228545894}
-    - target: {fileID: 2478794345925778205, guid: 0b546080af589c1498b91f8971c0c47b, type: 3}
-      propertyPath: m_SortingOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2843669229510685384, guid: 0b546080af589c1498b91f8971c0c47b, type: 3}
-      propertyPath: _wallJumpForce.x
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 2843669229510685384, guid: 0b546080af589c1498b91f8971c0c47b, type: 3}
-      propertyPath: _wallJumpForce.y
-      value: 15
-      objectReference: {fileID: 0}
     - target: {fileID: 2929904492367386306, guid: 0b546080af589c1498b91f8971c0c47b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -14.5
@@ -953,10 +941,6 @@ PrefabInstance:
       propertyPath: _target
       value: 
       objectReference: {fileID: 1483383860}
-    - target: {fileID: 5500900846455294277, guid: 0b546080af589c1498b91f8971c0c47b, type: 3}
-      propertyPath: _switchTransformsInRotation.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5968446577486750942, guid: 0b546080af589c1498b91f8971c0c47b, type: 3}
       propertyPath: _hookObject
       value: 
@@ -965,10 +949,6 @@ PrefabInstance:
       propertyPath: _pioletObject
       value: 
       objectReference: {fileID: 1484968229}
-    - target: {fileID: 6894023557217023328, guid: 0b546080af589c1498b91f8971c0c47b, type: 3}
-      propertyPath: _pauseMenu
-      value: 
-      objectReference: {fileID: 1228545894}
     - target: {fileID: 7023489141773015471, guid: 0b546080af589c1498b91f8971c0c47b, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1792,8 +1772,13 @@ MonoBehaviour:
   fileName: data.json
   gameData:
     deathCount: 0
-    playerPos: {x: 0, y: 0}
-    cameraPos: {x: 0, y: 0, z: -10}
+    playerPos:
+    - {x: -5.480995e+12, y: 7.6e-43}
+    - {x: 2.4578067e-18, y: 7.55e-43}
+    cameraPos:
+    - {x: 3139.1191, y: 7.61e-43, z: -0.0000000031967122}
+    - {x: 7.6e-43, y: 3139.127, z: 7.61e-43}
+    - {x: -0.0000000031967122, y: 7.6e-43, z: 3139.1348}
     collectibles: 
     collectiblesCollected: 0
     isHookEnabled: 0

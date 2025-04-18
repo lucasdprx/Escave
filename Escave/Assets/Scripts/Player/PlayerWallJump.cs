@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerWallJump : MonoBehaviour
 {
@@ -61,6 +62,9 @@ public class PlayerWallJump : MonoBehaviour
         _audioManager = AudioManager.Instance;
         _animator = _staminaEffect.GetComponent<Animator>();
         _rb = GetComponent<Rigidbody2D>();
+
+        if (SceneManager.GetActiveScene().buildIndex >= 2)
+            _isGrabUnlock = true;
     }
 
     private void Update()
