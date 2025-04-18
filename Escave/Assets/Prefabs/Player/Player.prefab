@@ -797,6 +797,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   _knockbackDuration: 0.2
+  _coyoteTime: 0.2
 --- !u!114 &2843669229510685384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -919,7 +920,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _lightHelmet: {fileID: 5966334176976692577}
   _animator: {fileID: 5415488315808768288}
-  _switchTransformsInRotation: []
+  _switchTransformsInRotation:
+  - {fileID: 5713371350758247214}
 --- !u!114 &1309718639194689868
 MonoBehaviour:
   m_ObjectHideFlags: 0
