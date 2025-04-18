@@ -121,7 +121,7 @@ public class PlayerWallJump : MonoBehaviour
             _rb.gravityScale = 4;
         }
 
-        if (IsGrounded())
+        if (IsGrounded() || IsOnOneWayPlateform())
         {
             _canWallClimb = true;
             _isWallClimbing = false;
@@ -277,6 +277,11 @@ public class PlayerWallJump : MonoBehaviour
     private bool IsGrounded()
     {
         return Physics2D.OverlapCircle(_groundCheck.position, _checkRadius, _wallLayer);
+    }
+
+    private bool IsOnOneWayPlateform()
+    {
+        return Physics2D.OverlapCircle(_groundCheck.position, _checkRadius, LayerMask.NameToLayer("OneWayPlatform"));
     }
     
     #endregion
