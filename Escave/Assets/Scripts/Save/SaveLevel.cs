@@ -11,7 +11,15 @@ public class SaveLevel : MonoBehaviour
     private void Start()
     {
         levelIndex = SceneManager.GetActiveScene().buildIndex - 1;
-        GameObject nearestLevel = GetNearestLevel(DataPersistenceManager.instance.gameData.cameraPos[levelIndex]);
+        GameObject nearestLevel;
+        if (DataPersistenceManager.instance.gameData.cameraPos.Count > levelIndex)
+        {
+            nearestLevel = GetNearestLevel(DataPersistenceManager.instance.gameData.cameraPos[levelIndex]);
+        }
+        else
+        {
+            nearestLevel = GetNearestLevel(Camera.main.transform.position);
+        }
         nearestLevel.SetActive(true);
     }
     private GameObject GetNearestLevel(Vector3 pos)

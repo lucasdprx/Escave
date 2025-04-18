@@ -36,10 +36,12 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
             if (_gameData.playerPos.Count <= levelIndex)
             {
                 _gameData.playerPos.Add(currentCheckpoint.transform.position);
+                Debug.Log("Add");
             }
             else
             {
                 _gameData.playerPos[levelIndex] = currentCheckpoint.transform.position;
+                Debug.Log("Changed");
             }
             
         }
@@ -48,6 +50,7 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
     public void LoadData(GameData _gameData)
     {
         levelIndex = SceneManager.GetActiveScene().buildIndex - 1;
+        Debug.Log(levelIndex);
         if (_gameData.playerPos.Count > levelIndex)
         {
             if (_gameData.playerPos[levelIndex] != Vector2.zero)

@@ -44,6 +44,7 @@ public class PauseMenuManager : MonoBehaviour
     public void BackToMainMenu()
     {
         Time.timeScale = 1f;
+        DataPersistenceManager.instance.SaveGame();
         SceneManager.LoadScene("MainMenu");
     }
 
