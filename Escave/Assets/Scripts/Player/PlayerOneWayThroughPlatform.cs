@@ -1,10 +1,8 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerOneWayThroughPlatform : MonoBehaviour
 {
-    private bool _isLookingDown;
     private bool _isOnPlatform;
     public bool isGoingDown;
 
@@ -23,16 +21,16 @@ public class PlayerOneWayThroughPlatform : MonoBehaviour
     public void Look(InputAction.CallbackContext _ctx)
     {
         Vector2 _look = _ctx.ReadValue<Vector2>();
-
-        if (_look.y < -0.95f && _isOnPlatform)
+        if (_ctx.performed)
         {
-            _isLookingDown = true;
-            isGoingDown = true;
-        }
-        else
-        {
-            _isLookingDown = false;
-            isGoingDown = false;
+            if (_look.y < -0.95f && _isOnPlatform)
+            {
+                isGoingDown = true;
+            }
+            else
+            {
+                isGoingDown = false;
+            }
         }
     }
 }

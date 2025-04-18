@@ -59,7 +59,6 @@ public class PlayerMovement : MonoBehaviour
     public static bool _isGrounded;
     
     private PlayerWallJump _playerWallJump;
-    private bool _isOnOneWayPlatform;
     private bool _isGrappling;
     private bool _justDetachedFromHook;
     private bool _isKnockback;
@@ -228,18 +227,6 @@ public class PlayerMovement : MonoBehaviour
         _hasLanded = true;
         AudioManager.Instance.PlaySound(_inHeavyFall ? AudioType.jumpHeavyLand : AudioType.jumpLand);
         _inHeavyFall = false;
-    }
-
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.layer == LayerMask.NameToLayer("OneWayPlatform"))
-            _isOnOneWayPlatform = true;
-    }
-
-    private void OnCollisionExit2D(Collision2D other)
-    {
-        if (other.gameObject.layer == LayerMask.NameToLayer("OneWayPlatform"))
-            _isOnOneWayPlatform = false;
     }
     
     private void OnMove()
