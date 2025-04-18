@@ -59,23 +59,24 @@ public class BreakingPlatform : MonoBehaviour
         {
             if (_timer >= breakingTime)
             {
-                BreakPlateform();
+                BreakPlatform();
             }
         }
         else
         {
             if (_timer >= recreationTime)
             {
-                ResetPlateform();
+                ResetPlatform();
             }
         }
     }
 
-    private void BreakPlateform()
+    private void BreakPlatform()
     {
         StopAllCoroutines();
-        Instantiate(_breakingPlatformPositionBlock, _transform.position, Quaternion.identity);
-        Instantiate(breakingParticles, _transform.position, Quaternion.identity);
+        Vector3 position = _transform.position;
+        Instantiate(_breakingPlatformPositionBlock, position, Quaternion.identity);
+        Instantiate(breakingParticles, position, Quaternion.identity);
         _timer = 0;
         boxCollider.enabled = false;
         spriteRenderer.enabled = false;
@@ -83,15 +84,16 @@ public class BreakingPlatform : MonoBehaviour
         OnBroken?.Invoke();
     }
 
-    private void ResetPlateform()
+    private void ResetPlatform()
     {
-        _transform.position = _initialPosition;
-        Instantiate(breakingParticles, _transform.position, Quaternion.identity);
+        Vector3 position = _initialPosition;
+        Instantiate(breakingParticles, position, Quaternion.identity);
         _timer = 0;
         boxCollider.enabled = true;
         spriteRenderer.enabled = true;
         _hasTouched = false;
-        _transform.position = _initialPosition;
+        position = _initialPosition;
+        _transform.position = position;
     }
     
     private IEnumerator Shake() 
