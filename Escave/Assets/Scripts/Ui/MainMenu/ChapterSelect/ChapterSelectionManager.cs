@@ -6,9 +6,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class ChapterSelectionManager : MonoBehaviour, IDataPersistence
+public class ChapterSelectionManager : MonoBehaviour
 {
-    [SerializeField] private List<Button> buttons;
     private AudioManager _audioManager;
     
     public void LoadChapters(string _levelName)
@@ -17,16 +16,8 @@ public class ChapterSelectionManager : MonoBehaviour, IDataPersistence
         _audioManager.PlaySound(AudioType.levelStart);
     }
 
-    public void LoadData(GameData _gameData)
+    public void Start()
     {
         _audioManager = AudioManager.Instance;
-
-        if (_gameData.chaptersFinished.Count <= 0) return;
-        
-        if(_gameData.chaptersFinished[0]) buttons[1].interactable = true;
-    }
-
-    public void SaveData(ref GameData _gameData)
-    {
     }
 }

@@ -118,12 +118,8 @@ public class SwapArea : MonoBehaviour
                 _targetCameraPosition.position += new Vector3(0,_direction.y * _cameraScale.y,0);
                 break;
         }
-
-        if (DataPersistenceManager.instance.gameData.cameraPos.Count <= levelIndex)
-        {
-            DataPersistenceManager.instance.gameData.cameraPos.Add(_targetCameraPosition.position);
-        }else
-            DataPersistenceManager.instance.gameData.cameraPos[levelIndex] = _targetCameraPosition.position;
+        
+        DataPersistenceManager.instance.gameData.cameraPos = _targetCameraPosition.position;
     }
 
     private IEnumerator MoveCameraCoroutine()

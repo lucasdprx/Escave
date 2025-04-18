@@ -27,9 +27,9 @@ public class LevelEnd : MonoBehaviour, IDataPersistence
 
     public void SaveData(ref GameData _gameData)
     {
-        if (_gameData.chaptersFinished.Count <= _index && passedPassed)
+        if (passedPassed)
         {
-            _gameData.chaptersFinished.Add(true);
+            _gameData.chapterUnlocked = true;
         }
     }
 }
