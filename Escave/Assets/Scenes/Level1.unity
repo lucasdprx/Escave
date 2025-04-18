@@ -1769,22 +1769,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c7d0ac63f8144b46a9f8ddadba2aa46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileName: data.json
+  fileName: Level1.json
   gameData:
     deathCount: 0
-    playerPos:
-    - {x: -5.480995e+12, y: 7.6e-43}
-    - {x: 2.4578067e-18, y: 7.55e-43}
-    cameraPos:
-    - {x: 3139.1191, y: 7.61e-43, z: -0.0000000031967122}
-    - {x: 7.6e-43, y: 3139.127, z: 7.61e-43}
-    - {x: -0.0000000031967122, y: 7.6e-43, z: 3139.1348}
+    playerPos: {x: 0, y: 0}
+    cameraPos: {x: 0, y: 0, z: 0}
     collectibles: 
     collectiblesCollected: 0
     isHookEnabled: 0
     isPioletEnabled: 0
-    chaptersFinished: 
-    timers: []
+    chapterUnlocked: 0
+    buttonStateSet: 0
+    timer: 0
 --- !u!4 &1494607821
 Transform:
   m_ObjectHideFlags: 0
@@ -2964,7 +2960,9 @@ PrefabInstance:
       objectReference: {fileID: 367331640}
     - target: {fileID: 1655768873785895159, guid: 800637e7cead47843822841d84518de5, type: 3}
       propertyPath: m_text
-      value: 1h45m2s52ms
+      value: '0h0m0s0
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 1655768873785895159, guid: 800637e7cead47843822841d84518de5, type: 3}
       propertyPath: m_HorizontalAlignment
@@ -3239,11 +3237,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5897370953533657349, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
       propertyPath: m_AnimatedTiles.Array.data[6].second.m_AnimationSpeed
-      value: 10.000001
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5897370953533657349, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
       propertyPath: m_AnimatedTiles.Array.data[28].second.m_AnimationSpeed
-      value: 10.000001
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5897370953533657349, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
       propertyPath: m_AnimatedTiles.Array.data[35].second.m_AnimationSpeed
@@ -3251,6 +3249,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5897370953533657349, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
       propertyPath: m_AnimatedTiles.Array.data[36].second.m_AnimationSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5897370953533657349, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
+      propertyPath: m_AnimatedTiles.Array.data[64].second.m_AnimationSpeed
       value: 10.000001
       objectReference: {fileID: 0}
     - target: {fileID: 5897370953533657349, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
@@ -3263,7 +3265,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5897370953533657349, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
       propertyPath: m_AnimatedTiles.Array.data[126].second.m_AnimationSpeed
-      value: 10.000001
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5897370953533657349, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
       propertyPath: m_AnimatedTiles.Array.data[140].second.m_AnimationSpeed

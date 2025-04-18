@@ -2727,22 +2727,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c7d0ac63f8144b46a9f8ddadba2aa46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileName: data.json
+  fileName: Level2.json
   gameData:
     deathCount: 0
-    playerPos:
-    - {x: 1.9014703e+27, y: 8.03e-43}
-    - {x: -1.951268e-24, y: 8.03e-43}
-    cameraPos:
-    - {x: 1.901612e+27, y: 8.03e-43, z: 3.6287638e+26}
-    - {x: 8.03e-43, y: 1.9016167e+27, z: 8.03e-43}
-    - {x: 3.6287638e+26, y: 8.03e-43, z: 1.9016214e+27}
+    playerPos: {x: 0, y: 0}
+    cameraPos: {x: 0, y: 0, z: 0}
     collectibles: 
     collectiblesCollected: 0
     isHookEnabled: 0
     isPioletEnabled: 0
-    chaptersFinished: 
-    timers: []
+    chapterUnlocked: 0
+    buttonStateSet: 0
+    timer: 0
 --- !u!4 &1494607821
 Transform:
   m_ObjectHideFlags: 0
