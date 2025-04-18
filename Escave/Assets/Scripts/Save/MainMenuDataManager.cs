@@ -12,6 +12,8 @@ public class MainMenuDataManager : MonoBehaviour
     
     private DataFileHandler _dataFileDataHandler;
     public static MainMenuDataManager instance { get; private set; }
+
+    private bool allowLevel;
     
     private void Awake()
     {
@@ -46,8 +48,16 @@ public class MainMenuDataManager : MonoBehaviour
         {
             NewDatas();
         }
+
+        if (allowLevel)
+        {
+            currentGameData.chapterUnlocked = true;
+            allowLevel = false;
+        }
         
-        print(currentGameData);
+        if (currentGameData.chapterFinished) {
+            allowLevel = true;
+        }
 
         _datasLoaded.LoadData(currentGameData);
     }
