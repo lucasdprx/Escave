@@ -37,6 +37,10 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Knockback")]
     [SerializeField] private float _knockbackDuration = 0.2f;
+    
+    [Header("Coyote Time")]
+    [SerializeField] private float _coyoteTime = 0.2f;
+    private float _coyoteTimeCounter;
 
     public Direction LastDirection { get; private set; } = Direction.Right;
     public enum Direction
@@ -105,6 +109,15 @@ public class PlayerMovement : MonoBehaviour
         if (_isGrounded && _justDetachedFromHook)
         {
             _justDetachedFromHook = false;
+        }
+
+        if (_isGrounded)
+        {
+            _coyoteTimeCounter = _coyoteTime;
+        }
+        else
+        {
+            _coyoteTimeCounter -= Time.deltaTime;
         }
 
         if (_isGrounded && _inputActionTime > 0) 
@@ -247,14 +260,16 @@ public class PlayerMovement : MonoBehaviour
         _inputActionTime = _inputBufferTime;
         _isInputBuffering = true;
 
-        if (!_isGrounded) return;
-        
-        _isJumping = true;
-        _jumpTimeCounter = _maxJumpDuration;
+        if (_coyoteTimeCounter > 0f)
+        {
+            _isJumping = true;
+            _jumpTimeCounter = _maxJumpDuration;
+        }
     }
     private void OnJumpRelease()
     {
         _isJumping = false;
+        _coyoteTimeCounter = 0f;
     }
 
     private Direction GetEightDirection(Vector2 input)
