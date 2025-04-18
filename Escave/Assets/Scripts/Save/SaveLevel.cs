@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class SaveLevel : MonoBehaviour
 {
-    private int levelIndex;
+    [SerializeField] private int levelIndex;
     
     [SerializeField] private List<GameObject> _levels;
 
