@@ -26,6 +26,8 @@ public class LaederBoardScript : MonoBehaviour, ILBPersistence, IDataPersistence
         
             for (int i = 0; i < m_GameData.timers.Count; i++)
             {
+                if (m_GameData.chaptersFinished.Count <= i) continue;
+                
                 if (m_GameData.chaptersFinished[i])
                 {
                     if(i >= m_timersToDisplay.Count)
