@@ -3,9 +3,6 @@ using UnityEngine;
 
 public class TimerUIManager : MonoBehaviour, IDataPersistence
 {
-    [SerializeField]
-    private int timerIndex;
-    
     [SerializeField] private TextMeshProUGUI _timerText;
     private float _timePassInLevel;
     private int _secondsPassInLevel;
@@ -17,6 +14,7 @@ public class TimerUIManager : MonoBehaviour, IDataPersistence
     {
         _timePassInLevel += Time.deltaTime;
         _millisecondsPassInLevel = (int)(_timePassInLevel % (int)_timePassInLevel * 100);
+        if(_millisecondsPassInLevel < 0) _millisecondsPassInLevel = 0;
         _secondsPassInLevel = (int)_timePassInLevel % 60;
         _minutesPassInLevel = (int)_timePassInLevel / 60;
         _minutesPassInLevel %= 60;
@@ -29,18 +27,11 @@ public class TimerUIManager : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData _gameData)
     {
-        if (_gameData.timers.Count <= timerIndex) return;
-        
-        _timePassInLevel = _gameData.timers[timerIndex];
+        _timePassInLevel = _gameData.timer;
     }
 
     public void SaveData(ref GameData _gameData)
     {
-        if (_gameData.timers.Count <= timerIndex)
-        {
-            _gameData.timers.Add(_timePassInLevel);
-        };
-        
-        _gameData.timers[timerIndex] = _timePassInLevel;
+        _gameData.timer = _timePassInLevel;
     }
 }

@@ -26,11 +26,6 @@ public class DataPersistenceManager : MonoBehaviour
         LoadGame();
     }
 
-    private void Start()
-    {
-        
-    }
-
     private void OnApplicationQuit()
     {
         SaveGame();
