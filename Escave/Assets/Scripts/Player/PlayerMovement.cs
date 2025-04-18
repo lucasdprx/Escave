@@ -59,7 +59,6 @@ public class PlayerMovement : MonoBehaviour
     public static bool _isGrounded;
     
     private PlayerWallJump _playerWallJump;
-    private bool _isOnOneWayPlatform;
     private bool _isGrappling;
     private bool _justDetachedFromHook;
     private bool _isKnockback;
@@ -229,18 +228,6 @@ public class PlayerMovement : MonoBehaviour
         AudioManager.Instance.PlaySound(_inHeavyFall ? AudioType.jumpHeavyLand : AudioType.jumpLand);
         _inHeavyFall = false;
     }
-
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.layer == LayerMask.NameToLayer("OneWayPlatform"))
-            _isOnOneWayPlatform = true;
-    }
-
-    private void OnCollisionExit2D(Collision2D other)
-    {
-        if (other.gameObject.layer == LayerMask.NameToLayer("OneWayPlatform"))
-            _isOnOneWayPlatform = false;
-    }
     
     private void OnMove()
     {
@@ -254,7 +241,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Time.timeScale <= 0) return;
         
-        if (_playerInputHandler.MoveInput.y < -0.95f && _isOnOneWayPlatform) return;
+        //if (_playerInputHandler.MoveInput.y < -0.95f && _isOnOneWayPlatform) return;
 
         _onJumpWhileGrappling.Invoke();
         _inputActionTime = _inputBufferTime;
