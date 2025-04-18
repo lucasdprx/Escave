@@ -154,13 +154,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isHookUnlock: 0
   _target: {fileID: 0}
-  hookTime: 4
+  hookTime: 5
   _grapplingHookProjectile: {fileID: 5052244785293746716, guid: b3fe719adf31bbd4eadad23d180469b4, type: 3}
   _isGrappled: 0
   firePoint: {fileID: 5713371350758247214}
   hookSpeed: 35
   maxDistance: 10
-  _climbSpeed: 2
+  _climbSpeed: 3.5
   _ropeColorGradient:
     serializedVersion: 2
     key0: {r: 0.25882354, g: 0.25882354, b: 0.25882354, a: 1}

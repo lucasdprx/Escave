@@ -209,19 +209,14 @@ public class PlayerWallJump : MonoBehaviour
         
         if (_ctx.started)
         {
-            if (_isWallClimbing)
-            {
-                _isWallClimbing = false;
-                _isWallClimbingLeft = false;
-                _isWallClimbingRight = false;
-                return;
-            }
-                
             _isInputDone = true;
         }
         else if (_ctx.canceled)
         {
             _isInputDone = false;
+            _isWallClimbing = false;
+            _isWallClimbingLeft = false;
+            _isWallClimbingRight = false;
         }
     }
     
