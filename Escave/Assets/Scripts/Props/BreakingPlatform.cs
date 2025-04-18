@@ -14,7 +14,7 @@ public class BreakingPlatform : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     private bool _hasTouched;
-    private Transform _initialPosition;
+    private Vector3 _initialPosition;
     private float _timer;
     public event Action OnBroken;
 
@@ -23,7 +23,7 @@ public class BreakingPlatform : MonoBehaviour
 
     private void Start()
     {
-        _initialPosition = transform;
+        _initialPosition = transform.position;
         Vector3 _scaleWanted = new Vector3(transform.localScale.x, 1f, 1f);
         boxCollider = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -83,21 +83,25 @@ public class BreakingPlatform : MonoBehaviour
 
     private void ResetPlateform()
     {
-        transform.position = _initialPosition.position;
+        transform.position = _initialPosition;
         Instantiate(breakingParticles, transform.position, Quaternion.identity);
         _timer = 0;
         boxCollider.enabled = true;
         spriteRenderer.enabled = true;
         _hasTouched = false;
+        transform.position = _initialPosition;
     }
     
     private IEnumerator Shake() 
     {
+        Vector3 originalPosition = _initialPosition;
+
         while (true)
         {
-            transform.localPosition += new Vector3(_distanceToShake, 0, 0);
+            float offset = _distanceToShake;
+            transform.position = originalPosition + new Vector3(offset, 0, 0);
             yield return new WaitForSeconds(0.01f);
-            transform.localPosition -= new Vector3(_distanceToShake, 0, 0);
+            transform.position = originalPosition - new Vector3(offset, 0, 0);
             yield return new WaitForSeconds(0.01f);
         }
     }
