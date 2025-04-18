@@ -17,6 +17,7 @@ public class GameData
     public bool isPioletEnabled;
 
     public bool chapterUnlocked;
+    public bool chapterFinished;
     public bool buttonStateSet;
 
     public float timer;
@@ -38,5 +39,6 @@ public class GameData
         
         chapterUnlocked = false;
         buttonStateSet = false;
+        chapterFinished = false;
     }
 }

@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 
 public class LevelEnd : MonoBehaviour, IDataPersistence
 {
-    private int _index;
     private bool passedPassed;
     private void OnTriggerExit2D(Collider2D other)
     {
@@ -16,11 +15,6 @@ public class LevelEnd : MonoBehaviour, IDataPersistence
         SceneManager.LoadScene("MainMenu");
     }
 
-    private void Start()
-    {
-        _index = SceneManager.GetActiveScene().buildIndex - 1;
-    }
-
     public void LoadData(GameData _gameData)
     {
     }
@@ -29,7 +23,7 @@ public class LevelEnd : MonoBehaviour, IDataPersistence
     {
         if (passedPassed)
         {
-            _gameData.chapterUnlocked = true;
+            _gameData.chapterFinished = true;
         }
     }
 }
