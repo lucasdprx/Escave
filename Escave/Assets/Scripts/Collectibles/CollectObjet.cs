@@ -13,13 +13,19 @@ public class CollectObjet : MonoBehaviour
     
     public static event Action OnCollectibleCollected;
 
-    private void Start()
+    void Start()
     {
-        collectibleData = new CollectibleData();
-        
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = icon;
         _audioManager = AudioManager.Instance;
+    }
+
+    public void Initialize(bool _isCollected)
+    {
+        collectibleData = new CollectibleData();
+        collectibleData.HasBeenCollected = _isCollected;
+
+        gameObject.SetActive(!collectibleData.HasBeenCollected);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
