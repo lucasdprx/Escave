@@ -61,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
     public bool _isClimbingFlip;
     
     private PlayerWallJump _playerWallJump;
-    private bool _isGrappling;
+    public bool _isGrappling;
     private bool _justDetachedFromHook;
     private bool _isKnockback;
     private float _knockbackTimer;
