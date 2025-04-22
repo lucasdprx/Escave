@@ -20,8 +20,8 @@ public enum AudioType
     levelStart,
     uiButton,
     uiReturn,
-    mainMenuOST,
-    inGameOST
+    platformBreak,
+    platformRespawn
 }
 
 public class AudioManager : MonoBehaviour
@@ -59,8 +59,6 @@ public class AudioManager : MonoBehaviour
         else data.source.pitch = 1f;
 
         data.source.Play();
-
-        if (type == AudioType.inGameOST) Debug.Log("Playing the in game ost, in theory");
     }
 
     public void StopSound(AudioType type)

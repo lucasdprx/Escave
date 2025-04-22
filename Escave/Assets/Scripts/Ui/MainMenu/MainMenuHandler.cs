@@ -19,10 +19,8 @@ public class MainMenuHandler : MonoBehaviour
 
     public void PlayGame()
     {
-        _audioManager.StopSound(AudioType.mainMenuOST);
         SceneManager.LoadScene("Game");
         _audioManager.PlaySound(AudioType.levelStart);
-        _audioManager.PlaySound(AudioType.inGameOST);
     }
 
     public void NewGame()
@@ -46,8 +44,6 @@ public class MainMenuHandler : MonoBehaviour
     {
         StartCoroutine(FadeOutAnim(blackScreen));
         _audioManager = AudioManager.Instance;
-        _audioManager.StopSound(AudioType.mainMenuOST);
-        _audioManager.PlaySound(AudioType.mainMenuOST);
     }
 
     public void FadeIn(CanvasGroup _canvasGroup)
