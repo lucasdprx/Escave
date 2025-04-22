@@ -99,8 +99,13 @@ public class GrapplerProjectile : MonoBehaviour
 
         if (IsPartOfTrap(collision.transform)) StartReturn(); //grappling come back to player
 
+        if (collision.CompareTag("Enemy"))
+        {
+            StartReturn();
+        }
+        
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") ||
-            collision.gameObject.layer == LayerMask.NameToLayer("OneWayPlatform") || collision.CompareTag("Enemy") || 
+            collision.gameObject.layer == LayerMask.NameToLayer("OneWayPlatform") || 
             collision.gameObject.layer == LayerMask.NameToLayer("UnclimbableWall")) //Attach to object
         {
             print("OnGround");
