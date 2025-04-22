@@ -125,13 +125,6 @@ public class PlayerWallJump : MonoBehaviour
 
         if (IsOnPlatform(_groundCheck.position, _wallLayer) || IsOnPlatform(_groundCheck.position, 1 << LayerMask.NameToLayer("OneWayPlatform")))
         {
-            _isWallClimbingLeft = false;
-            _isWallClimbingRight = false;
-            _isWallClimbing = false;
-            _isInputDone = false;
-            _rb.gravityScale = _initialGravityScale;
-        }
-        {
             _canWallClimb = true;
             _isWallClimbing = false;
             _wallStayTimer = 0;
