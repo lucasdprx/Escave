@@ -16,7 +16,7 @@ public enum AudioType
     enduranceRunOut,
     collectibleGet,
     stalactiteFall,
-    stalactiteRegrow,
+    ratBounce,
     levelStart,
     uiButton,
     uiReturn,
@@ -53,6 +53,8 @@ public class AudioManager : MonoBehaviour
          || type == AudioType.uiReturn
          || type == AudioType.platformBreak
          || type == AudioType.platformRespawn
+         || type == AudioType.death
+         || type == AudioType.ratBounce
          || type == AudioType.uiButton)
         {
             data.source.pitch = Random.Range(0.75f, 1.5f);
