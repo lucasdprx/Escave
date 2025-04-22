@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ae6c796495785f645a94eeb4fdea3ecd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0fe5da036991f824588293a9f3ac9966, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -153,6 +153,7 @@ MonoBehaviour:
   onTouchParticles: {fileID: 1125175072244788571, guid: 8576a2b56afe24c419cb0519737c355b, type: 3}
   breakingParticles: {fileID: 8368128936833767661, guid: f5b4a9d614d5c6f42b2dba885662f19b, type: 3}
   _breakingPlatformPositionBlock: {fileID: 7001725641646581334, guid: 03aacbd2534ca5c419ef0da849ba5457, type: 3}
+  _distanceToShake: 0.05
 --- !u!114 &7454200272719635905
 MonoBehaviour:
   m_ObjectHideFlags: 0
