@@ -27,7 +27,7 @@ public class MainMenuHandler : MonoBehaviour
     {
         DataPersistenceManager.instance.NewOptions();
         DataPersistenceManager.instance.SaveGame();
-        PlayGame();
+        SceneManager.LoadScene("Level1");
     }
 
     public void PlayUIClickSound()
