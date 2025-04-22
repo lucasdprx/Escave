@@ -204,6 +204,7 @@ GameObject:
   - component: {fileID: 6932263571252307126}
   - component: {fileID: 2478794345925778205}
   - component: {fileID: 5415488315808768288}
+  - component: {fileID: 9167543267988291903}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
@@ -304,6 +305,27 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &9167543267988291903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3816604139127367419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ea34ccbe86eee74b819cbf7565e185a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _lightHelmet: {fileID: 5966334176976692577}
+  _animator: {fileID: 5415488315808768288}
+  _switchTransformsInRotation:
+  - {fileID: 5713371350758247214}
+  _spriteRenderer: {fileID: 2478794345925778205}
+  _playerInputHandler: {fileID: 1309718639194689868}
+  _playerMovement: {fileID: 6894023557217023328}
+  _rb: {fileID: 7052040378954289160}
+  _grapplingHook: {fileID: 4692712459543376296}
 --- !u!1 &4594134647436753598
 GameObject:
   m_ObjectHideFlags: 0
@@ -437,7 +459,6 @@ GameObject:
   - component: {fileID: 7576297500504853032}
   - component: {fileID: 4370203769354911228}
   - component: {fileID: 5968446577486750942}
-  - component: {fileID: 5500900846455294277}
   - component: {fileID: 1309718639194689868}
   - component: {fileID: 1496963242904100683}
   m_Layer: 7
@@ -786,6 +807,7 @@ MonoBehaviour:
         m_CallState: 2
   _knockbackDuration: 0.2
   _coyoteTime: 0.12
+  _isClimbingFlip: 0
 --- !u!114 &2843669229510685384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -894,22 +916,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pioletObject: {fileID: 0}
   _hookObject: {fileID: 0}
---- !u!114 &5500900846455294277
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7023489141773015471}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ea34ccbe86eee74b819cbf7565e185a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _lightHelmet: {fileID: 5966334176976692577}
-  _animator: {fileID: 5415488315808768288}
-  _switchTransformsInRotation:
-  - {fileID: 5713371350758247214}
 --- !u!114 &1309718639194689868
 MonoBehaviour:
   m_ObjectHideFlags: 0

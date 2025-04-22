@@ -18,6 +18,10 @@ public class GrapplerProjectile : MonoBehaviour
     private bool _isOnEnemy;
     private BreakingPlatform _currentBreakingPlatform;
     private Transform _grapplingHookTransform;
+    
+    [SerializeField] private Animator _hookAnimator;
+    [SerializeField] private Sprite _hookAttachingSprite;
+    [SerializeField] private bool _isAnimePlaying;
 
     public static event Action OnProjectileReturned;
     public static event Action OnDetachGrapplingHook;
@@ -37,6 +41,11 @@ public class GrapplerProjectile : MonoBehaviour
 
     private void Update()
     {
+        if (!_isAnimePlaying)
+        {
+            _hookAnimator.enabled = true;
+        }
+        
         if (_isReturning)
         {
             _currentHookedObject = null;
@@ -69,6 +78,7 @@ public class GrapplerProjectile : MonoBehaviour
     {
         if (_isReturning) return;
 
+        _isAnimePlaying = false;
         _isOnEnemy = false;
         _isReturning = true;
         _rb.bodyType = RigidbodyType2D.Dynamic;
@@ -89,8 +99,13 @@ public class GrapplerProjectile : MonoBehaviour
 
         if (IsPartOfTrap(collision.transform)) StartReturn(); //grappling come back to player
 
+        if (collision.CompareTag("Enemy"))
+        {
+            StartReturn();
+        }
+        
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") ||
-            collision.gameObject.layer == LayerMask.NameToLayer("OneWayPlatform") || collision.CompareTag("Enemy") || 
+            collision.gameObject.layer == LayerMask.NameToLayer("OneWayPlatform") || 
             collision.gameObject.layer == LayerMask.NameToLayer("UnclimbableWall")) //Attach to object
         {
             print("OnGround");
@@ -107,9 +122,13 @@ public class GrapplerProjectile : MonoBehaviour
 
                 transform.position = collision.ClosestPoint(transform.position);
                 _isAttached = true;
+                _isAnimePlaying = true;
 
                 _hookTime = surface.HookSurfaceTime;
                 OnSurfaceTouched?.Invoke();
+                
+                _hookAnimator.enabled = false;
+                gameObject.GetComponentInChildren<SpriteRenderer>().sprite = _hookAttachingSprite;
 
                 //set is grapple to surface 
                 if(collision.CompareTag("BreakingPlateform"))
