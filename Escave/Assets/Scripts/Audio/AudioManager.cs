@@ -16,10 +16,12 @@ public enum AudioType
     enduranceRunOut,
     collectibleGet,
     stalactiteFall,
-    stalactiteRegrow,
+    ratBounce,
     levelStart,
     uiButton,
-    uiReturn
+    uiReturn,
+    platformBreak,
+    platformRespawn
 }
 
 public class AudioManager : MonoBehaviour
@@ -49,6 +51,10 @@ public class AudioManager : MonoBehaviour
          || type == AudioType.grapplingHookThrow 
          || type == AudioType.grapplingHookHit
          || type == AudioType.uiReturn
+         || type == AudioType.platformBreak
+         || type == AudioType.platformRespawn
+         || type == AudioType.death
+         || type == AudioType.ratBounce
          || type == AudioType.uiButton)
         {
             data.source.pitch = Random.Range(0.75f, 1.5f);
@@ -62,7 +68,7 @@ public class AudioManager : MonoBehaviour
     public void StopSound(AudioType type)
     {
         AudioData data = GetAudioData(type);
-        data.source.Stop();
+        if (data.source) data.source.Stop();
     }
 
     private AudioData GetAudioData(AudioType type)

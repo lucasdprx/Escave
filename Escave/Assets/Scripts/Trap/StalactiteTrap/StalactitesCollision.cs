@@ -43,7 +43,6 @@ public class StalactitesCollision : MonoBehaviour
 
     private IEnumerator ResetSpike()
     {
-        _audioManager.PlaySound(AudioType.stalactiteRegrow);
         _transform.position = initSpawnPoint;
         rb.gravityScale = 0f;
         rb.linearVelocity = Vector2.zero;

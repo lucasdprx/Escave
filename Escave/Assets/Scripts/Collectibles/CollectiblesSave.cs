@@ -6,6 +6,8 @@ public class CollectiblesSave : MonoBehaviour, IDataPersistence
 {
     [SerializeField] private List<CollectObjet> collectibles;
     [SerializeField] private TextMeshProUGUI _fraiseText;
+
+    private List<bool> _temp;
     
     private int valueCollected;
 
@@ -16,31 +18,25 @@ public class CollectiblesSave : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData _gameData)
     {
+        Debug.Log("Loading Collectibles");
+        
         valueCollected = _gameData.collectiblesCollected;
         UpdateText();
-        
-        if (_gameData.collectibles.Count == 0) return;
+
+        if (_gameData.collectibles.Count == 0)
+        {
+            foreach (CollectObjet collectObjet in collectibles)
+            {
+                _gameData.collectibles.Add(false);
+            }
+        }
         
         for (int i = 0; i < _gameData.collectibles.Count; i++)
         {
             if (collectibles.Count <= i) continue;
             
-            if (collectibles[i].collectibleData != null)
-                collectibles[i].collectibleData.SetData(_gameData.collectibles[i]);
-        }
-
-        foreach (CollectObjet _collectObjet in collectibles)
-        {
-            if (_collectObjet.collectibleData == null) continue;
-            
-            if (_collectObjet.collectibleData.HasBeenCollected)
-            {
-                _collectObjet.gameObject.SetActive(false);
-            }
-            else if(!_collectObjet.collectibleData.HasBeenCollected)
-            {
-                _collectObjet.gameObject.SetActive(true);
-            }
+            print("Initialize");
+            collectibles[i].Initialize(_gameData.collectibles[i]);
         }
     }
 
@@ -55,14 +51,25 @@ public class CollectiblesSave : MonoBehaviour, IDataPersistence
         _fraiseText.text = valueCollected.ToString();
     }
 
+    public void Save()
+    {
+        _temp = new List<bool>();
+        
+        for (int i = 0; i < collectibles.Count; i++)
+        {
+            if(collectibles[i].collectibleData != null)
+                _temp.Add(collectibles[i].collectibleData.HasBeenCollected);
+        }
+    }
+
+    public void EndCollectibles()
+    {
+        LoadData(DataPersistenceManager.instance.gameData);
+    }
+
     public void SaveData(ref GameData _gameData)
     {
         _gameData.collectiblesCollected = valueCollected;
-        _gameData.collectibles = new List<bool>();
-
-        for (int i = 0; i < collectibles.Count; i++)
-        {
-            _gameData.collectibles.Add(collectibles[i].collectibleData.HasBeenCollected);
-        }
+        _gameData.collectibles = _temp;
     }
 }

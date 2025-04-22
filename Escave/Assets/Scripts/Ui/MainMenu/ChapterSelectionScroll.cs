@@ -15,6 +15,8 @@ public class ChapterSelectionScroll : MonoBehaviour
     private Vector2 _nextPos;
     private ScrollRect scrollRect;
     private GameObject selectedElement;
+    
+    public bool _canMove;
 
     private void Awake()
     {
@@ -29,10 +31,17 @@ public class ChapterSelectionScroll : MonoBehaviour
             }
         }
     }
+
+    public void SetCanMove(bool canMove)
+    {
+        _canMove = canMove;
+    }
     
     public void InputAction(InputAction.CallbackContext _ctx)
     {
+        print(_canMove);
         if (!chapterSelection.activeSelf) return;
+        if (!_canMove) return;
         
         Vector2 _delta = _ctx.ReadValue<Vector2>();
         
