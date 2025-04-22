@@ -51,6 +51,8 @@ public class AudioManager : MonoBehaviour
          || type == AudioType.grapplingHookThrow 
          || type == AudioType.grapplingHookHit
          || type == AudioType.uiReturn
+         || type == AudioType.platformBreak
+         || type == AudioType.platformRespawn
          || type == AudioType.uiButton)
         {
             data.source.pitch = Random.Range(0.75f, 1.5f);
