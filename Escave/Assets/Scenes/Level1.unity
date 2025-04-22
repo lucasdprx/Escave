@@ -3200,7 +3200,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8345162707418543912, guid: 800637e7cead47843822841d84518de5, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 20.71
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8345162707418543912, guid: 800637e7cead47843822841d84518de5, type: 3}
       propertyPath: m_SizeDelta.y
@@ -3325,6 +3325,14 @@ PrefabInstance:
       propertyPath: _grapplingHook
       value: 
       objectReference: {fileID: 769763604}
+    - target: {fileID: 1658000925805337536, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1900799510703519631, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2648774950224487253, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
       propertyPath: _fraiseText
       value: 
@@ -3377,9 +3385,33 @@ PrefabInstance:
       propertyPath: _playerWallJump
       value: 
       objectReference: {fileID: 769763605}
+    - target: {fileID: 4021589033432358281, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4570143723096997370, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5267657022780461691, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5345963708156737708, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7535912261978824578, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8295652783049654115, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
       propertyPath: m_Name
       value: Map 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802939720452642006, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
