@@ -71,7 +71,7 @@ public class PlayerWallJump : MonoBehaviour
 
     private void Update()
     {
-        if (IsGrounded())
+        if (IsOnPlatform(_groundCheck.position, _wallLayer))
         {
             _canWallClimb = true;
             _isWallClimbing = false;
@@ -80,11 +80,11 @@ public class PlayerWallJump : MonoBehaviour
             _isWallClimbingRight = false;
         }
         
-        if (_isInputDone && IsWallRight() && _moveInput.x > 0.1f && !IsGrounded())
+        if (_isInputDone && IsOnPlatform(_wallCheckRight.position, _wallLayer) && _moveInput.x > 0.1f && !IsOnPlatform(_groundCheck.position, _wallLayer))
         {
             _isWallClimbingRight = true;
             _isWallClimbing = true;
-        } else if (_isInputDone && IsWallLeft() && _moveInput.x < 0.1f && !IsGrounded()) {
+        } else if (_isInputDone && IsOnPlatform(_wallCheckLeft.position, _wallLayer) && _moveInput.x < 0.1f && !IsOnPlatform(_groundCheck.position, _wallLayer)) {
             _isWallClimbingLeft = true;
             _isWallClimbing = true;
         }
@@ -123,7 +123,14 @@ public class PlayerWallJump : MonoBehaviour
             _rb.gravityScale = _initialGravityScale;
         }
 
-        if (IsGrounded() || IsOnOneWayPlateform())
+        if (IsOnPlatform(_groundCheck.position, _wallLayer) || IsOnPlatform(_groundCheck.position, 1 << LayerMask.NameToLayer("OneWayPlatform")))
+        {
+            _isWallClimbingLeft = false;
+            _isWallClimbingRight = false;
+            _isWallClimbing = false;
+            _isInputDone = false;
+            _rb.gravityScale = _initialGravityScale;
+        }
         {
             _canWallClimb = true;
             _isWallClimbing = false;
@@ -140,19 +147,19 @@ public class PlayerWallJump : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(IsGrounded()) return;
+        if(IsOnPlatform(_groundCheck.position, _wallLayer)) return;
         if (!_canWallClimb) return;
         if (_isWallJumping) return;
         if (!_isWallClimbing) return;
 
         _isGravitySet = false;
 
-        if ((_isWallClimbingLeft && !IsWallLeft() || _isWallClimbingRight && !IsWallRight()) && !_isWallJumping)
+        if ((_isWallClimbingLeft && !IsOnPlatform(_wallCheckLeft.position, _wallLayer) || _isWallClimbingRight && !IsOnPlatform(_wallCheckRight.position, _wallLayer)) && !_isWallJumping)
         {
             _rb.AddForce(_onTopWallForce, ForceMode2D.Impulse);
         }
 
-        if (_isWallClimbingRight && IsWallRight())
+        if (_isWallClimbingRight && IsOnPlatform(_wallCheckRight.position, _wallLayer))
         {
             _rb.gravityScale = 0;
             if (_moveInput.y != 0)
@@ -162,7 +169,7 @@ public class PlayerWallJump : MonoBehaviour
             }
             _rb.linearVelocity = new Vector2(0f, 0f);
         }
-        else if (_isWallClimbingLeft && IsWallLeft())
+        else if (_isWallClimbingLeft && IsOnPlatform(_wallCheckLeft.position, _wallLayer))
         {
             _rb.gravityScale = 0;
             if (_moveInput.y != 0)
@@ -266,24 +273,9 @@ public class PlayerWallJump : MonoBehaviour
     #endregion
     
     #region Bool Functions
-    private bool IsWallRight()
+    private static bool IsOnPlatform(Vector3 position, LayerMask layerMask)
     {
-        return Physics2D.OverlapCircle(_wallCheckRight.position, _checkRadius, _wallLayer);
-    }
-
-    private bool IsWallLeft()
-    {
-        return Physics2D.OverlapCircle(_wallCheckLeft.position, _checkRadius, _wallLayer);
-    }
-
-    private bool IsGrounded()
-    {
-        return Physics2D.OverlapCircle(_groundCheck.position, _checkRadius, _wallLayer);
-    }
-
-    private bool IsOnOneWayPlateform()
-    {
-        return Physics2D.OverlapCircle(_groundCheck.position, _checkRadius, LayerMask.NameToLayer("OneWayPlatform"));
+        return Physics2D.OverlapCircle(position, _checkRadius, layerMask);
     }
     
     #endregion
