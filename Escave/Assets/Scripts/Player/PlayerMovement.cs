@@ -58,6 +58,8 @@ public class PlayerMovement : MonoBehaviour
     public static event Action OnStepSound;
     public static bool _isGrounded;
     
+    public bool _isClimbingFlip;
+    
     private PlayerWallJump _playerWallJump;
     private bool _isGrappling;
     private bool _justDetachedFromHook;
@@ -313,6 +315,14 @@ public class PlayerMovement : MonoBehaviour
     }
     public bool IsWallClimb()
     {
+        if (_playerWallJump._isWallClimbingRight)
+        {
+            _isClimbingFlip = true;
+        }
+        else if (_playerWallJump._isWallClimbingLeft)
+        {
+            _isClimbingFlip = false;
+        }
         return _playerWallJump._isWallClimbingLeft || _playerWallJump._isWallClimbingRight;
     }
 
