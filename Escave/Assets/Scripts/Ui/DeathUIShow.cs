@@ -9,6 +9,7 @@ public class DeathUIShow : MonoBehaviour
     private void Start()
     {
         _playerDeath.OnDeath.AddListener(ShowDeathCounter);
+        ShowDeathCounter(DataPersistenceManager.instance.gameData.deathCount);
     }
 
     private void ShowDeathCounter(int deathCount)

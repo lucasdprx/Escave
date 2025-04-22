@@ -23,7 +23,12 @@ public class CollectiblesSave : MonoBehaviour, IDataPersistence
         valueCollected = _gameData.collectiblesCollected;
         UpdateText();
 
-        if (_gameData.collectibles.Count == 0)
+        if (_gameData.collectibles == null)
+        {
+            _gameData.collectibles = new List<bool>();
+        }
+
+        if (_gameData.collectibles.Count <= 0)
         {
             foreach (CollectObjet collectObjet in collectibles)
             {
@@ -69,6 +74,7 @@ public class CollectiblesSave : MonoBehaviour, IDataPersistence
 
     public void SaveData(ref GameData _gameData)
     {
+        Save();
         _gameData.collectiblesCollected = valueCollected;
         _gameData.collectibles = _temp;
     }
