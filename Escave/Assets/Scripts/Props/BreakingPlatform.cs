@@ -19,6 +19,8 @@ public class BreakingPlatform : MonoBehaviour
     private Transform _transform;
     public event Action OnBroken;
 
+    private AudioManager _audioManager;
+
    [SerializeField] private GameObject _breakingPlatformPositionBlock;
    [SerializeField] private float _distanceToShake = 0.05f;
 
@@ -30,6 +32,8 @@ public class BreakingPlatform : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         onTouchParticles.transform.localScale = _scaleWanted;
+
+        _audioManager = AudioManager.Instance;
     }
 
     private void OnCollisionEnter2D(Collision2D _other)
@@ -80,6 +84,7 @@ public class BreakingPlatform : MonoBehaviour
         _timer = 0;
         boxCollider.enabled = false;
         spriteRenderer.enabled = false;
+        _audioManager.PlaySound(AudioType.platformBreak);
 
         OnBroken?.Invoke();
     }
@@ -94,6 +99,7 @@ public class BreakingPlatform : MonoBehaviour
         _hasTouched = false;
         position = _initialPosition;
         _transform.position = position;
+        _audioManager.PlaySound(AudioType.platformRespawn);
     }
     
     private IEnumerator Shake() 
