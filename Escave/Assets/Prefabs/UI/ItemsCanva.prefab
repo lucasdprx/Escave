@@ -180,13 +180,13 @@ MonoBehaviour:
   _action: {fileID: 2270293901065445836, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   _textMesh: {fileID: 8895647250680983907}
   message: 'Hello again, after a lot of exploration I was able to work on a grappling
-    hook system that can help you make your way throught all of this crap. I''m able
-    to craft a second one right now so I''m going to leave it here for anyone who''s
-    trying to escape this hell.
+    hook system that can help you make your way through all of this crap. I''m able
+    to craft a second one right now so I''m leaving it here for anyone who''s trying
+    to escape this hell.
 
 
-    Use [firstBind] or [secondBind] in order to
-    use the grappling hook.'
+    Use [firstBind] or [secondBind] in order to use the
+    grappling hook.'
   _videoPlayer1: {fileID: 6472329174176381165}
   _videoPlayer2: {fileID: 6562441908383337855}
   _backBtn: {fileID: 8599821677279780887}
@@ -1994,13 +1994,13 @@ MonoBehaviour:
   _action: {fileID: 2270293901065445836, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   _textMesh: {fileID: 2788015335014372264}
   message: 'Hi fellow traveller, if you read these words you''re probably trying
-    to escape this cave. I found myself here after caving to deep and figured out
-    this cave is kind of climbable. I wrote some notesfor you on the right side of
-    this page.. be aware of your surroundings my friend.
+    to escape this cave. I found myself here after caving too deep and figured out
+    a way to climb this cave. I wrote some notes for you on the right side of this
+    page.. be aware of your surroundings my friend.
 
 
-    Use [firstBind] or
-    [secondBind] and keep your direction in the wall in order to climb a wall.'
+    Use [firstBind] or [secondBind]
+    towards a wall in order to climb.'
   _videoPlayer1: {fileID: 3815763900341081137}
   _videoPlayer2: {fileID: 8633275262619293137}
   _backBtn: {fileID: 5088547776182646864}
