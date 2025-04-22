@@ -12,6 +12,7 @@ public class CreditsCreatorDisplay : MonoBehaviour, IPointerEnterHandler, IPoint
     private Button _button;
 
     [SerializeField] private string _link;
+    private bool isOnPic = false;
 
     private void Start()
     {
@@ -20,24 +21,21 @@ public class CreditsCreatorDisplay : MonoBehaviour, IPointerEnterHandler, IPoint
     
     public void OnPointerEnter(PointerEventData _eventData)
     {
-        _name.gameObject.SetActive(true);
-        _role.gameObject.SetActive(true);
+        isOnPic = true;
     }
 
     public void OnPointerExit(PointerEventData _eventData)
     {
-        _name.gameObject.SetActive(false);
-        _role.gameObject.SetActive(false);
+        isOnPic = false;
     }
 
     void Update()
     {
-        if (_eventSystem.currentSelectedGameObject == _button.gameObject)
+        if (_eventSystem.currentSelectedGameObject == _button.gameObject || isOnPic)
         {
             _name.gameObject.SetActive(true);
             _role.gameObject.SetActive(true);
-        }
-        else
+        } else if (!isOnPic && _eventSystem.currentSelectedGameObject != _button.gameObject)
         {
             _name.gameObject.SetActive(false);
             _role.gameObject.SetActive(false);
