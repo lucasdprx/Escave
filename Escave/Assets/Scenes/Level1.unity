@@ -1432,6 +1432,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3626563091251747397, guid: 314c2db0b71e08c499e5c8815405dff1, type: 3}
+      propertyPath: message
+      value: 'Hello again, after a lot of exploration I was able to work on a grappling
+        hook system that can help you make your way through all of this crap. I''m
+        able to craft a second one right now so I''m leaving it here for anyone who''s
+        trying to escape this hell.
+
+
+        Use [firstBind] or [secondBind] in
+        order to use the grappling hook.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3626563091251747397, guid: 314c2db0b71e08c499e5c8815405dff1, type: 3}
       propertyPath: _playerInput
       value: 
       objectReference: {fileID: 800945711}
@@ -1578,6 +1589,17 @@ PrefabInstance:
     - target: {fileID: 6532480769930724947, guid: 314c2db0b71e08c499e5c8815405dff1, type: 3}
       propertyPath: m_Name
       value: ItemsCanva
+      objectReference: {fileID: 0}
+    - target: {fileID: 6761151065983716336, guid: 314c2db0b71e08c499e5c8815405dff1, type: 3}
+      propertyPath: message
+      value: 'Hi fellow traveller, if you read these words you''re probably trying
+        to escape this cave. I found myself here after caving too deep and figured
+        out a way to climb this cave. I wrote some notes for you on the right side
+        of this page.. be aware of your surroundings my friend.
+
+
+        Use [firstBind]
+        or [secondBind] towards a wall in order to climb.'
       objectReference: {fileID: 0}
     - target: {fileID: 6761151065983716336, guid: 314c2db0b71e08c499e5c8815405dff1, type: 3}
       propertyPath: _playerInput
