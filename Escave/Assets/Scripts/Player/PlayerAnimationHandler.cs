@@ -7,22 +7,22 @@ public class PlayerAnimationHandler : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private Transform[] _switchTransformsInRotation;
 
-    [SerializeField] private SpriteRenderer _spriteRenderer;
-    [SerializeField] private PlayerInputHandler _playerInputHandler;
-    [SerializeField] private PlayerMovement _playerMovement;
-    [SerializeField] private Rigidbody2D _rb;
-    [SerializeField] private GrapplingHook _grapplingHook;
+    private SpriteRenderer _spriteRenderer;
+    private PlayerInputHandler _playerInputHandler;
+    private PlayerMovement _playerMovement;
+    private Rigidbody2D _rb;
+    private GrapplingHook _grapplingHook;
     private Vector3[] _initialLocalPositions;
 
     private bool _isFacingRight;
 
     private void Awake()
     {
-        //_spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        //_grapplingHook = GetComponentInChildren<GrapplingHook>();
-        //_playerInputHandler = GetComponent<PlayerInputHandler>();
-        //_rb = GetComponent<Rigidbody2D>();
-        //_playerMovement = GetComponent<PlayerMovement>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _grapplingHook = transform.parent.GetComponentInChildren<GrapplingHook>();
+        _playerInputHandler = transform.parent.GetComponent<PlayerInputHandler>();
+        _rb = transform.parent.GetComponent<Rigidbody2D>();
+        _playerMovement = transform.parent.GetComponent<PlayerMovement>();
         
         _initialLocalPositions = new Vector3[_switchTransformsInRotation.Length];
 
