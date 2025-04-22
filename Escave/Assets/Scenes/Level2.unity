@@ -2832,6 +2832,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1494607821}
   - component: {fileID: 1494607820}
+  - component: {fileID: 1494607822}
   m_Layer: 0
   m_Name: DataManager
   m_TagString: Untagged
@@ -2879,6 +2880,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1494607822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1494607819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63d6edc25c3f0284ba27a3ea911fb2ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collectiblesSave: {fileID: 1278087817}
 --- !u!1 &1559507653
 GameObject:
   m_ObjectHideFlags: 0
@@ -3414,7 +3428,7 @@ PrefabInstance:
     - target: {fileID: 7580087569118472847, guid: cfd257f4f7764ad4583cf77671e25d19, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1494607822}
     - target: {fileID: 7580087569118472847, guid: cfd257f4f7764ad4583cf77671e25d19, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -3425,7 +3439,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7580087569118472847, guid: cfd257f4f7764ad4583cf77671e25d19, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SaveGame
+      value: OnQuit
       objectReference: {fileID: 0}
     - target: {fileID: 7580087569118472847, guid: cfd257f4f7764ad4583cf77671e25d19, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -3433,7 +3447,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7580087569118472847, guid: cfd257f4f7764ad4583cf77671e25d19, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: DataPersistenceManager, Assembly-CSharp
+      value: OnQuitScript, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7580087569118472847, guid: cfd257f4f7764ad4583cf77671e25d19, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
