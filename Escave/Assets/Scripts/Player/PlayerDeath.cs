@@ -87,7 +87,7 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
         }
         if (checkpoints.Contains(newCheckpoint))
         {
-            _collectiblesSave.Save();
+            DataPersistenceManager.instance.SaveGame();
             currentCheckpoint = newCheckpoint;
         }
         else
