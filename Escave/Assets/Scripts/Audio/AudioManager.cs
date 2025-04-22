@@ -19,7 +19,9 @@ public enum AudioType
     stalactiteRegrow,
     levelStart,
     uiButton,
-    uiReturn
+    uiReturn,
+    mainMenuOST,
+    inGameOST
 }
 
 public class AudioManager : MonoBehaviour
@@ -57,12 +59,14 @@ public class AudioManager : MonoBehaviour
         else data.source.pitch = 1f;
 
         data.source.Play();
+
+        if (type == AudioType.inGameOST) Debug.Log("Playing the in game ost, in theory");
     }
 
     public void StopSound(AudioType type)
     {
         AudioData data = GetAudioData(type);
-        data.source.Stop();
+        if (data.source) data.source.Stop();
     }
 
     private AudioData GetAudioData(AudioType type)
