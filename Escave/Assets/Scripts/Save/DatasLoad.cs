@@ -22,8 +22,13 @@ public class DatasLoad : MonoBehaviour, ILBPersistence
     private float tempCurrentTime;
     private bool bestTimeSet;
     
+    private GameData gameData;
+    private LBData lbData;
+    
     public void LoadData(GameData _gameData)
     {
+        gameData = _gameData;
+        
         //first set state
         if (!_gameData.buttonStateSet)
         {
@@ -51,8 +56,7 @@ public class DatasLoad : MonoBehaviour, ILBPersistence
 
         button.interactable = _gameData.chapterUnlocked;
         
-        if(_gameData.chapterFinished) 
-            SetBestTime();
+        SetBestTime();
     }
 
     private void SetCurrentTime(float _timePassInLevel)
@@ -74,21 +78,34 @@ public class DatasLoad : MonoBehaviour, ILBPersistence
             bestTimeSet = true;
             return;
         }
-
-        if (IsBestTime(tempCurrentTime, tempBestTime))
+        
+        if (!gameData.chapterFinished)
         {
-            tempBestTime = tempCurrentTime;
-            LBPersistenceManager.instance.SaveGame();
+            float _millisecondsPassInLevel = (int)(tempBestTime % (int)tempBestTime * 100);
+            if(_millisecondsPassInLevel < 0) _millisecondsPassInLevel = 0;
+            float _secondsPassInLevel = (int)tempBestTime % 60;
+            float _minutesPassInLevel = (int)tempBestTime / 60;
+            _minutesPassInLevel %= 60;
+            float _hoursPassInLevel = (int)tempBestTime / 3600;
+        
+            bestTime.text = "Best time : " + _hoursPassInLevel + "h" + _minutesPassInLevel + "m" + _secondsPassInLevel + "s" + _millisecondsPassInLevel;
+        } else
+        {
+            if (IsBestTime(tempCurrentTime, tempBestTime) || tempBestTime == 0)
+            {
+                tempBestTime = tempCurrentTime;
+                LBPersistenceManager.instance.SaveGame();
+            }
+        
+            float _millisecondsPassInLevel = (int)(tempBestTime % (int)tempBestTime * 100);
+            if(_millisecondsPassInLevel < 0) _millisecondsPassInLevel = 0;
+            float _secondsPassInLevel = (int)tempBestTime % 60;
+            float _minutesPassInLevel = (int)tempBestTime / 60;
+            _minutesPassInLevel %= 60;
+            float _hoursPassInLevel = (int)tempBestTime / 3600;
+        
+            bestTime.text = "Best time : " + _hoursPassInLevel + "h" + _minutesPassInLevel + "m" + _secondsPassInLevel + "s" + _millisecondsPassInLevel;
         }
-        
-        float _millisecondsPassInLevel = (int)(tempBestTime % (int)tempBestTime * 100);
-        if(_millisecondsPassInLevel < 0) _millisecondsPassInLevel = 0;
-        float _secondsPassInLevel = (int)tempBestTime % 60;
-        float _minutesPassInLevel = (int)tempBestTime / 60;
-        _minutesPassInLevel %= 60;
-        float _hoursPassInLevel = (int)tempBestTime / 3600;
-        
-        bestTime.text = "Best time : " + _hoursPassInLevel + "h" + _minutesPassInLevel + "m" + _secondsPassInLevel + "s" + _millisecondsPassInLevel;
     }
 
     public void SaveData(ref GameData _gameData)
@@ -99,28 +116,32 @@ public class DatasLoad : MonoBehaviour, ILBPersistence
 
     private bool IsBestTime(float _currentTime, float _bestTime)
     {
-        Debug.Log(_currentTime);
-        Debug.Log(_bestTime);
         return _currentTime <= _bestTime;
     }
 
     public void LoadData(LBData _gameData)
     {
-        if (_gameData.timers.Count <= levelIndex)
-        {
-            tempBestTime = 0;
-        }
-        else
+        lbData = _gameData;
+        if (_gameData.timers.Count > levelIndex)
         {
             tempBestTime = _gameData.timers[levelIndex];
         }
-        
+        else
+        {
+            tempBestTime = 0;
+        }
         SetBestTime();
     }
 
     public void SaveData(ref LBData _gameData)
     {
-        if(_gameData.timers.Count > levelIndex)
+        if (_gameData.timers.Count > levelIndex)
+        {
             _gameData.timers[levelIndex] = tempBestTime;
+        }
+        else
+        {
+            _gameData.timers.Add(tempBestTime);
+        }
     }
 }

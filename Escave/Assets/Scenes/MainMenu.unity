@@ -858,7 +858,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6672202001051453856, guid: 5b07bb3d0ab00184c9691592e1280294, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2106179273}
   m_SourcePrefab: {fileID: 100100000, guid: 5b07bb3d0ab00184c9691592e1280294, type: 3}
 --- !u!225 &371914135 stripped
 CanvasGroup:
@@ -1002,53 +1005,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!1 &618573193
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 618573194}
-  - component: {fileID: 618573195}
-  m_Layer: 0
-  m_Name: LeaderboardManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &618573194
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 618573193}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 107.508644, y: 63.854935, z: 0.00530759}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &618573195
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 618573193}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 112da0b93228a864e92ff19e35475f14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fileName: leaderboard.json
-  lbData:
-    timers: []
 --- !u!1 &629278356
 GameObject:
   m_ObjectHideFlags: 0
@@ -1378,6 +1334,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1563238132 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6672202001051453856, guid: 5b07bb3d0ab00184c9691592e1280294, type: 3}
+  m_PrefabInstance: {fileID: 371914133}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1684140740 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8046511611358879398, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
@@ -1425,12 +1386,27 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6531364327468333745, guid: 5b07bb3d0ab00184c9691592e1280294, type: 3}
   m_PrefabInstance: {fileID: 371914133}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1563238132}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 741f308f258e900468f342bde0324d51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2106179273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1563238132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 112da0b93228a864e92ff19e35475f14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fileName: leaderboard.json
+  lbData:
+    timers: []
 --- !u!1001 &306700926645811704
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2587,7 +2563,6 @@ SceneRoots:
   - {fileID: 534878405}
   - {fileID: 629278357}
   - {fileID: 306700926645811704}
-  - {fileID: 618573194}
   - {fileID: 1256697828}
   - {fileID: 857446524}
   - {fileID: 1269907235}
