@@ -36,6 +36,10 @@ public class PlayerAnimationHandler : MonoBehaviour
     {
         CheckForFlipTrigger();
         HandlePlayerAnimation();
+        if (_playerMovement._isGrappling)
+        {
+            HandleSpriteFlip();
+        }
     }
 
     private void CheckForFlipTrigger()
