@@ -26,11 +26,6 @@ public class DataPersistenceManager : MonoBehaviour
         LoadGame();
     }
 
-    private void OnApplicationQuit()
-    {
-        SaveGame();
-    }
-
     public void NewOptions()
     {
         this.gameData = new GameData();

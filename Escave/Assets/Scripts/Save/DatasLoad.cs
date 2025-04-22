@@ -51,7 +51,8 @@ public class DatasLoad : MonoBehaviour, ILBPersistence
 
         button.interactable = _gameData.chapterUnlocked;
         
-        SetBestTime();
+        if(_gameData.chapterFinished) 
+            SetBestTime();
     }
 
     private void SetCurrentTime(float _timePassInLevel)
