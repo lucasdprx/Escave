@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenuDataManager : MonoBehaviour
 {
@@ -38,6 +39,14 @@ public class MainMenuDataManager : MonoBehaviour
     public void NewDatas()
     {
         this.currentGameData = new GameData();
+    }
+
+    public void Reset(int _index)
+    {
+        currentGameData = new GameData();
+        _dataFileDataHandler = new DataFileHandler(Application.persistentDataPath, fileName[_index]);
+        _dataFileDataHandler.Save(currentGameData);
+        
     }
     
     public void LoadGame(DatasLoad _datasLoaded)

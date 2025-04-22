@@ -77,6 +77,7 @@ public class DatasLoad : MonoBehaviour, ILBPersistence
         if (IsBestTime(tempCurrentTime, tempBestTime))
         {
             tempBestTime = tempCurrentTime;
+            LBPersistenceManager.instance.SaveGame();
         }
         
         float _millisecondsPassInLevel = (int)(tempBestTime % (int)tempBestTime * 100);
@@ -86,7 +87,7 @@ public class DatasLoad : MonoBehaviour, ILBPersistence
         _minutesPassInLevel %= 60;
         float _hoursPassInLevel = (int)tempBestTime / 3600;
         
-        bestTime.text = "Current time : " + _hoursPassInLevel + "h" + _minutesPassInLevel + "m" + _secondsPassInLevel + "s" + _millisecondsPassInLevel;
+        bestTime.text = "Best time : " + _hoursPassInLevel + "h" + _minutesPassInLevel + "m" + _secondsPassInLevel + "s" + _millisecondsPassInLevel;
     }
 
     public void SaveData(ref GameData _gameData)
@@ -97,7 +98,9 @@ public class DatasLoad : MonoBehaviour, ILBPersistence
 
     private bool IsBestTime(float _currentTime, float _bestTime)
     {
-        return _currentTime >= _bestTime;
+        Debug.Log(_currentTime);
+        Debug.Log(_bestTime);
+        return _currentTime <= _bestTime;
     }
 
     public void LoadData(LBData _gameData)

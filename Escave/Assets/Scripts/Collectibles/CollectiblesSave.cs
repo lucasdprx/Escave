@@ -62,6 +62,11 @@ public class CollectiblesSave : MonoBehaviour, IDataPersistence
         }
     }
 
+    public void EndCollectibles()
+    {
+        LoadData(DataPersistenceManager.instance.gameData);
+    }
+
     public void SaveData(ref GameData _gameData)
     {
         _gameData.collectiblesCollected = valueCollected;
