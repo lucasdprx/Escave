@@ -89,6 +89,11 @@ public class OptionsMenuHandler : MonoBehaviour, IOptionPersistence
         Screen.SetResolution(int.Parse(_resolution[0]), int.Parse(_resolution[1]), fullscreenToggle.isOn);
     }
 
+    public void PlaySliderSFX()
+    {
+        AudioManager.Instance.PlaySound(AudioType.uiButton);
+    }
+
     public void ReturnButton()
     {
         gameObject.SetActive(false);
