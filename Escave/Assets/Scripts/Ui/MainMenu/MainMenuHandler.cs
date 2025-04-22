@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -26,7 +27,7 @@ public class MainMenuHandler : MonoBehaviour
     {
         DataPersistenceManager.instance.NewOptions();
         DataPersistenceManager.instance.SaveGame();
-        PlayGame();
+        SceneManager.LoadScene("Level1");
     }
 
     public void PlayUIClickSound()

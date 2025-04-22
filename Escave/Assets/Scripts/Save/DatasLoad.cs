@@ -116,7 +116,7 @@ public class DatasLoad : MonoBehaviour, ILBPersistence
 
     public void SaveData(ref LBData _gameData)
     {
-        if(_gameData.timers.Count <= levelIndex)
+        if(_gameData.timers.Count > levelIndex)
             _gameData.timers[levelIndex] = tempBestTime;
     }
 }

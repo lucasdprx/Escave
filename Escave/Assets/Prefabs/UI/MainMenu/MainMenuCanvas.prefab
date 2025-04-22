@@ -358,6 +358,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0603dab8c5d26f4aa130d1abc425e64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chapterSelectionButton: {fileID: 0}
 --- !u!1 &1062309575187778567
 GameObject:
   m_ObjectHideFlags: 0
@@ -942,8 +943,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 18132374bad901a448566d333375cff4, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4

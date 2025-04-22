@@ -76,6 +76,11 @@ public class PlayerAnimationHandler : MonoBehaviour
         
         if (_animator.GetBool("IsClimbing"))
         {
+            if (_spriteRenderer.flipX == false && _playerMovement._isClimbingFlip == false)
+            {
+                _spriteRenderer.flipX = true;
+                _lightHelmet.transform.rotation = Quaternion.Euler(0, -180, -90);
+            }
             float climbSpeed = Mathf.Abs(_rb.linearVelocity.y);
             _animator.SetFloat("ClimbSpeed", climbSpeed);
         }
