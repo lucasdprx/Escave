@@ -1922,6 +1922,10 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[14].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ShowPausePanel
       objectReference: {fileID: 0}
+    - target: {fileID: 2478794345925778205, guid: 0b546080af589c1498b91f8971c0c47b, type: 3}
+      propertyPath: m_FlipX
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2843669229510685384, guid: 0b546080af589c1498b91f8971c0c47b, type: 3}
       propertyPath: _isGrabUnlock
       value: 1
