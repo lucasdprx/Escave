@@ -363,6 +363,10 @@ PrefabInstance:
       propertyPath: _settingsMenuPanel
       value: 
       objectReference: {fileID: 9160985811545503084}
+    - target: {fileID: 3534083957460278878, guid: a4f581baa4bd18140b757450e33a1a55, type: 3}
+      propertyPath: m_Colors.m_NormalColor.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4596943798834068803, guid: a4f581baa4bd18140b757450e33a1a55, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -378,6 +382,14 @@ PrefabInstance:
     - target: {fileID: 4596943798834068803, guid: a4f581baa4bd18140b757450e33a1a55, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -190
+      objectReference: {fileID: 0}
+    - target: {fileID: 5254396276657088646, guid: a4f581baa4bd18140b757450e33a1a55, type: 3}
+      propertyPath: m_Colors.m_NormalColor.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5598758573319285734, guid: a4f581baa4bd18140b757450e33a1a55, type: 3}
+      propertyPath: m_Colors.m_NormalColor.a
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7320752099529688546, guid: a4f581baa4bd18140b757450e33a1a55, type: 3}
       propertyPath: m_AnchorMax.y
@@ -505,6 +517,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7855765952134205808, guid: a4f581baa4bd18140b757450e33a1a55, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692218374745824371, guid: a4f581baa4bd18140b757450e33a1a55, type: 3}
+      propertyPath: m_Colors.m_NormalColor.a
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
