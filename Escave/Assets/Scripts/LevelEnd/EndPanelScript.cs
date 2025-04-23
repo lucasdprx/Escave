@@ -89,6 +89,7 @@ public class EndPanelScript : MonoBehaviour
 
     public void LoadScene(string _scene)
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(_scene);
     }
 
@@ -240,5 +241,7 @@ public class EndPanelScript : MonoBehaviour
             _elapsedTime += Time.deltaTime;
             yield return null;
         }
+        
+        Time.timeScale = 0f;
     }
 }
