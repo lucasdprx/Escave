@@ -18,8 +18,6 @@ public class CollectiblesSave : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData _gameData)
     {
-        Debug.Log("Loading Collectibles");
-        
         valueCollected = _gameData.collectiblesCollected;
         UpdateText();
 
@@ -30,7 +28,7 @@ public class CollectiblesSave : MonoBehaviour, IDataPersistence
 
         if (_gameData.collectibles.Count <= 0)
         {
-            foreach (CollectObjet collectObjet in collectibles)
+            foreach (CollectObjet _ in collectibles)
             {
                 _gameData.collectibles.Add(false);
             }
@@ -40,12 +38,11 @@ public class CollectiblesSave : MonoBehaviour, IDataPersistence
         {
             if (collectibles.Count <= i) continue;
             
-            print("Initialize");
             collectibles[i].Initialize(_gameData.collectibles[i]);
         }
     }
 
-    public void OnCollectibleCollected()
+    private void OnCollectibleCollected()
     {
         valueCollected++;
         UpdateText();
@@ -56,7 +53,7 @@ public class CollectiblesSave : MonoBehaviour, IDataPersistence
         _fraiseText.text = valueCollected.ToString();
     }
 
-    public void Save()
+    private void Save()
     {
         _temp = new List<bool>();
         
