@@ -654,6 +654,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -158.255
       objectReference: {fileID: 0}
+    - target: {fileID: 4333266933390228632, guid: d041a2f56dad2b840969a0eec20418c7, type: 3}
+      propertyPath: timerUIManager
+      value: 
+      objectReference: {fileID: 2122143425}
     - target: {fileID: 6813362065222017758, guid: d041a2f56dad2b840969a0eec20418c7, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2010,6 +2014,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8778219271273940609, guid: 800637e7cead47843822841d84518de5, type: 3}
   m_PrefabInstance: {fileID: 2122143423}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2122143425 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1734777488718873222, guid: 800637e7cead47843822841d84518de5, type: 3}
+  m_PrefabInstance: {fileID: 2122143423}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a317dabe0f6aab5458bfdc198f395d2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2128502133 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2539069137448979827, guid: 2a155bf21a9cbfa46bd91b6313c7aa15, type: 3}
