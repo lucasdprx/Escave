@@ -12,7 +12,7 @@ public class CreditsCreatorDisplay : MonoBehaviour, IPointerEnterHandler, IPoint
     private Button _button;
 
     [SerializeField] private string _link;
-    private bool isOnPic = false;
+    private bool isOnPic;
 
     private void Start()
     {
