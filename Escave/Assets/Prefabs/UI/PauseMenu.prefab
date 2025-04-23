@@ -351,6 +351,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 296770322354194804}
     m_Modifications:
+    - target: {fileID: 776884835243468386, guid: a4f581baa4bd18140b757450e33a1a55, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d38c8993e328afb4ca743ca959c1eeae, type: 3}
     - target: {fileID: 1810118597002764380, guid: a4f581baa4bd18140b757450e33a1a55, type: 3}
       propertyPath: m_Name
       value: Pause Panel
