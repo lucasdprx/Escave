@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MainMenuDataManager : MonoBehaviour
 {
@@ -40,8 +39,8 @@ public class MainMenuDataManager : MonoBehaviour
             BeginLoadGame(levelDatasToLoad[i], i);
         }
     }
-    
-    public void NewDatas()
+
+    private void NewDatas()
     {
         this.currentGameData = new GameData();
     }
@@ -64,8 +63,8 @@ public class MainMenuDataManager : MonoBehaviour
 
         _datasLoaded.LoadData(currentGameData);
     }
-    
-    public void BeginLoadGame(DatasLoad _datasLoaded, int _index)
+
+    private void BeginLoadGame(DatasLoad _datasLoaded, int _index)
     {
         this.currentGameData = _dataFileDataHandler.Load();
         
@@ -98,9 +97,9 @@ public class MainMenuDataManager : MonoBehaviour
         for (int i = 0; i < levelDatasToLoad.Count; i++)
         {
             _dataFileDataHandler = new DataFileHandler(Application.persistentDataPath, fileName[i]);
-            this.currentGameData = _dataFileDataHandler.Load();
+            currentGameData = _dataFileDataHandler.Load();
             
-            if (this.currentGameData == null)
+            if (currentGameData == null)
             {
                 NewDatas();
             }
@@ -110,7 +109,7 @@ public class MainMenuDataManager : MonoBehaviour
         }
     }
 
-    public void SaveChapters()
+    private void SaveChapters()
     {
         _chaptersFileHandler.Save(_chaptersFileData);
     }
