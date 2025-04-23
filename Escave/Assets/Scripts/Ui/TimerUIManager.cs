@@ -11,8 +11,6 @@ public class TimerUIManager : MonoBehaviour, IDataPersistence
     private int _hoursPassInLevel;
     private int _millisecondsPassInLevel;
 
-    public UnityEvent<float> OnSaveTime;
-
     private void Update()
     {
         _timePassInLevel += Time.deltaTime;
@@ -36,6 +34,5 @@ public class TimerUIManager : MonoBehaviour, IDataPersistence
     public void SaveData(ref GameData _gameData)
     {
         _gameData.timer = _timePassInLevel;
-        OnSaveTime?.Invoke(_timePassInLevel);
     }
 }
