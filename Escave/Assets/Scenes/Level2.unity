@@ -1292,17 +1292,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3340184327257344959, guid: cfd257f4f7764ad4583cf77671e25d19, type: 3}
   m_PrefabInstance: {fileID: 1889895871}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &367331640 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7576297500504853032, guid: 0b546080af589c1498b91f8971c0c47b, type: 3}
-  m_PrefabInstance: {fileID: 769763603}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cca755792dc519740a01ffcbaf8bf286, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &417128760 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5356783889658118351, guid: b9f1ee2b2cd077c4d9dc209725df3b21, type: 3}
@@ -3104,65 +3093,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 673252706}
     m_Modifications:
-    - target: {fileID: 866443845839941403, guid: 800637e7cead47843822841d84518de5, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 250
-      objectReference: {fileID: 0}
-    - target: {fileID: 1270689243245073525, guid: 800637e7cead47843822841d84518de5, type: 3}
-      propertyPath: _playerDeath
-      value: 
-      objectReference: {fileID: 367331640}
-    - target: {fileID: 1655768873785895159, guid: 800637e7cead47843822841d84518de5, type: 3}
-      propertyPath: m_text
-      value: 000:00:00:00
-      objectReference: {fileID: 0}
     - target: {fileID: 4291313903811246402, guid: 800637e7cead47843822841d84518de5, type: 3}
       propertyPath: m_Name
       value: UIGame
-      objectReference: {fileID: 0}
-    - target: {fileID: 6694353869329086335, guid: 800637e7cead47843822841d84518de5, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6694353869329086335, guid: 800637e7cead47843822841d84518de5, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6694353869329086335, guid: 800637e7cead47843822841d84518de5, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6694353869329086335, guid: 800637e7cead47843822841d84518de5, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8345162707418543912, guid: 800637e7cead47843822841d84518de5, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8345162707418543912, guid: 800637e7cead47843822841d84518de5, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8345162707418543912, guid: 800637e7cead47843822841d84518de5, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8345162707418543912, guid: 800637e7cead47843822841d84518de5, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8345162707418543912, guid: 800637e7cead47843822841d84518de5, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 20.71
-      objectReference: {fileID: 0}
-    - target: {fileID: 8345162707418543912, guid: 800637e7cead47843822841d84518de5, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 95.354996
-      objectReference: {fileID: 0}
-    - target: {fileID: 8345162707418543912, guid: 800637e7cead47843822841d84518de5, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 8778219271273940609, guid: 800637e7cead47843822841d84518de5, type: 3}
       propertyPath: m_Pivot.x
@@ -3245,9 +3178,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 7885662790562151826, guid: 800637e7cead47843822841d84518de5, type: 3}
-    - {fileID: 1492320692641206838, guid: 800637e7cead47843822841d84518de5, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 800637e7cead47843822841d84518de5, type: 3}
