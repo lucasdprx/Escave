@@ -51,6 +51,7 @@ public class DatasLoad : MonoBehaviour, ILBPersistence
         deathCount.text = _gameData.deathCount.ToString();
         #endregion
         
+        
         SetCurrentTime(_gameData.timer);
         tempCurrentTime = _gameData.timer;
 
