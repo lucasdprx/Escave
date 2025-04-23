@@ -61,7 +61,6 @@ public class OptionsMenuHandler : MonoBehaviour, IOptionPersistence
         ChangeMasterVolume();
         ChangeSFXVolume();
         ChangeMusicVolume();
-        Debug.Log("Load");
     }
 
     public void SaveOption(ref OptionsData _optionData)
@@ -74,7 +73,6 @@ public class OptionsMenuHandler : MonoBehaviour, IOptionPersistence
         
         _optionData.fullScreen = fullscreenToggle.isOn;
         ToggleFullscreen();
-        Debug.Log("Saved");
     }
 
     public void SaveOptionsFromSettings()
