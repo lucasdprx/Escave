@@ -10,8 +10,11 @@ public class MainMenuDataManager : MonoBehaviour
     
     [Header("File infos")]
     [SerializeField] private List<string> fileName;
+    [SerializeField] private string chaptersUnlockedFileName;
     
     private DataFileHandler _dataFileDataHandler;
+    private ChaptersFileHandler _chaptersFileHandler;
+    public ChaptersFileData _chaptersFileData;
     public static MainMenuDataManager instance { get; private set; }
 
     private bool allowLevel;
@@ -29,10 +32,12 @@ public class MainMenuDataManager : MonoBehaviour
 
     public void Load()
     {
+        _chaptersFileHandler = new ChaptersFileHandler(Application.persistentDataPath, chaptersUnlockedFileName);
+        
         for (int i = 0; i < levelDatasToLoad.Count; i++)
         {
             _dataFileDataHandler = new DataFileHandler(Application.persistentDataPath, fileName[i]);
-            LoadGame(levelDatasToLoad[i]);
+            BeginLoadGame(levelDatasToLoad[i], i);
         }
     }
     
@@ -46,7 +51,6 @@ public class MainMenuDataManager : MonoBehaviour
         currentGameData = new GameData();
         _dataFileDataHandler = new DataFileHandler(Application.persistentDataPath, fileName[_index]);
         _dataFileDataHandler.Save(currentGameData);
-        
     }
     
     public void LoadGame(DatasLoad _datasLoaded)
@@ -58,15 +62,33 @@ public class MainMenuDataManager : MonoBehaviour
             NewDatas();
         }
 
-        if (allowLevel)
+        _datasLoaded.LoadData(currentGameData);
+    }
+    
+    public void BeginLoadGame(DatasLoad _datasLoaded, int _index)
+    {
+        this.currentGameData = _dataFileDataHandler.Load();
+        
+        if (this.currentGameData == null)
         {
-            currentGameData.chapterUnlocked = true;
-            allowLevel = false;
+            NewDatas();
         }
         
-        if (currentGameData.chapterFinished) {
-            allowLevel = true;
+        _chaptersFileData = _chaptersFileHandler.Load();
+        if (_chaptersFileData == null)
+        {
+            _chaptersFileData = new ChaptersFileData();
         }
+        if (currentGameData.chapterFinished) {
+            if(_chaptersFileData.chaptersUnlocked.Count - 1 > _index)
+                _chaptersFileData.chaptersUnlocked[_index + 1] = true;
+            else
+                _chaptersFileData.chaptersUnlocked.Add(true);
+        }
+        
+        Debug.Log(_chaptersFileData.chaptersUnlocked[_index]);
+        
+        SaveChapters();
 
         _datasLoaded.LoadData(currentGameData);
     }
@@ -86,5 +108,10 @@ public class MainMenuDataManager : MonoBehaviour
             levelDatasToLoad[i].SaveData(ref currentGameData);
             _dataFileDataHandler.Save(currentGameData);
         }
+    }
+
+    public void SaveChapters()
+    {
+        _chaptersFileHandler.Save(_chaptersFileData);
     }
 }

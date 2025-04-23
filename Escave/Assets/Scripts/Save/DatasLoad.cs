@@ -54,7 +54,7 @@ public class DatasLoad : MonoBehaviour, ILBPersistence
         SetCurrentTime(_gameData.timer);
         tempCurrentTime = _gameData.timer;
 
-        button.interactable = _gameData.chapterUnlocked;
+        button.interactable = MainMenuDataManager.instance._chaptersFileData.chaptersUnlocked[levelIndex];
         
         SetBestTime();
     }

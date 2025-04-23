@@ -483,6 +483,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -25
       objectReference: {fileID: 0}
+    - target: {fileID: 3520927438448663784, guid: 5b07bb3d0ab00184c9691592e1280294, type: 3}
+      propertyPath: chaptersUnlockedFileName
+      value: ChaptersUnlocked.json
+      objectReference: {fileID: 0}
     - target: {fileID: 3699434298731162606, guid: 5b07bb3d0ab00184c9691592e1280294, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -815,6 +819,14 @@ PrefabInstance:
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 1269907234}
+    - target: {fileID: 7230279025603038188, guid: 5b07bb3d0ab00184c9691592e1280294, type: 3}
+      propertyPath: m_ChildAlignment
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230279025603038188, guid: 5b07bb3d0ab00184c9691592e1280294, type: 3}
+      propertyPath: m_Padding.m_Right
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7239416641441097407, guid: 5b07bb3d0ab00184c9691592e1280294, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: Level1

@@ -86,7 +86,6 @@ public class ChapterSelectionScroll : MonoBehaviour
             if (selectedIndex > -1)
             {
                 _nextPos = new Vector2(0, (float)selectedIndex / (selectables.Count-1));
-                Debug.Log(_nextPos);
             }
         }
     }
