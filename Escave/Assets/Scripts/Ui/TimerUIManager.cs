@@ -1,14 +1,17 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TimerUIManager : MonoBehaviour, IDataPersistence
 {
     [SerializeField] private TextMeshProUGUI _timerText;
-    private float _timePassInLevel;
+    public float _timePassInLevel;
     private int _secondsPassInLevel;
     private int _minutesPassInLevel;
     private int _hoursPassInLevel;
     private int _millisecondsPassInLevel;
+
+    public UnityEvent<float> OnSaveTime;
 
     private void Update()
     {
@@ -33,5 +36,6 @@ public class TimerUIManager : MonoBehaviour, IDataPersistence
     public void SaveData(ref GameData _gameData)
     {
         _gameData.timer = _timePassInLevel;
+        OnSaveTime?.Invoke(_timePassInLevel);
     }
 }
