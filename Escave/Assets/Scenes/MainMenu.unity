@@ -359,6 +359,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -40
       objectReference: {fileID: 0}
+    - target: {fileID: 697757478123637221, guid: 5b07bb3d0ab00184c9691592e1280294, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
+      value: EndPanelScene
+      objectReference: {fileID: 0}
     - target: {fileID: 845302826963606408, guid: 5b07bb3d0ab00184c9691592e1280294, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -690,6 +694,10 @@ PrefabInstance:
     - target: {fileID: 4979739878298633217, guid: 5b07bb3d0ab00184c9691592e1280294, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: LoadChapters
+      objectReference: {fileID: 0}
+    - target: {fileID: 4979739878298633217, guid: 5b07bb3d0ab00184c9691592e1280294, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: EndPanelScene
       objectReference: {fileID: 0}
     - target: {fileID: 5187258920882410895, guid: 5b07bb3d0ab00184c9691592e1280294, type: 3}
       propertyPath: levelIndex
