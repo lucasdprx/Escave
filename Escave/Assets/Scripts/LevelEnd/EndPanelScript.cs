@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class EndPanelScript : MonoBehaviour
@@ -51,6 +52,8 @@ public class EndPanelScript : MonoBehaviour
 
     public void InitializeEndPanelScript(ref GameData _gameData)
     {
+        backgroundImage.interactable = true;
+        
         deathCountText.text = "";
         heartText.text = "";
         timerText.text = "";
@@ -63,12 +66,30 @@ public class EndPanelScript : MonoBehaviour
         heartString = LoadDeathText(_gameData.deathCount);
         deathString = LoadHeartText(_gameData.collectibles);
         
+        Debug.Log(timerString);
+        Debug.Log(heartString);
+        Debug.Log(deathString);
+        Debug.Log(title);
+        
         timerStringArray = timerString.ToCharArray();
         heartStringArray = heartString.ToCharArray();
         deathStringArray = deathString.ToCharArray();
         titleStringArray = title.ToCharArray();
         
-        StartCoroutine(StartAnimation());
+        StartCoroutine(ShowPanel());
+        StartCoroutine(ShowTitle());
+        StartCoroutine(ShowTimer());
+        StartCoroutine(ShowDeath());
+        StartCoroutine(ShowHearts());
+        StartCoroutine(ShowButtonOne());
+        StartCoroutine(ShowButtonTwo());
+        
+        GetComponent<CanvasSelectionButton>().SelectThing();
+    }
+
+    public void LoadScene(string _scene)
+    {
+        SceneManager.LoadScene(_scene);
     }
 
     private string LoadTimerText(float _timePassInLevel)
@@ -97,17 +118,11 @@ public class EndPanelScript : MonoBehaviour
         
         return "Heart: " + heartCount + "/" + maxHeartCount;
     }
-
-    private IEnumerator StartAnimation()
+    
+    private IEnumerator ShowPanel()
     {
-        float timerInterval = timerAnimTime / timerStringArray.Length;
-        float heartInterval = heartAnimTime / heartStringArray.Length;
-        float deathInterval = deathAnimTime / deathStringArray.Length;
-        float titleInterval = titleAnimTime / titleStringArray.Length;
-        
         float _elapsedTime = 0f;
-        int _index = 0;
-
+        
         while (_elapsedTime < backgroundAnimTime)
         {
             backgroundImage.alpha = Mathf.Lerp(backgroundImage.alpha, 1f, _elapsedTime / backgroundAnimTime);
@@ -116,73 +131,114 @@ public class EndPanelScript : MonoBehaviour
         }
         
         backgroundImage.alpha = 1;
+    }
 
+    private IEnumerator ShowTitle()
+    {
+        float titleInterval = titleAnimTime / titleStringArray.Length;
+        
+        float _elapsedTime = 0f;
+        int _index = 0;
+        
         while (_index < titleStringArray.Length)
         {
             if (_elapsedTime >= titleInterval)
             {
                 titleText.text += titleStringArray[_index];
+                Debug.Log(titleStringArray[_index]);
+                _index++;
                 _elapsedTime -= titleInterval;
             }
+            _elapsedTime += Time.deltaTime;
             yield return null;
         }
+    }
+    
+    private IEnumerator ShowTimer()
+    {
+        float _elapsedTime = 0f;
+        int _index = 0;
         
-        _elapsedTime = 0f;
-        _index = 0;
+        float timerInterval = timerAnimTime / timerStringArray.Length;
         
         while (_index < timerStringArray.Length)
         {
             if (_elapsedTime >= timerInterval)
             {
                 timerText.text += timerStringArray[_index];
+                _index++;
                 _elapsedTime -= timerInterval;
             }
+            _elapsedTime += Time.deltaTime;
             yield return null;
         }
+    }
+    
+    private IEnumerator ShowDeath()
+    {
+        float _elapsedTime = 0f;
+        int _index = 0;
         
-        _elapsedTime = 0f;
-        _index = 0;
+        float deathInterval = deathAnimTime / deathStringArray.Length;
         
         while (_index < deathStringArray.Length)
         {
             if (_elapsedTime >= deathInterval)
             {
                 deathCountText.text += deathStringArray[_index];
+                _index++;
                 _elapsedTime -= deathInterval;
             }
+            _elapsedTime += Time.deltaTime;
             yield return null;
         }
+    }
+    
+    private IEnumerator ShowHearts()
+    {
+        float _elapsedTime = 0f;
+        int _index = 0;
         
-        _elapsedTime = 0f;
-        _index = 0;
-
+        float heartInterval = heartAnimTime / heartStringArray.Length;
+        
         while (_index < heartStringArray.Length)
         {
             if (_elapsedTime >= heartInterval)
             {
                 heartText.text += heartStringArray[_index];
+                _index++;
                 _elapsedTime -= heartInterval;
             }
-
+            _elapsedTime += Time.deltaTime;
             yield return null;
         }
+    }
+    
+    private IEnumerator ShowButtonOne()
+    {
+        float _elapsedTime = 0f;
         
-        _elapsedTime = 0f;
-
         while (_elapsedTime < buttonAnimTime)
         {
             float nextBtnAlpha = Mathf.Lerp(nextLevelBtn.color.a, 1f, _elapsedTime / buttonAnimTime);
             Color nextBtnColor = new Color(255, 255, 255, nextBtnAlpha);
             nextLevelBtn.color = nextBtnColor;
+            _elapsedTime += Time.deltaTime;
+            yield return null;
         }
+    }
+    
+    private IEnumerator ShowButtonTwo()
+    {
+        float _elapsedTime = 0f;
         
-        _elapsedTime = 0f;
-
         while (_elapsedTime < buttonAnimTime)
         {
             float mainBtnAlpha = Mathf.Lerp(mainMenuBtn.color.a, 1f, _elapsedTime / buttonAnimTime);
             Color mainBtnColor = new Color(255, 255, 255, mainBtnAlpha);
             mainMenuBtn.color = mainBtnColor;
+            _elapsedTime += Time.deltaTime;
+            yield return null;
         }
     }
 }
