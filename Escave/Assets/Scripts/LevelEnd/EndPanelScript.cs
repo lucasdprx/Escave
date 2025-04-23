@@ -35,6 +35,8 @@ public class EndPanelScript : MonoBehaviour
     [SerializeField] private float buttonAnimTime;
     [SerializeField] private float backgroundAnimTime;
     
+    [SerializeField] private TimerUIManager timerUIManager;
+    
     [Space(10)]
     [SerializeField] private Image nextLevelBtn;
     [SerializeField] private Image mainMenuBtn;
@@ -62,14 +64,9 @@ public class EndPanelScript : MonoBehaviour
         mainMenuBtn.color = new Color32(255, 255, 255, 0);
         backgroundImage.alpha = 0;
         
-        timerString = LoadTimerText(_gameData.timer);
+        timerString = LoadTimerText(timerUIManager._timePassInLevel);
         heartString = LoadDeathText(_gameData.deathCount);
         deathString = LoadHeartText(_gameData.collectibles);
-        
-        Debug.Log(timerString);
-        Debug.Log(heartString);
-        Debug.Log(deathString);
-        Debug.Log(title);
         
         timerStringArray = timerString.ToCharArray();
         heartStringArray = heartString.ToCharArray();
@@ -89,7 +86,6 @@ public class EndPanelScript : MonoBehaviour
 
     public void LoadScene(string _scene)
     {
-        Time.timeScale = 1;
         SceneManager.LoadScene(_scene);
     }
 
@@ -241,7 +237,5 @@ public class EndPanelScript : MonoBehaviour
             _elapsedTime += Time.deltaTime;
             yield return null;
         }
-        
-        Time.timeScale = 0f;
     }
 }
