@@ -2641,7 +2641,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1827308274176375141}
-  - component: {fileID: 2689588009141203669}
   - component: {fileID: 4840176295064183461}
   - component: {fileID: 500466219557149213}
   m_Layer: 5
@@ -2673,19 +2672,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -624.8}
   m_SizeDelta: {x: 1200, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2689588009141203669
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4643248748181685105}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b6c2da2db9374dada6761b5e35121c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!114 &4840176295064183461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6566,7 +6552,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2689588009141203669}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: RebindSaveLoad, Unity.InputSystem.RebindingUI
         m_MethodName: ResetBindings
         m_Mode: 1
@@ -7022,7 +7008,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2802218266125705066}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: RebindSaveLoad, Unity.InputSystem.RebindingUI
         m_MethodName: ResetBindings
         m_Mode: 1
@@ -7502,7 +7488,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2833043990639528879}
-  - component: {fileID: 2802218266125705066}
   - component: {fileID: 8984913282517718183}
   m_Layer: 5
   m_Name: KeyboardBindings
@@ -7533,19 +7518,6 @@ RectTransform:
   m_AnchoredPosition: {x: 960, y: -612.3}
   m_SizeDelta: {x: 1200, y: 675}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2802218266125705066
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8853863954697874596}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b6c2da2db9374dada6761b5e35121c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!114 &8984913282517718183
 MonoBehaviour:
   m_ObjectHideFlags: 0
