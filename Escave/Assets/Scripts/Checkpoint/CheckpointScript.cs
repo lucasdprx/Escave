@@ -4,7 +4,7 @@ public class CheckpointScript : MonoBehaviour
 {
     private Animator _animator;
     [SerializeField] private GameObject _light;
-    private int _triggerEnterCounter = 0;
+    private int _triggerEnterCounter;
 
     private void Awake()
     {
