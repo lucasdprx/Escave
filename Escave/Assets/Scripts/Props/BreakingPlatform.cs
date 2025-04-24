@@ -24,7 +24,7 @@ public class BreakingPlatform : MonoBehaviour
 
    [SerializeField] private GameObject _breakingPlatformPositionBlock;
    [SerializeField] private float _distanceToShake = 0.05f;
-   [SerializeField] private float _shakeDuration = 0.5f; // Durée du shake en secondes
+   [SerializeField] private float _shakeDuration = 0.5f; // DurÃ©e du shake en secondes
 
     private Queue<ParticleSystem> particlePool = new Queue<ParticleSystem>();
 
@@ -119,10 +119,10 @@ public class BreakingPlatform : MonoBehaviour
             _plateformTransform.position = originalPosition - new Vector3(offset, 0, 0);
             yield return new WaitForSeconds(0.01f);
 
-            elapsedTime += 0.02f; // Temps total écoulé
+            elapsedTime += 0.02f; // Temps total ï¿½coulï¿½
         }
 
-        _plateformTransform.position = originalPosition; // Réinitialiser la position
+        _plateformTransform.position = originalPosition; // Rï¿½initialiser la position
     }
 
     private void InitializeParticlePool(int poolSize)
