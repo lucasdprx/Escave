@@ -1,10 +1,11 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TimerUIManager : MonoBehaviour, IDataPersistence
 {
     [SerializeField] private TextMeshProUGUI _timerText;
-    private float _timePassInLevel;
+    public float _timePassInLevel;
     private int _secondsPassInLevel;
     private int _minutesPassInLevel;
     private int _hoursPassInLevel;
