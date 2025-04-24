@@ -28,6 +28,7 @@ public class LevelEnd : MonoBehaviour, IDataPersistence
     {
         if (passedPassed)
         {
+            passedPassed = false;
             _gameData.chapterFinished = true;
             playerInput.enabled = false;
             endPanel.InitializeEndPanelScript(ref _gameData);
