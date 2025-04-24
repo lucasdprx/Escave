@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -104,9 +103,6 @@ public class MainMenuHandler : MonoBehaviour
             _buttonToSelect = _tempKeyboardButton;
             _isInKeybinds = false;
         }
-        
-        Debug.Log(_buttonToSelect);
-        Debug.Log(_tempKeyboardButton);
     }
 
     private IEnumerator FadeInAnim(CanvasGroup _canvasGroup)

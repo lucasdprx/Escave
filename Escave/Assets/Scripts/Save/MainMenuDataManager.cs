@@ -85,8 +85,6 @@ public class MainMenuDataManager : MonoBehaviour
                 _chaptersFileData.chaptersUnlocked.Add(true);
         }
         
-        Debug.Log(_chaptersFileData.chaptersUnlocked[_index]);
-        
         SaveChapters();
 
         _datasLoaded.LoadData(currentGameData);

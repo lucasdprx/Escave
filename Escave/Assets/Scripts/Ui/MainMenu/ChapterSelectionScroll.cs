@@ -41,7 +41,6 @@ public class ChapterSelectionScroll : MonoBehaviour
     
     public void InputAction(InputAction.CallbackContext _ctx)
     {
-        print(_canMove);
         if (!chapterSelection.activeSelf) return;
         if (!_canMove) return;
         
