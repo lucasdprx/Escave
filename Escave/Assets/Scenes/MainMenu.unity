@@ -3273,6 +3273,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 629278357}
     m_Modifications:
+    - target: {fileID: 207954670276931455, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d9e296934bb0afc41bacb7af57f3f896, type: 3}
+    - target: {fileID: 638034211159581666, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f5ba9c69ef7d4c84bb257669d9b51592, type: 3}
     - target: {fileID: 771877039115672031, guid: 978ed2793e7443e4fb6c2fd892d2f58e, type: 3}
       propertyPath: _eventSystem
       value: 
