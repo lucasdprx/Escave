@@ -370,6 +370,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EndPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 3165789681117225442, guid: d041a2f56dad2b840969a0eec20418c7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: MainMenu
+      objectReference: {fileID: 0}
     - target: {fileID: 3564930963912635435, guid: d041a2f56dad2b840969a0eec20418c7, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

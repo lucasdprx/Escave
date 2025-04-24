@@ -73,7 +73,7 @@ public class EndPanelScript : MonoBehaviour
         heartStringArray = heartString.ToCharArray();
         deathStringArray = deathString.ToCharArray();
         titleStringArray = title.ToCharArray();
-        
+        Debug.Log("caca");
         StartCoroutine(ShowPanel());
         StartCoroutine(ShowTitle());
         StartCoroutine(ShowTimer());
