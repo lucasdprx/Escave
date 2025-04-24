@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1837069202165182709}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.65, y: 0.085, z: 0}
+  m_LocalPosition: {x: 0.65, y: 0.483, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -321,11 +321,6 @@ MonoBehaviour:
   _animator: {fileID: 5415488315808768288}
   _switchTransformsInRotation:
   - {fileID: 5713371350758247214}
-  _spriteRenderer: {fileID: 2478794345925778205}
-  _playerInputHandler: {fileID: 1309718639194689868}
-  _playerMovement: {fileID: 6894023557217023328}
-  _rb: {fileID: 7052040378954289160}
-  _grapplingHook: {fileID: 4692712459543376296}
 --- !u!1 &4594134647436753598
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,6 +803,7 @@ MonoBehaviour:
   _knockbackDuration: 0.2
   _coyoteTime: 0.12
   _isClimbingFlip: 0
+  _isGrappling: 0
 --- !u!114 &2843669229510685384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -901,7 +897,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8c581960b87fc7418b3d542008ecb35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGoingDown: 0
 --- !u!114 &5968446577486750942
 MonoBehaviour:
   m_ObjectHideFlags: 0
