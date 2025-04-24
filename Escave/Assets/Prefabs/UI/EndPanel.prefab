@@ -561,13 +561,14 @@ MonoBehaviour:
   deathCountText: {fileID: 1547471798551674238}
   heartText: {fileID: 2690711139990656326}
   titleText: {fileID: 7471803407830384916}
-  title: Level Finished
+  title: LEVEL FINISHED
   timerAnimTime: 1
   heartAnimTime: 1
   deathAnimTime: 1
   titleAnimTime: 1
   buttonAnimTime: 1
   backgroundAnimTime: 1
+  timerUIManager: {fileID: 0}
   nextLevelBtn: {fileID: 5840040133862254441}
   mainMenuBtn: {fileID: 5449289970021934884}
 --- !u!1 &2462329153146591975
