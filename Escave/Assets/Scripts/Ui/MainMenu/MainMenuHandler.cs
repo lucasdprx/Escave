@@ -2,6 +2,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -16,6 +17,9 @@ public class MainMenuHandler : MonoBehaviour
     public float lerpTime;
 
     private Button _buttonToSelect;
+    private CanvasGroup _canvasGroup;
+    [SerializeField] private CanvasGroup _OptionsCanvas;
+    [SerializeField] private Button playButton;
     
     public void QuitGame()
     {
@@ -50,6 +54,11 @@ public class MainMenuHandler : MonoBehaviour
         _buttonToSelect = _button;
     }
 
+    public void SelectCanvasGroup(CanvasGroup _canvasGroup)
+    {
+        this._canvasGroup = _canvasGroup;
+    }
+
     private void Start()
     {
         StartCoroutine(FadeOutAnim(blackScreen));
@@ -58,6 +67,7 @@ public class MainMenuHandler : MonoBehaviour
 
     public void FadeIn(CanvasGroup _canvasGroup)
     {
+        this._canvasGroup = _canvasGroup;
         StopAllCoroutines();
         StartCoroutine(FadeInAnim(_canvasGroup));
     }
@@ -108,5 +118,27 @@ public class MainMenuHandler : MonoBehaviour
         
         eventSystem.enabled = true;
         _canvasGroup.gameObject.GetComponent<Select>().SelectThing();
+    }
+
+    public void BackCanvas(InputAction.CallbackContext _ctx)
+    {
+        if (_ctx.started && _canvasGroup != null)
+        {
+            FadeOut(_canvasGroup);
+            if (_isInKeybinds)
+            {
+                _canvasGroup = _OptionsCanvas;
+                _buttonToSelect = playButton;
+            }
+            else
+                _canvasGroup = null;
+
+        }
+    }
+
+    private bool _isInKeybinds;
+    public void SetInKeybindsBool()
+    {
+        _isInKeybinds = true;
     }
 }
