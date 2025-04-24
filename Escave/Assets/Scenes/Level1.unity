@@ -516,7 +516,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 302305897060902716, guid: d041a2f56dad2b840969a0eec20418c7, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 960.37836
+      value: 960
       objectReference: {fileID: 0}
     - target: {fileID: 302305897060902716, guid: d041a2f56dad2b840969a0eec20418c7, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -580,7 +580,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1874214636187166287, guid: d041a2f56dad2b840969a0eec20418c7, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 960.37836
+      value: 960
       objectReference: {fileID: 0}
     - target: {fileID: 1874214636187166287, guid: d041a2f56dad2b840969a0eec20418c7, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -658,6 +658,14 @@ PrefabInstance:
       propertyPath: timerUIManager
       value: 
       objectReference: {fileID: 2122143425}
+    - target: {fileID: 5449289970021934884, guid: d041a2f56dad2b840969a0eec20418c7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f5ba9c69ef7d4c84bb257669d9b51592, type: 3}
+    - target: {fileID: 5840040133862254441, guid: d041a2f56dad2b840969a0eec20418c7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f5ba9c69ef7d4c84bb257669d9b51592, type: 3}
     - target: {fileID: 6813362065222017758, guid: d041a2f56dad2b840969a0eec20418c7, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

@@ -239,7 +239,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 302305897060902716, guid: d041a2f56dad2b840969a0eec20418c7, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 959.37506
+      value: 960
       objectReference: {fileID: 0}
     - target: {fileID: 302305897060902716, guid: d041a2f56dad2b840969a0eec20418c7, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -303,7 +303,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1874214636187166287, guid: d041a2f56dad2b840969a0eec20418c7, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 959.37506
+      value: 960
       objectReference: {fileID: 0}
     - target: {fileID: 1874214636187166287, guid: d041a2f56dad2b840969a0eec20418c7, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -959,6 +959,26 @@ PrefabInstance:
     - target: {fileID: 1217224998343057527, guid: 0b546080af589c1498b91f8971c0c47b, type: 3}
       propertyPath: m_ActionEvents.Array.data[14].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ShowPausePanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817489756858815163, guid: 0b546080af589c1498b91f8971c0c47b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817489756858815163, guid: 0b546080af589c1498b91f8971c0c47b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817489756858815163, guid: 0b546080af589c1498b91f8971c0c47b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817489756858815163, guid: 0b546080af589c1498b91f8971c0c47b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817489756858815163, guid: 0b546080af589c1498b91f8971c0c47b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 2478794345925778205, guid: 0b546080af589c1498b91f8971c0c47b, type: 3}
       propertyPath: m_FlipX
