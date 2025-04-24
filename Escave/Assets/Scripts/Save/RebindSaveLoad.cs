@@ -15,6 +15,12 @@ public class RebindSaveLoad : MonoBehaviour
         }
     }
 
+    public void Save()
+    {
+        var rebinds = actions.SaveBindingOverridesAsJson();
+        PlayerPrefs.SetString("rebinds", rebinds);
+    }
+
     public void Load()
     {
         var rebinds = PlayerPrefs.GetString("rebinds");

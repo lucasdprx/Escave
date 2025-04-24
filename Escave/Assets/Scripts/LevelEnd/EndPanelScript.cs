@@ -55,6 +55,7 @@ public class EndPanelScript : MonoBehaviour
     public void InitializeEndPanelScript(ref GameData _gameData)
     {
         backgroundImage.interactable = true;
+        backgroundImage.blocksRaycasts = true;
         
         deathCountText.text = "";
         heartText.text = "";
