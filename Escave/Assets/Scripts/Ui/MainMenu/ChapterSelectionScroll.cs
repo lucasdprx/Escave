@@ -12,6 +12,8 @@ public class ChapterSelectionScroll : MonoBehaviour
     [SerializeField] private GameObject chapterSelection;
     [SerializeField] private Button _backBtn;
     
+    [SerializeField] private EventSystem _eventSystem;
+    
     private Vector2 _nextPos;
     private ScrollRect scrollRect;
     private GameObject selectedElement;
@@ -50,8 +52,9 @@ public class ChapterSelectionScroll : MonoBehaviour
             BackBtnScript _backBtnScript = _backBtn.GetComponent<BackBtnScript>();
             _backBtnScript.OnLeftInput(selectedElement);
         }
-        
-        if (EventSystem.current.currentSelectedGameObject == _backBtn.gameObject) return;
+
+        if (!_eventSystem.enabled) return;
+        if (_eventSystem.currentSelectedGameObject == _backBtn.gameObject) return;
         if (_delta.y < 0.5f && _delta.y > -0.5f) return;
 
         if (selectables.Count > 0)
