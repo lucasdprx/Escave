@@ -2,17 +2,15 @@ using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 
 public class PlayerDeath : MonoBehaviour, IDataPersistence
 {
     [Header("Checkpoints")]
-    [SerializeField] private List<GameObject> checkpoints; // checkpoint list
-    private GameObject currentCheckpoint; // active checkpoint
+    [SerializeField] private List<GameObject> checkpoints;
+    private GameObject currentCheckpoint;
     
     private int levelIndex;
 
-    public int DeathCount => deathCounter;
     [SerializeField, ReadOnly] private int deathCounter;
 
     public UnityEvent<int> OnDeath;
@@ -82,17 +80,12 @@ public class PlayerDeath : MonoBehaviour, IDataPersistence
     {
         if (newCheckpoint == null)
         {
-            Debug.LogWarning("Checkpoint fourni est null !");
             return;
         }
         if (checkpoints.Contains(newCheckpoint))
         {
             DataPersistenceManager.instance.SaveGame();
             currentCheckpoint = newCheckpoint;
-        }
-        else
-        {
-            Debug.LogWarning("Le checkpoint sp�cifi� n'est pas dans la liste des checkpoints !");
         }
     }
 }

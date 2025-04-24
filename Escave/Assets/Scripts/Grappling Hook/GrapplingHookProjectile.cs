@@ -10,8 +10,6 @@ public class GrapplerProjectile : MonoBehaviour
     private Vector2 _startPosition;
     private bool _isReturning;
     private float _hookTime;
-    
-    public LayerMask layerMask;
     private bool _isAttached;
 
     private GameObject _currentHookedObject;

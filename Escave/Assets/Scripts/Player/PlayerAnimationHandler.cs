@@ -15,14 +15,17 @@ public class PlayerAnimationHandler : MonoBehaviour
     private Vector3[] _initialLocalPositions;
 
     private bool _isFacingRight;
+    private Transform _transform;
 
     private void Awake()
     {
+        _transform = transform;
+        Transform parent = _transform.parent;
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _grapplingHook = transform.parent.GetComponentInChildren<GrapplingHook>();
-        _playerInputHandler = transform.parent.GetComponent<PlayerInputHandler>();
-        _rb = transform.parent.GetComponent<Rigidbody2D>();
-        _playerMovement = transform.parent.GetComponent<PlayerMovement>();
+        _grapplingHook = parent.GetComponentInChildren<GrapplingHook>();
+        _playerInputHandler = parent.GetComponent<PlayerInputHandler>();
+        _rb = parent.GetComponent<Rigidbody2D>();
+        _playerMovement = parent.GetComponent<PlayerMovement>();
         
         _initialLocalPositions = new Vector3[_switchTransformsInRotation.Length];
 
