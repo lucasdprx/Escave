@@ -560,7 +560,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 302305897060902716, guid: d041a2f56dad2b840969a0eec20418c7, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 960.37836
+      value: 960
       objectReference: {fileID: 0}
     - target: {fileID: 302305897060902716, guid: d041a2f56dad2b840969a0eec20418c7, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -624,7 +624,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1874214636187166287, guid: d041a2f56dad2b840969a0eec20418c7, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 960.37836
+      value: 960
       objectReference: {fileID: 0}
     - target: {fileID: 1874214636187166287, guid: d041a2f56dad2b840969a0eec20418c7, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1178,6 +1178,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 580219759234090939, guid: 314c2db0b71e08c499e5c8815405dff1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1535718384585886895, guid: 314c2db0b71e08c499e5c8815405dff1, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1289,6 +1293,18 @@ PrefabInstance:
       propertyPath: m_VideoClip
       value: 
       objectReference: {fileID: 32900000, guid: e5a17a0c028fac44bb6e7c34e699eef8, type: 3}
+    - target: {fileID: 4060132879748853647, guid: 314c2db0b71e08c499e5c8815405dff1, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4060132879748853647, guid: 314c2db0b71e08c499e5c8815405dff1, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4060132879748853647, guid: 314c2db0b71e08c499e5c8815405dff1, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4393074552257213784, guid: 314c2db0b71e08c499e5c8815405dff1, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1429,10 +1445,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6472329174176381165, guid: 314c2db0b71e08c499e5c8815405dff1, type: 3}
+      propertyPath: m_VideoClip
+      value: 
+      objectReference: {fileID: 32900000, guid: bb7d5a98d9830fe44ae6245a8051282b, type: 3}
     - target: {fileID: 6532480769930724947, guid: 314c2db0b71e08c499e5c8815405dff1, type: 3}
       propertyPath: m_Name
       value: ItemsCanva
       objectReference: {fileID: 0}
+    - target: {fileID: 6562441908383337855, guid: 314c2db0b71e08c499e5c8815405dff1, type: 3}
+      propertyPath: m_VideoClip
+      value: 
+      objectReference: {fileID: 32900000, guid: 04f3b56191e6b1043927a30218b29937, type: 3}
     - target: {fileID: 6761151065983716336, guid: 314c2db0b71e08c499e5c8815405dff1, type: 3}
       propertyPath: message
       value: 'Hi fellow traveller, if you read these words you''re probably trying
