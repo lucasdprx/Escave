@@ -97,13 +97,23 @@ public class MainMenuHandler : MonoBehaviour
         _canvasGroup.interactable = true;
         if (_buttonToSelect != null)
             _buttonToSelect.Select();
+
+        if (_isInKeybinds)
+        {
+            this._canvasGroup = _tempKeyboardCanvas;
+            _buttonToSelect = _tempKeyboardButton;
+            _isInKeybinds = false;
+        }
+        
+        Debug.Log(_buttonToSelect);
+        Debug.Log(_tempKeyboardButton);
     }
 
     private IEnumerator FadeInAnim(CanvasGroup _canvasGroup)
     {
-        eventSystem.enabled = false;
         _canvasGroup.gameObject.SetActive(true);
         _canvasGroup.interactable = false;
+        eventSystem.enabled = false;
         float _elapsedTime = 0;
 
         while (_elapsedTime < lerpTime)
@@ -112,11 +122,11 @@ public class MainMenuHandler : MonoBehaviour
             _elapsedTime += Time.deltaTime;
             yield return null;
         }
+        eventSystem.enabled = true;
         
         _canvasGroup.alpha = 1f;
         _canvasGroup.interactable = true;
         
-        eventSystem.enabled = true;
         _canvasGroup.gameObject.GetComponent<Select>().SelectThing();
     }
 
@@ -135,6 +145,20 @@ public class MainMenuHandler : MonoBehaviour
 
         }
     }
+
+    public void SetTempKCanvas(CanvasGroup _canvasGroup)
+    {
+        _tempKeyboardCanvas = _canvasGroup;
+    }
+    
+    public void SetTempKButton(Button _canvasGroup)
+    {
+        _tempKeyboardButton = _canvasGroup;
+    }
+    
+    private CanvasGroup _tempKeyboardCanvas;
+    private Button _tempKeyboardButton;
+    
 
     private bool _isInKeybinds;
     public void SetInKeybindsBool()
