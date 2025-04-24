@@ -1120,6 +1120,10 @@ PrefabInstance:
       propertyPath: levelIndex
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5593818354454929521, guid: 5b07bb3d0ab00184c9691592e1280294, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: aa156f15c2b045b43ad7b1148555882c, type: 3}
     - target: {fileID: 5721359798691418997, guid: 5b07bb3d0ab00184c9691592e1280294, type: 3}
       propertyPath: m_Type
       value: 0
