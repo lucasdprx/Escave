@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -21,8 +22,20 @@ public class StalactitesCollision : MonoBehaviour
     private void Start()
     {
         initSpawnPoint = _transform.position;
+        _transform.position = initSpawnPoint;
         rb = GetComponent<Rigidbody2D>();
         _audioManager = AudioManager.Instance;
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+        stalactitesRespawnAnimation.SetBool("IsEnter", false);
+        _transform.position = initSpawnPoint;
+        rb.gravityScale = 0f;
+        rb.linearVelocity = Vector2.zero;
+        transform.localScale = new Vector3(0.8f, 1, 1);
+        isStarted = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
