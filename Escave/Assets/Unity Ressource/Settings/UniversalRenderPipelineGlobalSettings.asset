@@ -57,6 +57,7 @@ MonoBehaviour:
       - rid: 2036595870802116609
     m_RuntimeSettings:
       m_List:
+      - rid: 6852985685364965378
       - rid: 6852985685364965379
       - rid: 6852985685364965380
       - rid: 6852985685364965381
@@ -111,7 +112,7 @@ MonoBehaviour:
       type: {class: URPShaderStrippingSetting, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.Runtime}
       data:
         m_Version: 0
-        m_StripUnusedPostProcessingVariants: 1
+        m_StripUnusedPostProcessingVariants: 0
         m_StripUnusedVariants: 1
         m_StripScreenCoordOverrideVariants: 1
     - rid: 6852985685364965377
