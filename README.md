@@ -22,14 +22,6 @@ Through carefully crafted levels, Escave challenges your reflexes, precision, an
 - **Language:** C#
 - **Input:** Unity Input System
 
-## My Contribution
-
-Team project (8 people). I was the second-largest contributor with **175 commits**, and implemented:
-
-- **Wall grab / wall jump** — the core vertical traversal mechanic.
-- **Main menu UI** — menus and navigation.
-- **Save system** — level progress and game state persistence.
-
 ## Team
 
 [lucasdprx](https://github.com/lucasdprx) · [Kureo524](https://github.com/Kureo524) · [alternate-creature](https://github.com/alternate-creature) · [PandorTaxe](https://github.com/PandorTaxe) · [alexxterrieur](https://github.com/alexxterrieur) · [NicolasTre](https://github.com/NicolasTre) · [wighthood](https://github.com/wighthood) · [Seven2O7](https://github.com/Seven2O7)
