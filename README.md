@@ -8,13 +8,17 @@ A 2D precision platformer inspired by *Celeste*. You play as a lost speleologist
 
 Through carefully crafted levels, Escave challenges your reflexes, precision, and creativity. Every jump, every grapple, and every climb could be your last. The cave itself is your greatest enemy: dark chambers illuminated only by glowing mushrooms and radiant crystals, where every new room offers a fresh challenge — some fair, some deadly.
 
-## Core Features
+## Game Features
 
-- **Fluid controls** — responsive platforming with advanced mechanics such as coyote time, input buffering, and variable jump heights.
-- **Grappling hook** — swing across deadly gaps and build momentum to reach impossible places.
-- **Ice axes** — climb special surfaces and master vertical movement to uncover hidden paths.
-- **Challenging collectibles** — brave the most dangerous parts of the cave to collect shimmering ruby hearts.
+- **Fluid controls** — responsive platforming with advanced mechanics such as coyote time, input buffering, variable jump heights, wall grab / wall jump, and one-way platforms.
+- **Traversal tools** — a grappling hook and ice axes to swing, climb, and reach hidden paths.
+- **Collectibles** — shimmering ruby hearts hidden in the most dangerous parts of the cave, with a level-end summary.
 - **Traps** — crumbling platforms, deadly spikes, falling stalactites, and treacherous quicksand.
+- **Enemies** — patrolling enemies that kill on contact and grant a jump boost when defeated.
+- **Checkpoints & levels** — checkpoints, chapter unlocking, and multi-level progression.
+- **Persistence** — a full save system covering progress, collectibles, keybinds, and unlocked chapters.
+- **Leaderboard** — an in-game leaderboard for level times.
+- **UI & menus** — main menu, pause menu, death screen, and a timer HUD.
 
 ## Tech Stack
 
